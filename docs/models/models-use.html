@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,59 @@
 				<div>
 					<h2>Models</h2>
 					<h3>Use</h3>
-					<p>Coming soon...</p>
+					<p>Models provide a powerful interface to your data so that Truck can do things to make your work easier. Although many frameworks don't use models but expect you to use plain JavaScript objects, this have a number of drawbacks. You can not judge easily when the state of the data changes without costly polling and caching of duplicates, etc.</p>
+					<p>Model are easy to create. Just use the $.Model method to do so. We'll first create a model that represents a JavaScript object of key/value pairs:</p>
+					<pre class="prettyprint linenums">
+// Plain JavaScript object:
+var myObject = {
+	name: {
+		first: 'John',
+		last: 'Doe'
+	},
+	age: 32,
+	job: 'web developer'
+}
+
+// Create a model:
+var PersonModel = $.Model(myObject, 'person-model');
+
+// Get rid of the plain JavaScript object,
+// since we don't need it any more:
+myOjbect = undefined;
+					</pre>
+					<p>To initialize the model, we gave it the object to use and a handle, which is a name Truck can use to identify the model. And that's it. Since it is now a model, we can access the model with object appropriate methods. These are:</p>
+					<ul>
+						<li>PersonModel.getItemProp()</li>
+						<li>PersonModel.setItemProp()</li>
+						<li>PersonModel.deleteItemProp()</li>
+					</ul>
+					<p>In our case, if we want to get the name, we might do this:</p>
+					<pre class="prettyprint linenums">
+PersonModel.getItemProp('name')
+// returns: {first: "John", last: "Doe"}
+// To get the first name and last name separate:
+PersonModel.getItemProp('name').first
+// returns: "John"
+PersonModel.getItemProp('name').last
+// returns: "Doe"
+					</pre>
+<p>Now let's create a model that holds a collection. By collection we mean an array. This might be a simple array or an array of objects. Making it is the same as we did for the simple object:</p>
+<pre class="prettyprint linenums">
+var fruits = [
+  {name: "Apple", image: 'images/apple.png'},
+  {name: "Banana", image: 'images/banana.png'},
+  {name: "Orange", image: 'images/orange.png'},
+  {name: "Mango", image: 'images/mango.png'} 
+];
+var FruitModel = $.Model(fruits, 'fruit-model');
+fruits = undefined;
+
+fruits.getItemProp(2, 'name'); // returns "Orange"
+// Returns
+</pre>
+<p>In the above example, we accessed the data a little differently. Because this is a collection, we need to tell Truck what index of the collect we want to get the property from. The index, like arrays, is zero-based.</p>
+
+
 				</div>
 				
 				<div id="menu">
@@ -91,5 +146,8 @@
 		</footer>
 	</article>
 	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
