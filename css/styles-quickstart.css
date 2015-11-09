@@ -1,0 +1,19 @@
+
+section > div {
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 40px 0 100px 0;
+}
+pre {
+	font-size: 14px;
+	max-width: 700px;
+}
+.mainLink {
+	margin: 20px 0 40px 0;
+}
+section > div > h2 {
+	font-size: 32px;
+	font-weight: 400;
+	border-bottom: solid 1px #BCBEC0;
+	padding-bottom: 12px;
+}

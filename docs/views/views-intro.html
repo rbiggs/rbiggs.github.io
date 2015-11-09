@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Truck - Documentation</title>
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../../css/styles.css">
+	<link rel="stylesheet" href="../../css/styles-docs.css">
+</head>
+<body>
+	<article>
+		<nav>
+			<div>
+				<h1><a href="../../index.html">Truck</a></h1>
+				<menu>
+					<a href="../../quickstart.html">Quick Start</a>
+					<a href="../../features.html">Features</a>
+					<a class='selected' href="#">Docs</a>
+					<a href="../../install.html">Install</a>
+				</menu>
+			</div>
+		</nav>
+		<header>
+			<div>
+				<h2>Docs</h2>
+				<h3>Everything You Need to Know</h3>
+			</div>
+		</header>
+		
+		<section>
+			<div>
+				<div>
+					<h2>Views</h2>
+					<h3>Intro</h3>
+					<p>Views are magincal unicorns. They take data and turn it into your app. Truck's View is very versitile. You can create a view with nothing and add functionality later. Or you can configure it all at once.</p>
+
+					<p>If you give a view an element and some data, view will attempt to extract a template from the element, then render it with the data. At any time you can change the template that the View uses, or change the model that the view uses. You can tell a template to render only a certain number of times. Or tell it to start rendering after a certain time. Or you can tell your template to automatically render at designated intervals. If you do this, View is smart enough to only render if the data it is using has changed, otherwise it waits until the next cycle.</p>
+
+					<p>You can wire up a view with events. If the events are targeting the element's descendants, they will be delegated on the element. Of course, you can also remove events from a view.</p>
+
+					<p>By default, View renders all markup unencoded, but you can configure a view to render data encoded, or limit it to just one template delimiter set. This helps prevent injection of malicious scripts in your document. If you are unsure where you should use encoding or not, please research the security threats this may expose in your app through cross site scripting with your current server setup.</p>
+				</div>
+				
+				<div id="menu">
+					<ul>
+						<li><a href='../models/models-intro.html'>Models</a></li>
+						<li><a href="../views/views-intro.html" class='selected'>Views</a>
+							<ul>
+								<li><a href="views-intro.html" class='selected'>Intro</a></li>
+								<li><a href="views-use.html">Use</a></li>
+								<li><a href="views-api.html">API</a></li>
+							</ul></li>
+						</li>
+						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+						<li><a href="../templates/templates-intro.html">Templates</a></li>
+						<li><a href="../promises/promises-intro.html">Promises</a></li>
+						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+						<li><a href="../router/router-intro.html">Router</a></li>
+						<li><a href="../box/box-intro.html">Box</a></li>
+						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+						<li><a href="../dom/dom-intro.html">DOM</a></li>
+						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+						<li><a href="../themes/themes-intro.html">Themes</a></li>
+						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+
+		<footer>
+			<div>
+					<menu id='mainFooterMenu'>
+						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+						<a href="quickstart.html">Quick Start</a>
+						<a href="features.html">Features</a>
+						<a href="../../install.html">Install</a>
+					</menu>
+				<aside>
+					<menu id='social-links'>
+						<a id='tumblr' href="#">Tumblr</a>
+						<a id='github' href="#">Github</a>
+						<a id='twitter' href="#">Twitter</a>
+						<a id='npm' href="#">NPM</a>
+					</menu>
+				</aside>
+			</div>
+		</footer>
+	</article>
+	
+</body>
+</html>

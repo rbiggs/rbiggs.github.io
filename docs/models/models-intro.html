@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Truck - Documentation</title>
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../../css/styles.css">
+	<link rel="stylesheet" href="../../css/styles-docs.css">
+</head>
+<body>
+	<article>
+		<nav>
+			<div>
+				<h1><a href="../../index.html">Truck</a></h1>
+				<menu>
+					<a href="../../quickstart.html">Quick Start</a>
+					<a href="../../features.html">Features</a>
+					<a class='selected' href="models-intro.html">Docs</a>
+					<a href="../../install.html">Install</a>
+				</menu>
+			</div>
+		</nav>
+		<header>
+			<div>
+				<h2>Docs</h2>
+				<h3>Everything You Need to Know</h3>
+			</div>
+		</header>
+		
+		<section>
+			<div>
+				<div>
+					<h2>Models</h2>
+					<h3>Intro</h3>
+					<p>Data is the source of all truth in an app. Models provide a powerful way to manage data. You could just use POJO, plain ole JavaScript objects. Many frameworks do. But by doing so you loose the power of models.</p>
+
+					<p>For example, Truck models can hold a single object of key value pairs, or it can hold an array of objects with key value pairs. Truck views feed on models. When rendering their templates, the views do not care what the data is. They take a model of an object and render one occurrence of the template. But if you provide the same view with a model holding an array of objects, that same view will render its template repeated, consuming all the objects in the model's array.</p>
+
+					<p>Truck gives you automatic data binding, where the output of a view is bound to a model. When you add, subtract or modify the contents of a model, it automatically propagates those changes to the system. Controllers intercept these changes and update the views. If you were using POJOs, this would not be possible. With models, it is possible to bind the views to them.</p>
+
+					<p>Perhaps the part we like the most about models is the fact that they hide your data. A model is an encapsulation where your data is not accessible except through the model's interface. This protects your data from unintentional modification. You can even query a model to find out when was the last time it was modified. You are not going to be able to do that with a POJO.</p>
+
+				</div>
+				
+				<div id="menu">
+					<ul>
+						<li><a href='../models/models-intro.html' class='selected'>Models</a>
+							<ul>
+								<li><a href="models-intro.html" class='selected'>Intro</a></li>
+								<li><a href="models-use.html">Use</a></li>
+								<li><a href="models-api.html">API</a></li>
+							</ul>
+						</li>
+						<li><a href="../views/views-intro.html">Views</a></li>
+						<li><a href="../mediators/mediators-intro.html">Mediators</a>
+						</li>
+						<li><a href="../templates/templates-intro.html">Templates</a></li>
+						<li><a href="../promises/promises-intro.html">Promises</a></li>
+						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+						<li><a href="../router/router-intro.html">Router</a></li>
+						<li><a href="../box/box-intro.html">Box</a></li>
+						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+						<li><a href="../dom/dom-intro.html">DOM</a></li>
+						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+						<li><a href="../themes/themes-intro.html">Themes</a></li>
+						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+
+		<footer>
+			<div>
+					<menu id='mainFooterMenu'>
+						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+						<a href="quickstart.html">Quick Start</a>
+						<a href="features.html">Features</a>
+						<a href="../../install.html">Install</a>
+					</menu>
+				<aside>
+					<menu id='social-links'>
+						<a id='tumblr' href="#">Tumblr</a>
+						<a id='github' href="#">Github</a>
+						<a id='twitter' href="#">Twitter</a>
+						<a id='npm' href="#">NPM</a>
+					</menu>
+				</aside>
+			</div>
+		</footer>
+	</article>
+	
+</body>
+</html>

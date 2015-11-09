@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Truck - Documentation</title>
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../../css/styles.css">
+	<link rel="stylesheet" href="../../css/styles-docs.css">
+</head>
+<body>
+	<article>
+		<nav>
+			<div>
+				<h1><a href="../../index.html">Truck</a></h1>
+				<menu>
+					<a href="../../quickstart.html">Quick Start</a>
+					<a href="../../features.html">Features</a>
+					<a class='selected' href="#">Docs</a>
+					<a href="../../install.html">Install</a>
+				</menu>
+			</div>
+		</nav>
+		<header>
+			<div>
+				<h2>Docs</h2>
+				<h3>Everything You Need to Know</h3>
+			</div>
+		</header>
+		
+		<section>
+			<div>
+				<div>
+					<h2>Box</h2>
+					<h3>Intro</h3>
+					<p>When you need to store things, you might put them in a box. Truck's Box does that for your app. It provides a consistent and simple interface for handling local data persistence using IndexedDB, WebSQL and localStorage. By default it tries to use IndexedDB. If the browser's implementation is buggy, Box will try to use WebSQL. If that also proves to be problematic, it will use localStorage.</p>
+
+					<p>All the latest versions of Safari, desktop and mobile, claim to support IndexedDB, in fact their implementation is seriously flawed, rendering this problematic for reliable storage. We therefore currently use WebSQL for Safari. Chrome and IE 10/MS Edge get IndexedDB. If you know what your target platform supports, you can tell Box to use it with a configuration setting to override the defaults.</p>
+
+					<p>Local data stores are not like server databases. They have severe limitations to how much data you can store. Box's data cap is 5MB. This is the limit for localStorage. If you want to ignore the localStorage fallback and depend on IndexedDB and WebSQL for your storage need, you can set the size to up to 50MB, which is the limit for WebSQL. Doing so means the user may be prompted to authorize it. Your users may not understand why they are being asked to permit storage and choose to deny it. You should therefore properly inform the user with a notification explaining that they need to authorize the use of more data for the app to function properly.</p>
+
+					<p>Although IndexedDB can store binary data, such as images, WebSQL and localStorage cannot. If you want to store binary data, Truck Box will need to encode the binary data in 64 bit format before saving. Depending on the size of your binary data, this may take quite some time. This will temporarily impact the performance of your app, so plan accordingly.</p>
+				</div>
+				
+				<div id="menu">
+					<ul>
+						<li><a href='../models/models-intro.html'>Models</a></li>
+						<li><a href="../views/views-intro.html">Views</a></li>
+						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+						<li><a href="../templates/templates-intro.html">Templates</a></li>
+						<li><a href="../promises/promises-intro.html">Promises</a></li>
+						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+						<li><a href="../router/router-intro.html">Router</a></li>
+						<li><a href="../box/box-intro.html" class='selected'>Box</a>
+							<ul>
+								<li><a href="box-intro.html" class='selected'>Intro</a></li>
+								<li><a href="box-use.html">Use</a></li>
+								<li><a href="box-api.html">API</a></li>
+							</ul>
+						</li>
+						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+						<li><a href="../dom/dom-intro.html">DOM</a></li>
+						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+						<li><a href="../themes/themes-intro.html">Themes</a></li>
+						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+
+		<footer>
+			<div>
+					<menu id='mainFooterMenu'>
+						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+						<a href="quickstart.html">Quick Start</a>
+						<a href="features.html">Features</a>
+						<a href="../../install.html">Install</a>
+					</menu>
+				<aside>
+					<menu id='social-links'>
+						<a id='tumblr' href="#">Tumblr</a>
+						<a id='github' href="#">Github</a>
+						<a id='twitter' href="#">Twitter</a>
+						<a id='npm' href="#">NPM</a>
+					</menu>
+				</aside>
+			</div>
+		</footer>
+	</article>
+	
+</body>
+</html>

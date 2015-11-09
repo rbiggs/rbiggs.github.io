@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Views</h2>
+          <h3>API</h3>
+
+          <h4>View</h4>
+          <p><code>$.View(options)</code></p>
+          <p>Views can be initialized with the following options:</p>
+          <ul>
+            <li><strong>element</strong>: The element that the view will use as a temlate parent. The template will be rendered inside of this element.</li>
+            <li><strong>template</strong>: a template to use. This can must be a string. You could use $(selector).text() to get a template.</li>
+            <li><strong>model</strong>: a model. This will bind the view to the designated model.</li>
+            <li><strong>controller</strong>: This tells the view which controller to use.</li>
+            <li><strong>name</strong>: Used to identify a view. This should be the same as the variable you use to initialize the view. This will be exposed by <code>getViewName()</code>.</li>
+            <li><strong>variable</strong>:A name to use inside your templates to refer to the data being consumed. By default Truck uses <code>data</code>. Providing a variable allows you to use a term that makes sense for the data you template is consuming.</li>
+            <li><strong>events</strong>: This is an array of events to bind to a view. You can target the parent element by leaving out the `element` property or using `self` as the value for `element`. Otherwise, you can create a delegated event on the template's descendants by providing a selector for the intended target:
+<pre class='prettyprint linenums'>var myView = $.View({
+  element: '#arrayTemplate1', 
+  model: MyModel,
+  startIndexFrom: 10,
+  escapeHTML: true,
+  variable: 'stuff'
+  events: [{
+    element: 'li',
+    startIndexFrom: 10,
+    event: 'singletap',
+    callback: function() {
+      console.log($(this).text());
+    }
+  }]
+});</li></pre>
+            <li><strong>noTemplate</strong>: If set to true, the view will be created without trying to extract a template from the element. This allows you to create a view purely for non-data purposes, such as binding events. A template can be applied later using <code>setTemplate()</code>.</li>
+
+            <li><strong>startIndexFrom</strong>: This tells Truck where to start a template's index from. If you are using <code>$.view.index</code> in your template to output sequential numbers, the numbers will start with the value provided here.</li>
+
+            <li><strong>escapeHTML</strong>: If set to `true`, the template will escape all HTML. This is useful to prevent unintentional tag or script injection. By default Truck renders the data with tags. If you wish, you can use <code>$.escapeHTML()</code> inside a specific template delimiter to escape data for a particular instance.</li>
+          </ul>
+
+          <h4>render</h4>
+          <p><code>render(data, append)</code></p>
+
+          <h4>empty</h4>
+          <p><code>empty()</code></p>
+
+          <h4>resetIndex</h4>
+          <p><code>resetIndex()</code></p>
+
+          <h4>startIndexFrom</h4>
+          <p><code>startIndexFrom(number)</code></p>
+
+          <h4>beginFromIndex</h4>
+          <p><code>beginFromIndex(boolean)</code></p>
+
+          <h4>getTemplate</h4>
+          <p><code>getTemplate()</code></p>
+
+          <h4>setTemplate</h4>
+          <p><code>setTemplate(tempalate)</code></p>
+
+          <h4>getModel</h4>
+          <p><code>getModel()</code></p>
+
+          <h4>setModel</h4>
+          <p><code>setModel(model)</code></p>
+
+          <h4>getController</h4>
+          <p><code>getController()</code></p>
+
+          <h4>isRendered</h4>
+          <p><code>isRendered()</code></p>
+
+          <h4>isEmpty</h4>
+          <p><code>isEmpty()</code></p>
+
+          <h4>setParent</h4>
+          <p><code>setParent(element)</code></p>
+
+          <h4>bind</h4>
+          <p><code>bind(model)</code></p>
+
+          <h4>unbind</h4>
+          <p><code>unbind()</code></p>
+
+          <h4>addEvent</h4>
+          <p><code>addEvent(events, dontReplace)</code></p>
+
+          <h4>off</h4>
+          <p><code>off(event, element, callback)</code></p>
+
+          <h4>stop</h4>
+          <p><code>stop(after)</code></p>
+
+          <h4>isStopped</h4>
+          <p><code>isStopped()</code></p>
+
+          <h4>restart</h4>
+          <p><code>restart(item)</code></p>
+
+          <h4>getRestartTime</h4>
+          <p><code>getRestartTime()</code></p>
+
+          <h4>renderViewAfter</h4>
+          <p><code>renderViewAfter(time, data)</code></p>
+
+          <h4>renderViewEvery</h4>
+          <p><code>renderViewEvery(time, callback)</code></p>
+
+          <h4>stopRenderViewEvery</h4>
+          <p><code>stopRenderViewEvery()</code></p>
+
+          <h4>getLastRenderTime</h4>
+          <p><code>getLastRenderTime()</code></p>
+
+          <h4>getViewName</h4>
+          <p><code>getViewName()</code></p>
+          
+          <h4>defineHelper</h4>
+          <p><code>defineHelper(callback)</code></p>
+
+          <h4>escapeHTML</h4>
+          <p><code>escapeHTML(true)</code></p>
+
+          <h4>isEscapingHTML</h4>
+          <p><code>isEscapingHTML()</code></p>
+
+          <h4>getRenderCount</h4>
+          <p><code>getRenderCount()</code></p>
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html" class='selected'>Views</a>
+              <ul>
+                <li><a href="views-intro.html">Intro</a></li>
+                <li><a href="views-use.html">Use</a></li>
+                <li><a href="views-api.html" class='selected'>API</a></li>
+              </ul></li>
+            </li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="../../index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+          <p>MIT license.</p>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+</body>
+</html>

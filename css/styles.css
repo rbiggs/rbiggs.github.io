@@ -1,0 +1,214 @@
+html, body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Open Sans', Consolas, 'Gill Sans', Arial, Sans-serif;
+	height: 100%;
+	-webkit-font-smoothing: subpixel-antialiased;
+	background-color: #fafafa;
+}
+nav {
+	height: 90px;
+	background-color: #3A8BDC;
+	border-bottom: solid 1px #8DBEF0;
+}
+nav > div {
+	height: 100%;
+	padding: 1px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+}
+nav > div > h1 a {
+	color: transparent;
+	background: transparent url(../images/Logo.png) left center no-repeat;
+	background-size: auto 50px;
+	height: 50px;
+	display: inline-block;
+	width: 160px;
+	margin: 0;
+	text-decoration: none;
+	color: transparent;
+}
+nav > div > h1 {
+	color: transparent;
+	background: none;
+	height: 50px;
+	display: inline-block;
+	width: auto;
+}
+menu {
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
+	margin: 0;
+}
+menu > a {
+	height: 38px;
+	color: #fff;
+	text-decoration: none;
+	display: inline-block;
+	width: auto;
+	margin-left: 40px;
+	margin-top: 28px;
+	text-transform: uppercase;
+	font-size: 24px;
+	font-family: 'Open Sans';
+	font-weight: 600;
+	border-bottom: solid 6px transparent;
+	padding-bottom: 18px;
+	transition: all .33s ease-out;
+}
+menu > a:hover,
+menu > a.selected {
+	border-color: #fff;
+}
+header {
+	background-color: #509BE6;
+	height: 140px;
+	box-sizing: border-box;
+	padding: 1px 42px;
+	color: #fff;
+}
+header div {
+	box-sizing: border-box;
+	height: 210px;
+	margin: 0 auto;
+	display: block;
+	width: 960px;
+	position: relative;
+	height: 141px;
+	display: flex;
+	align-items: center;
+}
+header h2 {
+	font-family: 'Open Sans', Consolas, San-serif;
+	display: inline-block;
+	font-size: 36px;
+	font-weight: 600;
+	margin-right: 40px;
+}
+header h3 {
+	display: inline-block;
+	font-weight: 100;
+	font-size: 24px;
+}
+section {
+	min-height: 400px;
+	background-color: #fff;
+}
+footer {
+	background-color: #C12833;
+	height: 150px;
+	color: #fff;
+}
+footer > div {
+	height: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 40px 0 1px 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+footer menu {
+	justify-content: flex-start;
+	margin: 0 !important;
+	height: auto;
+	float: left;
+	-webkit-padding-start: 0 !important;
+}
+footer img {
+	float: left;
+}
+footer menu a {
+	font-family: 'Open Sans';
+	font-size: 20px;
+	text-transform: none;
+	margin-top: 0;
+	padding-bottom: 6px;
+	border-width: 1px;
+	font-weight: 200;
+}
+footer p {
+	font-family: 'Open Sans';
+	font-size: 12px;
+	float: right;
+	font-weight: 200;
+}
+.mainLink {
+	display: inline-block;
+	/*height: 40px;*/
+	width: auto;
+	border: solid 1px #3A8BDC;
+	color: #3A8BDC;
+	padding: 10px 20px;
+	/*box-sizing: border-box;*/
+	font-size: 16px;
+	text-transform: uppercase;
+	text-decoration: none;
+	margin: 20px 0 0 0;
+	text-align: center;
+	transition: all .33s ease-out;
+}
+.mainLink:hover {
+	color: #fff;
+	background-color: #3A8BDC;
+}
+code {
+	font-size: 16px;
+}
+footer > div > menu a#truckLogoLink {
+	margin: 0 !important;
+	border: none !important;
+}
+#truckLogoLink:hover {
+	border: none !important;
+}
+#mainFooterMenu {
+	display: flex;
+	align-items: flex-end;
+}
+#mainFooterMenu > a {
+	height: 40px;
+	padding: 0 !important;
+	line-height: 3em;
+}
+#social-links > a {
+
+}
+#social-links {
+	float: right;
+	margin-top: 18px !important;
+}
+#social-links > a:hover {
+	border-color: transparent !important;
+}
+#tumblr, #github, #twitter, #npm {
+	color: transparent;
+	background-repeat: no-repeat;
+	background-size: auto 70%;
+	background-position: center center;
+}
+#tumblr {
+	background-image: url('../images/social-icons/tumblr.png');
+	height: 27px;
+	width: 16px;
+}
+#github {
+	background-image: url('../images/social-icons/github.png');
+	height: 24px;
+	width: 25px;
+} 
+#twitter {
+	background-image: url('../images/social-icons/twitter.png');
+	height: 22px;
+	width: 28px;
+} 
+#npm {
+	background-image: url('../images/social-icons/npm.png');
+	height: 20px;
+	width: 52px;
+}

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Truck - Documentation</title>
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../../css/styles.css">
+	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+	<article>
+		<nav>
+			<div>
+				<h1><a href="../../index.html">Truck</a></h1>
+				<menu>
+					<a href="../../quickstart.html">Quick Start</a>
+					<a href="../../features.html">Features</a>
+					<a class='selected' href="#">Docs</a>
+					<a href="../../install.html">Install</a>
+				</menu>
+			</div>
+		</nav>
+		<header>
+			<div>
+				<h2>Docs</h2>
+				<h3>Everything You Need to Know</h3>
+			</div>
+		</header>
+		
+		<section>
+			<div>
+				<div>
+					<h2>Box</h2>
+					<h3>API</h3>
+
+					<h4>Handling Results</h4>
+					<p>Truck Box offers two ways of using its API, through functions or promises. The functions work like Node functions. You'll be doing everythin inside a callback:</p>
+
+<pre class="prettyprint linenums">
+$.Box.set('key', obj, function(err, ret) { 
+  alert(ret.value); 
+});
+</pre>
+					<p>You could write code that returns the result like a normal array, however, you would pay a price in performance, since the data request will be blocking:</p>
+
+<pre class="prettyprint linenums">
+var stuff = JSON.parse($.Box.get('myStuff'));
+console.log(stuff);
+</pre>
+					<p>Contrast that with this, which is non-blocking:</p>
+
+<pre class="prettyprint linenums">
+$.Box.get('key', function(err, stuff) { 
+  alert(stuff); 
+});
+</pre>
+
+					<p>You can handle errors inside a callback. The error will be the the first argument, just like Node:</p>
+
+<pre class="prettyprint linenums">
+$.Box.get('key', function(err, stuff) {
+  if (err) {
+    console.error('Houston, we have a problem!');
+  } else {
+    alert(stuff);
+  }
+});
+</pre>
+
+					<p>When using promises, remember that promises are async. You'll need to do whatever you are trying to accomplish inside of the promise. The following are the same examples from above with promises:</p>
+
+<pre class="prettyprint linenums">
+$.Box.get('key')
+  .then(function(stuff) { 
+    alert(stuff); 
+  });
+</pre>
+
+          <p>You can handle errors as you normally would in a promise:</p>
+
+<pre class="prettyprint linenums">
+$.Box.set('key', 'value')
+  .then(function(value) {
+      alert(value + ' was set!');
+    // Handle error:
+    }, function(error) {
+      console.error(error);
+  });
+
+// Or use catch:
+$.Box.set('key', 'value')
+  .then(function(value) {
+      alert(value + ' was set!');
+  })
+  // Handle error:
+  .catch(function(error) {
+    console.error(error);
+  });
+</pre>
+
+ 					<h4>set</h4>
+ 					<p><code>set(key, value, successCallback)</code></p>
+ 					<p>Saves data to an offline store. You can store the following types of JavaScript objects:</p>
+
+					<ul>
+						<li>Array</li>
+						<li>ArrayBuffer</li>
+						<li>Blob</li>
+						<li>Float32Array</li>
+						<li>Float64Array</li>
+						<li>Int8Array</li>
+						<li>Int16Array</li>
+						<li>Int32Array</li>
+						<li>Number</li>
+						<li>Object</li>
+						<li>Uint8Array</li>
+						<li>Uint8ClampedArray</li>
+						<li>Uint16Array</li>
+						<li>Uint32Array</li>
+						<li>String</li>
+					</ul>
+
+					<p>A key name has the same restrictions as any object property: it must be alpha-numeric. The underscore character, "_", is permitted, other word delimiters are not: ". , ; -", etc.</p>
+<pre class="prettyprint linenums">
+$.Box.set('somekey', 'some value', function(err, value) {
+  // Output the value:
+   console.log(value);
+});
+
+// You can store non-strings:
+$.Box.set('my array', [1, 2, 'three'], function(err, value) {
+   // This will output `1`:
+   console.log(value[0]);
+});
+
+// Store binary data:
+request = new XMLHttpRequest();
+request.open('GET', '/myPhoto.jpg', true);
+request.responseType = 'arraybuffer';
+
+request.addEventListener('readystatechange', function() {
+  // Request complete:
+  if (request.readyState === 4) { 
+    $.Box.set('myPhoto', request.response);
+  }
+});
+</pre>
+					<summary>When using localStorage and WebSQL backends, binary data will be serialized before being saved (and retrieved). This serialization will incur a size increase when binary data is saved.</summary>
+					<h4>get</h4>
+					<p><code>get(key, successCallback)</code></p>
+
+					<p>Gets an item from the storage library and supplies the result to a callback. If the key does not exist, <code>get()</code> will return null.</p>
+
+					<summary>Even if undefined is saved, null will be returned by <code>get()</code>. This is due to a limitation in localStorage, and for compatibility reasons $.Box cannot store the value undefined.</summary>
+
+ <pre class="prettyprint linenums">
+$.Box.get('somekey', function(err, value) {
+  // Output the value:
+  console.log(value);
+});
+// Same code using Promises:
+$.Box.get('somekey')
+  .then(function(value) {
+    console.log(value);
+  });
+ </pre>
+
+					<h4>remove</h4>
+					<p><code>remove(key, successCallback)</code></p>
+					<p>Removes the value of a key from the offline store.</p>
+<pre class='prettyprint linenums'>
+// Execute callback after the key has been removed:
+$.Box.remove('somekey', function(err) {
+  console.log('Key is cleared!');
+});
+</pre>
+
+					<h4>clear</h4>
+					<p><code>clear(successCallback)</code></p>
+					<p>Removes every key from the database, returning it to a blank slate.</p>
+<pre class='prettyprint linenums'>
+// Execute callback after the database has been deleted:
+$.Box.clear(function(err) {
+   console.log('Database went bye-bye.');
+});	
+</pre>		
+					<summary>$.Box.clear() will remove every item in the offline store. Use this method with caution.
+</summary>
+
+					<h4>size</h4>
+					<p><code>size(successCallback)</code></p>
+					<p>Gets the number of keys in the offline store (i.e. its “size”).</p>
+<pre class='prettyprint linenums'>
+// Output the number of keys in the database:
+$.Box.size(function(err, numberOfKeys) {
+  console.log(numberOfKeys);
+});
+</pre>
+
+					<h4>key</h4>
+					<p><code>key(keyIndex, successCallback)</code></p>
+					<p>Get the name of a key based on its ID.</p>
+<pre class='prettyprint linenums'>
+// Output the key name:
+$.Box.key(2, function(err, keyName) {
+  console.log(keyName);
+});
+</pre>
+					<h4>keys</h4>
+					<p><code>keys(successCallback)</code></p>
+					<p>Get the list of all keys in the datastore.</p>
+<pre class='prettyprint linenums'>
+// An array of all the key names:
+$.Box.keys(function(err, keys) {
+  console.log(keys);
+});
+</pre>
+
+					<h4>each</h4>
+					<p><code>each(successCallback)</code></p>
+					<p>Iterate over all value/key pairs in datastore.</p>
+					<p><code>successCallback</code> is called once for each pair, with the following arguments:</p>
+					<ol>
+						<li>value</li>
+						<li>key</li>
+						<li>idx - one-based number</li>
+					</ol>
+<pre class='prettyprint linenums'>
+// This callback will be executed for every item in the database:
+$.Box.each(function(value, key, idx) {
+  console.log([key, value]);
+}, function(err) {
+  if (!err) {
+    console.log('each has completed.');
+  // Handle any error:
+  } else {
+    console.log(err);
+  }
+});
+
+// The same code using Promises:
+$.Box.each(function(value, key, idx) {
+  console.log([key, value]);
+})
+  .then(function() {
+     console.log('Iteration has completed.');
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+
+// Exit the iteration:
+$.Box.each(function(value, key, idx) {
+  if (idx &lt; 5) {
+    console.log([key, value]);
+  } else {
+    return [key, value];
+  }
+}, function(err, result) {
+  if (!err) {
+    console.log('Iteration has completed.');
+    console.log('The last iterated pair was:');
+    console.log(result);
+  }
+});
+
+// The same code using Promises:
+$.Box.each(function(value, key, idx) {
+  if (idx &lt; 5) {
+    console.log([key, value]);
+  } else {
+    return [key, value];
+  }
+})
+  .then(function(result) {
+    console.log('Iteration has completed.');
+    console.log('The last iterated pair was:');
+    console.log(result);
+  });
+</pre>
+					<summary><code>each</code> supports early exit by returning an undefined value inside the eachCallback. The resulting value will be passed to successCallback with each iteration.</summary>
+
+					<h4>createInstance</h4>
+					<p><code>createInstance(options)</code></p>
+					<p>You can create multiple instances of Truck Box. <code>createInstance</code> accepts all the options that config does (see below). Each instance can have its own name to identify it.</p>
+
+<pre class='prettyprint linenums'>
+// Setup:
+var moviesBox = $.Box.createInstance({
+  name: 'MoviesDB'
+});
+recipesBox.set('movie1', {...});
+var recipiesBox = $.Box.createInstance({
+  name: 'RecipesDB'
+});
+recipesBox.set('recipe1, {...}');
+
+// Get a movie from its box:
+moviesBox.get('movie1')
+  .then(function(movie) {
+    console.log(movie.name);
+  });
+</pre>
+
+					<h3>Settings</h3>
+					<p>These methods allow driver selection and database configuration. They should generally be called before the first data API call to $.Box (i.e. before you call <code>get()</code>, <code>size()</code>, etc.)</p>
+
+					<h4>setDriver</h4>
+					<p><code>setDriver(driverName)</code></p>
+					<p><code>setDriver([driverName, nextDriverName])</code></p>
+					<p>Force usage of a particular driver or drivers, if available.</p>
+					<p>By default, $.Box selects drivers for the datastore in this order:</p>
+					<ol>
+						<li>IndexedDB</li>
+						<li>WebSQL</li>
+						<li>localStorage</li>
+					</ol>
+					<p>If you want to force the usage of a particular driver, you can use <code>setDriver()</code> with one or more of the following parameters:</p>
+					<ul>
+						<li>$.Box.INDEXEDDB</li>
+						<li>$.Box.WEBSQL</li>
+						<li>$.Box.LOCALSTORAGE</li>
+					</ul>
+<pre class='prettyprint linenums'>
+// Force Box to use localStorage:
+$.Box.setDriver($.Box.LOCALSTORAGE);
+
+// Tell Box what your order preference is:
+$.Box.setDriver([$.Box.WEBSQL, $.Box
+.INDEXEDDB, $.Box.LOCALSTORAGE]);
+</pre>
+						<summary> If the backend you’re trying to load isn’t available on the user’s browser, $.Box will continue to use whatever backend driver it was previously using. This means, for example, if you try to force IE to use WebSQL, it will fail and continue using IndexedDB.</summary>
+
+						<h4>config</h4>
+						<p><code>config(options)</code></p>
+						<p>Set and persist $.Box options. This must be called before any other calls to $.Box are made, but can be called after $.Box is loaded. If you set any config values with this method, they will persist after driver changes, so you can call <code>config()</code> then <code>setDriver()</code>. The following config values can be set:</p>
+
+						<h5>driver</h5>
+						<p>The preferred driver(s) to use. Same format as what is passed to <code>setDriver()</code>, above.</p>
+						<p>Default: [$.Box.INDEXEDDB, $.Box.WEBSQL, $.Box.LOCALSTORAGE]</p>
+
+						<h5>name</h5>
+						<p>The name of the database. This may appear during storage limit prompts. Since the user may see this, it is best to use the name of your app. In localStorage, this is used as a key prefix for all keys stored in localStorage.</p>
+						<p>Default: 'TruckBox'</p>
+
+						<h5>size</h5>
+						<p>The size of the database in bytes. Used by WebSQL and localStorage.
+						<p>Default: 4980736</p>
+
+						<h5>boxName</h5>
+						<p>The name of the datastore. In IndexedDB this is the dataStore, in WebSQL this is the name of the key/value table in the database. This must be alphanumeric, with underscores. Any non-alphanumeric characters will be converted to underscores.</p>
+						Default: 'keyvaluepairs'</p>
+
+						<h5>version</h5>
+						<p>The version of your database.</p>
+						<p>Default: 1.0</p>
+
+						<h5>description</h5>
+						<p>A description of the database. This is only as a reminder for you, the developer. By default this value is empty.</p>
+						<p>Default: ''</p>
+
+<pre class='prettyprint linenums'>
+// This will rename the database from "TruckBox"
+// to "Bongo Babies App".
+$.Box.config({
+  name: 'Bongo Babies App'
+});
+
+// This will replace whatever the current
+// storage driver is with localStorage. 
+// This is the same as using `setDriver()`.
+$.Box.config({
+  driver: $.Box.LOCALSTORAGE,
+  name: 'localStorage-always-works'
+});
+
+// Use a different driver order.
+$.Box.config({
+  driver: [$.Box.WEBSQL,
+    $.Box.INDEXEDDB,
+    $.Box.LOCALSTORAGE],
+  name: 'WebSQL-First'
+});
+</pre>
+
+
+				</div>
+				
+				<div id="menu">
+					<ul>
+						<li><a href='../models/models-intro.html'>Models</a></li>
+						<li><a href="../views/views-intro.html">Views</a></li>
+						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+						<li><a href="../templates/templates-intro.html">Templates</a></li>
+						<li><a href="../promises/promises-intro.html">Promises</a></li>
+						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+						<li><a href="../router/router-intro.html">Router</a></li>
+						<li><a href="../box/box-intro.html" class='selected'>Box</a>
+							<ul>
+								<li><a href="box-intro.html">Intro</a></li>
+								<li><a href="box-use.html">Use</a></li>
+								<li><a href="box-api.html" class='selected'>API</a></li>
+							</ul>
+						</li>
+						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+						<li><a href="../dom/dom-intro.html">DOM</a></li>
+						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+						<li><a href="../themes/themes-intro.html">Themes</a></li>
+						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+
+		<footer>
+			<div>
+					<menu id='mainFooterMenu'>
+						<a id='truckLogoLink' href="../../index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+						<a href="../../quickstart.html">Quick Start</a>
+						<a href="../../features.html">Features</a>
+						<a href="../../install.html">Install</a>
+					</menu>
+				<aside>
+					<menu id='social-links'>
+						<a id='tumblr' href="#">Tumblr</a>
+						<a id='github' href="#">Github</a>
+						<a id='twitter' href="#">Twitter</a>
+						<a id='npm' href="#">NPM</a>
+					</menu>
+				</aside>
+			</div>
+		</footer>
+	</article>
+	
+
+<script>
+  prettyPrint();
+</script>
+</body>
+</html>

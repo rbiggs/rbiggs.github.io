@@ -1,0 +1,104 @@
+nav > div > h1 {
+	color: transparent;
+	background: transparent url(../images/Logo.png) left center no-repeat;
+	background-size: auto 50px;
+	height: 50px;
+	display: inline-block;
+	width: 160px;
+	margin:  0;
+}
+header {
+	height: 220px;
+	background-color: #509BE6;
+	box-sizing: border-box;
+	color: #fff;
+	position: relative;
+	padding: 1px;
+}
+header h2 {
+	font-family: 'Open Sans', Consolas, San-serif;
+	font-weight: 100;
+	font-size: 24px;
+	margin: 0 0 5px 0;
+	display: block;
+}
+header #truck-image {
+	position: absolute;
+	right: 0;
+	bottom: -20px;
+}
+header div {
+	box-sizing: border-box;
+	height: 210px;
+	padding: 46px 0 0 0;
+	margin: 0 auto;
+	display: block;
+	width: 960px;
+	position: relative;
+}
+section {
+	box-sizing: border-box;
+	padding: 1px 42px;
+}
+section h2 {
+	font-family: 'Open Sans';
+	font-size: 36px;
+	color: #4D4D4D;
+	font-weight: normal;
+	margin: 0;
+}
+section h3 {
+	font-family: 'Open Sans';
+	font-size: 16px;
+	color: #4D4D4D;
+	font-weight: normal;
+	margin: 0;
+	max-width: 500px;
+}
+section {
+	height: 400px;
+}
+section div {
+	max-width: 960px;
+	margin: 0 auto;
+	position: relative
+}
+#build  {
+	height: 318px;
+	padding-top: 72px;
+}
+#build img {
+	float: left;
+	/*margin-right: 86px;*/
+	/*margin-left: 62px;*/
+}
+#build aside {
+	margin-left: 320px;
+}
+#code {
+	background-color: #FAFAFA;
+	padding-left: 44px;
+	padding-top: 42px;
+	border-top: solid 1px #F6F6F6;
+	border-bottom: solid 1px #F6F6F6;
+}
+#code img {
+	float: right;
+	margin-left: 44px;
+}
+#opensource {
+	padding-top: 54px;
+}
+#opensource img {
+	float: left;
+}
+#opensource aside {
+	margin-left: 320px;
+}
+#build .mainLink {
+	margin: 20px 0 0 0;
+}
+#opensource .mainLink {
+	margin: 20px 0 0 0;
+}
+

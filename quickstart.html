@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Truck - Quick Start</title>
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/styles-quickstart.css">
+  <link rel="stylesheet" href="./prettify/obsidian.css">
+  <script type='text/javascript' src='./prettify/prettify.js'></script>
+  <script type='text/javascript' src='./prettify/lang-css.js'></script>
+</head>
+<body>
+	<article>
+		<nav>
+			<div>
+				<h1><a href="index.html">Truck</a></h1>
+				<menu>
+					<a class='selected' href="quickstart.html">Quick Start</a>
+					<a href="features.html">Features</a>
+					<a href="docs/models/models-intro.html">Docs</a>
+					<a href="install.html">Install</a>
+				</menu>
+			</div>
+		</nav>
+		<header>
+			<div>
+				<h2>Quick Start</h2>
+				<h3>Make a Model, Bind it to a View</h3>
+			</div>
+		</header>
+		
+		<section>
+			<div>
+			<h2>Basic Markup</h2>
+			<p>First we need to import a stylesheet and TruckJS. Then we define a template. This will be used by our view. Our data will be an array of people so we are going to use the term "person" to refer to an individual in our template. Each person will have a first name and a last name. The template is in the element <code>#peopleList</code>:</p>
+			<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Truck - Demo&lt;/title&gt;
+  &lt;link rel="stylesheet" href="truck-ios.css"&gt;
+  &lt;script src="truck.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;screen&gt;
+    &lt;nav&gt;
+      &lt;h1&gt;Truck is Fun&lt;/h1&gt;
+    &lt;/nav&gt;
+    &lt;section&gt;
+      &lt;ul class="list" id='peopleList'&gt;
+        &lt;li&gt;
+          &lt;div&gt;
+            &lt;h3&gt;${ person.firstName }&lt;/h3&gt;
+            &lt;h4&gt;${ person.lastName }&lt;/h4&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+  &lt;/screen&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+			<a href="docs/templates/templates-intro.html" class="mainLink">Learn More About Templates</a>
+			<h2>Create a Model</h2>
+			<p>Below is the data we will use</p>
+			<pre class="prettyprint linenums">
+var people = [
+  { firstName: 'Joe', lastName: 'Bodoni' },
+  { firstName: 'John', lastName: 'Doe' },
+  { firstName: 'Wobba', lastName: 'Rango' },
+  { firstName: 'Josh', lastName: 'Rutherford' }
+];</pre>
+			<p>Now we can turn the data into a model. To do that we use <code>$.Model</code>, which takes two arguments, the data to use in the model, and a handle which the model will use to notify the system of any changes:</p>
+			<pre class="prettyprint linenums">
+var PeopleModel = $.Model(people, 'people-model');</pre>
+			<a href="docs/models/models-intro.html" class="mainLink">Learn More About Models</a>
+			<h2>Define a View</h2>
+			<p>Now that we have a template and a model, we can create the view. We do that using <code>$.View</code>. A view needs at least an element with a template and some data. Since we have a template in the markup and a model, we're ready to go. The last line tells Truck to rener the view:</p>
+
+			<pre class="prettyprint linenums">
+var PeopleView = $.View({
+  element: '#peopleList',
+  model: PeopleModel,
+  // Use this variable in the template:
+  variable: 'person'
+});
+PeopleView.render();</pre>
+			<a href="docs/views/views-intro.html" class="mainLink">Learn More About Views</a>
+			<p>By providing the view with a model, Truck binds it to the model by creating a controller for us. Any changes we make to the model will propogate to the view. Because we provided the element <code>#peopleList</code>, Truck extracts its template and renders it with the model <code>PeopleModel</code>.</p>
+			<p>When we load this in the browser, we get this:</p>
+			<p><img src="images/quickstart/data-binding-rendered.png" alt="Output from Truck template with data binding."></p>
+			<a href="docs/tutorials/tutorials-intro.html" class="mainLink">Tutorials</a>
+
+			</div>
+		</section>
+
+		<footer>
+			<div>
+					<menu id='mainFooterMenu'>
+						<a id='truckLogoLink' href="index.html"><img src="images/footer-logo.png" alt="Truck"></a>
+						<a href="quickstart.html">Quick Start</a>
+						<a href="features.html">Features</a>
+						<a href="docs/models/models-intro.html">Docs</a>
+					</menu>
+				<aside>
+					<menu id='social-links'>
+						<a id='tumblr' href="#">Tumblr</a>
+						<a id='github' href="#">Github</a>
+						<a id='twitter' href="#">Twitter</a>
+						<a id='npm' href="#">NPM</a>
+					</menu>
+				</aside>
+			</div>
+		</footer>
+	</article>
+
+<script>
+  prettyPrint();
+</script>
+</body>
+</html>
