@@ -1,94 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Box</h2>
-					<h3>Use</h3>
-					<p>Comming soon...</p>
-				</div>
-				
-				<div id="menu">
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Box</h2>
+          <h3>Use</h3>
+          <p>Truck's Box is an interface to three different types of local data persistence: IndexedDB, WebSQL and localStorage. Which one it uses depends on the browser. Box first tries to use IndexedDB, if the browser does not support it, Box tries WebSQL, if the browser does not support that, it uses localStorage.</p>
+          <p>To use Box you have two options:</p>
+          <ol>
+            <li>You can box a model or any other data at any time.</li>
+            <li>You can set a model to automatically box its changes.</li>
+          </ol>
+
+					<h4>$.Box.set()</h4>
+          <p>If your data needs are simply, meaning you just need a simple box for local data persistence of a few items, you can use the defaul box. You do this by just setting your data. Box will put it in its default box called 'keyvaluepairs'. You can examine your boxes by opening the browsers Web inspector and examining your resources.</p>
+          <p>To put something in a box, let's look at the following example. We'll need to write an event to grab some data from some form inputs, and a mediator to handle putting those values in a box:</p>
+          
+          <pre class='prettyprint linenums'>
+// Handle event to trigger model agumentation:
+//============================================
+$('#boxit').on('click', function() {
+  var key = $('#key').val();
+  var value = $('#value').val();
+  if (!key || !value) return;
+  BoxMediator.run({key: key, value: value});
+});
+
+// Define Mediator to handle boxing model:
+//========================================
+var BoxMediator = $.Mediator('box-mediator');
+BoxMediator.init(function(data) {
+  if (data && data.key) {
+    var key = data.key;
+    var value = data.value;
+    // Set a Box key/value pair:
+    $.Box.set(key, value).then(function(item) {
+      $('#boxList').empty();
+      $.Box.each(function(value, key) {
+        $('#boxList').append('&lt;li&gt;Key: ' + key + ', value: ' + value + '&lt;/li&gt;');
+      });
+    });
+  }
+});
+          </pre>
+					<h4>$.Box.get()</h4>
+					<p>You can get a key/value pair out of a box using <code>$.Box.get()</code>. Just give if the key you want to retrieve. Box will return a promise that you can use to access that data:</p>
+					<pre class='prettyprint linenums'>
+$.Box.get('name').then(function(value) {
+	console.log('The name is: ' + value);
+});</pre>
+					<p>Because this is a promise, you can use <code>catch</code> to handle errors.</p>
+
+					<h4>How Box Stores Values</h4>
+					<p>A value can be any of the following:</p>
 					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html" class='selected'>Box</a>
-							<ul>
-								<li><a href="box-intro.html">Intro</a></li>
-								<li><a href="box-use.html" class='selected'>Use</a></li>
-								<li><a href="box-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+						<li>Array</li>
+						<li>ArrayBuffer</li>
+						<li>Blob</li>
+						<li>Float32Array</li>
+						<li>Float64Array</li>
+						<li>Int8Array</li>
+						<li>Int16Array</li>
+						<li>Int32Array</li>
+						<li>Number</li>
+						<li>Object</li>
+						<li>Uint8Array</li>
+						<li>Uint8ClampedArray</li>
+						<li>Uint16Array</li>
+						<li>Uint32Array</li>
+						<li>String</li>
 					</ul>
-				</div>
-			</div>
-		</section>
+
+					<p>Box will encode these depending on the type of storage it is using. When you extract a value, Box decodes it for you. That means that if you stored an array and you get it from the box, it is returned as an array. So you can immediately loop it:</p>
+					<pre class='prettyprint linenums'>
+$.Box.get('prices').then(function(value) {
+	prices.forEach(function(price)) {
+		console.log('The price is: ' + price);
+	});
+});</pre>
+					<h4>Boxing a Model</h4>
+					<p>You can tell a model to box its data. You use the <code>box</code> method. This takes a two options: a key and a box name.</p>
+					<pre class='prettyprint linenums'>
+ProjectsModel.box('projects', 'Projects-Box');</pre>
+					<p>Having boxed the model, you can extract its data from the box name you provided using the key.</p>
+					<p>You can find out if a model has been boxed by querying it:</p>
+					<pre class='prettyprint linenums'>MyModel.isBoxed()
+// returns true or false</pre>
+
+					<h4>Setting a Model to Auto-Box</h4>
+					<p>You can set a model to automatically box all of its changes. When you do so, there are a couple of things to keep in mind. If you have a default value for the model that gets set a load time, you need to first check the box to see if the model has been store. If it has, get it and use its values to set the data for the model, otherwise use the defaults. Below is how you set a model to auto-box:</p>
+					<pre class='prettyprint linenums'>
+PeopleModel.box({key: 'auto-boxed-people', autobox: true});</pre>
+					<p>To see how this is done, please take a good look at the source code example called "auto-box.html".</p>
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html" class='selected'>Box</a>
+              <ul>
+                <li><a href="box-intro.html">Intro</a></li>
+                <li><a href="box-use.html" class='selected'>Use</a></li>
+                <li><a href="box-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
