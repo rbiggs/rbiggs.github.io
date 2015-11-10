@@ -37,7 +37,14 @@
 				<div>
 					<h2>Mediators</h2>
 					<h3>Intro</h3>
-					<p>Truck's Mediators are an evented bus system. Mediators can respond to events, or as they are called in Truck, handles. For example, when a model changes, it announce that change using a handle. If a mediator is listening for that handle, it can respond. This gets useful when the handle comes with data. The mediator can then take that data and do something with it.</p>
+
+					<p>Mediators are what binds the different parts of Truck together. Model, Views, remote domains and local data persistence do not know about each other. Only the mediators know about these. Trucks mediators handle the flow from one to the other. The following picture illustrates the role mediators play in Truck's architecture:</p>
+					<p>
+						<img src="../../images/truck-parts/mediator.png" alt="">
+					</p>
+					<p>From this image you can see that the remove server can send a push notification to a mediator. A model and notify a mediator that it has changed. A view can notify a mediator about a user interaction. And a mediator and interact with the remote server, the model, the view and the local data persistence.</p>
+
+					<p>Truck's Mediators are an evented bus system. Mediators can respond to events, or as they are called in Truck, handles. For example, when a model changes, it announces that change using a handle. If a mediator is listening for that handle, it can respond. This gets useful when the handle comes with data. The mediator can then take that data and do something with it.</p>
 
 					<p>You can also define a mediator that is executed like any other function. For example:</p>
 
