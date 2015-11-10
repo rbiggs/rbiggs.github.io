@@ -110,6 +110,21 @@ $.Box.get('prices').then(function(value) {
 		console.log('The price is: ' + price);
 	});
 });</pre>
+					<h4>$.Box.each()</h4>
+					<p>If you want to get all the keys out of your box, you can use the <code>each()</code> method. This will run a loop on the box, returning the key/value pairs. You can do it like this:</p>
+					<pre class='prettyprint linenums'>
+$.Box.each(function(value, key, idx) {
+  console.log([key, value]);
+}, function(err) {
+  if (!err) {
+    console.log('each has completed.');
+  // Handle any error:
+  } else {
+    console.log(err);
+  }
+});</pre>
+
+
 					<h4>Boxing a Model</h4>
 					<p>You can tell a model to box its data. You use the <code>box</code> method. This takes a two options: a key and a box name.</p>
 					<pre class='prettyprint linenums'>
@@ -124,6 +139,7 @@ ProjectsModel.box('projects', 'Projects-Box');</pre>
 					<pre class='prettyprint linenums'>
 PeopleModel.box({key: 'auto-boxed-people', autobox: true});</pre>
 					<p>To see how this is done, please take a good look at the source code example called "auto-box.html".</p>
+					<p>To learn more about how to use Box, please consulte the <a href="./box-api.html">API</a>.</p>
 
         </div>
         
