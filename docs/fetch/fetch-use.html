@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,458 @@
 				<div>
 					<h2>Fetch</h2>
 					<h3>Use</h3>
-					<p>Coming soon...</p>
+
+<p>Ajax has served us well over the years, so why Fetch? Well, let's take a look at the differences. A plain JavaScript XMLHttpRequest could look like this:</p>
+
+<pre class="prettyprint"><code>var xhr = new XMLHttpRequest();
+xhr.open('GET', url);
+xhr.responseType = 'json';
+
+xhr.onload = function() {
+  console.log(xhr.response);
+};
+
+xhr.onerror = function() {
+  console.log("Booo");
+};
+
+xhr.send();
+</code></pre>
+
+<p>And here's the same thing using jQuery, which gives us more organization:</p>
+
+<pre class="prettyprint"><code>$.ajax({
+  url: './some/url',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(err) {
+    console.log(err);
+  }
+});
+</code></pre>
+
+<p>Now here's the same thing using the new  <code>fetch</code> API:</p>
+
+<pre class="prettyprint"><code>fetch('./some/url')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+</code></pre>
+
+<p>As you can see in the above example, <code>fetch</code> uses promises to its advantage and the result is a much cleaner and easier to follow process. Of course, you could use jQuery deferred objects, or convert jQuery promises into ES6 promises. But Fetch's advantage is promises are built in. It's how Fetch works.</p>
+
+<h3>API</h3>
+
+<p>Fetch takes two arguments: input and init. Input is a url. If only a url is provided, <code>fetch</code> assumes a GET request. Init is an optional object of key/value pairs. The possible values for init are:</p>
+
+<pre class="prettyprint"><code>init: {
+  method: {
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'OPTIONS',
+    'HEAD'
+  },
+  headers: {
+    'Accept': 'application/json',
+    'Accept-Encoding', 'deflate',
+    'Accept-Encoding', 'gzip'
+    'Content-Type': 'application/json',
+    "Content-Type": "application/x-www-form-urlencoded",
+    'Content-Type', 'image/jpeg',
+    'Content-Type', 'text/html'
+  },
+  body: {
+    json,
+    text,
+    formData,
+    blob,
+    arrayBuffer
+  },
+  mode:  {
+    "cors",
+    "no-cors",
+    "same-origin",
+  },
+  credentials: {
+    "omit",
+    "same-origin",
+    "include"
+  },
+  cache: {
+    "default",
+    "no-store",
+    "reload",
+    "no-cache",
+    "force-cache",
+    "only-if-cached"
+  },
+  timeout: 10000
+}
+</code></pre>
+
+<p>OK, so how do you use this thing? Here are some examples:</p>
+
+<h3Get</h3>
+
+<p>In this example we fetch from a url, parse the JSON, pass it to a forEach function and append the data to the document.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  fetch('../data/wines.json')
+  // Parse response to JSON:
+  .then($.json)
+  .then(function(json) {
+    json.forEach(function(wine) {
+      $('#message_ajax').append('&lt;li&gt;' + wine.name + '&lt;/li&gt;');
+    })
+  });
+});
+</code></pre>
+
+<h3Getting HTML</h3>
+
+<p>If you want to get some an HTML document or document fragment, do the following:</p>
+
+<pre class="prettyprint"><code>fetch('https://foo.com/fragments/page-1.html')
+  .then(function(response) {
+    return resonse.text();
+  })
+  .then(function(result) {
+    $('body').append(result);
+  });
+</code></pre>
+
+<h4>
+<a id="user-content-json" class="anchor" href="#json" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.json</h4>
+
+<p>This method automatically parses data returned by the response as JSON. To use it, simply put it as the immediate response to a JSON request:</p>
+
+<pre class="prettyprint"><code>.then($.json)
+</code></pre>
+
+<p>See the example above. You can use this whenever you expect JSON will be returned.</p>
+
+<h3Post</h3>
+
+<p>Here we are posting some form data that will get processed by a PHP controller. We provide a url, followed by an init object that contains the 'post' method, headers object and the body, which holds the data from the serialized form:</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  // Serialize form data:
+  var data = $.serialize($('form')[0]);
+  fetch('../controllers/php-post.php', {
+    method: 'post',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+    },
+    body: data
+  })
+  .then($.json) 
+  .then(function(data) {
+    if(data.email_check == "valid"){
+        $("#message_ajax").html("&lt;div class='successMessage'&gt;" + data.email + " is a valid e-mail address. Thank you, " + data.name + ".&lt;/div&gt;");
+        $("#message_ajax").append('&lt;p&gt;' + data.msg + '&lt;/p&gt;');
+    } else {
+        $("#message_ajax").html("&lt;div class='errorMessage'&gt;Sorry " + data.name + ", " + data.email + " is NOT a valid e-mail address. Try again.&lt;/div&gt;");
+    }
+  });
+});
+</code></pre>
+
+<p>In the above example, our PHP controller processes form data and then returns some information which we can output to the document when it was successful.</p>
+
+<h3>Put</h3>
+
+<p>To perform a PUT operation, we provide the url, followed by an init object with the 'put' method, headers and a body holding the form data that we want to put. The PHP controller at the other end of the url will handle this.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  var data = $('#fileText').val();
+  fetch('../controllers/php-put.php', {
+    method: 'put',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+    },
+    body: data
+  })
+  .then($.json) 
+  .then(function(data) {
+      console.dir(data.base);
+      $("#message_ajax").append('&lt;p&gt;' + data.result + '&lt;/p&gt;');
+      $("#message_ajax").append('&lt;p&gt;The file name is: ' + data.fileName + '&lt;/p&gt;');
+  })
+  .catch(function(error) {
+      console.log(error);
+      $("#message_ajax").html("&lt;div class='errorMessage'&gt;Sorry, put was not successful.&lt;/div&gt;");
+  });
+});
+</code></pre>
+
+<p>If this put request was handled successfully by the server side controller, it will return some data that we will output to the document.</p>
+
+<h3>Delete</h3>
+
+<p>This shows how to implement a delete. In this case we are simply deleting a file on the server. If the file does not exist, our PHP controller will let us know, otherwise it will delete the file. </p>
+
+<p>The delete request needs the url to send to, followed by an init object with the 'delete' method, a headers object and the body to hold the name of the file to delete.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  var file = $('#fileName').val();
+  fetch('../controllers/php-delete.php', {
+    method: 'delete',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+    },
+    body: file
+  })
+  .then($.json) 
+  .then(function(data) {
+      $("#message_ajax").html("&lt;div&gt;DELETE was sent to the server successfully.&lt;/div&gt;");
+      $("#message_ajax").append('&lt;p&gt;' + data.result + '&lt;/p&gt;');
+  },
+  function(data) {
+    console.log('PROBLEM')
+    console.log(data);
+  })
+  .catch(function(error) {
+      $("#message_ajax").html("&lt;div class='errorMessage'&gt;Sorry, 'DELETE' was not successful.&lt;/div&gt;");
+      error.reject();
+  });
+});
+</code></pre>
+
+<p>If the server side controller was successful, it will send back some information that we can output to the document.</p>
+
+<h3>Headers</h3>
+
+<p>In <code>fetch</code> you can create headers using the Headers method:</p>
+
+<pre class="prettyprint"><code>fetch('some/particular/url', {
+  method: 'post',
+  headers: {
+    "Content-Type": "text/plain",
+    "Content-Length": content.length.toString(),
+    "X-Custom-Header": "ProcessThisImmediately"
+  }
+});
+
+// or:
+var headers = new Headers({
+  "Content-Type": "text/plain",
+  "Content-Length": content.length.toString(),
+  "X-Custom-Header": "ProcessThisImmediately",
+});
+fetch('some/particular/url', {
+  method: 'post',
+  headers: headers
+});
+
+// or:
+var reqHeaders = new Headers();
+reqHeaders.append("Content-Type", "text/plain"
+reqHeaders.append("Content-Length", content.length.toString());
+reqHeaders.append("X-Custom-Header", "ProcessThisImmediately");
+fetch('some/particular/url', {
+  method: 'post',
+  headers: headers
+});
+</code></pre>
+
+<p>With the headers object, you can choose the style that works for the situation.</p>
+
+<h3>Request Object</h3>
+
+<p>You can also create a Request object to use with <code>fetch</code>:</p>
+
+<pre class="prettyprint"><code>// Create Request Object:
+var wineRequest = new Request('../data/wines.json');
+$("#submit").on("click", function(e) {
+  fetch(wineRequest)
+  // Parse response to JSON:
+  .then($.json)
+  .then(function(json) {
+    json.forEach(function(wine) {
+      $('#message_ajax').append('&lt;li&gt;' + wine.name + '&lt;/li&gt;');
+    })
+  });
+});
+</code></pre>
+
+<p>or:</p>
+
+<pre class="prettyprint"><code>var data = $.serialize($('form')[0]);
+// Create Request Object:
+var postRequest = new Request('../controllers/php-post.php', {
+  method: 'post',
+  headers: {  
+    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+  },
+  body: data
+});
+fetch(postRequest);
+</code></pre>
+
+<p>The Request object accepts the same arguments as the fetch method, so you can pass it a url, along with an init object with method, headers, mode and cache, or whatever you need in your case:</p>
+
+<pre class="prettyprint"><code>var myInit = { 
+  method: 'GET',
+  headers: myHeaders,
+  mode: 'cors',
+  cache: 'default' 
+};
+var myRequest = new Request('my/special/url', myInit);
+fetch(myRequest)
+.then(function(response) {
+  console.log('We got something here.')
+})
+</code></pre>
+
+<h3>Sending Serialized Data</h3>
+
+<p>You can serialize the values of a form to send, but you need to set the header to do so:</p>
+
+<pre class="prettyprint"><code>headers: {  
+  "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+}
+</code></pre>
+
+<p>Look at the previous <code>fetch</code> examples to see how we used this.</p>
+
+<h3>response.ok</h3>
+
+<p>You can check the status of a response by examining its <code>ok</code> property:</p>
+
+<pre class="prettyprint"><code>fetch('some/url')
+.then(function(reponse) {
+  if (response.ok) {
+    console.log('Woohoo! We were successful!');
+  } else {
+    console.log('There seems to have been a network problem.');
+  }
+})
+</code></pre>
+
+<p>You can query any of the following values on the Response object like we did with <code>ok</code>:</p>
+
+<pre class="prettyprint"><code>ok
+status
+statusText
+type
+url
+</code></pre>
+
+<h3>Timeouts</h3>
+<p>If you pass <code>fetch</code> a timeout value in its init object, you can cancel a request taking too long:</p>
+
+<pre class="prettyprint"><code>
+var data = $.serialize($('form')[0]);
+
+fetch('../controllers/php-post.php', {
+  //=====================
+  // Set a timeout value:
+  timeout: 50000,
+  //=====================
+  method: 'post',
+  headers: {  
+    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+  },
+  body: data
+})
+.then($.json) 
+.then(function(data) {
+  if(data.email_check == "valid"){
+      $("#message_ajax").html("&lt;div class='successMessage'&gt;" + data.email + " is a valid e-mail address. Thank you, " + data.name + ".&lt;/div&gt;");
+      $("#message_ajax").append('&lt;p&gt;' + data.msg + '&lt;/p&gt;');
+  } else {
+      $("#message_ajax").html("&lt;div class='errorMessage'&gt;Sorry " + data.name + ", " + data.email + " is NOT a valid e-mail address. Try again.&lt;/div&gt;");
+  }
+})
+// Catch the timeout:
+.catch(function(error) {
+  console.log(error);
+  // returns: Request timed out at: /controllers/php-post.php
+});
+</code></pre>
+
+<h3>Handling HTTP Error Status</h3>
+<p>Unlike normal Ajax requests, the promise returned by <code>fetch</code> will not get rejected, even if the response is 404 or 500. You can get arround this by defining a custom handler:</p>
+
+<pre class="prettyprint"><code>
+  function checkStatus(response) {
+  if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) {
+    return response
+  } else {
+    var error = new Error(response.statusText)
+    error.response = response
+    throw error
+  }
+}
+
+fetch('/candies')
+  .then(checkStatus)
+  .then($.json)
+  .then(function(data) {
+    console.dir(data);
+  })
+  .catch(function(error) {
+    console.log('Request failed: ', error);
+  })
+</code></pre>
+
+<h3>Handling Cookies</h3>
+<p>By default, <code>fetch</code> will not send cookies. This can result in session authentication failing. To get <code>fetch</code> to send cookies you need to provide the proper credentials:</p>
+
+<pre class="prettyprint"><code>
+fetch('/candies', {
+  credentials: "same-origin"
+});
+</code></pre>
+
+
+<h3>Receiving Cookies</h3>
+<p>The <code>fetch</code> API is not allowed to read the <code>Set-Cookie</code> header in the response. Instead, it is the browser's responsibility to handle new cookies being set. Any new cookies set in this manner will be available from <code>document.cookie</code>.</p>
+
+<h3>JSONP</h3>
+
+<p>Although not a part of the <code>fetch</code> API, we created an interface for JSONP that matches that of fetch.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  $.jsonp('https://something/is/here?name=chipper', { timeout: 10000 })
+  .then($.json)
+  .then(function(obj) {
+    console.log(obj)
+    obj.forEach(function(repo) {
+      $('#message_ajax').append("&lt;li&gt;" + repo.name + "&lt;/li&gt;");
+    });
+  })
+  .catch(function(error) {
+    $('#message_ajax').append("&lt;li&gt;" + error.message + "&lt;/li&gt;")
+  });
+});
+</code></pre>
+
+<p>Jsonp takes the following parameters, though only the url is required:</p>
+
+<pre class="prettyprint"><code>url,
+options: {
+  timeout: 5000,
+  callbackName: 'myCallbackHandler',
+  clear: true/false
+}
+</code></pre>
+
+<p>The url is of course the url you wish to query. You can set a timeout value so if the request is taking too long you can cancel. The default value for callback is good for the majority of sites. However, some sites have a custom handler name they use. You can provide that using the callbackName value. Setting the clear property to false will allow the script and variable for your JSONP request to persist in the browser window. By default the value is set to false so that they are automatically removed.</p>
+
+
+
 				</div>
 				
 				<div id="menu">
@@ -91,5 +545,8 @@
 		</footer>
 	</article>
 	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>

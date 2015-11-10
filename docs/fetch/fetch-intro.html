@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,20 @@
 				<div>
 					<h2>Fetch</h2>
 					<h3>Intro</h3>
-					<p>Coming soon...</p>
+					<p>Fetch is a <a href="https://fetch.spec.whatwg.org">new API</a> created by the <a href="https://whatwg.org">WHATWG</a> as a simplified and lower level alternative to XHTTP requests. Fetch is built on the concept of asynch operations, something that was not taken into consideration at the time that Ajax was developed. Fetch uses promises by default. It also provides a simle and consistent interface to doing the things that Ajax requires with many lines of code. At the same time, it provides ways of customizing headers, etc. for more specialized needs. Below is an example of Fetch:</p>
+					<pre class="prettyprint"><code>fetch('./some/url')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+</code></pre>
+					<p>This is currently only supported in Firefox and Chrome, but Truck provides a polyfill for other browsers so you can use it today.</p>
+					<p>Please read the section on <a href="./fetch-use.html">Use</a> to learn how to use it in your app.</p>
 				</div>
 				
 				<div id="menu">
@@ -90,6 +106,9 @@
 			</div>
 		</footer>
 	</article>
+<script>
+  prettyPrint();
+</script>
 	
 </body>
 </html>

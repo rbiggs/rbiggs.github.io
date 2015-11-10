@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,11 @@
 				<div>
 					<h2>Promises</h2>
 					<h3>Intro</h3>
-					<p>Coming soon...</p>
+					<p>In JavaScript callbacks are used to handle the return of operations. But suppose an operation might take some undertinable amount of time. How would you deal with it? Write a timer? Or put a callback inside the callback. In complex situations this can lead to timers inside timers and deeply nested callbacks.</p>
+					<p>Promises provide an alternative to this. You create a promise that gets returned when the operation completes. When the promise is resolved, you can handle that, or if the promise gets rejected, you can handle that as well. Promise put you back in charge of comlex asynchronous operations.</p>
+					<p>Currently all modern browsers support promises, but for the older ones that do not, Truck provides a polyfill.</p>
+					<p>Promises are easy to use. In fact Truck uses promises for Fetch and Box because they are by nature asynch opertions.</p>
+					<p>Please read the next sub-section <a href="./promises-use.html">Use</a> for more details on how to use promises.</p>
 				</div>
 				
 				<div id="menu">
@@ -90,6 +97,9 @@
 			</div>
 		</footer>
 	</article>
-	
+  
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>

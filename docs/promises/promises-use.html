@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,160 @@
 				<div>
 					<h2>Promises</h2>
 					<h3>Use</h3>
-					<p>Coming soon...</p>
+<p>ECMAScript 6 Promises provide the following interface:</p>
+
+<ol>
+  <li>Promise</li>
+  <li>Promise.then()</li>
+  <li>Promise.resolve()</li>
+  <li>Promise.reject()</li>
+  <li>Promise.catch()</li>
+  <li>Promise.race()</li>
+  <li>Promise.all()</li>
+</ol>
+
+<p>If you are familiar and have been using jQuery or ChocolateChipJS's Deferred object, this will not look too foreign. Except for the last two: race and all. These have no equivalent with typical deferreds. They are features specific to ECMAScript promises.</p>
+
+<h3>The Promise Interface</h3>
+
+<p>An ECMAScript 6 promise is created with the "new" keyword. This returns an instance of the Promise object.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise();
+</code></pre>
+
+<p>When you create a promise, you can also provide a callback. This will be able to handle two arguments: resolve and reject:</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  var value;
+  // Do something to get value;
+  // ...
+  // Then test value to determine how to handle the promise:
+  if (value === 'good') {
+    resolve(value);
+  } else {
+    // When you reject the promise,
+    // you also get the reason it failed,
+    // which you can choose to output if you want:
+    reject(reason);
+  }
+});
+</code></pre>
+
+<h4>Then</h4>
+<p>Promises provide several methods allowing us to do useful things. The way you'll most like use promises is with the <code>then</code> method. This method can take up two two callbacks–one for success and one for failure.</p>
+
+
+<pre class="prettyprint"><code>// Create an instance of a promise:
+var myPromise = new Promise(function(resolve, reject) {
+  // Resolve the promise:
+  resolve('Success!');
+  // or reject it:
+  // reject('Lost in Space!');
+});
+myPromise.then(function(value) {
+  // Success:
+  console.log(value);
+},
+// Opps! There was a problem:
+function(reason) {
+  console.log(reason);
+});
+</code></pre>
+
+<p>As you can see in the above code, <code>then</code> can handle two callbacks, one for success and another optional one for failure. You can just provide a single callback to handle the success. That's up to you. If you want, you could return whatever value you get in your success callback, which allows you to chain a second function. Read the next part on Multiple Thens for more information.</p>
+
+<h4>Multiple Thens</h4>
+<p>The <code>then</code> method always returns a promsie. This means that you can chain multiple thens together. This allows you to break your code up into more logical blocks. This also helps you to avoid one of JavaScript development's worse patterns–the pyramid of doom–deeply nest series of callbacks.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  resolve(1);
+});
+myPromise.then(function(value) {
+  console.log(value); // 1
+  // Return the value:
+  return value + 1;
+})
+.then(fuction(value) {
+  console.log(value) // 2
+})
+</code></pre>
+
+
+<h4>Resolve</h4>
+
+<p>We can resolve a promise at any time using the <code>resolve</code> method on the static Promise object. Once we execute the resolve method, the promise is disposed of. </p>
+
+<pre class="prettyprint"><code>// Define an alias for the resolve callback:
+var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+}).then(function(value) {
+  equal(value, 5, 'Promise fulfilled with Promise should resolve to actual value');
+  start();
+});
+fulfill(Promise.resolve(5));
+</code></pre>
+
+<h4>Reject</h4>
+
+<p>Like the resolve example above, we can similarly reject a promise using its method on the static Promise object. In this example we pass a value that gets returned with the rejection:</p>
+
+<pre class="prettyprint"><code>var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+})['catch'](function(value) {
+  console.log(value);
+});
+fulfill(Promise.reject(5));
+</code></pre>
+
+<h4>Catch</h4>
+
+<p>We can handle errors and exceptions using the <code>catch</code> method. This enables us to have a series of thens that only handle success situations. ECMAScript promise pass any exception along until their is some callback to handle it.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  resolve("Success!");
+});
+myPromise.then(function(value) {
+  console.log(value); // Success!
+  throw "Oops! Something went wrong.";
+})
+.catch(function(error) {
+  console.log(error); // Oops! Something went wrong.
+})
+</code></pre>
+
+<h4>Race</h4>
+
+<p>Sometimes you may need to execute several operations and any one of them could finish first. You want to take the result of the first to finishing, ignoring the others. ECMAScript promises enable this with the <code>race</code> method. This expects an array of promises as its argument.</p>
+
+<pre class="prettyprint"><code>var f1, f2, f3;
+var p1 = new Promise(function(f, r) { f1 = f; });
+var p2 = new Promise(function(f, r) { f2 = f; });
+var p3 = new Promise(function(f, r) { f3 = f; });
+Promise.race([p1, p2, p3]).then(function(value) {
+  console.log('Promise.race() should resolve to: ' + value);
+});
+// Execute the second:
+f2(2);
+</code></pre>
+
+<h4>All</h4>
+<p>Unlike with race conditions, sometimes you want to execute a number of things and wait until they are all done before doing anything. In those cases you can use the <code>all</code> method. This expects an array of promises as its argument.</p>
+
+<pre class="prettyprint"><code>var f1, f2, f3;
+var p1 = new Promise(function(f, r) { f1 = f; });
+var p2 = new Promise(function(f, r) { f2 = f; });
+var p3 = new Promise(function(f, r) { f3 = f; });
+Promise.all([p1, p2, p3])
+.then(function(value) {
+  console.log(value);
+});
+// Execute theme in opposite order:
+f3(3);
+f2(2);
+f1(1);
+</code></pre>
 				</div>
 				
 				<div id="menu">
@@ -90,6 +246,9 @@
 			</div>
 		</footer>
 	</article>
-	
+  
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
