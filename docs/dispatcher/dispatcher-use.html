@@ -1,95 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Dispatcher</h2>
-					<h3>Use</h3>
-					<p>Comming soon...</p>
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html" class='selected'>Dispatcher</a>
-							<ul>
-								<li><a href="dispatcher-intro.html">Intro</a></li>
-								<li><a href="dispatcher-use.html" class='selected'>Use</a></li>
-								<li><a href="dispatcher-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Dispatcher</h2>
+          <h3>Use</h3>
+          <p>Truck's Dispatcher is an evented bus. You can use this to set up a basic PubSub type of interaction. The Dispatcher has receivers and dispatchers. Although you don't have to, you should probably name your receivers. You do this by assigning them to a variable. That way, if you need to later get rid of a receiver you can do so using the variable. Box receivers and dispatchers you a handle. This is a string value. You can use any type of delimiters to create a namespace if that is helpful, or just use a simple name.</p>
+
+          <h4>$.receive()</h4>
+          <p>Receivers take two arguments, the handle their using and a callback. If the dispatcher sent any data, this will be available to the callback as the first argument:</p>
+          <pre class='prettyprint linenums'>
+var newsUpdater = $.receive('news/update', function(data) {
+  $('#news').append('&lt;li&gt;' + data + '&lt;/li&gt;');
+});</pre>
+          <p>If the data being received was an array, we could loop over it:</p>
+          <pre class='prettyprint linenums'>
+var newsUpdater = $.receive('news/update', function(data) {
+  data.forEach(function(item) {
+    $('#news').append('&lt;li&gt;' + item + '&lt;/li&gt;');
+  });
+});</pre>
+          <p>You should be aware of what type of data you are expecting with a dispatch. Or you can set up different receivers that test the data before acting. Then only the receiver that is expecting a particular type of data will handle its output.</p>
+          <h4>$.dispatch()</h4>
+          <p>To make a dispatcher, you use the <code>$.dispatch()</code> method. This takes two arguments, the handle to dispatch to and any data. You do not have to dispatch data. Similarly, a receiver does not need to get data. Both of these could simply be about dispatching the handle. In this case the dispatcher is acting like a custom event system.</p>
+          <p>Below is an example of a dispatcher for our previous reeiver example:</p>
+          <pre class='prettyprint linenums'>
+// Dispatch a single item:
+$.dispatch( 'news/update', 'We need piles of money now!' );
+// Dispatch an array of data:
+$.dispatch( 'news/update', [{'news-flash':'Not much has happened yet.'},{'update':'More of the same.'}] );</pre>
+
+            <h4>$.cancelReceiver()</h4>
+            <p>You can cancel a recevier at any time. Please note that doing so permanently disables it. If you want to be able to stop a receiver and start it later, then you probably want to set up a mediator instead. Please see <a href="../mediators/mediators-intro.html">Mediators</a> for more information.</p>
+            <p>Below is an example of canceling a receiver:</p>
+            <pre class='prettyprint linenums'>
+$.cancelReceiver( newsUpdater );</pre>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html" class='selected'>Dispatcher</a>
+              <ul>
+                <li><a href="dispatcher-intro.html">Intro</a></li>
+                <li><a href="dispatcher-use.html" class='selected'>Use</a></li>
+                <li><a href="dispatcher-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
