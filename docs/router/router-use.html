@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,94 @@
 				<div>
 					<h2>Router</h2>
 					<h3>Use</h3>
-					<p>Coming soon...</p>
+					<p>Truck's router enables you to capture the user's interaction with Truck's various navigations schemes. These are three: navigation lists, slide out menus and tab bars.</p>
+					<h4>Gettin Started</h4>
+					<p>To use routes you first need to initialize a router:</p>
+					<pre class='prettyprint linenums'>
+var AppRoutes = $.Router();</pre>
+					<p>You can then add routes to handle each route separately:</p>
+					<pre class='prettyprint linenums'>
+AppRoutes.addRoute([
+	{
+		route: 'main',
+		callback: function() {
+			// Do stuff
+		}
+	},
+	{
+		route: 'detailScreen',
+		callback: function() {
+
+		}
+	}
+]);</pre>
+				<p>When setting up your navigation lists, slide out menus and tab bars, you can provide an id value that can be captured by the route to do something specific to the id. This allows you to have, for example, a navigation list where all the list items go to the same page. The route for that page takes the provided id of each list item and renders content based on that id. So, where would you get an id from? That would be from the data collect you used to render the navigation list. You could use a unique property, an id or guid or whatever, to identify each object in the collection. And you would output that as part of the route used by the navigation list, etc. Below is an navigation list item with an id as part of its route:</p>
+				<pre class='prettyprint linenums'>
+&lt;li data-goto="detail:N356f953-2c3c-4a72-b4e7-5955662ec80f"&gt;
+				</pre>
+				<p>Notice the semi-colon followed by a guid. You use a semi-colon to tell the router that what follows is a route id. When the user taps such a list item, the route separates it from the route and lets you capture it in your route. The id passed to a route is exposed to the routes callaback. Below is an example of how to capture a route id. Notice how we capture the id in the callback:</p>
+				<pre class='prettyprint linenums'>
+var AppRoutes = $.Router();
+AppRoutes.addRoute([
+  {
+    route: 'detail',
+    callback: function(id) {
+      // Get current view model:
+      var model = AppViews.VIPView.getModel().getData();
+      // Filter model with id passed in route:
+      var whichPerson = model.filter(function(person) {
+        return person.guid === id;
+      })[0];
+      // Output peron's name:
+      $('#chosenPerson').text('Welcome, ' + whichPerson.firstName + '.');
+    }
+  }
+]);
+				</pre>
+				<p>If you have a single destination and you want to render it differently based on the route id, you probably want to use a switch state to do so:</p>
+				<pre class='prettyprint linenums'>
+AppRoutes.addRoute([
+  {
+    // The route:
+    route: 'choice', 
+    // Callback to handle passed id:
+    callback: function(id) {
+      // Method to rener templates in switch statement:
+      var renderChosenTemplate = function(element, template, item) {
+        listView.setTemplate(template);
+        listView.setParent(element);
+        listView.render(item);
+      };
+      // Handle passed id:
+      switch (id) {
+        case 'music':
+          renderChosenTemplate('#myList', templates[0], music);
+          break;
+        case 'pictures':
+          renderChosenTemplate('#gridOfImages', templates[1], imageCollection);
+          break;
+        case 'documents':
+          renderChosenTemplate('#myList', templates[2], docs);
+          break;
+        case 'recipes':
+          renderChosenTemplate('#myList', templates[3], recipes);
+          break;
+        case 'favorites':
+          renderChosenTemplate('#myList', templates[4], favorites);
+          break;
+      }
+    }
+  }
+]);</pre>
+
+					<h4>Digging deeper</h4>
+					<p>Navigations lists automatically dispatch a route when the user taps on a list item. Where does it get the route? From the <code>data-goto</code> value you use to indicate where that list item goes to. Similarly, silde out menus use the <code>data-show</code> property. And tab bars use <code>data-id</code>. Because setting up each type of layout is different, it will be easier to open the examples provided in the source code. You want to look at the following examples depending on what type of layout you wish to create:</p>
+					<ul>
+						<li>navigation-routes.html</li>
+						<li>slide-out-menu-routes.html</li>
+						<li>tabbar-nav-routes.html</li>
+					</ul>
+					<p>Look for these in the "examples" folder of the <a href="https://github.com/rbiggs/TruckJS" target="_blank">source code</a> from Github</p>
 				</div>
 				
 				<div id="menu">
@@ -91,5 +181,8 @@
 		</footer>
 	</article>
 	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
