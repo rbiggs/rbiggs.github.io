@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,65 @@
 				<div>
 					<h2>Utilities</h2>
 					<h3>Use</h3>
-					<p>Coming soon...</p>
+					<p>Truck provides a number of utility functions for you to use. The first set are as follows:</p>
+
+					<ul>
+						<li>$.isEmptyObject()</li>
+						<li>$.isInteger()</li>
+						<li>$.isFloat()</li>
+						<li>$.encode()</li>
+						<li>$.escapeHTML()</li>
+						<li>$.concat()</li>
+						<li>$.uuid()</li>
+					</ul>
+					<p>$.isEmptyObject(object) tests where an object is <code>{}</code> or where it has properties. This is a boolean value.</p>
+					<p>$.isInteger(number) tests whether the number is an integer or not. This is a boolean value.</p>
+					<p>$.isFloat(number) tests whether the number is a float or not. This is a boolean value.</p>
+					<p>$.encode(data) returns the value from a form element encoded.</p>
+					<p>$.escapeHTML(data) escapes the html tags, parenthesis, etc.</p>
+					<p>$.concat(args) takes a series of strings and returns one string. This is useful where you need to concatenate a lot of string pieces together</p>
+					<pre class='prettyprint linenums'>
+var str = $.concat('This', ' ', 'is', ' ', 'a' , ' ', 'string', '.');</pre>
+					<p>$.uuid() create a uuid. This is a string. You can use it to create a unique identifier for objects in a collection, or for ids of DOM elements. Truck uses $.uuid internally for this purpose.</p>
+
+
+					<h4>The Haz Helpers</h4>
+					<p>These help you avoiding writing loops to handle finding elements by selectors. These do not return booleans like their jQuery cousins. Instead they directly return the elements that match the selector. This allows you to write onelines to access them.</p>
+					<ul>
+						<li>$(selector).iz(selector)</li>
+						<li>$(selector).iznt(selector)</li>
+						<li>$(selector).haz(descendant)</li>
+						<li>$(selector).haznt(descendant)</li>
+						<li>$(selector).hazClass(class)</li>
+						<li>$(selector).hazntClass(class)</li>
+						<li>$(selector).hazAttr(attribute)</li>
+						<li>$(selector).hazntAttr(attribute)</li>
+					</ul>
+					
+					<p>Here are some examples using them:</p>
+
+
+					<pre class='prettyprint linenums'>
+$('#list').iz('ol').css('border', 'solid 1px blue');
+$('.list').iznt('.disabled').show();
+$('#list').haz('li').addClass('important');
+$('#list').haznt('li').append('&lt;li&gt;Some default text&lt;/li&gt;');
+$('#list').hasClass('important').css({'background-color': 'blue, 'color': '#fff''});
+$('button').hazAttr('disabled').removeProp('disabled');</pre>
+
+					<p>Truck lets you iterate over element collections using a normal JavaScript foreach function. jQuery uses the backward each function where the index value comes first. Since most of the time we care about the context and not the index, the foreach gives us an option.</p>
+					<pre class='prettyprint linenums'>$('li').forEach(function(li) {
+  console.log(li.nodeName);
+});</pre>
+
+					<p>Truck provides two function to enable and dispable form elements:</p>
+					<ul>
+						<li>$(input).enable()</li>
+						<li>$(input).disable()</li>
+					</ul>
+
+
+
 				</div>
 				
 				<div id="menu">
@@ -90,5 +151,9 @@
 		</footer>
 	</article>
 	
+	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
