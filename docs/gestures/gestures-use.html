@@ -8,7 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
-</head>
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 <body>
 	<article>
 		<nav>
@@ -34,7 +36,17 @@
 				<div>
 					<h2>Gestures</h2>
 					<h3>Use</h3>
-					<p>Coming soon...</p>
+					<p>Gestures are used just like any other events.</p>
+					<pre class='prettyprint linenums'>
+$('button').on('tap', function() {
+	// Do stuff
+});
+$('#myList').on('doubletap', 'li', function() {
+	// Do stuff based on the list tapped
+});
+$('#myList').on('swiperight', 'li', function() {
+	console.log('You just swipped right!');
+});</pre>
 				</div>
 				
 				<div id="menu">
@@ -91,5 +103,8 @@
 		</footer>
 	</article>
 	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>

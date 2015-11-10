@@ -34,7 +34,63 @@
 				<div>
 					<h2>Gestures</h2>
 					<h3>API</h3>
-					<p>Coming soon...</p>
+					<ul>
+						<li>tap - has a 150 millisecond delay</li>
+						<li>doubletap - not longer than 250 millisecond delay between taps</li>
+						<li>longtap - has a 750 millisecond dealy</li>
+						<li>swipeleft - a minimum of 50 pixels distance</li>
+						<li>swiperight - a minimum of 50 pixels distance</li>
+						<li>swipeup - a minimum of 50 pixels distance</li>
+						<li>swipedown - a minimum of 50 pixels distance</li>
+					</ul>
+
+<h4>Event Aliases</h4>
+<p>Besides gestures, Truck provides the follow event aliases to handle the differences between different platforms. Although these are available, in most case you are better off using gestures.</p>
+
+<p>On desktop:</p>
+
+<ul>
+  <li>$.eventStart: mousedown</li>
+  <li>$.eventMove: mousemove</li>
+  <li>$.eventEnd: mouseup</li>
+  <li>$.eventCancel: mousecancel</li>
+</ul>
+
+<p>On Android:</p>
+
+<ul>
+  <li>$.eventStart: touchstart</li>
+  <li>$.eventMove: touchmove</li>
+  <li>$.eventEnd: touchend</li>
+  <li>$.eventCancel: touchcancel</li>
+</ul>
+
+<p>On iOS:</p>
+
+<ul>
+  <li>$.eventStart: touchstart</li>
+  <li>$.eventMove: touchmove</li>
+  <li>$.eventEnd: touchend</li>
+  <li>$.eventCancel: touchcancel</li>
+</ul>
+
+<p>On Windows Phone 8 (IE10):</p>
+
+<ul>
+  <li>$.eventStart: MSPointerDown</li>
+  <li>$.eventMove: MSPointerMove</li>
+  <li>$.eventEnd: MSPointerEnd</li>
+  <li>$.eventCancel: MSPointerCancel</li>
+</ul>
+
+<p>On Windows Phone 8 (IE11):</p>
+
+<ul>
+  <li>$.eventStart: pointerdown</li>
+  <li>$.eventMove: pointermove</li>
+  <li>$.eventEnd: pointerup</li>
+  <li>$.eventCancel: pointercancel</li>
+</ul>
 				</div>
 				
 				<div id="menu">
