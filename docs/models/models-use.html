@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="models-intro.html">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Models</h2>
-					<h3>Use</h3>
-					<p>Models provide a powerful interface to your data so that Truck can do things to make your work easier. Although many frameworks don't use models but expect you to use plain JavaScript objects, this have a number of drawbacks. You can not judge easily when the state of the data changes without costly polling and caching of duplicates, etc.</p>
-					<p>Model are easy to create. Just use the $.Model method to do so. We'll first create a model that represents a JavaScript object of key/value pairs:</p>
-					<pre class="prettyprint linenums">
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="models-intro.html">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Models</h2>
+          <h3>Use</h3>
+          <p>Models provide a powerful interface to your data so that Truck can do things to make your work easier. Although many frameworks don't use models but expect you to use plain JavaScript objects, this have a number of drawbacks. You can not judge easily when the state of the data changes without costly polling and caching of duplicates, etc.</p>
+          <p>Model are easy to create. Just use the $.Model method to do so. We'll first create a model that represents a JavaScript object of key/value pairs:</p>
+          <pre class="prettyprint linenums">
 // Plain JavaScript object:
 var myObject = {
-	name: {
-		first: 'John',
-		last: 'Doe'
-	},
-	age: 32,
-	job: 'web developer'
+  name: {
+    first: 'John',
+    last: 'Doe'
+  },
+  age: 32,
+  job: 'web developer'
 }
 
 // Create a model:
@@ -56,15 +56,15 @@ var PersonModel = $.Model(myObject, 'person-model');
 // Get rid of the plain JavaScript object,
 // since we don't need it any more:
 myOjbect = undefined;
-					</pre>
-					<p>To initialize the model, we gave it the object to use and a handle, which is a name Truck can use to identify the model. And that's it. Since it is now a model, we can access the model with object appropriate methods. These are:</p>
-					<ul>
-						<li>PersonModel.getItemProp()</li>
-						<li>PersonModel.setItemProp()</li>
-						<li>PersonModel.deleteItemProp()</li>
-					</ul>
-					<p>In our case, if we want to get the name, we might do this:</p>
-					<pre class="prettyprint linenums">
+          </pre>
+          <p>To initialize the model, we gave it the object to use and a handle, which is a name Truck can use to identify the model. And that's it. Since it is now a model, we can access the model with object appropriate methods. These are:</p>
+          <ul>
+            <li>PersonModel.getItemProp()</li>
+            <li>PersonModel.setItemProp()</li>
+            <li>PersonModel.deleteItemProp()</li>
+          </ul>
+          <p>In our case, if we want to get the name, we might do this:</p>
+          <pre class="prettyprint linenums">
 PersonModel.getItemProp('name')
 // returns: {first: "John", last: "Doe"}
 // To get the first name and last name separate:
@@ -72,7 +72,7 @@ PersonModel.getItemProp('name').first
 // returns: "John"
 PersonModel.getItemProp('name').last
 // returns: "Doe"
-					</pre>
+          </pre>
 <p>Now let's create a model that holds a collection. By collection we mean an array. This might be a simple array or an array of objects. Making it is the same as we did for the simple object:</p>
 <pre class="prettyprint linenums">
 var fruits = [
@@ -90,62 +90,62 @@ fruits.getItemProp(2, 'name'); // returns "Orange"
 <p>In the above example, we accessed the data a little differently. Because this is a collection, we need to tell Truck what index of the collect we want to get the property from. The index, like arrays, is zero-based.</p>
 
 
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html' class='selected'>Models</a>
-							<ul>
-								<li><a href="models-intro.html">Intro</a></li>
-								<li><a href="models-use.html" class='selected'>Use</a></li>
-								<li><a href="models-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html' class='selected'>Models</a>
+              <ul>
+                <li><a href="models-intro.html">Intro</a></li>
+                <li><a href="models-use.html" class='selected'>Use</a></li>
+                <li><a href="models-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
 <script>
   prettyPrint();
 </script>

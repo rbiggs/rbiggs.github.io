@@ -1,121 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Views</h2>
-					<h3>Use</h3>
-					
-					<h4>Setup</h4>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Views</h2>
+          <h3>Use</h3>
+          
+          <h4>Setup</h4>
+          <p>To initialize a view, you can make an empty view, or provide a number of options to give it various types of functionality. If you want a view, but aren't ready to have it associate with someting in the DOM quite yet, you can make an empty one like so:</p>
+          <pre class="prettyprint linenums">
+var EmptyView = $.View();
+          </pre>
+          <p>To be useful a view needs at least an element to associate it with. Generally this element will hold a template that the view will use, but it doesn't have too. You can always attach a template to a view later. Let's look at create a view with an associate DOM element:</p>
+          <pre class="prettyprint linenums">
+var SimpleView = $.View({
+  element: '#special'
+});
+          </pre>
+          <p>The above view presupposes the existence of an element call <code>#special</code>. This might have a template inside it like this:</p>
+          <pre class="prettyprint linenums">
+&lt;ul&gt;
+  &lt;li&gt;${ data.name }&lt;/li&gt;
+&lt;/ul&gt;
+          </pre>
+          <p>When we point a view to an element with a template, Truck extracts the template and parses it. Then we can render the template with our data:</p>
+          <pre class="prettyprint linenums">
+SimpleView.render(fruits);
+          </pre>
+          <p>If <code>fruits</code> were a collection, the view would render the template repeatedly to output the collection. And if fruits was a simle object, it would render just once. Views do not care whether data is iterable or not. If it is, it renders repeatedly, otherwise it renders a single time.</p>
+          
 
-					<h4>Control When a View Renders</h4>
-					
-					<h4>Managing a View's Data</h4>
+          <p>To learn more about templates please visit the documentation for <a href="http://truckjs.io/docs/templates/templates-intro.html">templates</a>.</p>
 
-					<h5>Using Plain JavaScript Data</h5>
+          
+          <h4>Managing a View's Data</h4>
 
-					<h5>Using Models</h5>
+          <h5>Using Models</h5>
+          <p>As we saw above, you can use plain JavaScript objects with Truck's views. However, in many cases you might prefer to create an model and use that with a view. Why? Because when you assign a model to a view, the view becomes bound to the model. Any changes to the model get updated in the template automatically.</p>
+          <p>To set up data binding with a model is simple:</p>
+          <pre class="prettyprint linenums">
+var BoundView = $.View({
+  element: '#peopleList',
+  model: PeopleModel
+});
+          </pre>
 
-					<h5>Switching Models</h5>
+          <h5>Switching Models</h5>
+          <p>You can change the model that a view uses at any time. As soon as you change a view's model, the view renders its template with the new model:</p>
+<pre class="prettyprint linenums">
+BoundView.setModel(VIPModel);
+</pre>
 
-					<h4>Make a View Interactive</h4>
+          <h4>Make a View Interactive</h4>
+          <p>You can make view interactive by providing events when setting up a view. You use the <code>events</code> property, which takes an array of event initializations. Events have three components: the element, the event and a callback. If no element is provided or you use the string <code>"self"</code>, Truck will register the event on the element the view is attached to. However you can create a delegate event by providing a selector for a child element of the view's target. You can use any of the events that Truck supports from mouse events to touch gestures. For the callback, <code>this</code> will refer to the element the user is interacting with:</p>
+          <pre class="prettyprint linenums">
+var InteractiveView({
+  element: '#items',
+  model: ItemsModel,
+  events: [{
+    element: 'li',
+    event: 'tap',
+    callback: function() {
+      console.log($(this).text());
+    }
+  }]
+});
+          </pre>
+          <p>You can add events at any time to an existing view using the <code>addEvents</code> method on a view:</p>
+          <pre class="prettyprint linenums">
+MyView.addEvent({
+  element: 'h3',
+  event: 'doubletap',
+  callback: function() {
+    console.log($(this).text());
+});
+          </pre>
 
-					<h4>Managing a View's Template</h4>
+          <h4>Managing a View's Template</h4>
 
-					<h5>Changing Templates</h5>
+          <h5>Changing Templates</h5>
+          <p>As we mentioned previously, you can change the template that a view is using. If you wanted to render several kinds of data on the same view depending on what the user chooses, you can change the view's model and template with each choice.</p>
+          <p>To change a view's template, you assign it using the method <code>setTemplate</code>. After change the template, you will need to render the teplate again, as illustrated below:</p>
+          <pre class="prettyprint linenums">
+var template2 = $('#template2').html();
+PeopleView.setTemplate(template2);
+PeopleView.render();
+          </pre>
+          <p>If you want to change a view's model and template, change the template first, then the model. That way, the new model will render the view with the new template. Please see <a href="http://truckjs.io/docs/templates/templates-intro.html">templates</a> for more details.</p>
 
-					<h5>Sequential Numbering</h5>
+          <h5>Sequential Numbering</h5>
+          <p>Sometimes you want to output sequential numbering in your view's template. You do this by first using the <code>$.view.index</code> value in your template. By default all sequential numbering starts from <code>1</code>. However, you can set a view to start from any number you want. You can even use a negative number. The number you provide will be the first number output in the template.</p>
+        <pre class="prettyprint linenums">
+// Template numbering will begin at 10:
+PeopleView.startIndexFrom(10); 
+        </pre>
+        <p>And here's a template using it:</p>
+         <pre class="prettyprint linenums">
+&lt;ul class="list cloak" id="arrayTemplate1"&gt;
+  &lt;li class='comp'&gt;
+    &lt;h3&gt;
+      ${ $.view.index }: ${ data.firstName } ${ data.lastName }
+    &lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+         </pre>
 
-					<h5>Formatting Output</h5>
-
-					<h5>Using Template Helpers</h5>
-
-					<h5>Nested Templates</h5>
-					
-
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html" class='selected'>Views</a>
-							<ul>
-								<li><a href="views-intro.html">Intro</a></li>
-								<li><a href="views-use.html" class='selected'>Use</a></li>
-								<li><a href="views-api.html">API</a></li>
-							</ul></li>
-						</li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+          <h5>Formatting Output</h5>
+          <p>You may need to format the data you are rendering in a view's template. Truck provides a number of formatters to help you. These go right in the template where you want the data formated. Truck has the following formatters:</p>
+          <ul>
+            <li>formatNumber</li>
+            <li>sum</li>
+            <li>currency</li>
+            <li>formatTime</li>
+            <li>sortDate</li>
+            <li>sortNumbers</li>
+            <li>sortNumbersDescending</li>
+          </ul>
+          <p>Please see temlates for more information about data formatters.</p>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+          <h5>Using Template Helpers</h5>
+          <p>Depending on your data, you may have the need to do some specialized formating of the data before outputing it. Truck helps you accomplish this using a template helper. You do this using the <code>defineHelper</code> method:</p>
+          <pre class="prettyprint linenums">
+$.defineHelper({
+  bigName: function(data) {
+    return data.lastName.toUpperCase();
+  }
+});
+          </pre>
+          <p>You can then use it like so:</p>
+          <pre class="prettyprint linenums">
+&lt;ul class="list cloak" id="basicRepeater"&gt;
+  &lt;li&gt;${ $.helpers.bigName(data) }&lt;/li&gt;
+&lt;/ul&gt;
+          </pre>
+
+          <h5>Nested Templates</h5>
+          <p>Rendering a data object that has a child element that is a collection is tricky. Truck allows you to cover this by running JavaScript directly in your template</p>
+
+
+          <h4>Control When a View Renders</h4>
+          <p>Sometimes you just need to tell a view to stop. Truck provides several methods to allow you to controll when a view renders its template. There are two methods: <code>stop</code> and <code>restart</code>. Executing <code>stop</code> on a view makes even a bound view stop rendering, even if you run the <code>render</code> method on it. But as soon as you run <code>restart</code> on the view, if it is data bound, it will render as soon as the model changes, or if you run the <code>render</code> method on it.</p>
+          <p>But Truck takes this idea one step further. You can tell a view to stop after rendering a certain number of times. You do this by providing a number to the <code>stop</code> method. Similarly, you can tell a view to restart render after a certain amount of time by providing a number representing seconds to the <code>restart</code> method:</p>
+          <pre class="prettyprint linenums">
+PeopleView.stop();
+// Nothing will happen because the view is stopped.
+PeopleView.render();
+PeopleView.restart();
+// Now the view will render:
+PeopleView.render();
+// The view will only render three times:
+PeopleView.stop(3);
+// The view will be able to render after five minutes:
+PeopleView.restart(300);
+          </pre>
+          
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html" class='selected'>Views</a>
+              <ul>
+                <li><a href="views-intro.html">Intro</a></li>
+                <li><a href="views-use.html" class='selected'>Use</a></li>
+                <li><a href="views-api.html">API</a></li>
+              </ul></li>
+            </li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
