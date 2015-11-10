@@ -1,94 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Templates</h2>
-					<h3>Use</h3>
-					<p>Coming soon...</p>
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
-						<li><a href="../templates/templates-intro.html">Templates</a>
-							<ul>
-								<li><a href="templates-intro.html">Intro</a></li>
-								<li><a href="templates-use.html" class='selected'>Use</a></li>
-								<li><a href="templates-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Templates</h2>
+          <h3>Use</h3>
+          <p>Truck's views use templates to render data. Template are of three types: script, markup and string. We really prefer our templates directly where they will be rendered since it shows intent clearly. You could also define a temlate as a string. This is very tedious if the temlate is complex. Using a script tag or DOM elements is much easier. Besides, when you define a view, it grabs the elements template and caches it for reuse.</p>
+          <p>Templates have two important type of markers or delimiters: interpolators and executors. An interpolator tells Truck to render a data variable. And executor tells Truck to run a piece of JavaScript. A template can also hold an number sequencer or a template helper.</p>
+          <p>Script templates are convenient because they hide their content from the browser. Truck expects script templates to have the type <code>type="text/x-template"</code>. Let's put together a template based on an object we want to render.</p>
+          <pre class='prettyprint linenums'>
+var myObject = {
+  name: {
+    first: 'John',
+    last: 'Doe'
+  },
+  age: 32,
+  job: 'web developer'
+}
+
+// To render this object, 
+// we can use the following template:
+
+&lt;script type="text/x-template"&gt;
+  &lt;li&gt;
+    &lt;h3&gt;Name: ${ data.name.first } { data.name.last }&lt;/h3&gt;
+    &lt;h4&gt;Job: ${ data.job }&lt;/h4&gt;
+  &lt;/li&gt;
+&lt;/script&gt;</pre>
+        <p>In the above example, <code>${ }</code> is used to demark a data variable for interpolation by the template renderer. Similary, we can use <code>{{ }}</code> to define blocks of JavaScript to be executed in a temlate. You might want to do that to conditionally output something.</p>
+        <pre class='prettyprint linenums'>
+&lt;script type="text/x-template"&gt;
+  {{ if (somebody.friends && somebody.friends.length) { }}
+    {{  somebody.friends.forEach(function(friend) {  }}
+    &lt;li&gt; ${ friend.name}: ${ friend.job }&lt;/li&gt;
+    {{  });  }}
+  {{ } }}
+&lt;/script&gt;</pre>
+        </p>
+        <h4>Sequential Numbering</h4>
+        <p>Truck provides a way to enable you to output sequential numbering with each repetition of a template. To do so you put <code>$.view.index</code> at the place where you want the number output. By default number starts at 1. But you can tell the view at what number you want it to start. For example, if you wanted it to start at a negative number, just provide that as the argument. The numbering will begin with the negative number provided and increase by 1. Below are some examples:</p>
+        <pre class='prettyprint linenums'>
+&lt;script type="text/x-template"&gt;
+  &lt;li&gt;
+    &lt;h3&gt;${ $.view.index }: Name: ${ data.name.first } { data.name.last }&lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/script&gt;</pre>
+        <p>The above example will begin from 1. However, we can tell the view to start at any number. We can do that at setup:</p>
+        <pre class='prettyprint linenums'>
+// Tell the view to start from 10:
+var PeopleView = $.View({
+  element: '#peopleList',
+  model: PeopleModel,
+  startIndexFrom: 10
+});
+// Or tell the view to start from a negative number:
+var PeopleView = $.View({
+  element: '#peopleList',
+  model: PeopleModel,
+  startIndexFrom: -20
+});</pre>  
+            <p>Even after a view is define and rendered, you can change the start index value by running the <code>startIndexFrom</code> method on the view. This cause the view to immediately rerender with the new index value:</p>
+            <pre class='prettyprint linenums'>
+PeopleView.startIndexFrom(28);</pre>
+
+          <h4>Formatting Data</h4>
+          <p>Truck provides several data fromatters that you can use in your templates to control the output of data.</p>
+          <ul>
+            <li>formatNumber</li>
+            <li>sum</li>
+            <li>currency</li>
+            <li>formatTime</li>
+            <li>sortDate</li>
+            <li>sortNumbers</li>
+            <li>sortNumbersDescending</li>
+          </ul>
+          <p>You use them as a function with the data you want formatted as the argument:</p>
+          <pre class='prettyprint linenums'>
+&lt;script type="text/x-template"&gt;
+  &lt;li&gt;
+    &lt;h3&gt;Ammount: ${ $.formatNumber(data.number) }&lt;/h3&gt;
+    &lt;h4&gt;Price: $.currency(data.price, '$', ',', 0)&lt;/h4&gt;
+  &lt;/li&gt;
+&lt;/script&gt;</pre>
+            
+            <h4>Temlate Helpers</h4>
+            <p>You can define your own template helpers to operate on data before it is output by the template. To do that you use the <code>$.defineHelper</code> method:</p>
+          <pre class='prettyprint linenums'>
+$.defineHelper({
+  bigName: function(data) {
+    return data.lastName.toUpperCase();
+  }
+});  
+          </pre>
+          </pre>
+          <p>You can then use it like so:</p>
+          <pre class="prettyprint linenums">
+&lt;ul class="list cloak" id="basicRepeater"&gt;
+  &lt;li&gt;${ $.helpers.bigName(data) }&lt;/li&gt;
+&lt;/ul&gt;
+          </pre>
+
+          <h4>Nested Data Iteration</h4>
+          <p>Data is complicated. Sometimes a property might have an array as its value. and you need to be able to output that in your template. To do this you can write a JavaScript loop in the template to handle the array. Below is some complicated data, followed by a template to render it:</p>
+          <pre class='prettyprint linenums'>
+var people = [
+  {
+    "name": "Wobba",
+    "image": "images/Wobba.jpg",
+    "friends": [
+      {
+        "name": "Brennan", 
+        "job": "Installer"
+      },
+      {
+        "name": "Josh", 
+        "job": "Developer"
+      },
+      {
+        "name": "Pete", 
+        "job": "Grand Poobah"
+      }
+    ]
+  },
+  {
+    "name": "Bozo",
+    "image": "images/Bozo.jpg",
+    "friends": [
+      {
+        "name": "Dingo", 
+        "job": "Mad Scientist"
+      },
+      {
+        "name": "Bingo", 
+        "job": "Gambler"
+      },
+      {
+        "name": "Bango", 
+        "job": "Whatever"
+      }
+    ]
+  },
+  {
+    "name": "Dingo",
+    "image": "images/Dingo.jpg",
+    "friends": []
+  },
+  {
+    "name": "Apple",
+    "image": "images/apple.png",
+    "friends": [
+      {
+        "name": "orange",
+        "job": "juice"
+      },
+      {
+        "name": "banana",
+        "job": "eating"
+      }
+    ]
+  }
+];</pre>
+          <pre class='prettyprint linenums'>
+&lt;ul class='list' id="complexTemplate"&gt;
+  &lt;script id='tempie' type='text/x-template'&gt;
+    &lt;li&gt;
+      &lt;img data-src='${ somebody.image }'&gt;
+      &lt;div&gt;
+        &lt;h3&gt;${ somebody.name }&lt;/h3&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+    {{ if (somebody.friends && somebody.friends.length) { }}
+    &lt;li&gt;
+      &lt;div class='no-flex' style='max-width: 100px;'&gt;
+        &lt;h3&gt;Friends:&lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;ol&gt;
+          {{  somebody.friends.forEach(function(friend) {  }}
+          &lt;li&gt; ${ friend.name}: ${ friend.job }&lt;/li&gt;
+          {{  });  }}
+        &lt;/ol&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+    {{ } }}
+  &lt;/script&gt;
+&lt;/ul&gt;</pre>  
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a>
+              <ul>
+                <li><a href="templates-intro.html">Intro</a></li>
+                <li><a href="templates-use.html" class='selected'>Use</a></li>
+                <li><a href="templates-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
