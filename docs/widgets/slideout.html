@@ -37,7 +37,83 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Slide Out Menu</h3>
-					<p>Coming soon...</p>
+					<p>Slide out menus offer a convenient way to provide the user access to a number of otherwise unrelated screens. If you have more screen than can fit in a tab bar, but you don't want to use a navigation list in a tab bar to reveal them, a slide out menu is a better option.</p>
+					<p>To create a slide out menu, you need to provide it with the screens you want to show when the slide out menu items are tapped by the user. First we create the slide out menu using the <code>$.SlideOut</code> method. Then we populate the menu by passing it some options:</p>
+					<pre class="prettyprint linenums">
+// Set up Slide Out Menu:
+//=======================
+var appSlideOut = $.SlideOut();
+
+appSlideOut.populate([
+  { music: 'Music' },
+  { pictures: 'Pictures' },
+  { documents: 'Documents'},
+  { recipes: 'Recipes' },
+  { favorites: 'Favorites' }
+]);</pre>
+	<p>In the above example, the ids of the screens will be 'music', 'pictures', 'docuemnts', 'recipes', and 'favorites'. And the slide menu items will be 'Music', 'Pictures', etc. Tapping on the menu items will show the associated screen below.</p>
+	<h4>Routing</h4>
+	<p>You can use routes with the slide out menu. You might do that when you want to have just one screen and render its contents depending on which menu item the user taps in the slide out. This is easy to do, even if the content is different, because Truck lets you switch out what template a view uses. Just as we set up routing in a navigation list by providing ids, we would need to do the same thing here. Truck automatically dispatches a route when the user taps a slide out menu, so you just need to provide each menu item with a unique id and set up a router to capture the dispatch. You may want to review Truck's <a href="../router/router-intro.html">Router</a>. Below we have set up a slide out to pass ids with the routes:</p>
+	<pre class="prettyprint linenums">
+	// Setup Slide Out:
+//=================
+var appSlideOut = $.SlideOut();
+// Notice names have `:` to 
+// indicate id for routing.
+// Id will be used to render view.
+appSlideOut.populate([
+  { "choice:music": 'Music' },
+  { "choice:pictures": 'Pictures' },
+  { "choice:documents": 'Documents'},
+  { "choice:recipes": 'Recipes' },
+  { "choice:favorites": 'Favorites' }
+]);</pre>
+	<p>Every menu item is showing the same screen, but passing a unique id with the route. We can capture that id with a router:</p>
+<pre class="prettyprint linenums">var MyRoutes = $.Router();
+MyRoutes.addRoute([
+  {
+    // The route:
+    route: 'choice', 
+    // Callback to handle passed id:
+    callback: function(id) {
+      // Method to render templates in switch statement:
+      var renderChosenTemplate = function(element, template, item) {
+        listView.setTemplate(template);
+        listView.setParent(element);
+        listView.render(item);
+      };
+      // Handle passed id:
+      switch (id) {
+        case 'music':
+          renderChosenTemplate('#myList', templates[0], music);
+          break;
+        case 'pictures':
+          renderChosenTemplate('#gridOfImages', templates[1], imageCollection);
+          break;
+        case 'documents':
+          renderChosenTemplate('#myList', templates[2], docs);
+          break;
+        case 'recipes':
+          renderChosenTemplate('#myList', templates[3], recipes);
+          break;
+        case 'favorites':
+          renderChosenTemplate('#myList', templates[4], favorites);
+          break;
+      }
+    }
+  }
+]);</pre>
+	<h4>Slide Out Menu with Navigation List</h4>
+	<p>You can also have a navigation list as one of the screens that a slide out menu reveals. It doesn't require anything special. Just put it there and provide its id to the slide out menu.</p>
+	<p>You can examine the following files in the examples folder of the source code to see working examples of how to set up slide out menus.</p>
+	<ul>
+		<li>slide-out-menu.html</li>
+		<li>slide-out-menu-routes.html</li>
+		<li>slide-out-menu-nav.html</li>
+	</ul>
+
+
+
 				</div>
 				
 				<div id="menu">
