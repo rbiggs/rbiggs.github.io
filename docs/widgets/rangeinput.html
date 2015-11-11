@@ -37,8 +37,12 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Range Input</h3>
-					<p>Coming soon...</p>
-					<pre class="prettyprint linenums"></pre>
+					<p>Range inputs are sliders. These are of two types, incremental and stepped. Truck styles these appropriately for each platform. You can give a range a min value and a max value. Or you can tell it to increase in steps. Below are two range inputs, one incremental and one stepped:</p>
+					<pre class="prettyprint linenums">&lt;input type="range" id="rangeControl1" value="10" min="0" max="40"&gt;
+&lt;input type="range" id="rangeControl2" step='5' value="20" min="0" max="40"&gt;</pre>
+
+					<p>When trying to view the Windows theme on browsers other than IE or MSEdge, the range input will render as a default and simple looking range input, but on Microsoft's browser it will look correctly. The Android and iOS range inputs will look correctly on all browsers.</p>
+					<p>Check out the file "range-control.html" in the examples folder of the source code from Github. Change the theme it uses and reload it to see how the range input looks on different platforms.</p>
 				</div>
 				
 				<div id="menu">
