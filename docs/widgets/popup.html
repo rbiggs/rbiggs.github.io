@@ -37,9 +37,45 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Popup</h3>
-					<p>Coming soon...</p>
-					<pre class="prettyprint linenums"></pre>
+					<p>A popup is a custom alert or dialog box. These are styled to resemble the native popups of each platform. They are a number of options for customizing how they display and act. The options for a popup are:</p>
+        <ul>
+        	<li>id - an id for the popup</li>
+        	<li>title - displayed in the popup's title bar</li>
+        	<li>message - displayed in the body of the popup</li>
+        	<li>cancelButton - a name for the cancel button, the default is "Cancel"</li>
+        	<li>continueButton - a name for the continue button, the defualt is "Continue"</li>
+        	<li>width - a width for the popup, the default vaires by platform</li>
+        	<li>callback - a callback to execute when the user taps the Continue button</li>
+        	<li>empty - this creates an empty popup, which you can poplate with what you want.</li>
+        </ul>
+        <p>Here's an example of a popup:</p>
+					<pre class="prettyprint linenums">
+$.Popup({
+  id: "warning",
+  title: 'Attention Viewers!', 
+  message: 'The performance of "Merchant of Venice", Act 4 scene 1, will begin shortly. Thank you for your patience.', 
+  cancelButton: 'Skip', 
+  continueButton: 'Stay', 
+  callback: function() {
+    var popupMessageTarget = document.querySelector('#popupMessageTarget');
+    popupMessageTarget.textContent = 'Thanks for staying with us a bit longer.';
+    popupMessageTarget.classList.remove("animatePopupMessage");
+    popupMessageTarget.classList.add("animatePopupMessage");
+    setTimeout(function() {
+      $('#popupMessageTarget').empty()
+    }, 2000);
+  }
+});
+
+$("#showPopup").on("tap", function() {
+  $('#warning').ShowPopup();
+});</pre>
+			<p>After initializing the popup, we can use its id to show it with the <code>ShowPopup()</code> method. You can see this being used in the final event registered above.</p>
+			<p>Check out the file "popup.html" in the examples folder in the source code from Github.</p>
+
+
 				</div>
+
 				
 				<div id="menu">
 					<ul>
