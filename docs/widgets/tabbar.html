@@ -54,6 +54,11 @@ var opts = {
 //==============
 var myTabbar = $.TabBar(opts);
 					</pre>
+					<div class="layout">
+						<img  class='layout'  src="../../images/widgets/tabbar-1.png"  alt="Simple  Layout">
+						<img  class='layout'  src="../../images/widgets/tabbar-2.png"  alt="Simple  Layout">
+						
+					</div>
 					<p>In the above options, the icons have are rendered on a the tab as a class that you can use to show an icon as a background image of it icon. Each tab has an icon element. On iOS the label will appear under the icon. On Android and Windows the icons won't be visible and only the labels will be. The selected value tells Truck which tab should be selected at load time. Selection is zero-based, so the first tab is 0, the second tab is 1, etc. Screens are the ids of the screens you want the tabs to show. The tabs will be created in the order of the icons, labels and screens, so check your options to make sure you have everything in the right order. If you want your tab bar to exhibit icons for Android or Windows, you can override the default tab bar behavior by providing a option property <code>showIcons: true</code>. Truck will adust the height of the tab bar to accomodate the icons you provided, just as it does for iOS. Labels will be under their icons.</p>
 					
 					<h4>Tab Bar with Navigation List</h4>

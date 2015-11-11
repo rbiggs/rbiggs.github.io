@@ -53,6 +53,11 @@ appSlideOut.populate([
   { favorites: 'Favorites' }
 ]);</pre>
 	<p>In the above example, the ids of the screens will be 'music', 'pictures', 'docuemnts', 'recipes', and 'favorites'. And the slide menu items will be 'Music', 'Pictures', etc. Tapping on the menu items will show the associated screen below.</p>
+  <div class="layout">
+     <img  class='layout'  src="../../images/widgets/slide-out-menu-1.png"  alt="Simple  Layout">
+     <img  class='layout'  src="../../images/widgets/slide-out-menu-2.png"  alt="Simple  Layout">
+  </div>
+ 
 	<h4>Routing</h4>
 	<p>You can use routes with the slide out menu. You might do that when you want to have just one screen and render its contents depending on which menu item the user taps in the slide out. This is easy to do, even if the content is different, because Truck lets you switch out what template a view uses. Just as we set up routing in a navigation list by providing ids, we would need to do the same thing here. Truck automatically dispatches a route when the user taps a slide out menu, so you just need to provide each menu item with a unique id and set up a router to capture the dispatch. You may want to review Truck's <a href="../router/router-intro.html">Router</a>. Below we have set up a slide out to pass ids with the routes:</p>
 	<pre class="prettyprint linenums">

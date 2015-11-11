@@ -96,6 +96,16 @@ section > div > div > img.layout {
 	margin: 0 auto;
 	border: solid 1px #ccc;
 }
+section > div > div > div.layout  {
+	width: auto;
+	margin: 0 auto;
+}
+section > div > div > div.layout > img.layout {
+	display: inline-block;
+	margin: 0 20px;
+	height: 300px;
+	border: solid 1px #ccc;
+}
 summary {
 	background-color: #FAFAFA;
 	border: solid 1px #D6E7F7;
