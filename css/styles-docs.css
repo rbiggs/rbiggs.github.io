@@ -70,6 +70,9 @@ pre {
 .mainLink {
 	margin: 20px 0 40px 0;
 }
+section > div > div {
+	position: relative;
+}
 section > div > div > h2 {
 	font-size: 32px;
 	font-weight: 400;
@@ -80,7 +83,13 @@ section > div > div > h3 {
 	font-size: 24px;
 	font-weight: 600;
 }
-
+section > div > div > img {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100px;
+	width: auto;
+}
 summary {
 	background-color: #FAFAFA;
 	border: solid 1px #D6E7F7;

@@ -37,6 +37,7 @@
         <div>
           <h2>Templates</h2>
           <h3>Use</h3>
+          <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
           <p>Truck's views use templates to render data. Template are of three types: script, markup and string. We really prefer our templates directly where they will be rendered since it shows intent clearly. You could also define a temlate as a string. This is very tedious if the temlate is complex. Using a script tag or DOM elements is much easier. Besides, when you define a view, it grabs the elements template and caches it for reuse.</p>
           <p>Templates have two important type of markers or delimiters: interpolators and executors. An interpolator tells Truck to render a data variable. And executor tells Truck to run a piece of JavaScript. A template can also hold an number sequencer or a template helper.</p>
           <p>Script templates are convenient because they hide their content from the browser. Truck expects script templates to have the type <code>type="text/x-template"</code>. Let's put together a template based on an object we want to render.</p>
