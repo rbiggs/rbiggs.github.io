@@ -37,8 +37,37 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Select List</h3>
-					<p>Coming soon...</p>
-					<pre class="prettyprint linenums"></pre>
+					<p>When you need to provide the user the ability to pick one of several options, use Truck's select list. Internally this is a radio button group, but visually it looks like a list of selectable items. Only one item can be selected at a time. If you need multi-select, use Truck's <a href="./multiselectlist.html">Multi-Select List</a>.</p>
+					<p>A select list has the following structure:</p>
+					<pre class="prettyprint linenums">
+&lt;ul class="list" id="selectList"&gt;
+  &lt;li data-select="${ data.type}"&gt;
+    &lt;h3&gt;Lorem&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li data-select="${ data.type}"&gt;
+    &lt;h3&gt;Ipsum&lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+				<p>To turn a simple list into a select list, you need to define it with the following options: an element, a selected list item and a callback. If no selected item is provided, none of them will be selected at load time.</p>
+				<pre class="prettyprint linenums">
+mySelectList = $.SelectList({
+  element: '#selectList',
+  selected: 2,
+  callback: function() {
+    renderSelection();
+  }
+});</pre>
+			<p>You can find out what the current selection list is by querying the instance of the list that you created:</p>
+			<pre class="prettyprint linenums">
+mySelectList.getSelection()</pre>
+			<p>This will return a object like this:</p>
+			<pre class="prettyprint linenums">
+{index: 2, value: "work"}</pre>
+			<p>To get just the value, you could do this:</p>
+			<pre class="prettyprint linenums">
+mySelectList.getSelection()value</pre>
+			<p>Please check out the file "selectlist.html" in the examples folder of the source code from Github.</p>
+
 				</div>
 				
 				<div id="menu">
