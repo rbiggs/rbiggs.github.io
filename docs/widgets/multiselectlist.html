@@ -37,8 +37,48 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Multi-Select List</h3>
-					<p>Coming soon...</p>
-					<pre class="prettyprint linenums"></pre>
+					<p>You can use Truck's multi-select list to enable your users to select multiple items from a list. The setup is very similar to a select list. You create an instance and provide it with options:</p>
+					<pre class="prettyprint linenums">
+// Set up Select List:
+// //====================
+var myMulitSelectList = $.MultiSelectList({
+  element: '#multiSelectList',
+  selected: [1,2],
+  callback: function() {
+    renderSelection();
+  }
+});
+
+// Define callback for multi-select list:
+//================================= 
+var renderSelection = function() {
+  var temp = [];
+  // A multi-select list returns an array,
+  // so we loop over the results:
+  myMulitSelectList.getSelection().forEach(function(item){
+    temp.push(item.value);
+  });
+  temp = temp.join(', ');
+  if (temp.length) {
+    $('#response').text(temp);
+  } else {
+    $('#response').empty()
+  }
+};</pre>
+
+			<p>As you can see from the multi-select list options above, you can provide a series of pre-select list items by using an array. Numbering is zero based. To get the current value of a multi-select list, you use the <code>getSelection()</code> method on the list instance. This returns an array of objects like this:</p>
+			<pre class="prettyprint linenums">
+[
+  {index: 2, value: "work"},
+  {index: 4, value: "vacation"}
+]
+			</pre>
+			<p>To evaluate it we can loop over it, as we are doing in the callback in the example above.</p>
+			<p>Please look at the file "multi-select-list.html" in the example folder of the source code from Github.</p>
+
+
+
+
 				</div>
 				
 				<div id="menu">
