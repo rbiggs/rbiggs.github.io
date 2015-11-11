@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/styles-install.css">
+  <link rel="stylesheet" href="./prettify/obsidian.css">
+  <script type='text/javascript' src='./prettify/prettify.js'></script>
+  <script type='text/javascript' src='./prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -35,7 +38,25 @@
 				<p>Comming soon...</p>
 
 				<h2>Github</h2>
-				<p>You can get the source and code ready to build with from <a href="https://github.com/rbiggs/TruckJS">Github</a>.</p>
+				<p>You can get the source and code ready to build with from <a href="https://github.com/rbiggs/TruckJS">Github</a>. When you down the source code from Github, everything you need to get going is in the folder "dist". You do not need to run a build script. Also the source code includes a folder called "examples". In it you will find working examples of layouts and widgets that Truck provides.</p>
+				<p>If you have some specialized needs, you can build a version of Truck as needed. To build you need to run npm install on the folder:</p>
+				<pre class="prettyprint linenums">
+npm install</pre>
+				<p>After than you can build Truck in one of four ways:</p>
+				<ol>
+					<li>The complete framework</li>
+					<li>Just the selector engine</li>
+					<li>Just the MVC components</li>
+					<li>Everyting except the selector engine</li>
+				</ol>
+				<p>To build the whole thing, just run <code>gulp</code>. If you want to build just Truck's selector engine to use it as a light and modern replacement for jQuery, run:</p>
+<pre class="prettyprint linenums">gulp --wheels</pre> 
+				<p>To build just the MVC components, because you don't care about the layouts and widgets and maybe you want to use it with jQuery for desktop browsers, run:</p>
+<pre class="prettyprint linenums">gulp --mvc</pre>
+				<p>And to build the framework but with Truck's DOM engine because you want to use jQuery, run:</p>
+<pre class="prettyprint linenums">gulp --engine</pre>
+				<p>Please note that when you build a version without Truck's DOM engine, you need to load jQuery in the browser first. Also, you can use jQuery with the complete build as well, just load it first and Truck will use jQuery instead of its own DOM library.</p>
+
 			</div>
 
 		</section>
@@ -61,5 +82,8 @@
 		</footer>
 	</article>
 	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>

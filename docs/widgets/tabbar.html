@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -34,7 +37,28 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Tab Bar</h3>
-					<p>Coming soon...</p>
+					<p>When your app has three to five main screens, a tab bar is a perfect way to structure your app. Having more than five tabs is too cramped for narrower mobile devices, and there are still a lot of those around. Tab bars look very different on Android, iOS and Windows Phone. On iOS the tabs always have icons and the bar is on the bottom, where as on Android and Windows they do not have icons and the bar is on the top. You set up your tab bar and Truck will take care of making it look properly for each platform. If you are targetting iOS, you will need to provide images for the tabs.</p>
+					<p>Below is how you would set up a tab bar:</p>
+					<pre class="prettyprint linenums">
+// Options for Tab Bar:
+//=====================
+var opts = {
+   icons: ["music", "pictures", "docs", "recipes", "top_rated"],
+   labels: ["Music", "Pictures", "Docs", "Recipes", "Favs"],
+   selected: 1,
+   screens: ['music', 'pictures', 'documents', 'recipes', 'favorites']
+};
+
+// Init Tab Bar:
+//==============
+var myTabbar = $.TabBar(opts);
+					</pre>
+					<p>In the above options, the icons have are rendered on a the tab as a class that you can use to show an icon as a background image of it icon. Each tab has an icon element. On iOS the label will appear under the icon. On Android and Windows the icons won't be visible and only the labels will be. The selected value tells Truck which tab should be selected at load time. Selection is zero-based, so the first tab is 0, the second tab is 1, etc. Screens are the ids of the screens you want the tabs to show. The tabs will be created in the order of the icons, labels and screens, so check your options to make sure you have everything in the right order. If you want your tab bar to exhibit icons for Android or Windows, you can override the default tab bar behavior by providing a option property <code>showIcons: true</code>. Truck will adust the height of the tab bar to accomodate the icons you provided, just as it does for iOS. Labels will be under their icons.</p>
+					
+					<h4>Tab Bar with Navigation List</h4>
+					<p>If you really, really want a tab bar, but more screens than can fit in the tab bar, you could make the last tab a navigation list the directs the user to the additional screens.</p>
+
+
 				</div>
 				
 				<div id="menu">
@@ -55,7 +79,7 @@
 								<li><a href="tabbar.html" class='selected'>Tab Bar</a></li>
 								<li><a href="slideout.html">Slide Out Menu</a></li>
 								<li><a href="selectlist.html">Select List</a></li>
-								<li><a href="editablelist.html">Editable List</a></li>
+								<li><a href="multiselectlist.html">Multi-Select List</a></li>
 								<li><a href="switches.html">Switches</a></li>
 								<li><a href="rangeinput.html">Range Input</a></li>
 								<li><a href="carousel.html">Carousel</a></li>
@@ -105,5 +129,8 @@
 		</footer>
 	</article>
 	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
