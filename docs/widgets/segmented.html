@@ -37,8 +37,17 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Segmented Button</h3>
-					<p>Coming soon...</p>
-					<pre class="prettyprint linenums"></pre>
+					<p>Segmented buttons are useful to provide the user several possible actions from one interface control. The can also be used to toggle sections' visibility. To create a segemented button control you need to have a container for them. This is usally a div with the classes "horizontal centered". We will inject the segmented buttons in this:</p>
+					<pre class="prettyprint linenums">&lt;div id='segmentedPanel' class='horizontal centered'&gt;&lt;/div&gt;</pre>
+					<p>With our container ready, we can initialize the control:</p>
+					<pre class="prettyprint linenums">
+$.Segmented({
+  element: '#segmentedPanel',
+  labels : ['Radioactive','Hurt','Yeah, Yeah'],
+  selected: 2,
+  callback: segmentedResponse
+});</pre>
+		<p>In the above example notice that we provide the id of the container as the value of element. Then we provide labels that the buttons will display. We set a default selected state, which is a zero-based number. And finally, a callback to execute when the user taps a segment. That's all there is to set up a segmented control. Please see the file "segmented-button.html" in the folder of examples in the source code from Github.</p>
 				</div>
 				
 				<div id="menu">
