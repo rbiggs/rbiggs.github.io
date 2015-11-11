@@ -83,12 +83,18 @@ section > div > div > h3 {
 	font-size: 24px;
 	font-weight: 600;
 }
-section > div > div > img {
+section > div > div > img:first-of-type {
 	position: absolute;
 	top: 0;
 	right: 0;
 	height: 100px;
 	width: auto;
+}
+section > div > div > img.layout {
+	height: 300px;
+	display: block;
+	margin: 0 auto;
+	border: solid 1px #ccc;
 }
 summary {
 	background-color: #FAFAFA;

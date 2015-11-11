@@ -8,6 +8,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="../../css/styles.css">
 	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
 	<article>
@@ -35,7 +38,26 @@
 					<h2>Layouts</h2>
 					<h3>Intro</h3>
           <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-					<p>Coming soon...</p>
+					<p>Let's face it, layout is tough, even for the professionals. We're developers. We need help. Differrent platforms are, different. Yeah, layout is tough. Truck takes the pain out of coming up with a layout that works across mobile devices. We provide you with a number of versatile patterns to cover your needs for the most common use cases.</p>
+					<p>Truck gives you a number of simple layout components and techniques that you can combine together to create a wide variety of layouts. And, if you're comfortable with CSS, you can create some CSS definitions to create your own.</p>
+					<p>Truck layouts are based on the concept of screens. A screen is something that fills the screen of a mobile device from top to bottom, edge to edge. In truck a screen is a screen tag. It hold all the other tags that constitute a layout. When the user navigates though your app, he or she goes from one screen to another and back.</p>
+					<p>A screen is a vertical stack. It can have any of the following elements: nav, section or toolbar/footer. At a minimum a screen must have a section tag. This is the container for the important content of your app. It is a vertical, scrollable container. The nav tag create a navigation bar along the top of the screen, whereas the toolbar/footer will be at the bottom. If you create a screen without a navigation bar, be sure to provide some artifice be which the user can get out of that screen.</p>
+					<p>The most common tag for content layout is the list. This is created using unordered html lists with a class of "list":</p>
+
+					<pre class="prettyprint linenums">
+&lt;screen id='main' class='current'&gt;
+  &lt;nav&gt;
+    &lt;h1&gt;The Title&lt;/h1&gt;
+  &lt;/nav&gt;
+  &lt;section&gt;
+    &lt;h2&gt;A List&lt;/h2&gt;
+    &lt;ul class='list'&gt;
+      &lt;li&gt;One&lt;/li&gt;
+      &lt;li&gt;Two&lt;/li&gt;
+      &lt;li&gt;Three&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+&lt;/screen&gt;</pre>
 				</div>
 				
 				<div id="menu">
@@ -57,7 +79,6 @@
 							<ul>
 								<li><a href="layouts-intro.html" class='selected'>Intro</a></li>
 								<li><a href="layouts-use.html">Use</a></li>
-								<li><a href="layouts-api.html">API</a></li>
 							</ul>
 						</li>
 						<li><a href="../themes/themes-intro.html">Themes</a></li>
@@ -92,5 +113,8 @@
 		</footer>
 	</article>
 	
+<script>
+  prettyPrint();
+</script>
 </body>
 </html>
