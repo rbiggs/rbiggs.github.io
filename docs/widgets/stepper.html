@@ -38,7 +38,23 @@
 					<h2>Widgets</h2>
 					<h3>Stepper</h3>
           <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-					<p>Coming soon...</p>
+					<p>A stepper is a small control that allows the user to increase or decrease a value between predetermined values. It's not a picker. It's for when the different between possible choice is not great. The user decreases or increase the value by tapping on either side of the stepper.</p>
+					<p>To create a stepper you use a span with the class "stepper":</p>
+					<pre class="prettyprint linenums">
+&lt;span class='stepper' id="digits"&gt;&lt;/span&gt;</pre>
+					<p>To initialize a stepper, we use the <code>$.Stepper()</code> method and pass it three options: min value, max value and default value:</p>
+					<pre class="prettyprint linenums">
+var myStepper = $.Stepper({ 
+	element: '#digits', 
+  min: 1,
+  max: 8,
+  defaultValue: 3
+});</pre>
+					<p>We can get the current value of the stepper at any time by running <code>getValue()</code> on the stepper instance:</p>
+					<pre class="prettyprint linenums">
+var stepperValue = myStepper.getValue();</pre>
+					<p>Take a look at the file "stepper.html" in the examples folder in the source code from Github.</p>
+
 				</div>
 				
 				<div id="menu">

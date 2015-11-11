@@ -11,6 +11,13 @@
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+  <style>
+		#truck-architecture {
+			height: 350px;
+			display: block;
+			margin: 0 auto;
+		}
+  </style>
 </head>
 <body>
 	<article>
@@ -41,9 +48,9 @@
 
 					<p>Mediators are what binds the different parts of Truck together. Model, Views, remote domains and local data persistence do not know about each other. Only the mediators know about these. Trucks mediators handle the flow from one to the other. The following picture illustrates the role mediators play in Truck's architecture:</p>
 					<p>
-						<img src="../../images/truck-parts/mediator.png" alt="">
+						<img id='truck-architecture' src="../../images/truck-parts/mediator.png" alt="">
 					</p>
-					<p>From this image you can see that the remove server can send a push notification to a mediator. A model and notify a mediator that it has changed. A view can notify a mediator about a user interaction. And a mediator and interact with the remote server, the model, the view and the local data persistence.</p>
+					<p>From this image you can see that the remove server can send a push notification to a mediator. A model can notify a mediator that it has changed. A view can notify a mediator about a user interaction. And a mediator can interact with the remote server, the model, the view and the local data layer.</p>
 
 					<p>Truck's Mediators are an evented bus system. Mediators can respond to events, or as they are called in Truck, handles. For example, when a model changes, it announces that change using a handle. If a mediator is listening for that handle, it can respond. This gets useful when the handle comes with data. The mediator can then take that data and do something with it.</p>
 
