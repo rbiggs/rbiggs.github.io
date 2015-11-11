@@ -37,8 +37,96 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Pagination</h3>
-					<p>Coming soon...</p>
-					<pre class="prettyprint linenums"></pre>
+					<p>Sometimes you want to give the user a way to quickly scam through a number of screen quickly, but not really move to other screens. Yeah, that sounds weird. Truck provides a Paging widget to enable just this. To do this, it uses some particular markup. Instead of screen, it uses article tags inside a screen's section tag:</p>
+					<pre class="prettyprint linenums">
+&lt;section class='paging'&gt;
+  &lt;article class='current'&gt;
+    &lt;h2&gt;First Article&lt;/h2&gt;
+    &lt;ul class='list'&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Thing One&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Thing Two&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Thing Three&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;          
+     &lt;/ul&gt;
+  &lt;/article&gt;
+
+  &lt;article class='next'&gt;
+    &lt;h2&gt;Second Article&lt;/h2&gt;
+    &lt;ul class='list'&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Item One&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Item Two&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Item Three&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+    &lt;/ul&gt;
+  &lt;/article&gt;
+
+  &lt;article class='next'&gt;
+    &lt;h2&gt;Third Article&lt;/h2&gt;
+    &lt;ul class='list'&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Item 1&lt;/h3&gt;
+        &lt;h4&gt;Item 1 Subtitle&lt;/h4&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Item 2&lt;/h3&gt;
+        &lt;h4&gt;Item 2 Subtitle&lt;/h4&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Item 3&lt;/h3&gt;
+        &lt;h4&gt;Item 3 Subtitle&lt;/h4&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+    &lt;/ul&gt;          
+  &lt;/article&gt;
+
+  &lt;article class='next'&gt;  
+    &lt;h2&gt;Fourth Article&lt;/h2&gt;
+    &lt;ul class='list'&gt;      
+      &lt;li&gt;
+        &lt;h3&gt;Something Here&lt;/h3&gt;
+      &lt;/li&gt;    
+      &lt;li&gt;
+        &lt;h3&gt;Someting Else&lt;/h3&gt;
+      &lt;/li&gt;    
+      &lt;li&gt;
+        &lt;h3&gt;Another Thing&lt;/h3&gt;
+      &lt;/li&gt;    
+      &lt;li&gt;
+    &lt;/ul&gt;
+  &lt;/article&gt;
+
+  &lt;article class='next'&gt;
+    &lt;h2&gt;Fifth Article&lt;/h2&gt;
+    &lt;ul class='list'&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Thing One&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Thing Two&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h3&gt;Thing Three&lt;/h3&gt;
+      &lt;/li&gt;
+      &lt;li&gt;          
+     &lt;/ul&gt;
+  &lt;/article&gt;
+&lt;/section&gt;</pre>
+					<p>To initialize the paging control we use the <code>$.Paging()</code> method and provide it the id of the screen where the paging will occur:</p>
+					<pre class="prettyprint linenums">$.Paging({element: '#main'});</pre>
+					<p>Check out the file "paging.html" in the examples folder in the source code from Github.</p>
+
 				</div>
 				
 				<div id="menu">
