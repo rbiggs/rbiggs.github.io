@@ -37,7 +37,34 @@
 				<div>
 					<h2>Widgets</h2>
 					<h3>Switches</h3>
-					<p>Coming soon...</p>
+					<p>Truck has switches. These are controls for turning things on or off, or for other either/or situations in an interface. Internally they are simply checkboxes with a check or unchecked state. To create a switch, you first need to have a switch tag in the docuement:</p>
+					<pre class="prettyprint linenums">
+&lt;switch id='sleep-switch'&gt;&lt;/switch&gt;</pre>
+				<p>To make the switch look and act properly, you need to initialize it:</p>
+<pre class="prettyprint linenums">
+var sleepSwitch = $.Switch({
+  element: '#sleep-switch',
+  name: 'sleep',
+  value: 'get some sleep',
+  checked: false,
+  onCallback: function() {
+    console.log('Just turned this on!');
+    $('#response').text(sleepSwitch.getValue().value);
+  },
+  offCallback: function() {
+    console.log('Turning this thing off!');
+    $('#response').empty();
+  }
+});</pre>
+		<p>In the above example notice that we provided the id of the switch to initialize. The name value will be used as the name of the switch's checkbox. The value will be the value of the checkbox. The checked value will set the initalial state of the switch and checkbox. And finally, we provide two callbacks: onCallback and offCallback. You don't have to provide both. Just use the one you are interested in, or you might want to use both. It's your choice. We can get the value of any switch by using the <code>getValue()</code>  method on the switch instance. This returns an object like this:</p>
+		<pre class="prettyprint linenums">{checked: true, value: "get some sleep"}</pre>
+		<p>Using this object, we can verify whether a switch is checked/on or unchecked/off and what its value is:</p>
+		<pre class="prettyprint linenums">sleepSwitch.getValue().value
+// returns the value of the switch
+sleepSwitch.getValue().checked
+// returns the checked state: true or false</pre>
+			<p>Check out the demo of switches in the example folder of the source code from Github.</p>
+
 				</div>
 				
 				<div id="menu">
