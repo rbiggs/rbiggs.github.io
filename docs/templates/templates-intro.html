@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Templates</h2>
-					<h3>Intro</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Templates</h2>
+          <h3>Intro</h3>
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-					<p>Templates enable views to output data to your app. Templates are markup with delimiters to indicate data end points to interpolate while rendering.</p>
+          <p>Templates enable views to output data to your app. Templates are markup with delimiters to indicate data end points to interpolate while rendering.</p>
 
-					<p>To interpolate a data variable, use: <code>${ data }</code>. To process arbitrary JavaScript in your template, use: <code>{{ alert("hi!") }}</code>. Generally you shouldn't use JavaScript in your templates unless you need to output content conditionally.</p>
+          <p>To interpolate a data variable, use: <code>${ data }</code>. To process arbitrary JavaScript in your template, use: <code>{{ alert("hi!") }}</code>. Generally you shouldn't use JavaScript in your templates unless you need to output content conditionally.</p>
 
-					<p>You have to options for making temlates: using script tags or using inline markup. A script tag template will not show on the page. And inline template will, but by putting the class "cloak" on its parent, it will not show up until rendered.</p>
-					<p>With script tag:</p>
+          <p>You have to options for making temlates: using script tags or using inline markup. A script tag template will not show on the page. And inline template will, but by putting the class "cloak" on its parent, it will not show up until rendered.</p>
+          <p>With script tag:</p>
 <pre class='prettyprint linenums'>
 &lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;script type='text/x-template'&gt;
@@ -51,15 +51,15 @@
   &lt;/script&gt;
 &lt;ul&gt;
 </pre>
-					<p>Without script tag, using `cloak` class:</p>
+          <p>Without script tag, using `cloak` class:</p>
 <pre class='prettyprint linenums'>
 &lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
   &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
 &lt;ul&gt;
 </pre>
-					<p>Templates are consummed by views. That means that when the view loads, it looks for the template, extracts it from the parent element and stores it on the view object. The next time the view renders, it will find the template stored on itself and use it.</p>
+          <p>Templates are consummed by views. That means that when the view loads, it looks for the template, extracts it from the parent element and stores it on the view object. The next time the view renders, it will find the template stored on itself and use it.</p>
 
-					<p>You can output sequential numbering using <code>$.view.index</code> in your template markup. This value will increase with each iteration. You can also set a what value you want the count to start.</p>
+          <p>You can output sequential numbering using <code>$.view.index</code> in your template markup. This value will increase with each iteration. You can also set a what value you want the count to start.</p>
 
 <pre class='prettyprint linenums'>
 &lt;ul class="list" id='defaultObjectTemplateScript'&gt;
@@ -68,60 +68,60 @@
   &lt;/script&gt;
 &lt;ul&gt;
 </pre>
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
-						<li><a href="../templates/templates-intro.html">Templates</a>
-							<ul>
-								<li><a href="templates-intro.html" class='selected'>Intro</a></li>
-								<li><a href="templates-use.html">Use</a></li>
-								<li><a href="templates-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a>
+              <ul>
+                <li><a href="templates-intro.html" class='selected'>Intro</a></li>
+                <li><a href="templates-use.html">Use</a></li>
+                <li><a href="templates-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="quickstart.html">Quick Start</a>
-						<a href="features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
 
 <script>
   prettyPrint();

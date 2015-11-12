@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
   <style>
-		#truck-architecture {
-			height: 350px;
-			display: block;
-			margin: 0 auto;
-		}
+    #truck-architecture {
+      height: 350px;
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Mediators</h2>
-					<h3>Intro</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Mediators</h2>
+          <h3>Intro</h3>
           <img src="../../images/truck-parts/Truck-Engine.png" alt="Truck Engine">
 
-					<p>Mediators are what binds the different parts of Truck together. Model, Views, remote domains and local data persistence do not know about each other. Only the mediators know about these. Trucks mediators handle the flow from one to the other. The following picture illustrates the role mediators play in Truck's architecture:</p>
-					<p>
-						<img id='truck-architecture' src="../../images/truck-parts/mediator.png" alt="">
-					</p>
-					<p>From this image you can see that the remove server can send a push notification to a mediator. A model can notify a mediator that it has changed. A view can notify a mediator about a user interaction. And a mediator can interact with the remote server, the model, the view and the local data layer.</p>
+          <p>Mediators are what binds the different parts of Truck together. Model, Views, remote domains and local data persistence do not know about each other. Only the mediators know about these. Trucks mediators handle the flow from one to the other. The following picture illustrates the role mediators play in Truck's architecture:</p>
+          <p>
+            <img id='truck-architecture' src="../../images/truck-parts/mediator.png" alt="">
+          </p>
+          <p>From this image you can see that the remove server can send a push notification to a mediator. A model can notify a mediator that it has changed. A view can notify a mediator about a user interaction. And a mediator can interact with the remote server, the model, the view and the local data layer.</p>
 
-					<p>Truck's Mediators are an evented bus system. Mediators can respond to events, or as they are called in Truck, handles. For example, when a model changes, it announces that change using a handle. If a mediator is listening for that handle, it can respond. This gets useful when the handle comes with data. The mediator can then take that data and do something with it.</p>
+          <p>Truck's Mediators are an evented bus system. Mediators can respond to events, or as they are called in Truck, handles. For example, when a model changes, it announces that change using a handle. If a mediator is listening for that handle, it can respond. This gets useful when the handle comes with data. The mediator can then take that data and do something with it.</p>
 
-					<p>You can also define a mediator that is executed like any other function. For example:</p>
+          <p>You can also define a mediator that is executed like any other function. For example:</p>
 
 <pre class='prettyprint linenums'>
 var fooMtor = $.Mediator('fooMtor');
@@ -65,7 +65,7 @@ fooMtor.init(function() {
 fooMtor.run();
 </pre>
 
-				<p>Mediators have a number of builtin features that would require extra coding to do in an ordinary method. Besides running a mediator, you can stop it with <code>stop()</code>. This will prevent if from responding to any handles that might get published. You can also provide a number for the stop method, which tells the mediator to only run that many times and then stop.</p>
+        <p>Mediators have a number of builtin features that would require extra coding to do in an ordinary method. Besides running a mediator, you can stop it with <code>stop()</code>. This will prevent if from responding to any handles that might get published. You can also provide a number for the stop method, which tells the mediator to only run that many times and then stop.</p>
 
 <pre class='prettyprint linenums'>
 // Stop the mediator immediately:
@@ -73,7 +73,7 @@ fooMtor.stop();
 // Stop the mediator after 5 runs:
 fooMtor.stop(5);
 </pre>
-				<p>After some time, you might want to restart a stop mediator. You do that with <code>restart()</code>. Using restart means the mediator will immediately start responding to its handles when these are published. You can also provide a number value representing seconds. This will tell the mediator to restart <em>after</em> that many seconds have passed.</p>
+        <p>After some time, you might want to restart a stop mediator. You do that with <code>restart()</code>. Using restart means the mediator will immediately start responding to its handles when these are published. You can also provide a number value representing seconds. This will tell the mediator to restart <em>after</em> that many seconds have passed.</p>
 
 <pre class='prettyprint linenums'>
 // Restart the mediator immediately:
@@ -81,7 +81,7 @@ fooMtor.restart();
 // Restart the mediator after 5 minutes:
 fooMtor.restart(60 * 5);
 </pre>
-				<p>By default, mediators keep track of how many times they have run. You can get that number with <code>getCount()</code>. This allows you to monitor the activity of mediators. You can reset a mediators count with <code>resetCount()</code>, or you can stop the count altogether with <code>stopCount()</code>. If for some reason you don't need a mediator and want to get rid of it, you can kill it literally with <code>kill()</code>.</p>
+        <p>By default, mediators keep track of how many times they have run. You can get that number with <code>getCount()</code>. This allows you to monitor the activity of mediators. You can reset a mediators count with <code>resetCount()</code>, or you can stop the count altogether with <code>stopCount()</code>. If for some reason you don't need a mediator and want to get rid of it, you can kill it literally with <code>kill()</code>.</p>
 <pre class='prettyprint linenums'>
 // Get the current number of times
 // the mediator has run:
@@ -95,61 +95,61 @@ fooMtor.kill();
 </pre>
 
 
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html" class='selected'>Mediators</a>
-							<ul>
-								<li><a href="mediators-intro.html" class='selected'>Intro</a></li>
-								<li><a href="mediators-use.html">Use</a></li>
-								<li><a href="mediators-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html" class='selected'>Mediators</a>
+              <ul>
+                <li><a href="mediators-intro.html" class='selected'>Intro</a></li>
+                <li><a href="mediators-use.html">Use</a></li>
+                <li><a href="mediators-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="quickstart.html">Quick Start</a>
-						<a href="features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
 <script>
   prettyPrint();
 </script>

@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Layouts</h2>
-					<h3>Use</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Layouts</h2>
+          <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-					<p>As explained in the intro, your app consists of a series of screens. Within the screens you create the layout structure for your app. A screen can contain any of four elements: nav, section, toolbar, footer. Every screen must have a section. This is absolutely required for the content to be accessible. The section tag inside a screen creates a vertial scroller. A screen stacks its elements vertically, one on top of the other, so order is important: nav first, followed by section, followed by optional toolbar or footer. You would at least have a nav and section in every screen. OK, you can leave out a nav if you absolute must have maximum screen real estate, however, you must then provide something to allow the user to get out of that screen.</p>
-					<p>Truck uses h1-h5 for semantic purposes. An h1 is always in the navigation bar and serves as the title for that screen. An h2 is put before a list and serves as the list's title. h3 are used inside lists as the title of a list item. And h4 are using inside lists as the subtitle of a list item. Putting a paragraph tag after a list creates a footnote for the list. Or you can use the summary tag directly after a list for the same purpose.</p>
-					<p>Lists are created with unordered lists. Just put the class "list" on it and it will be displayed as a proper list. Otherwise it will appear as a normal bulleted list. Lists constitute the principal way that you will create layouts. </p>
-					<h4>Simple List</h4>
-					<p>To create a simple list, just put an h3 into a list item:</p>
-					<pre class="prettyprint linenums">
+          <p>As explained in the intro, your app consists of a series of screens. Within the screens you create the layout structure for your app. A screen can contain any of four elements: nav, section, toolbar, footer. Every screen must have a section. This is absolutely required for the content to be accessible. The section tag inside a screen creates a vertial scroller. A screen stacks its elements vertically, one on top of the other, so order is important: nav first, followed by section, followed by optional toolbar or footer. You would at least have a nav and section in every screen. OK, you can leave out a nav if you absolute must have maximum screen real estate, however, you must then provide something to allow the user to get out of that screen.</p>
+          <p>Truck uses h1-h5 for semantic purposes. An h1 is always in the navigation bar and serves as the title for that screen. An h2 is put before a list and serves as the list's title. h3 are used inside lists as the title of a list item. And h4 are using inside lists as the subtitle of a list item. Putting a paragraph tag after a list creates a footnote for the list. Or you can use the summary tag directly after a list for the same purpose.</p>
+          <p>Lists are created with unordered lists. Just put the class "list" on it and it will be displayed as a proper list. Otherwise it will appear as a normal bulleted list. Lists constitute the principal way that you will create layouts. </p>
+          <h4>Simple List</h4>
+          <p>To create a simple list, just put an h3 into a list item:</p>
+          <pre class="prettyprint linenums">
 &lt;ul class='list'&gt;
   &lt;li&gt;
     &lt;h3&gt;One&lt;/h3&gt;
@@ -55,10 +55,10 @@
     &lt;h3&gt;Three&lt;/h3&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</pre>
-				<p>This would give us a layout like this:</p>
-				<img class='layout' src="../../images/layouts/layout-1.png" alt="Simple Layout">
-				<p>You can add subtitles to the list by including h4s:</p>
-					<pre class="prettyprint linenums">
+        <p>This would give us a layout like this:</p>
+        <img class='layout' src="../../images/layouts/layout-1.png" alt="Simple Layout">
+        <p>You can add subtitles to the list by including h4s:</p>
+          <pre class="prettyprint linenums">
 &lt;ul class='list'&gt;
   &lt;li&gt;
     &lt;h3&gt;One&lt;/h3&gt;
@@ -73,8 +73,8 @@
     &lt;h4&gt;Subtitle Three&lt;/h4&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</pre>
-			<p>Notice that by default these are aligned to horizontally to the left and right. If you want the stacked, you need to put them in a div. In fact you can create various columns of stakced content using divs inside a list item:</p>
-					<pre class="prettyprint linenums">
+      <p>Notice that by default these are aligned to horizontally to the left and right. If you want the stacked, you need to put them in a div. In fact you can create various columns of stakced content using divs inside a list item:</p>
+          <pre class="prettyprint linenums">
 &lt;ul class='list'&gt;
   &lt;li&gt;
     &lt;div&gt;
@@ -95,21 +95,21 @@
     &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</pre>
-			
-			<h4>Navigation Lists</h4>
-			<p>To make a list look like it's navigable you need to include navigation disclosures in the list items:</p>
-			<pre class="prettyprint linenums">
+      
+      <h4>Navigation Lists</h4>
+      <p>To make a list look like it's navigable you need to include navigation disclosures in the list items:</p>
+      <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;h3&gt;Things&lt;/h3&gt;
   &lt;aside&gt;
     &lt;disclosure&gt;&lt;/disclosure&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-				<p>The list will look like this:</p>
-				<img class='layout' src="../../images/layouts/layout-2.png" alt="Navigation List Layout">
+        <p>The list will look like this:</p>
+        <img class='layout' src="../../images/layouts/layout-2.png" alt="Navigation List Layout">
 
-			<p>If we take the h3 and h4 together with a navigation disclosure, we get this:</p>
-			<pre class="prettyprint linenums">
+      <p>If we take the h3 and h4 together with a navigation disclosure, we get this:</p>
+      <pre class="prettyprint linenums">
 &lt;li data-goto='people'&gt;
   &lt;h3&gt;People&lt;/h3&gt;
   &lt;h4&gt;Your Friends&lt;/h4&gt;
@@ -117,9 +117,9 @@
     &lt;disclosure&gt;&lt;/disclosure&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-			<img class='layout' src="../../images/layouts/layout-3-a.png" alt="Navigation List Layout">
-			<p>If we want the h3 and h4 stacked, we put them in a div, followed by the disclosure:</p>
-			<pre class="prettyprint linenums">
+      <img class='layout' src="../../images/layouts/layout-3-a.png" alt="Navigation List Layout">
+      <p>If we want the h3 and h4 stacked, we put them in a div, followed by the disclosure:</p>
+      <pre class="prettyprint linenums">
 &lt;li data-goto='people'&gt;
   &lt;div&gt;
     &lt;h3&gt;People&lt;/h3&gt;
@@ -128,11 +128,11 @@
     &lt;disclosure&gt;&lt;/disclosure&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-			<img class='layout' src="../../images/layouts/layout-3-b.png" alt="Navigation List Layout">
+      <img class='layout' src="../../images/layouts/layout-3-b.png" alt="Navigation List Layout">
 
-			<h4>List Detail</h4>
-			<p>To include a detail along with the list item's title and subtitle, we use a paragraph tag:</p>
-			<pre class="prettyprint linenums">
+      <h4>List Detail</h4>
+      <p>To include a detail along with the list item's title and subtitle, we use a paragraph tag:</p>
+      <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;div&gt;
     &lt;h3&gt;Places&lt;/h3&gt;
@@ -140,11 +140,11 @@
     &lt;p&gt;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/li&gt;</pre>
-			<img class='layout' src="../../images/layouts/layout-4-a.png" alt="List with Detail Layout">
+      <img class='layout' src="../../images/layouts/layout-4-a.png" alt="List with Detail Layout">
 
-			<h4>Columns</h4>
-			<p>You can create columns inside a list item by including two divs. Please make sure that your target devices are wide enough to accomodate this type of layout. You can visually separate the two columns by putting a class "separator" on the second div. By default both columns will be the same width. Depending on what your content is, this may not work. You can change that behavior by putting a class "no-flex" on a div, as we did below. then in the stylesheet for the app we added a CSS definition to makes the first column only 100 pixels width:</p>
-			<pre class="prettyprint linenums">
+      <h4>Columns</h4>
+      <p>You can create columns inside a list item by including two divs. Please make sure that your target devices are wide enough to accomodate this type of layout. You can visually separate the two columns by putting a class "separator" on the second div. By default both columns will be the same width. Depending on what your content is, this may not work. You can change that behavior by putting a class "no-flex" on a div, as we did below. then in the stylesheet for the app we added a CSS definition to makes the first column only 100 pixels width:</p>
+      <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;div class='no-flex'&gt;
     &lt;h3&gt;People&lt;/h3&gt;
@@ -154,11 +154,11 @@
     &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/li&gt;</pre>
-			<img class='layout' src="../../images/layouts/layout-4-b.png" alt="List With Columns Layout">
+      <img class='layout' src="../../images/layouts/layout-4-b.png" alt="List With Columns Layout">
 
-			<h4>Icons in List Items</h4>
-			<p>You can use a span to display icons in your list items. Just you a span with the name icon and provide a syle for it. In the example below we give each icon span a secondar name so we can define its image in the stylesheet:</p>
-			<pre class="prettyprint linenums">
+      <h4>Icons in List Items</h4>
+      <p>You can use a span to display icons in your list items. Just you a span with the name icon and provide a syle for it. In the example below we give each icon span a secondar name so we can define its image in the stylesheet:</p>
+      <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;span class='icon weather'&gt;&lt;/span&gt;
   &lt;h3&gt;Weather&lt;/h3&gt;
@@ -180,8 +180,8 @@
     &lt;disclosure&gt;&lt;/disclosure&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-				<p>Here's what the styles look like:</p>
-				<pre class="prettyprint linenums">.icon {
+        <p>Here's what the styles look like:</p>
+        <pre class="prettyprint linenums">.icon {
   display: block;
   height: 40px;
   width: 40px;
@@ -200,11 +200,11 @@
   background-image: url(../images/app-icons/mail.png);
   background-size: 70% auto;
 }</pre>
-				<img class='layout' src="../../images/layouts/layout-5.png" alt="List With Icons Layout">
+        <img class='layout' src="../../images/layouts/layout-5.png" alt="List With Icons Layout">
 
-				<h4>Images in List Items</h4>
-				<p>You can include an image in a list item. Just make it the first item in the list. Put all the other content, h3, h4 and p tags, into a div after it:</p>
-				<pre class="prettyprint linenums">
+        <h4>Images in List Items</h4>
+        <p>You can include an image in a list item. Just make it the first item in the list. Put all the other content, h3, h4 and p tags, into a div after it:</p>
+        <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;img title='iTunes' src="../images/music/Kiss.jpg" height='100px'&gt;
   &lt;div&gt;
@@ -212,12 +212,12 @@
     &lt;h4&gt;This Kiss&lt;/h4&gt;
     &lt;p&gt;At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.&lt;/p&gt;&lt;/div&gt;
 &lt;/li&gt;</pre>
-				<img class='layout' src="../../images/layouts/layout-6-b.png" alt="List With Images Layout">
+        <img class='layout' src="../../images/layouts/layout-6-b.png" alt="List With Images Layout">
 
-				<h4>Information Indicator</h4>
-				<p>Besides navigation indicators, sometimes you want to alert the user that tapping a list item will show them more detail about the item. You do this using the info tag in an aside as the last element in the list item:</p>
+        <h4>Information Indicator</h4>
+        <p>Besides navigation indicators, sometimes you want to alert the user that tapping a list item will show them more detail about the item. You do this using the info tag in an aside as the last element in the list item:</p>
 
-				<pre class="prettyprint linenums">
+        <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;img title='Blues' src="../images/music/Willy Moon.jpg" height='100px'&gt;
   &lt;h3&gt;Willy Moon&lt;/h3&gt;
@@ -225,11 +225,11 @@
     &lt;info&gt;&lt;/info&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-				<img class='layout' src="../../images/layouts/layout-6-a.png" alt="List With Info Indicator Layout">
+        <img class='layout' src="../../images/layouts/layout-6-a.png" alt="List With Info Indicator Layout">
 
-				<h4>Showing a Price</h4>
-				<p>If you wanted to show a price, put the class "price" on the aside, and a span to hold the price:</p>
-				<pre class="prettyprint linenums">
+        <h4>Showing a Price</h4>
+        <p>If you wanted to show a price, put the class "price" on the aside, and a span to hold the price:</p>
+        <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;img title='Permanent' src="../images/music/Permanent.jpg" height="80px"&gt;
   &lt;div&gt;
@@ -241,10 +241,10 @@
     &lt;span class='show-detail'&gt;&lt;/span&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-				<img class='layout' src="../../images/layouts/layout-6-c.png" alt="List With Prices Layout">
-				<h4>Date and Time</h4>
-				<p>You show a date or time by putting those classes on the aside and including the data in a span tag:</p>
-				<pre class="prettyprint linenums">
+        <img class='layout' src="../../images/layouts/layout-6-c.png" alt="List With Prices Layout">
+        <h4>Date and Time</h4>
+        <p>You show a date or time by putting those classes on the aside and including the data in a span tag:</p>
+        <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;div&gt;
     &lt;h3&gt;Places&lt;/h3&gt;
@@ -265,11 +265,11 @@
     &lt;disclosure&gt;&lt;/disclosure&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-				<img class='layout' src="../../images/layouts/layout-7-a.png" alt="List With Date and Time Layout">
+        <img class='layout' src="../../images/layouts/layout-7-a.png" alt="List With Date and Time Layout">
 
-				<h4>Numbers</h4>
-				<p>You display numbers by putting the "number" class on an aside and putting the number in a span tag:</p>
-				<pre class="prettyprint linenums">
+        <h4>Numbers</h4>
+        <p>You display numbers by putting the "number" class on an aside and putting the number in a span tag:</p>
+        <pre class="prettyprint linenums">
 &lt;li data-goto&gt;
   &lt;h3&gt;Food&lt;/h3&gt;
   &lt;h4&gt;Recipes&lt;/h4&gt;
@@ -278,74 +278,74 @@
     &lt;disclosure&gt;&lt;/disclosure&gt;
   &lt;/aside&gt;
 &lt;/li&gt;</pre>
-				<img class='layout' src="../../images/layouts/layout-7-b.png" alt="List With Info Numbers Layout">
+        <img class='layout' src="../../images/layouts/layout-7-b.png" alt="List With Info Numbers Layout">
 
-				<h4>Style the List Headers</h4>
-				<p>By default, when you put an h2 before a list as its header, it gets style uppercase and it wraps around. Instead it gets cut off with ellipses. You can change this to suit your needs with some list header-specific classes.</p>
-				<h5>Normal Case</h5>
-				<p>By putting the class "normal-case" on a h2, it will display the default case of the text.</p>
-				<h5>No Wrap</h5>
-				<p>If you would prefer that your list headers did not wrap, but were cut off with ellipsis as is common on mobile devies, you can add the class "no-wrap" to the h2.</p>
+        <h4>Style the List Headers</h4>
+        <p>By default, when you put an h2 before a list as its header, it gets style uppercase and it wraps around. Instead it gets cut off with ellipses. You can change this to suit your needs with some list header-specific classes.</p>
+        <h5>Normal Case</h5>
+        <p>By putting the class "normal-case" on a h2, it will display the default case of the text.</p>
+        <h5>No Wrap</h5>
+        <p>If you would prefer that your list headers did not wrap, but were cut off with ellipsis as is common on mobile devies, you can add the class "no-wrap" to the h2.</p>
 
-				<p>Check out all the examples of layouts in the source code from Github. there in a folder called layouts in the examples folder.</p>
-
-
-
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html" class='selected'>Layouts</a>
-							<ul>
-								<li><a href="layouts-intro.html">Intro</a></li>
-								<li><a href="layouts-use.html" class='selected'>Use</a></li>
-							</ul>
-						</li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        <p>Check out all the examples of layouts in the source code from Github. there in a folder called layouts in the examples folder.</p>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html" class='selected'>Layouts</a>
+              <ul>
+                <li><a href="layouts-intro.html">Intro</a></li>
+                <li><a href="layouts-use.html" class='selected'>Use</a></li>
+              </ul>
+            </li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
 <script>
   prettyPrint();
 </script>

@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Layouts</h2>
-					<h3>Intro</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Layouts</h2>
+          <h3>Intro</h3>
           <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-					<p>Let's face it, layout is tough, even for the professionals. We're developers. We need help. Differrent platforms are, different. Yeah, layout is tough. Truck takes the pain out of coming up with a layout that works across mobile devices. We provide you with a number of versatile patterns to cover your needs for the most common use cases.</p>
-					<p>Truck gives you a number of simple layout components and techniques that you can combine together to create a wide variety of layouts. And, if you're comfortable with CSS, you can create some CSS definitions to create your own.</p>
-					<p>Truck layouts are based on the concept of screens. A screen is something that fills the screen of a mobile device from top to bottom, edge to edge. In truck a screen is a screen tag. It hold all the other tags that constitute a layout. When the user navigates though your app, he or she goes from one screen to another and back.</p>
-					<p>A screen is a vertical stack. It can have any of the following elements: nav, section or toolbar/footer. At a minimum a screen must have a section tag. This is the container for the important content of your app. It is a vertical, scrollable container. The nav tag create a navigation bar along the top of the screen, whereas the toolbar/footer will be at the bottom. If you create a screen without a navigation bar, be sure to provide some artifice be which the user can get out of that screen.</p>
-					<p>The most common tag for content layout is the list. This is created using unordered html lists with a class of "list":</p>
+          <p>Let's face it, layout is tough, even for the professionals. We're developers. We need help. Differrent platforms are, different. Yeah, layout is tough. Truck takes the pain out of coming up with a layout that works across mobile devices. We provide you with a number of versatile patterns to cover your needs for the most common use cases.</p>
+          <p>Truck gives you a number of simple layout components and techniques that you can combine together to create a wide variety of layouts. And, if you're comfortable with CSS, you can create some CSS definitions to create your own.</p>
+          <p>Truck layouts are based on the concept of screens. A screen is something that fills the screen of a mobile device from top to bottom, edge to edge. In truck a screen is a screen tag. It hold all the other tags that constitute a layout. When the user navigates though your app, he or she goes from one screen to another and back.</p>
+          <p>A screen is a vertical stack. It can have any of the following elements: nav, section or toolbar/footer. At a minimum a screen must have a section tag. This is the container for the important content of your app. It is a vertical, scrollable container. The nav tag create a navigation bar along the top of the screen, whereas the toolbar/footer will be at the bottom. If you create a screen without a navigation bar, be sure to provide some artifice be which the user can get out of that screen.</p>
+          <p>The most common tag for content layout is the list. This is created using unordered html lists with a class of "list":</p>
 
-					<pre class="prettyprint linenums">
+          <pre class="prettyprint linenums">
 &lt;screen id='main' class='current'&gt;
   &lt;nav&gt;
     &lt;h1&gt;The Title&lt;/h1&gt;
@@ -58,61 +58,61 @@
     &lt;/ul&gt;
   &lt;/section&gt;
 &lt;/screen&gt;</pre>
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html" class='selected'>Layouts</a>
-							<ul>
-								<li><a href="layouts-intro.html" class='selected'>Intro</a></li>
-								<li><a href="layouts-use.html">Use</a></li>
-							</ul>
-						</li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html" class='selected'>Layouts</a>
+              <ul>
+                <li><a href="layouts-intro.html" class='selected'>Intro</a></li>
+                <li><a href="layouts-use.html">Use</a></li>
+              </ul>
+            </li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="quickstart.html">Quick Start</a>
-						<a href="features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
 <script>
   prettyPrint();
 </script>

@@ -1,189 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>DOM</h2>104 vs 247
-					<h3>Intro</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>DOM</h2>104 vs 247
+          <h3>Intro</h3>
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-					<p>Truck has its own DOM selector engine which provides identical functionality to jQuery. Truck's DOM engine is only 104KB compared to jQuery 1.3.2 being 247KB. The main reason we can do this is because we are targetting modern browsers.</p>
+          <p>Truck has its own DOM selector engine which provides identical functionality to jQuery. Truck's DOM engine is only 104KB compared to jQuery 1.3.2 being 247KB. The main reason we can do this is because we are targetting modern browsers.</p>
 
-					<ul>
-						<li>$(selector) - find selector</li>
-						<li>$(function) - run a DOM ready</li>
-						<li>$(markup) - create elements from markup</li>
-						<li>element.find(selector) - find descendant</li>
-						<li>element.is(selector)</li>
-						<li>element.not(selector)</li>
-						<li>element.has(selector)</li>
-						<li>element.prev(selector?)</li>
-						<li>element.prevAll(selector?)</li>
-						<li>element.next(selector?)</li>
-						<li>element.nextAll(selector?)</li>
-						<li>element.first()</li>
-						<li>element.last()</li>
-						<li>element.index(element?)</li>
-						<li>element.children(selector?)</li>
-						<li>element.siblings(selector?)</li>
-						<li>element.parent()</li>
-						<li>element.closest(selector)</li>
-						<li>element.css(property)</li>
-						<li>element.css(property, value)</li>
-						<li>element.width()</li>
-						<li>element.height()</li>
-						<li>element.before(content)</li>
-						<li>element.after(content)</li>
-						<li>element.prepend(content)</li>
-						<li>element.append(content)</li>
-						<li>element.prependTo(selector)</li>
-						<li>element.appendTo(selector)</li>
-						<li>element.clone(true?)</li>
-						<li>element.wrap(markup)</li>
-						<li>element.unwrap()</li>
-						<li>element.offset()</li>
-						<li>element.position()</li>
-						<li>element.empty()</li>
-						<li>element.html(content)</li>
-						<li>element.html()</li>
-						<li>element.text(content)</li>
-						<li>element.text()</li>
-						<li>element.remove()</li>
-						<li>element.addClass(className)</li>
-						<li>element.hasClass(className)</li>
-						<li>element.removeClass(className)</li>
-						<li>element.toggleClass(className)</li>
-						<li>element.attr(property)</li>
-						<li>element.attr(property, value)</li>
-						<li>element.removeAttr(property)</li>
-						<li>element.prop(property)</li>
-						<li>element.prop(property, value)</li>
-						<li>element.removeProp(property)</li>
-						<li>element.disable().</li>
-						<li>element.enable()</li>
-						<li>element.val(value)</li>
-						<li>element.val()</li>
-						<li>element.hide()</li>
-						<li>element.show()</li>
-						<li>element.data(key, value)</li>
-						<li>element.data(key)</li>
-						<li>element.removeData(key)</li>
-						<li>element.on(event, callback, type)</li>
-						<li>element.on(event, element, callback, type)</li>
-						<li>element.off(event, callback, type)</li>
-						<li>element.off(event, element, callback, type)</li>
-						<li>element.trigger(event)</li>
-						<li>element.serializeArray()</li>
-						<li>element.serialize()</li>
-						<li>element.eq(index)</li>
-						<li>element.push(element)</li>
-						<li>element.pop()</li>
-						<li>element.unshift(element)</li>
-						<li>element.shift()</li>
-						<li>element.each(callback)</li>
-						<li>element.slice()</li>
-						<li>element.splice()</li>
-						<li>element.filter(callback)</li>
-						<li>element.map(callback)</li>
-						<li>element.every(callback)</li>
-						<li>element.some(callback)</li>
-						<li>element.unique()</li>
-						<li>$.param(obj, traditional)</li>
-						<li>$.type(object).</li>
-						<li>$.each(object, callback)</li>
-						<li>$.noop</li>
-						<li>$.delay(func, milliseconds)</li>
-						<li>$.defer(func)</li>
-						<li>$.require(scriptSrc, callback</li>
-					</ul>
-				
-
-
+          <ul>
+            <li>$(selector) - find selector</li>
+            <li>$(function) - run a DOM ready</li>
+            <li>$(markup) - create elements from markup</li>
+            <li>element.find(selector) - find descendant</li>
+            <li>element.is(selector)</li>
+            <li>element.not(selector)</li>
+            <li>element.has(selector)</li>
+            <li>element.prev(selector?)</li>
+            <li>element.prevAll(selector?)</li>
+            <li>element.next(selector?)</li>
+            <li>element.nextAll(selector?)</li>
+            <li>element.first()</li>
+            <li>element.last()</li>
+            <li>element.index(element?)</li>
+            <li>element.children(selector?)</li>
+            <li>element.siblings(selector?)</li>
+            <li>element.parent()</li>
+            <li>element.closest(selector)</li>
+            <li>element.css(property)</li>
+            <li>element.css(property, value)</li>
+            <li>element.width()</li>
+            <li>element.height()</li>
+            <li>element.before(content)</li>
+            <li>element.after(content)</li>
+            <li>element.prepend(content)</li>
+            <li>element.append(content)</li>
+            <li>element.prependTo(selector)</li>
+            <li>element.appendTo(selector)</li>
+            <li>element.clone(true?)</li>
+            <li>element.wrap(markup)</li>
+            <li>element.unwrap()</li>
+            <li>element.offset()</li>
+            <li>element.position()</li>
+            <li>element.empty()</li>
+            <li>element.html(content)</li>
+            <li>element.html()</li>
+            <li>element.text(content)</li>
+            <li>element.text()</li>
+            <li>element.remove()</li>
+            <li>element.addClass(className)</li>
+            <li>element.hasClass(className)</li>
+            <li>element.removeClass(className)</li>
+            <li>element.toggleClass(className)</li>
+            <li>element.attr(property)</li>
+            <li>element.attr(property, value)</li>
+            <li>element.removeAttr(property)</li>
+            <li>element.prop(property)</li>
+            <li>element.prop(property, value)</li>
+            <li>element.removeProp(property)</li>
+            <li>element.disable().</li>
+            <li>element.enable()</li>
+            <li>element.val(value)</li>
+            <li>element.val()</li>
+            <li>element.hide()</li>
+            <li>element.show()</li>
+            <li>element.data(key, value)</li>
+            <li>element.data(key)</li>
+            <li>element.removeData(key)</li>
+            <li>element.on(event, callback, type)</li>
+            <li>element.on(event, element, callback, type)</li>
+            <li>element.off(event, callback, type)</li>
+            <li>element.off(event, element, callback, type)</li>
+            <li>element.trigger(event)</li>
+            <li>element.serializeArray()</li>
+            <li>element.serialize()</li>
+            <li>element.eq(index)</li>
+            <li>element.push(element)</li>
+            <li>element.pop()</li>
+            <li>element.unshift(element)</li>
+            <li>element.shift()</li>
+            <li>element.each(callback)</li>
+            <li>element.slice()</li>
+            <li>element.splice()</li>
+            <li>element.filter(callback)</li>
+            <li>element.map(callback)</li>
+            <li>element.every(callback)</li>
+            <li>element.some(callback)</li>
+            <li>element.unique()</li>
+            <li>$.param(obj, traditional)</li>
+            <li>$.type(object).</li>
+            <li>$.each(object, callback)</li>
+            <li>$.noop</li>
+            <li>$.delay(func, milliseconds)</li>
+            <li>$.defer(func)</li>
+            <li>$.require(scriptSrc, callback</li>
+          </ul>
+        
 
 
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html" class='selected'>DOM</a>
-							<ul>
-								<li><a href="dom-intro.html" class='selected'>Intro</a></li>
-								<li><a href="dom-use.html">Use</a></li>
-								<li><a href="dom-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="quickstart.html">Quick Start</a>
-						<a href="features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html" class='selected'>DOM</a>
+              <ul>
+                <li><a href="dom-intro.html" class='selected'>Intro</a></li>
+                <li><a href="dom-use.html">Use</a></li>
+                <li><a href="dom-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
 </body>
 </html>

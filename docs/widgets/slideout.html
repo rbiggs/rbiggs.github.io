@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Widgets</h2>
-					<h3>Slide Out Menu</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Widgets</h2>
+          <h3>Slide Out Menu</h3>
           <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-					<p>Slide out menus offer a convenient way to provide the user access to a number of otherwise unrelated screens. If you have more screen than can fit in a tab bar, but you don't want to use a navigation list in a tab bar to reveal them, a slide out menu is a better option.</p>
-					<p>To create a slide out menu, you need to provide it with the screens you want to show when the slide out menu items are tapped by the user. First we create the slide out menu using the <code>$.SlideOut</code> method. Then we populate the menu by passing it some options:</p>
-					<pre class="prettyprint linenums">
+          <p>Slide out menus offer a convenient way to provide the user access to a number of otherwise unrelated screens. If you have more screen than can fit in a tab bar, but you don't want to use a navigation list in a tab bar to reveal them, a slide out menu is a better option.</p>
+          <p>To create a slide out menu, you need to provide it with the screens you want to show when the slide out menu items are tapped by the user. First we create the slide out menu using the <code>$.SlideOut</code> method. Then we populate the menu by passing it some options:</p>
+          <pre class="prettyprint linenums">
 // Set up Slide Out Menu:
 //=======================
 var appSlideOut = $.SlideOut();
@@ -52,16 +52,16 @@ appSlideOut.populate([
   { recipes: 'Recipes' },
   { favorites: 'Favorites' }
 ]);</pre>
-	<p>In the above example, the ids of the screens will be 'music', 'pictures', 'docuemnts', 'recipes', and 'favorites'. And the slide menu items will be 'Music', 'Pictures', etc. Tapping on the menu items will show the associated screen below.</p>
+  <p>In the above example, the ids of the screens will be 'music', 'pictures', 'docuemnts', 'recipes', and 'favorites'. And the slide menu items will be 'Music', 'Pictures', etc. Tapping on the menu items will show the associated screen below.</p>
   <div class="layout">
      <img  class='layout'  src="../../images/widgets/slide-out-menu-1.png"  alt="Simple  Layout">
      <img  class='layout'  src="../../images/widgets/slide-out-menu-2.png"  alt="Simple  Layout">
   </div>
  
-	<h4>Routing</h4>
-	<p>You can use routes with the slide out menu. You might do that when you want to have just one screen and render its contents depending on which menu item the user taps in the slide out. This is easy to do, even if the content is different, because Truck lets you switch out what template a view uses. Just as we set up routing in a navigation list by providing ids, we would need to do the same thing here. Truck automatically dispatches a route when the user taps a slide out menu, so you just need to provide each menu item with a unique id and set up a router to capture the dispatch. You may want to review Truck's <a href="../router/router-intro.html">Router</a>. Below we have set up a slide out to pass ids with the routes:</p>
-	<pre class="prettyprint linenums">
-	// Setup Slide Out:
+  <h4>Routing</h4>
+  <p>You can use routes with the slide out menu. You might do that when you want to have just one screen and render its contents depending on which menu item the user taps in the slide out. This is easy to do, even if the content is different, because Truck lets you switch out what template a view uses. Just as we set up routing in a navigation list by providing ids, we would need to do the same thing here. Truck automatically dispatches a route when the user taps a slide out menu, so you just need to provide each menu item with a unique id and set up a router to capture the dispatch. You may want to review Truck's <a href="../router/router-intro.html">Router</a>. Below we have set up a slide out to pass ids with the routes:</p>
+  <pre class="prettyprint linenums">
+  // Setup Slide Out:
 //=================
 var appSlideOut = $.SlideOut();
 // Notice names have `:` to 
@@ -74,7 +74,7 @@ appSlideOut.populate([
   { "choice:recipes": 'Recipes' },
   { "choice:favorites": 'Favorites' }
 ]);</pre>
-	<p>Every menu item is showing the same screen, but passing a unique id with the route. We can capture that id with a router:</p>
+  <p>Every menu item is showing the same screen, but passing a unique id with the route. We can capture that id with a router:</p>
 <pre class="prettyprint linenums">var MyRoutes = $.Router();
 MyRoutes.addRoute([
   {
@@ -109,88 +109,88 @@ MyRoutes.addRoute([
     }
   }
 ]);</pre>
-	<h4>Slide Out Menu with Navigation List</h4>
-	<p>You can also have a navigation list as one of the screens that a slide out menu reveals. It doesn't require anything special. Just put it there and provide its id to the slide out menu.</p>
-	<p>You can examine the following files in the examples folder of the source code to see working examples of how to set up slide out menus.</p>
-	<ul>
-		<li>slide-out-menu.html</li>
-		<li>slide-out-menu-routes.html</li>
-		<li>slide-out-menu-nav.html</li>
-	</ul>
+  <h4>Slide Out Menu with Navigation List</h4>
+  <p>You can also have a navigation list as one of the screens that a slide out menu reveals. It doesn't require anything special. Just put it there and provide its id to the slide out menu.</p>
+  <p>You can examine the following files in the examples folder of the source code to see working examples of how to set up slide out menus.</p>
+  <ul>
+    <li>slide-out-menu.html</li>
+    <li>slide-out-menu-routes.html</li>
+    <li>slide-out-menu-nav.html</li>
+  </ul>
 
 
 
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html" class='selected'>Widgets</a>
-							<ul>
-								<li><a href="widgets-intro.html">Intro</a></li>
-								<li><a href="navigation.html">Navigation</a></li>
-								<li><a href="tabbar.html">Tab Bar</a></li>
-								<li><a href="slideout.html" class='selected'>Slide Out Menu</a></li>
-								<li><a href="selectlist.html">Select List</a></li>
-								<li><a href="multiselectlist.html">Multi-Select List</a></li>
-								<li><a href="editablelist.html">Editable List</a></li>
-								<li><a href="switches.html">Switches</a></li>
-								<li><a href="rangeinput.html">Range Input</a></li>
-								<li><a href="scrollpanel.html">Scroll Panel</a></li>
-								<li><a href="segmented.html">Segmented Button</a></li>
-								<li><a href="pagination.html">Pagination</a></li>
-								<li><a href="popup.html">Pop Up</a></li>
-								<li><a href="popover.html">Pop Over</a></li>
-								<li><a href="sheets.html">Sheets</a></li>
-								<li><a href="stepper.html">Stepper</a></li>
-								<li><a href="busy.html">Busy</a></li>
-								<li><a href="forms.html">Forms</a></li>
-							</ul>
-						</li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html" class='selected'>Widgets</a>
+              <ul>
+                <li><a href="widgets-intro.html">Intro</a></li>
+                <li><a href="navigation.html">Navigation</a></li>
+                <li><a href="tabbar.html">Tab Bar</a></li>
+                <li><a href="slideout.html" class='selected'>Slide Out Menu</a></li>
+                <li><a href="selectlist.html">Select List</a></li>
+                <li><a href="multiselectlist.html">Multi-Select List</a></li>
+                <li><a href="editablelist.html">Editable List</a></li>
+                <li><a href="switches.html">Switches</a></li>
+                <li><a href="rangeinput.html">Range Input</a></li>
+                <li><a href="scrollpanel.html">Scroll Panel</a></li>
+                <li><a href="segmented.html">Segmented Button</a></li>
+                <li><a href="pagination.html">Pagination</a></li>
+                <li><a href="popup.html">Pop Up</a></li>
+                <li><a href="popover.html">Pop Over</a></li>
+                <li><a href="sheets.html">Sheets</a></li>
+                <li><a href="stepper.html">Stepper</a></li>
+                <li><a href="busy.html">Busy</a></li>
+                <li><a href="forms.html">Forms</a></li>
+              </ul>
+            </li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
 <script>
   prettyPrint();
 </script>

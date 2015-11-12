@@ -1,82 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Utilities</h2>
-					<h3>Use</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Utilities</h2>
+          <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Engine.png" alt="Truck Engine">
-					<p>Truck provides a number of utility functions for you to use. The first set are as follows:</p>
+          <p>Truck provides a number of utility functions for you to use. The first set are as follows:</p>
 
-					<ul>
-						<li>$.isEmptyObject()</li>
-						<li>$.isInteger()</li>
-						<li>$.isFloat()</li>
-						<li>$.encode()</li>
-						<li>$.escapeHTML()</li>
-						<li>$.concat()</li>
-						<li>$.uuid()</li>
-					</ul>
-					<p>$.isEmptyObject(object) tests where an object is <code>{}</code> or where it has properties. This is a boolean value.</p>
-					<p>$.isInteger(number) tests whether the number is an integer or not. This is a boolean value.</p>
-					<p>$.isFloat(number) tests whether the number is a float or not. This is a boolean value.</p>
-					<p>$.encode(data) returns the value from a form element encoded.</p>
-					<p>$.escapeHTML(data) escapes the html tags, parenthesis, etc.</p>
-					<p>$.concat(args) takes a series of strings and returns one string. This is useful where you need to concatenate a lot of string pieces together</p>
-					<pre class='prettyprint linenums'>
+          <ul>
+            <li>$.isEmptyObject()</li>
+            <li>$.isInteger()</li>
+            <li>$.isFloat()</li>
+            <li>$.encode()</li>
+            <li>$.escapeHTML()</li>
+            <li>$.concat()</li>
+            <li>$.uuid()</li>
+          </ul>
+          <p>$.isEmptyObject(object) tests where an object is <code>{}</code> or where it has properties. This is a boolean value.</p>
+          <p>$.isInteger(number) tests whether the number is an integer or not. This is a boolean value.</p>
+          <p>$.isFloat(number) tests whether the number is a float or not. This is a boolean value.</p>
+          <p>$.encode(data) returns the value from a form element encoded.</p>
+          <p>$.escapeHTML(data) escapes the html tags, parenthesis, etc.</p>
+          <p>$.concat(args) takes a series of strings and returns one string. This is useful where you need to concatenate a lot of string pieces together</p>
+          <pre class='prettyprint linenums'>
 var str = $.concat('This', ' ', 'is', ' ', 'a' , ' ', 'string', '.');</pre>
-					<p>$.uuid() create a uuid. This is a string. You can use it to create a unique identifier for objects in a collection, or for ids of DOM elements. Truck uses $.uuid internally for this purpose.</p>
+          <p>$.uuid() create a uuid. This is a string. You can use it to create a unique identifier for objects in a collection, or for ids of DOM elements. Truck uses $.uuid internally for this purpose.</p>
 
 
-					<h4>The Haz Helpers</h4>
-					<p>These help you avoiding writing loops to handle finding elements by selectors. These do not return booleans like their jQuery cousins. Instead they directly return the elements that match the selector. This allows you to write onelines to access them.</p>
-					<ul>
-						<li>$(selector).iz(selector)</li>
-						<li>$(selector).iznt(selector)</li>
-						<li>$(selector).haz(descendant)</li>
-						<li>$(selector).haznt(descendant)</li>
-						<li>$(selector).hazClass(class)</li>
-						<li>$(selector).hazntClass(class)</li>
-						<li>$(selector).hazAttr(attribute)</li>
-						<li>$(selector).hazntAttr(attribute)</li>
-					</ul>
-					
-					<p>Here are some examples using them:</p>
+          <h4>The Haz Helpers</h4>
+          <p>These help you avoiding writing loops to handle finding elements by selectors. These do not return booleans like their jQuery cousins. Instead they directly return the elements that match the selector. This allows you to write onelines to access them.</p>
+          <ul>
+            <li>$(selector).iz(selector)</li>
+            <li>$(selector).iznt(selector)</li>
+            <li>$(selector).haz(descendant)</li>
+            <li>$(selector).haznt(descendant)</li>
+            <li>$(selector).hazClass(class)</li>
+            <li>$(selector).hazntClass(class)</li>
+            <li>$(selector).hazAttr(attribute)</li>
+            <li>$(selector).hazntAttr(attribute)</li>
+          </ul>
+          
+          <p>Here are some examples using them:</p>
 
 
-					<pre class='prettyprint linenums'>
+          <pre class='prettyprint linenums'>
 $('#list').iz('ol').css('border', 'solid 1px blue');
 $('.list').iznt('.disabled').show();
 $('#list').haz('li').addClass('important');
@@ -84,75 +84,75 @@ $('#list').haznt('li').append('&lt;li&gt;Some default text&lt;/li&gt;');
 $('#list').hasClass('important').css({'background-color': 'blue, 'color': '#fff''});
 $('button').hazAttr('disabled').removeProp('disabled');</pre>
 
-					<p>Truck lets you iterate over element collections using a normal JavaScript foreach function. jQuery uses the backward each function where the index value comes first. Since most of the time we care about the context and not the index, the foreach gives us an option.</p>
-					<pre class='prettyprint linenums'>$('li').forEach(function(li) {
+          <p>Truck lets you iterate over element collections using a normal JavaScript foreach function. jQuery uses the backward each function where the index value comes first. Since most of the time we care about the context and not the index, the foreach gives us an option.</p>
+          <pre class='prettyprint linenums'>$('li').forEach(function(li) {
   console.log(li.nodeName);
 });</pre>
 
-					<p>Truck provides two function to enable and dispable form elements:</p>
-					<ul>
-						<li>$(input).enable()</li>
-						<li>$(input).disable()</li>
-					</ul>
+          <p>Truck provides two function to enable and dispable form elements:</p>
+          <ul>
+            <li>$(input).enable()</li>
+            <li>$(input).disable()</li>
+          </ul>
 
 
 
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a></li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html" class='selected'>Utilities</a>
-							<ul>
-								<li><a href="utilities-intro.html">Intro</a></li>
-								<li><a href="utilities-use.html" class='selected'>Use</a></li>
-								<li><a href="utilities-api.html">API</a></li>
-							</ul>
-						</li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html" class='selected'>Utilities</a>
+              <ul>
+                <li><a href="utilities-intro.html">Intro</a></li>
+                <li><a href="utilities-use.html" class='selected'>Use</a></li>
+                <li><a href="utilities-api.html">API</a></li>
+              </ul>
+            </li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+  
 <script>
   prettyPrint();
 </script>

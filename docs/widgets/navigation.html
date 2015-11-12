@@ -76,32 +76,32 @@
     &lt;h4&gt;Bananas&lt;/h4&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</pre>
-			<p>Notice  how  all  list  items  are  pointing  to  the  screen  "detailScreen".  We  used  a  semi-colon  to  attach  a  unique  id  for  the  route.  That  will  get  passed  by  the  navigation  route  dispatcher  and  can  be  intercepted  on  the  detail  screen  by  a  route.  Here's  how  you  do  that:</p>
-			<pre  class="prettyprint  linenums">
+      <p>Notice  how  all  list  items  are  pointing  to  the  screen  "detailScreen".  We  used  a  semi-colon  to  attach  a  unique  id  for  the  route.  That  will  get  passed  by  the  navigation  route  dispatcher  and  can  be  intercepted  on  the  detail  screen  by  a  route.  Here's  how  you  do  that:</p>
+      <pre  class="prettyprint  linenums">
 var  FruitRouter  =  $.Router();
 FruitRouter.addRoute([
-	{
+  {
     route:  'detailScreen',
     callback:  function(id)  {
-    	//  id  will  be  the  fruit  id  
-    	//  of  the  list  item  the  user  tapped
-    	//  Filter  the  fruit  from  a  collection:
-    	var  chosenFruit  =  fruits.filter(function(fruit)  {
-    		return  fruit.name  ===  id;
-    	});
-    	ChosenFruitView.render(chosenFruit);
-  	}
+      //  id  will  be  the  fruit  id  
+      //  of  the  list  item  the  user  tapped
+      //  Filter  the  fruit  from  a  collection:
+      var  chosenFruit  =  fruits.filter(function(fruit)  {
+        return  fruit.name  ===  id;
+      });
+      ChosenFruitView.render(chosenFruit);
+    }
   }
 ]);</pre>
-		<p>The  above  route  makes  a  few  assumes.  Firstly,  that  we  have  a  fruit  collection  call  fruits  with  object  that  have  a  name  property  equal  to  our  fruits.  Secondly,  that  our  detail  screen  has  a  view  named  ChosenFruitView  that  we  can  pass  our  fruit  object  to  for  rendering.  If  this  is  new  to  you,  go  over  to  <a  href="../views/views-intro.html">views</a>  to  learn  how  to  use  them.  For  more  information  about  routing,  please  read  about  Truck's  <a  href="../router/router-intro.html">Router</a>.</p>
+    <p>The  above  route  makes  a  few  assumes.  Firstly,  that  we  have  a  fruit  collection  call  fruits  with  object  that  have  a  name  property  equal  to  our  fruits.  Secondly,  that  our  detail  screen  has  a  view  named  ChosenFruitView  that  we  can  pass  our  fruit  object  to  for  rendering.  If  this  is  new  to  you,  go  over  to  <a  href="../views/views-intro.html">views</a>  to  learn  how  to  use  them.  For  more  information  about  routing,  please  read  about  Truck's  <a  href="../router/router-intro.html">Router</a>.</p>
 
-								<h4>Examples</h4>
-								<p>Check  out  the  following  examples  in  the  source  code  to  see  how  to  implement  navigation  lists</p>
-								<ul>
-									<li>navigation.html  -  simple  navigation  list</li>
-									<li>navigation-backto.html  -  shows  how  to  go  back  to  an  arbitrary  place  in  the  navigation  history</li>
-									<li>navigation-routes.html  -  navigation  with  routes</li>
-								</ul>
+                <h4>Examples</h4>
+                <p>Check  out  the  following  examples  in  the  source  code  to  see  how  to  implement  navigation  lists</p>
+                <ul>
+                  <li>navigation.html  -  simple  navigation  list</li>
+                  <li>navigation-backto.html  -  shows  how  to  go  back  to  an  arbitrary  place  in  the  navigation  history</li>
+                  <li>navigation-routes.html  -  navigation  with  routes</li>
+                </ul>
 
 
                 </div>

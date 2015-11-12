@@ -1,122 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>Widgets</h2>
-					<h3>Range Input</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Widgets</h2>
+          <h3>Range Input</h3>
           <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-					<p>Range inputs are sliders. These are of two types, incremental and stepped. Truck styles these appropriately for each platform. You can give a range a min value and a max value. Or you can tell it to increase in steps. Below are two range inputs, one incremental and one stepped:</p>
-					<pre class="prettyprint linenums">&lt;input type="range" id="rangeControl1" value="10" min="0" max="40"&gt;
+          <p>Range inputs are sliders. These are of two types, incremental and stepped. Truck styles these appropriately for each platform. You can give a range a min value and a max value. Or you can tell it to increase in steps. Below are two range inputs, one incremental and one stepped:</p>
+          <pre class="prettyprint linenums">&lt;input type="range" id="rangeControl1" value="10" min="0" max="40"&gt;
 &lt;input type="range" id="rangeControl2" step='5' value="20" min="0" max="40"&gt;</pre>
 
-					<p>When trying to view the Windows theme on browsers other than IE or MSEdge, the range input will render as a default and simple looking range input, but on Microsoft's browser it will look correctly. The Android and iOS range inputs will look correctly on all browsers.</p>
-					<p>Check out the file "range-control.html" in the examples folder of the source code from Github. Change the theme it uses and reload it to see how the range input looks on different platforms.</p>
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html" class='selected'>Widgets</a>
-							<ul>
-								<li><a href="widgets-intro.html">Intro</a></li>
-								<li><a href="navigation.html">Navigation</a></li>
-								<li><a href="tabbar.html">Tab Bar</a></li>
-								<li><a href="slideout.html">Slide Out Menu</a></li>
-								<li><a href="selectlist.html">Select List</a></li>
-								<li><a href="multiselectlist.html">Multi-Select List</a></li>
-								<li><a href="editablelist.html">Editable List</a></li>
-								<li><a href="switches.html">Switches</a></li>
-								<li><a href="rangeinput.html" class='selected'>Range Input</a></li>
-								<li><a href="scrollpanel.html">Scroll Panel</a></li>
-								<li><a href="segmented.html">Segmented Button</a></li>
-								<li><a href="pagination.html">Pagination</a></li>
-								<li><a href="popup.html">Pop Up</a></li>
-								<li><a href="popover.html">Pop Over</a></li>
-								<li><a href="sheets.html">Sheets</a></li>
-								<li><a href="stepper.html">Stepper</a></li>
-								<li><a href="busy.html">Busy</a></li>
-								<li><a href="forms.html">Forms</a></li>
-							</ul>
-						</li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+          <p>When trying to view the Windows theme on browsers other than IE or MSEdge, the range input will render as a default and simple looking range input, but on Microsoft's browser it will look correctly. The Android and iOS range inputs will look correctly on all browsers.</p>
+          <p>Check out the file "range-control.html" in the examples folder of the source code from Github. Change the theme it uses and reload it to see how the range input looks on different platforms.</p>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html" class='selected'>Widgets</a>
+              <ul>
+                <li><a href="widgets-intro.html">Intro</a></li>
+                <li><a href="navigation.html">Navigation</a></li>
+                <li><a href="tabbar.html">Tab Bar</a></li>
+                <li><a href="slideout.html">Slide Out Menu</a></li>
+                <li><a href="selectlist.html">Select List</a></li>
+                <li><a href="multiselectlist.html">Multi-Select List</a></li>
+                <li><a href="editablelist.html">Editable List</a></li>
+                <li><a href="switches.html">Switches</a></li>
+                <li><a href="rangeinput.html" class='selected'>Range Input</a></li>
+                <li><a href="scrollpanel.html">Scroll Panel</a></li>
+                <li><a href="segmented.html">Segmented Button</a></li>
+                <li><a href="pagination.html">Pagination</a></li>
+                <li><a href="popup.html">Pop Up</a></li>
+                <li><a href="popover.html">Pop Over</a></li>
+                <li><a href="sheets.html">Sheets</a></li>
+                <li><a href="stepper.html">Stepper</a></li>
+                <li><a href="busy.html">Busy</a></li>
+                <li><a href="forms.html">Forms</a></li>
+              </ul>
+            </li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="../../quickstart.html">Quick Start</a>
-						<a href="../../features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
 
 <script>
   prettyPrint();
-</script>	
+</script>  
 </body>
 </html>

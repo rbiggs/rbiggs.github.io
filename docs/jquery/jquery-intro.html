@@ -1,113 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Truck - Documentation</title>
-	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../../css/styles.css">
-	<link rel="stylesheet" href="../../css/styles-docs.css">
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
   <link rel="stylesheet" href="../../prettify/obsidian.css">
   <script type='text/javascript' src='../../prettify/prettify.js'></script>
   <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
-	<article>
-		<nav>
-			<div>
-				<h1><a href="../../index.html">Truck</a></h1>
-				<menu>
-					<a href="../../quickstart.html">Quick Start</a>
-					<a href="../../features.html">Features</a>
-					<a class='selected' href="#">Docs</a>
-					<a href="../../install.html">Install</a>
-				</menu>
-			</div>
-		</nav>
-		<header>
-			<div>
-				<h2>Docs</h2>
-				<h3>Everything You Need to Know</h3>
-			</div>
-		</header>
-		
-		<section>
-			<div>
-				<div>
-					<h2>jQuery</h2>
-					<h3>Intro</h3>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>jQuery</h2>
+          <h3>Intro</h3>
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-					<p>You can use jQuery with Truck. Just load it first. Truck will then use jQuery instead of its default DOM selector engine. You can also build Truck in a number of ways to which make it easier to use with jQuery. Personally, we don't think you should bother using jQuery with Truck. There simply isn't a good reason to do so. Including jQuery in every Web project is like a drug addiction. Truck can build powerful apps without jQuery. It provides great layouts and advanced widgets that do not need jQuery. It gives you modern, ECMAScript 6 Promises and the Fetch API as an alternative to jQuery's Ajax. Yes, there are a ton of jQuery plugins out there. But none of them are fit to use on mobile devices, and none of them create a satisfactory user experience on mobile devices. jQuery plugins are great for desktop though.</p>
-					<p>OK, so if you really, really, really insist on using jQuery, here are your build options:</p>
+          <p>You can use jQuery with Truck. Just load it first. Truck will then use jQuery instead of its default DOM selector engine. You can also build Truck in a number of ways to which make it easier to use with jQuery. Personally, we don't think you should bother using jQuery with Truck. There simply isn't a good reason to do so. Including jQuery in every Web project is like a drug addiction. Truck can build powerful apps without jQuery. It provides great layouts and advanced widgets that do not need jQuery. It gives you modern, ECMAScript 6 Promises and the Fetch API as an alternative to jQuery's Ajax. Yes, there are a ton of jQuery plugins out there. But none of them are fit to use on mobile devices, and none of them create a satisfactory user experience on mobile devices. jQuery plugins are great for desktop though.</p>
+          <p>OK, so if you really, really, really insist on using jQuery, here are your build options:</p>
 
-				<ol>
-					<li>The complete framework</li>
-					<li>Just the MVC components</li>
-					<li>Everyting except the selector engine</li>
-				</ol>
-				<p>To build the whole thing, just run <code>gulp</code>:</p>
+        <ol>
+          <li>The complete framework</li>
+          <li>Just the MVC components</li>
+          <li>Everyting except the selector engine</li>
+        </ol>
+        <p>To build the whole thing, just run <code>gulp</code>:</p>
 <pre class="prettyprint linenums">gulp</pre>
 
-				<p>If you want to build just Truck's selector engine to use it as a light and modern replacement for jQuery, run:</p>
+        <p>If you want to build just Truck's selector engine to use it as a light and modern replacement for jQuery, run:</p>
 <pre class="prettyprint linenums">gulp --mvc</pre>
-				<p>And to build the framework but with Truck's DOM engine because you want to use jQuery, run:</p>
+        <p>And to build the framework but with Truck's DOM engine because you want to use jQuery, run:</p>
 <pre class="prettyprint linenums">gulp --engine</pre>
-				</div>
-				
-				<div id="menu">
-					<ul>
-						<li><a href='../models/models-intro.html'>Models</a></li>
-						<li><a href="../views/views-intro.html">Views</a></li>
-						<li><a href="../mediators/mediators-intro.html">Mediators</a>
-						</li>
-						<li><a href="../templates/templates-intro.html">Templates</a></li>
-						<li><a href="../promises/promises-intro.html">Promises</a></li>
-						<li><a href="../fetch/fetch-intro.html">Fetch</a></li>
-						<li><a href="../router/router-intro.html">Router</a></li>
-						<li><a href="../box/box-intro.html">Box</a></li>
-						<li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-						<li><a href="../gestures/gestures-intro.html">Gestures</a></li>
-						<li><a href="../dom/dom-intro.html">DOM</a></li>
-						<li><a href="../utilities/utilities-intro.html">Utilities</a></li>
-						<li><a href="../layouts/layouts-intro.html">Layouts</a></li>
-						<li><a href="../themes/themes-intro.html">Themes</a></li>
-						<li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-						<li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
-						<li><a href="../stacks/stacks-intro.html">Stacks</a></li>
-						<li><a href="../jquery/jquery-intro.html" class='selected'>jQuery</a>
-							<ul>
-								<li><a href="jquery-intro.html" class='selected'>Intro</a></li>
-							</ul>
-						</li>
-						<li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a>
+            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../jquery/jquery-intro.html" class='selected'>jQuery</a>
+              <ul>
+                <li><a href="jquery-intro.html" class='selected'>Intro</a></li>
+              </ul>
+            </li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
-		<footer>
-			<div>
-					<menu id='mainFooterMenu'>
-						<a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-						<a href="quickstart.html">Quick Start</a>
-						<a href="features.html">Features</a>
-						<a href="../../install.html">Install</a>
-					</menu>
-				<aside>
-					<menu id='social-links'>
-						<a id='tumblr' href="#">Tumblr</a>
-						<a id='github' href="#">Github</a>
-						<a id='twitter' href="#">Twitter</a>
-						<a id='npm' href="#">NPM</a>
-					</menu>
-				</aside>
-			</div>
-		</footer>
-	</article>
-	
-	
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' href="#">Tumblr</a>
+            <a id='github' href="#">Github</a>
+            <a id='twitter' href="#">Twitter</a>
+            <a id='npm' href="#">NPM</a>
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+  
 <script>
   prettyPrint();
 </script>
