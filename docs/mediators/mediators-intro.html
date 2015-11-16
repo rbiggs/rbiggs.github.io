@@ -81,7 +81,7 @@ fooMtor.restart();
 // Restart the mediator after 5 minutes:
 fooMtor.restart(60 * 5);
 </pre>
-        <p>By default, mediators keep track of how many times they have run. You can get that number with <code>getCount()</code>. This allows you to monitor the activity of mediators. You can reset a mediators count with <code>resetCount()</code>, or you can stop the count altogether with <code>stopCount()</code>. If for some reason you don't need a mediator and want to get rid of it, you can kill it literally with <code>kill()</code>.</p>
+        <p>By default, mediators keep track of how many times they have run. You can get that number with <code>getCount()</code>. This allows you to monitor the activity of mediators. You can reset a mediators count with <code>resetCount()</code>, or you can stop the count altogether with <code>stopCount()</code>. If for some reason you don't need a mediator and want to get rid of it, you can kill it literally with <code>kill()</code>. Killing is fatal for a mediator. After being killed, you cannot revive a mediator.</p>
 <pre class='prettyprint linenums'>
 // Get the current number of times
 // the mediator has run:
