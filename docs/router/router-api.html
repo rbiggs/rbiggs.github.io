@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -36,50 +39,145 @@
           <h3>API</h3>
           <img src="../../images/truck-parts/Truck-Wheels.png" alt="Truck Wheels">
           
-          <h4>Route</h4>
-          <p><code>$.Route(options)</code></p>
+          <h4>Router</h4>
+          <p><code>$.Router()</code></p>
+          <p>This factory returns a router object which you assign to a variable.</p>
+<pre class="prettyprint"><code>
+var myRouter = $.Router();
+</code></pre>
           
           <h4>addRoute</h4>
-          <p><code>addRoute(options)</code></p>
+          <p><code>addRoute(arrayOfRoutes)</code></p>
+          <p>This method adds a route to your router object. It expects an array as an argument, even if you are only adding one route. A route is an object with two properties: a route and a callback.</p>
+          <p>Truck's routes are the ids of screens that you will be navigating to. You do not use the `#` but purely the id value of the screen:</p>
+<pre class="prettyprint"><code>
+var myRouter = $.Router();
+myRouter.addRoute([
+  route: 'detailScreen',
+  callback: function() {
+    $.GoToScreen('detailScreen');
+    detailView.render(detailData);
+  }
+]);
+</code></pre>
+<p>When handling a route, you have the option of also receiving and id with the route. The id is a unique value represeting a object in a collection. A route id is indicated by a color after the route:</p>
+
+<pre class="prettyprint"><code>
+&lt;li data-goto="detail:apple"&gt;&lt;/li&gt;
+&lt;li data-goto="detail:orange"&gt;&lt;/li&gt;
+&lt;li data-goto="detail:banana"&gt;&lt;/li&gt;
+</code></pre>
+<p>From the above code, Truck will send routes like this: 'detail:apple', etc. The route examines routes for ids. When it find them, it separates them and passes them to the route's callback as the first argument. That means you can capture the id being passed in your routes callback:</p>
+
+<pre class="prettyprint"><code>
+var myRouter = $.Router();
+myRouter.addRoute([
+  route: 'detailScreen',
+  callback: function(id) {
+    // Get the item represented by the route's id:
+    var item = myModel.filter(function(obj) {
+      return obj.id = id;
+    });
+    // Render the view with the returned object:
+    detailView.render(item);
+  }
+</code></pre>
           
           <h4>getFullRoute</h4>
           <p><code>getFullRoute()</code></p>
+          <p>This method returns a backslash delimited path of the current position of the user. In tab bars and slides this may simply be the current screen. If the user has drilled down in a navigation list, this will show the path the user has taken.</p>
+<pre class="prettyprint"><code>
+var route = $.Router.getFullRoute();
+console.log(route) // 'main/fruits/banana'
+</code></pre>
           
           <h4>getRoutesStack</h4>
           <p><code>getRoutesStack()</code></p>
+          <p>Similar to <code>getFullRoute</code>, execpt that it returns an array of the path:</p>
+<pre class="prettyprint"><code>
+var route = $.Router.getRoutesStack();
+console.log(route) // ["main", "fruits", "banana"]
+</code></pre>
           
           <h4>getCurrentLoc</h4>
           <p><code>getCurrentLoc()</code></p>
+          <p>Returns the user's current location. This is the id of the current screen.</p>
+<pre class="prettyprint"><code>
+var currentScreen = $.Router.getCurrentLoc();
+</code></pre>
           
           <h4>dispatch</h4>
           <p><code>dispatch(route)</code></p>
+          <p>This method lets you dispatch to a particular route. This means that you can tell the Router to handle the route. It takes one argument, the route. All navigation wigets (tab bars, slide out menus and navigation lists) automatically dispatch their routes. Also, if you use <code>$.GoToScreen()</code> to direct the user somewhere, this will automatically dispath the screen id you provided.</p>
+          <p></p>
+<pre class="prettyprint"><code>
+$.Router.dispatch('detail');
+
+// Dispatch route with id:
+$.Router.dispatch('detail:123');
+</code></pre>
+
+        <h3>Route Manipulation</h3>
+        <p>In general you should never need to use any of the following methods. These are used internally by Truck.</p>
           
           <h4>pushRoute</h4>
           <p><code>pushRoute(route)</code></p>
+          <p>This method allows you to push a route onto Truck's router object - $.TruckRoutes</p>
+<pre class="prettyprint"><code>
+$.Router.pushRoute('newRoute')
+</code></pre>
           
           <h4>popRoute</h4>
           <p><code>popRoute()</code></p>
+          <p>This method lets you pop the last route from the global router object - $.TruckRoutes</p>
+<pre class="prettyprint"><code>
+var lastRoute = $.Router.pop();
+</code></pre>
           
           <h4>unshiftRoute</h4>
           <p><code>unshiftRoute(route)</code></p>
+          <p>This method lets you add a new route at the beginning of the global router object - $.TruckRoutes</p>
+<pre class="prettyprint"><code>
+$.Router.unshiftRoute('newRoute');
+</code></pre>
           
           <h4>shiftRoute</h4>
           <p><code>shiftRoute()</code></p>
+          <p>This method lets you get the first route from the global router object - $.TruckRoutes</p>
+<pre class="prettyprint"><code>
+var firstRoute = $.Router.shiftRoute();
+</code></pre>
           
           <h4>insert</h4>
           <p><code>insert(position, route)</code></p>
+          <p>This method lets you insert a route in global router object - $.TruckRoutes, at the position you provide. This is a zero-based number.</p>
+<pre class="prettyprint"><code>
+$.Router.insert(2, 'aNewRouteAt3');
+</code></pre>
           
           <h4>eq</h4>
           <p><code>eq(number)</code></p>
+          <p>This method lets you get a route based on its index in the global router object - $.TruckRoutes. This is a zero-based number.</p>
+<pre class="prettyprint"><code>
+var fourthRoute = $.Router.eq(3)
+</code></pre>
           
           <h4>indexOf</h4>
           <p><code>indexOf(route)</code></p>
+          <p>By passing a route as an argument, this method lets you get its position in global router object - $.TruckRoutes. This is a zero-based number.</p>
+<pre class="prettyprint"><code>
+var routePos = $.Router.indexOf('myRoute');
+</code></pre>
           
           <h4>delete</h4>
-          <p><code>delete()</code></p>
+          <p><code>delete(route)</code></p>
+          <p>This method allows you to delete the provided route from the global router object - $.TruckRoutes</p>
+<pre class="prettyprint"><code>
+$.Router.delete('myRoute');
+</code></pre>
 
           <h4>$.TruckRoutes</h4>
-          <p>The Truck router. This holds the current routes. You can find out what the current route by running <code>$.TruckRoutes.getFullPath()</code>. If the user have gone down a nvigation list, this will return a string with routes separated by back slashes like so: <code>"main/options/detail:item23"</code>.</p>
+          <p>The Truck router object. This holds the current routes. You can find out what the current route by running <code>$.TruckRoutes.getFullPath()</code>. If the user have gone down a nvigation list, this will return a string with routes separated by back slashes like so: <code>"main/options/detail:item23"</code>.</p>
 
 
         </div>
@@ -138,6 +236,9 @@
     </footer>
   </article>
   
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
