@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -38,114 +41,353 @@
 
         <h4>Model</h4>
         <p><code>$.Model(options)</code></p>
+        <p>This is a factor that creates a model object for you based on the options you provide. It takes two arguments, the data to encapsule in the model, and a handle to use as its identifier. The model uses the handle to inform the system when it has changed. Mediators listen for this handle and react when it is dispatched. Models can hold either an object of key-value paris, or a colleciton of objects. Depending on the contents, different methods will work. Colleciton methods will not work with an object and object methods will not work with a collection. But some methods work for both. Therefore check the explanation of each method below to see what type of data they work with.</p>
+
+        <p>After putting your data in a model, you can dispose of it if you want to free up memory:</p>
+<pre class='prettyprint linenums'>
+// Create a new model:
+var MyModel = $.Model(myData, 'mydata-handle');
+// Set the data for garbage colleciton:
+myData = null;
+</pre>
 
         <h4>size</h4>
         <p><code>size()</code></p>
+        <p>If the model is collection, this will return the current number of items in the collection. If the data is an object, it will return undefined.</p>
+<pre class='prettyprint linenums'>
+MyModel.size();
+</pre>
 
         <h4>eq</h4>
-        <p><code>eq(number)</code></p>  
+        <p><code>eq(number)</code></p> 
+        <p>If the model is a collection, this method allows you to get a collection item by its position in the collection. The numbering is zero-based like arrays.</p>
+<pre class='prettyprint linenums'>
+MyModel.eq();
+</pre> 
+
+        <h4>getProp</h4>
+        <p><code>getProp(prop)</code></p>
+        <p>This method allows you to get a property's value in a model's object. This does not work with collections.</p>
+<pre class='prettyprint linenums'>
+// Get the `name` property of an object in the model:
+var name = MyModel.getProp('name');
+</pre>
 
         <h4>setProp</h4>
         <p><code>setProp(prop, value, doNotPropogate)</code></p>
+        <p>This method lets you set the value of a property in a model's object data. If the property does not exist, it will be added.</p>
+        <p>If you provide a boolean true for the last argument, the model will not dispatch its change to the system, meaning that any mediators listening to the model's handle will not react.</p>
+<pre class='prettyprint linenums'>
+// Set the name property in the model:
+MyModel.setProp('name', 'John Doe');
+</pre>
 
         <h4>setObject</h4>
         <p><code>setObject(obj, doNotPropogate)</code></p> 
+        <p>This method lets you replace the object that a model holds with a completely different one. Simply provide the object you want to be the new content of the model as the argument for this method:</p>
+<pre class='prettyprint linenums'>
+var newData = {
+  name: 'Joe Bodoni',
+  age: 32,
+  job: 'brain surgeon'
+}
+// Set the data of the model to 
+// the above data.
+MyModel.setObject(newData);
+
+// Same as above, but without propagating change:
+MyModel.setObject(newData, true);
+</pre>
+<p>If you provide a second boolean true as the final parameter, the model will not dispatch its change to the system, meaning that any mediators listening to the model's handle will not react.</p>
 
         <h4>push</h4>
         <p><code>push(data, doNotPropogate)</code></p>  
+        <p>If the model holds a collection, this method lets you push new data onto the collection. Of course you can push whatever kind of data you want onto a collection. But it makes sense to push data that matches the collection in format and structure.</p>
+        <p>This method works like push on arrays.</p>
+<pre class='prettyprint linenums'>
+// Push a new object onto the collection.
+MyModel.push({firstName: 'John', lastName: 'Doe', job: 'brain surgeon'});
+
+// Don't propagate the change:
+MyModel.push({firstName: 'John', lastName: 'Doe', job: 'brain surgeon'}, true);
+</pre>
           
         <h4>pop</h4>
         <p><code>pop(doNotPropogate)</code></p>  
+        <p>This method pops the last item off of a collection. That means the collection is now one item shorter.</p>
+<pre class='prettyprint linenums'>
+var lastItem = MyModel.pop();
+console.log(lastItem.name);
+
+// Don't propagate the change:
+var newLastItem = MyModel.pop(true);
+</pre>
+
+<p>If you provide a boolean true as a parameter, the model will not dispatch its change to the system, meaning that any mediators listening to the model's handle will not react.</p>
+
           
         <h4>unshift</h4>
-        <p><code>unshift(data, doNotPropogate)</code></p>  
+        <p><code>unshift(data, doNotPropogate)</code></p> 
+        <p>This method lets you add an item at the begining of a model's collection, just like unshift on arrays.</p>
+<pre class='prettyprint linenums'>
+MyModel.unshift({firstName: 'Tom', lastName: 'Doe', job: 'Clown'});
+</pre> 
+<p>If you provide a second boolean true as a parameter, the model will not dispatch its change to the system, meaning that any mediators listening to the model's handle will not react.</p>
+<pre class='prettyprint linenums'>
+// Don't propagate the change:
+MyModel.unshift({firstName: 'Tom', lastName: 'Doe', job: 'Clown'}) true;
+</pre> 
+
           
         <h4>shift</h4>
-        <p><code>shift(doNotPropogate)</code></p>  
+        <p><code>shift(doNotPropogate)</code></p>
+        <p>If the model holds a collection, this method lets you remove a item from the front of the collection, just like shift on an array.</p>  
+<pre class='prettyprint linenums'>
+var firstItem = MyModel.shift();
+
+// Don't propagate the change:
+var secondItem = MyModel.shift(true);
+</pre>
           
         <h4>concat</h4>
-        <p><code>concat(data, doNotPropogate)</code></p>  
+        <p><code>concat(data, doNotPropogate)</code></p> 
+        <p>This method lets you concatanate another collection to a model. If you provide a second boolean true as a parameter, the model will not dispatch its change to the system, meaning that any mediators listening to the model's handle will not react.</p>
+<pre class='prettyprint linenums'>
+MyModel.concat(myArray);
+
+// Don't propagate the change:
+MyModel.concat(myArray2, true);
+</pre> 
           
         <h4>insert</h4>
         <p><code>insert(position, data, doNotPropogate)</code></p>  
+        <p>This method lets you insert data at a specified index in a model's collection. The first argument is the position. This is zero-based. The second argument is the data to insert. Optionally you can provide a boolean true to tell the model not to dispatch its change.</p>
+<pre class='prettyprint linenums'>
+MyModel.insert(20, {firstName: 'Suzy', lastName: 'Cue', job: 'CEO'});
+
+// Don't propagate the change:
+MyModel.insert(20, {firstName: 'Suzy', lastName: 'Cue', job: 'CEO'}, true);
+</pre>
           
         <h4>unique</h4>
         <p><code>unique(doNotPropogate)</code></p>  
+        <p>This method lets you eliminate any duplicates in your collections. By providing a boolean true parameter, you can tell the model not to propagate its change.</p>
+<pre class='prettyprint linenums'>
+MyModel.unique();
+
+// Don't propagate the change:
+MyModel.unique(true);
+</pre>
           
         <h4>index</h4>
         <p><code>index(prop, value)</code></p>  
+        <p>Get the index of an object based on a property and value. This returns the first match.</p>
+<pre class='prettyprint linenums'>
+var objectPos = MyModel.index('firstName', 'Joe');
+</pre>
           
         <h4>filter</h4>
         <p><code>filter(args)</code></p>  
+        <p>This method allows you to run a filter callback on the model's collection. This works the same as filter on an array:</p>
+<pre class='prettyprint linenums'>
+// Function to filter model objects by id:
+var filterModel = function(id) {
+  var whichPerson = MyModel.filter(function(person) {
+    return person.guid === id;
+  });
+  console.log(whichPerson.name);
+};
+// Get object with this id:
+filterModel('asd234asd241');
+</pre>
           
         <h4>map</h4>
         <p><code>map(args)</code></p>  
+        <p>This method lets you map a function to every item in the model's collection. This works like map on an array:</p>
+<pre class='prettyprint linenums'>
+MyModel.map(function(person) {
+  console.log(person.name);
+});
+</pre>
           
         <h4>pluck</h4>
         <p><code>pluck(property)</code></p>  
+        <p>This method lets you get the value of a property from every object in a collection. This returns an array of the values found. If no property was found, it will return an empty array.</p>
+<pre class='prettyprint linenums'>
+var allNames = MyModel.pluck('name');
+</pre>
           
         <h4>sort</h4>
         <p><code>sort</code></p>  
+<pre class='prettyprint linenums'>
+MyModel.sort();
+</pre>
           
         <h4>reverse</h4>
-        <p><code>reverse(args)</code></p>  
+        <p><code>reverse()</code></p> 
+        <p>This method reverse the order of items in a model's collection.</p> 
+<pre class='prettyprint linenums'>
+MyModel.reverse();
+</pre>
           
         <h4>sortBy</h4>
         <p><code>sortBy(props)</code></p>  
+        <p>This method lets you sort a model's collection by the provided properties. You can sort by one property or more. Sorting will be in the order of provided properties. For example, you could sort a collection by last name, first name, age and income.</p>
+<pre class='prettyprint linenums'>
+MyModel.sortBy('lastName', 'firstName');
+</pre>
           
         <h4>delete</h4>
         <p><code>delete(data, doNotPropogate)</code></p>  
+        <p>This method lets you delete either an object property, if you provide a property, or a collection's object if you provide an index position. To delete an object from a collection, the number must be zero-based, like with arrays.</p>
+<pre class='prettyprint linenums'>
+// Delete property from model's object:
+MyModel.delete('firstName');
+
+// Delete 10th object from model's collection:
+MyModel.delete(9);
+</pre>
+        <p>This method lets you concatanate another collection to a model. If you provide a second boolean true as a parameter, the model will not dispatch its change to the system, meaning that any mediators listening to the model's handle will not react.</p>
+
           
         <h4>run</h4>
         <p><code>run(callback)</code></p>  
+        <p>This method lets you run a function on the model. Differs from map in that it does not run on each index of the collection. The callback has access to the model and the model's data.</p>
+<pre class='prettyprint linenums'>
+MyModel.run(function(model, data) {
+  var names = model.pluck('name');
+  names.forEach(function(name) {
+    console.log(name);
+  });
+  data.forEach(function(job) {
+    console.log(job);
+  });
+});
+</pre>
           
         <h4>poke</h4>
-        <p><code>poke()</code></p>  
+        <p><code>poke()</code></p> 
+        <p>As you may have noticed, it's possible to modify a model and tell it not to dispatch its changeds. This is useful where you have a view or views bound to a model and you want to make a number of changes. After you have made all those changes, you can get the model to dispatch its final state by `poking` it with this method, so that mediators can update their views:</p> 
+<pre class='prettyprint linenums'>
+// Tell the model to dispatch its current state:
+MyModel.poke();
+</pre>
           
         <h4>getHandle</h4>
-        <p><code>getHandle()</code></p>  
+        <p><code>getHandle()</code></p> 
+        <p>This method lets you find out what handle a model is using.</p> 
+<pre class='prettyprint linenums'>
+MyModel.getHandle();
+</pre>
           
         <h4>setHandle</h4>
-        <p><code>setHandle(handle)</code></p>  
+        <p><code>setHandle(handle)</code></p> 
+        <p>Sometimes you might want to change the handle a model is using so that another mediator can intercept the model's changes. You can do that using this method:</p> 
+<pre class='prettyprint linenums'>
+MyModel.setHandle('a-different-handle');
+</pre>
           
         <h4>purge</h4>
         <p><code>purge()</code></p>  
+        <p>This method lets you set the model's data to empty. If the model's data is an object, it will be set to <code>{}</code>. If it's a collection, it will get set to [].</p>
+<pre class='prettyprint linenums'>
+MyModel.purge();
+</pre>
           
         <h4>hasData</h4>
-        <p><code>hasData()</code></p>  
+        <p><code>hasData()</code></p> 
+        <p>This method lets you check to see if the model contains any data. It returns a boolean true/false.</p> 
+<pre class='prettyprint linenums'>
+MyModel.hasData();
+</pre>
           
         <h4>getType</h4>
         <p><code>getType</code></p>  
+        <p>This method lets you check what kind of data a model holds. If its and object, it returns 'object'. If its a collection, it returns 'array'.</p>
+<pre class='prettyprint linenums'>
+if (MyModel.getType() === 'array') {
+  console.log('This model holds a colleciton.')
+}
+</pre>
           
         <h4>isIterable</h4>
-        <p><code>isIterable()</code></p>  
+        <p><code>isIterable()</code></p> 
+        <p>This method lets you determine whether the data that a model holds is iterable. This returns a boolean true/false.</p> 
+<pre class='prettyprint linenums'>
+if (MyModel.isIterable()) {
+  MyModel.forEach(function(item) {
+    console.log(item.name + ': ' + item.price);
+  });
+}
+</pre>
           
         <h4>forEach</h4>
         <p><code>forEach(callback)</code></p>  
+        <p>This method lets you run a function that iterates over each item in a model's collection. This works like foreach on an array.</p>
+<pre class='prettyprint linenums'>
+MyModel.forEach(function(item) {
+  console.log(item.name);
+});
+</pre>
           
         <h4>getData</h4>
-        <p><code>getData()</code></p>  
+        <p><code>getData()</code></p> 
+        <p>This method returns the data that a model holds.</p> 
+<pre class='prettyprint linenums'>
+// Get the data in a model:
+var items = MyModel.getData();
+</pre>
           
         <h4>setItemProp</h4>
-        <p><code>setItemProp(index, prop, value, doNotPropogate)</code></p>  
+        <p><code>setItemProp(index, prop, value, doNotPropogate)</code></p>
+        <p>This method lets you set the value of a property on an object in a collection. The first argument is the index for the object in the collection. The second argument is the property whose value you want to set. If this property does not exist on the object at that index, this will create it. The third argument is the value for the property. And optional fourth value is a boolean true, which tells the model not to dispatch its changes to the system.</p>
+<pre class='prettyprint linenums'>
+MyModel.setItemProp(23, 'price', '300.00');
+
+// Tell the model not to dispatch the changes:
+MyModel.setItemProp(23, 'price', '300.00', true);
+</pre>  
           
         <h4>getItemProp</h4>
-        <p><code>getItemProp(index, prop)</code></p>  
+        <p><code>getItemProp(index, prop)</code></p> 
+<pre class='prettyprint linenums'>
+MyModel.getItemProp();
+</pre> 
           
         <h4>deleteItemProp</h4>
-        <p><code>deleteItemProp(index, prop, doNotPropogate)</code></p>  
+        <p><code>deleteItemProp(index, prop, doNotPropogate)</code></p> 
+        <p>This method lets you delete a property from an object in a model's colleciton. The first argument is the index for the object. The second is the property to delete. Optionally you can provide a third boolean true argument to prevent the model from dispatching its changes to the system.</p> 
+<pre class='prettyprint linenums'>
+MyModel.deleteItemProp();
+</pre>
           
         <h4>getLastModTime</h4>
         <p><code>getLastModTime()</code></p> 
+        <p>This method lets you get the last time a model was modified. If the model has never been modified, it will return undefined.</p>
+<pre class='prettyprint linenums'>
+var modTime = MyModel.getLastModTime();
+</pre>
           
         <h4>isBoxed</h4>
         <p><code>isBoxed()</code></p> 
+        <p>This method lets you check to see if a model is Boxed. It returns a boolean true/false.</p>
+<pre class='prettyprint linenums'>
+var boxed = MyModel.isBoxed();
+</pre>
           
         <h4>isAutoBoxed</h4>
-        <p><code>isAutoBoxed()</code></p> 
+        <p><code>isAutoBoxed()</code></p>
+        <p>This method lets you check to see if a model is set to auto box when it changes. It returns a boolean true/false.</p> 
+<pre class='prettyprint linenums'>
+var autoBoxed = MyModel.isAutoBoxed();
+</pre>
           
         <h4>getLastBoxTime</h4>
         <p><code>getLastBoxTime()</code></p> 
+        <p>This method lets you get the last time that a model was boxed. If it was not boxed, it returns undefined.</p>
+<pre class='prettyprint linenums'>
+var lastTimeStored = MyModel.getLastBoxTime();
+</pre>
           
 
         </div>
@@ -204,6 +446,9 @@
     </footer>
   </article>
   
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

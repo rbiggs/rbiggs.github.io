@@ -74,90 +74,323 @@
 
           <h4>render</h4>
           <p><code>render(data, append)</code></p>
+          <p>The render method will render a template. If it is bound to a model, it will render the view's template with that model:</p>
+<pre class='prettyprint linenums'>
+// Render a view:
+myView.render();
+</pre>
+          <p>Or you can render a view with raw JavaScript data:</p>
+<pre class='prettyprint linenums'>
+// Render a view:
+myView.render(myData);
+</pre>
+          <p>When rendering a view, the current content is replaced with the data available at render time. You can choose to have the render append the its content to the current content of the view. If you wish to append content to a view that uses a collection, make sure the content you're rendering is new, otherwise you'll have unnecessary duplicates.</p>
+          <p>To append content to a rendered view, add the keyword true as the last argument:</p>
+<pre class='prettyprint linenums'>
+// Append to a view:
+myView.render(myData, true);
+</pre>
 
           <h4>empty</h4>
           <p><code>empty()</code></p>
+          <p>Running this method on a view will remove all rendered content from the parent element.</p>
+<pre class='prettyprint linenums'>
+// Empty a view:
+myView.empty();
+</pre>
 
           <h4>resetIndex</h4>
           <p><code>resetIndex()</code></p>
+          <p>This will reset the index ($.view.index) used by a template to 1. That means, if you had set it to start from 10, running this will set it to start from 1.</p>
+<pre class='prettyprint linenums'>
+// Reset a view's index value:
+myView.resetIndex();
+</pre>
 
           <h4>startIndexFrom</h4>
           <p><code>startIndexFrom(number)</code></p>
+          <p>Setting this value tells the view at what number to start when rendering $.view.index in a repeating template.</p>
+<pre class='prettyprint linenums'>
+// Set a view's index start value:
+myView.startIndexFrom(10);
+</pre>
 
           <h4>getTemplate</h4>
           <p><code>getTemplate()</code></p>
+          <p>This will return a string of the template currently being used. This is the unparsed version of the template.</p>
+<pre class='prettyprint linenums'>
+// Get the template a view is using:
+var template = myView.getTemplate();
+</pre>
 
           <h4>setTemplate</h4>
           <p><code>setTemplate(tempalate)</code></p>
+          <p>You can use this to change the template that a view is using. It expects a string, unparsed template.</p>
+          <p>Using this with <code>myView.setModel(newModel)</code> allows you to totally change what the view is rendering to the screen.</p>
+<pre class='prettyprint linenums'>
+// Set a view's template:
+myView.setTemplate(newTemplate);
+</pre>
 
           <h4>getModel</h4>
           <p><code>getModel()</code></p>
+          <p>Find out which model the view is currently bound to. If it is not bound to a model, it will return undefined.</p>
+<pre class='prettyprint linenums'>
+// Reset a view's index value:
+myView.resetIndex();
+</pre>
 
           <h4>setModel</h4>
           <p><code>setModel(model)</code></p>
+          <p>This method allows you to change the model a view is bound to. When you change the model a view is bound to, the view will immediately re-render its template with the new model. Please make sure that when you change a view's model, its data has parts that match the view's template, otherwise you can also change a view's template using <code>myView.setTemplate(myTemplate)</code></p>
+<pre class='prettyprint linenums'>
+// Set the model for a view:
+myView.setModel(newModel);
+</pre>
 
-          <h4>getController</h4>
-          <p><code>getController()</code></p>
+          <h4>getMediator</h4>
+          <p><code>getMediator()</code></p>
+          <p>Find out if the view has a mediator associated with it. If it does not, it will return undefined. </p>
+<pre class='prettyprint linenums'>
+// Get the view's mediator:
+var myMtor = myView.getMediator();
+</pre>
 
           <h4>isRendered</h4>
           <p><code>isRendered()</code></p>
+          <p>Use this method to find out if the view has rendered its template to the screen. This returns a boolean true/false.</p>
+<pre class='prettyprint linenums'>
+// Check if the view is rendered:
+var myViewIsRendered = myView.isRendered();
+</pre>
 
           <h4>isEmpty</h4>
           <p><code>isEmpty()</code></p>
+          <p>This method returns a boolean true/false depending on whether the element has any content or not.</p>
+<pre class='prettyprint linenums'>
+// Check if a view is empty:
+var myViewIsEmpty = myView.isEmpty();
+</pre>
+
+          <h4>getParent</h4>
+          <p><code>getParent()</code></p>
+          <p>This method allows you to find out what parent element the view is attached to.</p>
+<pre class='prettyprint linenums'>
+// Get the element a view is attached to:
+var parentElement = myView.getParent();
+</pre>
 
           <h4>setParent</h4>
           <p><code>setParent(element)</code></p>
+          <p>This method allows you to change the element a view is anchored to. If you change the parent, the new element will have its content deleted. If you intend to change the parent element that a view uses, make sure that the view has the template you want and some data so that you can render it immediately.</p>
+<pre class='prettyprint linenums'>
+// Set the parent element for the view:
+myView.setParent('#newParent');
+myView.render(someData);
+</pre>
 
           <h4>bind</h4>
           <p><code>bind(model)</code></p>
+          <p>This method binds a view to a model. When it does so, it immediately re-renders the view with the model's data. Use this if you are binding a model for the first time. If you want to change a view's model, use <code>setModel()</code>.</p>
+<pre class='prettyprint linenums'>
+// Bind the view to a model:
+myView.bind(newModel);
+</pre>
 
           <h4>unbind</h4>
           <p><code>unbind()</code></p>
+          <p>Use this method to unbind a model from a view. Provide the name of the model to unbind. After unbinding, the current rendered state of the view's template will remain unchanged.</p>
+<pre class='prettyprint linenums'>
+// Unbind a view from its model:
+myView.unbind(myModel);
+</pre>
 
           <h4>addEvent</h4>
           <p><code>addEvent(events, dontReplace)</code></p>
+          <p>This method allows you to add events to a view. The method expects an object or array. The object should have at least two properties:</p>
+<pre class='prettyprint linenums'>
+// Add an event to the view:
+myView.addEvent({
+  event: 'tap',
+  callback: function() {
+    console.log($(this).text());
+  }
+});</pre>
+<p>You can also add a third property for a delegated element event. This element should be a descendent of the parent element:</p>
+<pre class='prettyprint linenums'>
+// Add a delegate event to the view:
+myView.addEvent({
+  element: 'li',
+  event: 'tap',
+  callback: function() {
+    console.log($(this).text());
+  }
+});
+</pre>
+<p>You can also pass the method an array of these object to initialze multiple events at once:</p>
+
+<pre class='prettyprint linenums'>
+// Add two events to a view:
+myView.addEvent([
+{
+  element: 'li',
+  event: 'tap',
+  callback: function() {
+    console.log($(this).text());
+  }
+},
+{
+  element: 'p',
+  event: 'doubletap',
+  callback: function() {
+    console.log($(this).text());
+  }
+}]);
+</pre>
 
           <h4>off</h4>
           <p><code>off(event, element, callback)</code></p>
+          <p>Remove an event or all events from a view. If no argument is passed, all events are removed. Otherwise you can pass the following parameters to remove a specific event: event, element, callback</p>
+<pre class='prettyprint linenums'>
+// Remove all events from a view:
+myView.off();
+
+// Remove a tap event from the view:
+myView.off('tap', '#element')
+</pre>
 
           <h4>stop</h4>
           <p><code>stop(after)</code></p>
+          <p>This method allows you to tell a view to stop rendering. From the moment you run this method, the view will no longer render its template, regardless whether it is bound to a model that changes, or you try to render it with raw JavaScript data.</p>
+          <p>You can also provide a number indicating how many times you want the view to render, after which is will stop.</p>
+          <p>Using the method <code>restart()</code>, you can tell a view to start rendering its template again(see below).</p>
+<pre class='prettyprint linenums'>
+// Stop the view from rendering immediately:
+myView.stop();
+// Tell the view to stop after rendering 10 times:
+myView.stop(10);
+</pre>
 
           <h4>isStopped</h4>
           <p><code>isStopped()</code></p>
+          <p>Find out if a view has been stopped or not. This method returns a boolean true/false.</p>
+<pre class='prettyprint linenums'>
+// Check if the view is stopped:
+myView.isStopped();
+</pre>
 
           <h4>restart</h4>
           <p><code>restart(item)</code></p>
+          <p>This method allows you to restart a stopped view. If no parameters are provided, the view is restarted immediately. You can also provide a number representing second. This will tell the view to start rendering again after than amount of time has passed.</p>
+<pre class='prettyprint linenums'>
+// Restart a view immediately:
+myView.restart();
+// Tell a view to restart in 6 minutes:
+myView.restart(60*6);
+</pre>
 
           <h4>getRestartTime</h4>
           <p><code>getRestartTime()</code></p>
+          <p>This method lets you find out if the view has a restart time set. If it does not, it will return undefined.</p>
+<pre class='prettyprint linenums'>
+// Get a view's restart time:
+var restartTime = myView.getRestartTime();
+</pre>
 
           <h4>renderViewAfter</h4>
           <p><code>renderViewAfter(time, data)</code></p>
+          <p>Like restart with seconds value, this method allows you to tell a view to render after the provided time. A view does not need to be stopped for this. The method takes two arguments, the time in seconds to wait before rendering, and some optional data. If the view is bound to a model, no data needs to be provided. It will use the model's data. Otherwise, you can pass some data for the view to use when it does render.</p>
+<pre class='prettyprint linenums'>
+// Render the view after 10 minutes (use it's model):
+myView.renderViewAfter(60*10);
+// Render the view after 10 minutes with data:
+myView.renderViewAfter(60*10, myData);
+</pre>
 
           <h4>renderViewEvery</h4>
           <p><code>renderViewEvery(time, callback)</code></p>
+          <p>This method tells the view to render regularly at the provided time interval. You would use this when you want a template to render at a regular cycle, regardless of what is happening with its model. If a view's model has not changed since the last rendering, this cycle will be skipped, meaning the View will not render.</p>
+<pre class='prettyprint linenums'>
+// Render the veiw every 5 minutes:
+myView.renderViewEvery(60*5);
+</pre>
 
           <h4>stopRenderViewEvery</h4>
           <p><code>stopRenderViewEvery()</code></p>
+          <p>This method allows you to stop a view that was set to render at regular intervals with <code>renderViewEvery</code> described above.</p>
+<pre class='prettyprint linenums'>
+// Break a view out of a render cycle:
+myView.stopRenderViewEvery();
+</pre>
 
           <h4>getLastRenderTime</h4>
           <p><code>getLastRenderTime()</code></p>
+          <p>This method lets you find out the last time that a view rendered its template.</p>
+<pre class='prettyprint linenums'>
+// Get the last time a View rendered:
+var renderTime = myView.getLastRenderTime();
+</pre>
 
           <h4>getViewName</h4>
           <p><code>getViewName()</code></p>
+          <p>Find out the name you used when you set up a view. If you did not provide a name, this will return undefined. Below is an example of initializing a view with a name:</p>
+<pre class='prettyprint linenums'>
+var myView = $.View({
+    element: '#element',
+    name: 'myView',
+    model: myModels
+});
+</pre>
+
+<p>You should make sure that if you do set this, that the name you provide is the same as the variable you assign the view to. This value gets pushed to <code>$.RegisteredViews</code>, which serves as a central reference to all registered views in your app. This can be helpful to keep track of all your views. Other than that, it has no other functionality. You can examine the contents of $.RegesteredViews. It's just an array of view names.</p>
+
+<pre class='prettyprint linenums'>
+// Get the name of the view:
+var viewName = myView.getViewName();
+</pre>
           
           <h4>defineHelper</h4>
           <p><code>defineHelper(callback)</code></p>
+          <p>This method lets you define helpers to use inside of a view's template. It expects an object in the following format:</p>
+<pre class='prettyprint linenums'>
+// Define a helper to capitalize the last name:
+$.defineHelper({
+  bigName: function(data) {
+    return data.lastName.toUpperCase();
+  }
+});
+</pre>
+<p>With a helper defined, you can then use it in a template like this:</p>
+<pre class='prettyprint linenums'>
+&lt;ul class="list cloak" id="basicRepeater"&gt;
+  &lt;!-- Use the helper to output the last name in uppercase --&gt;
+  &lt;li&gt;${ data.firstName }, ${ $.helpers.bigName(data) }&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
 
           <h4>escapeHTML</h4>
           <p><code>escapeHTML(true)</code></p>
+          <p>This methods lets you tell a view to escape any HTML tags in the data it is rendering. It takes a boolean true to escape the markup, otherwise it renders the data as is. Setting a view to escape data helps prevent malicious code injection in your document.</p>
+<pre class='prettyprint linenums'>
+// Tell a view to escape any markup in the data:
+myView.escapeHTML(true);
+</pre>
 
           <h4>isEscapingHTML</h4>
           <p><code>isEscapingHTML()</code></p>
+          <p>Find out if a view is escaping its data or not. This returns a boolean true/false.</p>
+<pre class='prettyprint linenums'>
+// Find out if the view is escaping markup:
+var isSafeOutput = myView.isEscapingHTML();
+</pre>
 
           <h4>getRenderCount</h4>
           <p><code>getRenderCount()</code></p>
+          <p>This method returns the number of times the view rendered its template since the app loaded.</p>
+<pre class='prettyprint linenums'>
+// Find out how many times the view rendered:
+myView.getRenderCount();
+</pre>
 
         </div>
         
