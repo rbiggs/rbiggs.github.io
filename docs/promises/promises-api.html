@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -38,24 +41,91 @@
 
         <h4>Promise</h4>
         <p><code>Promise()</code></p>
+        <p>This method is used to create a new promise:</p>
+<pre class='prettyprint linenums'>
+var myPromise = new Promise();
+</pre> 
 
         <h4>Promise.then</h4>
-        <p><code>Promise()</code></p>
+        <p><code>Promise.then(callback)</code></p>
+        <p>This method is used to handle the return of a promise. Promises are async. Using then allows you to handle the result of a promise when it is ready. The result of the promise being resolved is return as the argument for the callback in <code>then()</code>.</p>
+<pre class='prettyprint linenums'>
+var myPromise = new Promise();
+myPromise.then(function(result) {
+  console.log(result);
+});
+</pre>
 
         <h4>Promise.catch</h4>
-        <p><code>Promise.catch()</code></p>
+        <p><code>Promise.catch(callback)</code></p>
+        <p>This method is used for error handling. Its callback gets the error passed to it. Catch is not finall. You could attach a <code>then</code> to it. In that case the <code>then</code> would be execute after the error was handled.</p>
+<pre class='prettyprint linenums'>
+var myPromise = new Promise();
+myPromise.then(function(result) {
+  console.log(result);
+})
+.catch(function(err) {
+  console.log(err);
+});
+</pre>
 
         <h4>Promise.all</h4>
         <p><code>Promise.all()</code></p>
+        <p>This method allows you to execute a callback after an array of promises are resolved. This is convenient where you have multiple async operations, say requests for remote data, and you want to wait for all of them to complete before doing anything.</p>
+<pre class='prettyprint linenums'>
+var myPromise1 = new Promise();
+var myPromise2 = new Promise();
+var myPromise3 = new Promise();
+Promise.all([myPromise1, myPromise2, myPromise3])
+  .then(function(result) {
+    console.log(result);
+  });
+myPromise1(1);
+myPromise2(2);
+myPromise3(3);
+</pre>
 
         <h4>Promise.race</h4>
         <p><code>Promise.race()</code></p>
+        <p>This method allows you to do something with the first of several promises is resovled. </p>
+<pre class='prettyprint linenums'>
+var f1, f2, f3;
+var p1 = new Promise(function(f, r) { f1 = f; });
+var p2 = new Promise(function(f, r) { f2 = f; });
+var p3 = new Promise(function(f, r) { f3 = f; });
+Promise.race([p1, p2, p3]).then(function(value) {
+  console.log('Promise.race() should resolve to: ' + value);
+});
+// Execute the second:
+f2(2);
+</pre>
 
         <h4>Promise.resolve</h4>
         <p><code>Promise.resolve()</code></p>
+        <p>This method is used to resolve a promise. When it is resolved, any thens chained to it will receive its result.</p>
+<pre class='prettyprint linenums'>
+var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+}).then(function(value) {
+  equal(value, 5, 'Promise fulfilled with Promise should resolve to actual value');
+  start();
+});
+fulfill(Promise.resolve(5));
+</pre>
 
         <h4>Promise.reject</h4>
         <p><code>Promise.reject()</code></p>
+        <p>This method is used to reject a promise. When a promise is rejected any error handlers will capture the error.</p>
+<pre class='prettyprint linenums'>var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+// Handle the error:
+}).catch(function(value) {
+  console.log(value);
+});
+fulfill(Promise.reject(5));
+</pre>
         </div>
         
         <div id="menu">
@@ -112,6 +182,9 @@
     </footer>
   </article>
   
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

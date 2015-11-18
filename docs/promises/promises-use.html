@@ -139,7 +139,7 @@ fulfill(Promise.resolve(5));
 <pre class="prettyprint"><code>var fulfill;
 new Promise(function (resolve, reject) {
   fulfill = resolve;
-})['catch'](function(value) {
+}).catch(function(value) {
   console.log(value);
 });
 fulfill(Promise.reject(5));
