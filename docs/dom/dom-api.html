@@ -514,7 +514,7 @@ $('li').each(function(item) {
 
             <h4>element.some(callback)</h4>
             <p>This method works just like the array equivalent.</p>
-            
+
             <h4>element.unique()</h4>
             <p>This method removes any duplicate elements in the colleciton.</p>
 <pre class='prettyprint linenums'>
@@ -569,6 +569,15 @@ $.require('http:/my/script/url', function() {
   alert("I've got the script loaded now.")
 });
 </pre>
+            <h4>$.replace(oldElement, newelement)</h4>
+            <p>This method has no equivalent in jQuery. It allows you to replace one element with another. The first argument is the element to replace, and the second argument is the element that will replace it.</p>
+<pre class='prettyprint linenums'>
+var list1 = $('#list1');
+var list2 = $('#list2');
+// Replace list1 with list2:
+$.replace(list1, list2);
+</pre>
+          <p>jQuery has <code>replaceWith()</code>, but it works quite differently from this. We feel Truck's <code>replace</code> is more straightforward  about what it's doing than jQuery's <code>replaceWith</code>. Truck's <code>replace</code> works even when jQuery is present because it is included as a utlity plugin.</p>
 
 
 
