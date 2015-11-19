@@ -449,6 +449,19 @@ var data = $(form).serializeArray();
 <pre class='prettyprint linenums'>
 var data = $(form).serialize();
 </pre>
+            <h4>$.param(obj, traditional)</h4>
+            <p>This method lets you create a serialized representation of an array or a plain object suitable for use in a URL query string or a Fetch request.</p>
+<pre class='prettyprint linenums'>
+var myObject = {
+  a: {
+    one: 1,
+    two: 2,
+    three: 3
+  },
+  b: [ 1, 2, 3 ]
+};
+var recursiveEncoded = $.param(myObject);
+</pre>
             <h4>element.eq(index)</h4>
             <p>Get an element based on its position in a collection. This uses zero-based numbers.</p>
 <pre class='prettyprint linenums'>
@@ -506,19 +519,6 @@ $('li').each(function(item) {
             <p>This method removes any duplicate elements in the colleciton.</p>
 <pre class='prettyprint linenums'>
 var listItems = $('li').unique();
-</pre>
-            <h4>$.param(obj, traditional)</h4>
-            <p>This method lets you create a serialized representation of an array or a plain object suitable for use in a URL query string or a Fetch request.</p>
-<pre class='prettyprint linenums'>
-var myObject = {
-  a: {
-    one: 1,
-    two: 2,
-    three: 3
-  },
-  b: [ 1, 2, 3 ]
-};
-var recursiveEncoded = $.param(myObject);
 </pre>
             <h4>$.type(argument).</h4>
             <p>This method lets you find out what type the argument is. It can test for boolean, number, string, function, array, date, error, regexp, object.</p>
