@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -35,7 +38,48 @@
           <h2>Stacks</h2>
           <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Engine.png" alt="Truck Engine">
-          <p>Coming soon...</p>
+          <p>Stacks are abstractions for arrays and collections of objects. Why would you want to use an abstraction of an array? To protect your data from accidental modification. And, because Stacks are optimized for performance, executing the same operations as native functions at faster speeds.</p>
+          <p>To make an empty stack, or pass an array to it:</p>
+<pre class='prettyprint linenums'>
+// Create an empty stack:
+var myStack = $.Stack();
+
+// Create a stack of numbers:
+var nums = [1,2,3,4,5];
+var numStack = $.Stack(nums);
+
+// Create a stack of objects:
+var names = [
+  {name: 'Wobba'},
+  {name: 'Joe'},
+  {name: 'Sam'}
+];
+var nameStack = $.Stack(names);
+</pre>
+
+<p>Once you have data in a stack, you can run various stack methods on it:</p>
+
+<pre class='prettyprint linenums'>
+// Iterate over a stack:
+myStack.forEach(function(item) {
+  console.log(item);
+});
+
+// Filter a stack for items that cost $100:
+var result = myStack.filter(function(item) {
+  return item.price = 100;
+});
+
+// Add a new item to a stack:
+myStack.push({name: 'Sally'});
+
+remove the first item from the stack:
+var firstPerson = myStack.shift();
+</pre>
+
+
+
+
         </div>
         
         <div id="menu">
@@ -92,6 +136,10 @@
     </footer>
   </article>
   
+  
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

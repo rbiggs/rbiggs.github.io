@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -35,7 +38,28 @@
           <h2>DOM</h2>
           <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-          <p>If you know how to use jQuery, you know how to use Truck's DOM engine.</p>
+          <p>If you know how to use jQuery, you know how to use Truck's DOM engine. We built it to replicate the functionality of jQuery.</p>
+
+<pre class='prettyprint linenums'>
+$(function() {
+  $('#element').css('color', 'red').addClass('important');
+  $('li').on('tap', function(e) {
+    e.stopPropagation();
+    $(this).append('... some text');
+  });
+});
+</pre>
+
+<h4>Deferred Objects</h4>
+<p>Truck does not implement jQuery's Deferred object. Instead it uses ES6 promises. It provides a polyfill for older browsers that do not support native promises. Please see our documentation on promises to learn more about them.</p>
+
+<h4>Ajax</h4>
+<p>Truck does not implement jQuery's Ajax. Instead it uses the Fetch API, which is a modern replacement for remote server access. It uses ES6 promises by default. Please read our documentation on Fetch to learn more about using it.</p>
+
+
+
+
+
         </div>
         
         <div id="menu">
@@ -92,6 +116,10 @@
     </footer>
   </article>
   
+  
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
