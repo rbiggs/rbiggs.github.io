@@ -547,9 +547,15 @@ $.each(arrayData, function(idx, ctx) {
             <h4>$.noop</h4>
             <p>This is a function stub that you can use anywhere where you want to have a function/callback, but don't want anything to happen yet.</p>
 <pre class='prettyprint linenums'>
+var callback = $.noop;
+$('li').on('tap', $.noop);
 </pre>
+
+            <h3>Different from jQuery</h3>
+            <p>The following methods may have similar functionality in jQuery but work slightly differently.</p>
+
             <h4>$.delay(func, milliseconds)</h4>
-            <p>This method has no equivalent in jQuery. It's unique to TruckJS. It allows you to set a delay for when a function is executed.</p>
+            <p>This method is similar to jQuery's <code>.delay()</code>. However, instead of being a chainable function for animations, its a standalone function that can delay the execution of any JavaScript code</p>
 <pre class='prettyprint linenums'>
 $.delay(function() {
   alert('hi');
@@ -563,14 +569,14 @@ $.defer(function() {
 })
 </pre>
             <h4>$.require(scriptSrc, callback</h4>
-            <p>This method has no equivalent in jQuery. It allows you to insert a remove script into the document. It takes two arguments: a url for the script and a callback to execute when the script is fully loaded.</p>
+            <p>This method is similar to jQuery's <code>$.getScript</code>. It allows you to insert a remote script into the document. It takes two arguments: a url for the script and a callback to execute when the script is fully loaded.</p>
 <pre class='prettyprint linenums'>
-$.require('http:/my/script/url', function() {
+$.require('http:/my/script/url.js', function() {
   alert("I've got the script loaded now.")
 });
 </pre>
             <h4>$.replace(oldElement, newelement)</h4>
-            <p>This method has no equivalent in jQuery. It allows you to replace one element with another. The first argument is the element to replace, and the second argument is the element that will be replace it.</p>
+            <p>This method allows you to replace one element with another. The first argument is the element to replace, and the second argument is the element that will be replace it.</p>
 <pre class='prettyprint linenums'>
 var list1 = $('#list1');
 var list2 = $('#list2');
