@@ -63,16 +63,14 @@ SimpleView.render(fruits);
           <p>If <code>fruits</code> were a collection, the view would render the template repeatedly to output the collection. And if fruits was a simle object, it would render just once. Views do not care whether data is iterable or not. If it is, it renders repeatedly, otherwise it renders a single time.</p>
 
           <h5>Template in View</h5>
-          <p>If you don't like having templates defined in the document, you could also define your template directly in the View setup. You will need to escape the new lines when creating a string-based template. When you provide a template string in a view's setup, Truck will not try to extract a template from the element. That means, if you are using this approach, the target element should be empty:</p>
+          <p>If you don't like having templates defined in the document, you could also define your template directly in the View setup. If your template spans multiple lines, you will need to escape the new lines with backslashes. When you provide a template string in a view's setup, Truck will not try to extract a template from the element. As such, the target element should be empty:</p>
 
           <pre class="prettyprint linenums">
 // Define view with string template:
 var SimpleView = $.View({
   element: '#special',
   variable: 'fruit',
-  template: '&lt;ul&gt;\
-      &lt;li&gt;${ fruit.name }&lt;/li&gt;\
-    &lt;/ul&gt;'
+  template: '&lt;li&gt;${ fruit.name }&lt;/li&gt;'
 });
 // Render view:
 SimpleView.render(fruits);
