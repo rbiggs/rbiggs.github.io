@@ -190,6 +190,21 @@ myView.setParent('#newParent');
 myView.render(someData);
 </pre>
 
+          <p>To change the events after setting a new parent element, first unbind its events, then add the new ones:</p>
+<pre class='prettyprint linenums'>
+// Set the parent element for the view:
+myView.setParent('#newParent');
+myView.off();
+myView.addEvent({
+  element: 'li',
+  event: 'tap',
+  callback: function() {
+    console.log($(this).text());
+  }
+});
+myView.render(someData);
+</pre>
+
           <h4>bind</h4>
           <p><code>bind(model)</code></p>
           <p>This method binds a view to a model. When it does so, it immediately re-renders the view with the model's data. Use this if you are binding a model for the first time. If you want to change a view's model, use <code>setModel()</code>.</p>
