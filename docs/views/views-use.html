@@ -202,7 +202,7 @@ PeopleView.stop(3);
 PeopleView.restart(300);
           </pre>
           <h4>Reusing Views</h4>
-          <p>At run time you can change what element a view is attached to, what model it is bound to, what template it is using, and what events are bound to its rendered elements. If you have a component is repeated multiple times in your app, you can easily reuse a view by making a copy and changing what element it is attached to:</p>
+          <p>At run time you can change what element a view is attached to, what model it is bound to, what template it is using, and what events are bound to its rendered elements. If you have a component that is repeated multiple times in your app, you can easily reuse one view by making a copy and changing what element it is attached to. In the following example we are rendering two scroll panels, one for red wines and one for whites. They are in two different panels and with different data, otherwise their templates and events are identical:</p>
 
 <pre class="prettyprint linenums">var SpecialRedsView = $.View({
       element: '#picksRed',

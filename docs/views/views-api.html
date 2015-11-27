@@ -183,6 +183,7 @@ var parentElement = myView.getParent();
           <h4>setParent</h4>
           <p><code>setParent(element)</code></p>
           <p>This method allows you to change the element a view is anchored to. If you change the parent, the new element will have its content deleted. If you intend to change the parent element that a view uses, make sure that the view has the template you want and some data so that you can render it immediately.</p>
+          <p>When you change the parent element that a view is using, Truck rebinds any events you have in your view. If you want different events you need to change those using the <code>addEvent</code> method.</p>
 <pre class='prettyprint linenums'>
 // Set the parent element for the view:
 myView.setParent('#newParent');
