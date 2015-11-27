@@ -35,38 +35,106 @@
     <section>
       <div>
         <div>
-          <h2>Templates</h2>
-          <h3>Intro</h3>
+          <h2>Data Formatting</h2>
+          <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-          <p>Templates enable views to output data to your app. Templates are markup with delimiters to indicate data end points to interpolate while rendering.</p>
+          <p>You can provide formatters different parameters to tell it how to format your data.</p>
 
-          <p>To interpolate a data variable, use: <code>${ data }</code>. To process arbitrary JavaScript in your template, use: <code>{{ alert("hi!") }}</code>. Generally you shouldn't use JavaScript in your templates unless you need to output content conditionally.</p>
-
-          <p>You have to options for making temlates: using script tags or using inline markup. A script tag template will not show on the page. And inline template will, but by putting the class "cloak" on its parent, it will not show up until rendered.</p>
-          <p>With script tag:</p>
+            <h4>$.formatNumber(number, separator, decimal)</h4>
+            <p>Besides passing in the number to format, you can provide a character to use for indicating thousands. The third argument is the character to represent decimals. The default is thousands separator `,`. Some cultures use `.` for thousands and `,` for decimals. To format a number for Latin America:</p>
 <pre class='prettyprint linenums'>
-&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
-  &lt;script type='text/x-template'&gt;
-    &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
-  &lt;/script&gt;
-&lt;ul&gt;
+$.formatNumber(123456789.24312, '.', ',');
+// returns: 123.456.789,24312
 </pre>
-          <p>Without script tag, using `cloak` class:</p>
+            <p>If you want to reduce the number of decimals display, you can provide the last argument as the number of decimals to show. If the value is 0, it will be rounded of to a whole number.</p>
 <pre class='prettyprint linenums'>
-&lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
-  &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
-&lt;ul&gt;
+$.formatNumber(123456789.24312, 2);
+// returns: 123,456,789.24
+$.formatNumber(123456789.24312, 0);
+// returns: 123,456,789
 </pre>
-          <p>Templates are consummed by views. That means that when the view loads, it looks for the template, extracts it from the parent element and stores it on the view object. The next time the view renders, it will find the template stored on itself and use it.</p>
 
-          <p>You can output sequential numbering using <code>$.view.index</code> in your template markup. This value will increase with each iteration. You can also set a what value you want the count to start.</p>
-
+            <h4>$.sum(array)</h4>
+            <p>This takes an array of numbers and returns their sum:</p>
 <pre class='prettyprint linenums'>
-&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
-  &lt;script type='text/x-template'&gt;
-    &lt;li&gt;&lt;h3&gt;${ $.view.index }: ${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
-  &lt;/script&gt;
-&lt;ul&gt;
+$.sum([1,2,3,4,5,6,7,8,9,10,11.2]);
+// returns: 66.2
+</pre>
+            <h4>$.currency(amount, symbol, separator, decimal)</h4>
+            <p>This method takes and amount and formats it as currency, the default is for US dollars. The second parameters is the currency symbol, The third parameter is the thousands separator. The fourth parameter is the decimal separator or rounding number.</p>
+<pre class='prettyprint linenums'>
+$.currency(9123456789.2382, "$");
+// returns: $9,123,456,789.24
+$.currency(9123456789.99, "€", ",", 0);
+// returns: €9,123,456,789
+</pre>
+
+            <h4>$.formatTime(time)</h4>
+            <p>Using JavaScript, you can get the local time to format:</p>
+<pre class='prettyprint linenums'>
+// Output a data:
+var date = new Date();
+// returns: Thu Nov 26 2015 16:30:41 GMT-0800 (PST)
+date.toLocaleDateString();
+// returns: November 26, 2015
+
+// Output time:
+date.toLocaleTimeString();
+// returns: 4:30:41 PM PST
+$.formatTime(date.toLocaleTimeString())
+// returns: 4:30 PM
+
+</pre>
+
+            <h3>Sorting</h3>
+            <p>Truck provides Stack and Model with the sortBy method to sort their contents. But this will not work as expected with dates. And you may want to simply sort an array of numbers in ascending or descending order.</p>
+
+            <h4>$.sortDate([date1, date2])</h4>
+            <p>This function lets you sort dates.</p>
+
+<pre class='prettyprint linenums'>var today = new Date();
+var date_1999 = new Date('October 30, 1999');
+var date_1949 = new Date('August 20, 1949');
+var date_1980 = new Date('January 1, 1980');
+// returns:
+1949, August
+1980, January
+1999, October
+2015, November
+</pre>
+
+            <h4>$.sortNumbers([1,2,3,4,5])</h4>
+            <p>This method lets you sort numbers in ascending order:</p>
+<pre class='prettyprint linenums'>
+var prices = [5, 4.25, .98, 12.1, 42.98, 9.99, 1, .02, 7.5];
+$.currency($.sortNumbers(prices));
+// returns: 
+$42.98
+$12.10
+$9.99
+$7.50
+$5.00
+$4.25
+$1.00
+$.98
+$.02
+</pre>
+
+            <h4>$.sortNumbersDescending([1,2,3,4,5])</h4>
+<pre class='prettyprint linenums'>&lt;script type="text/x-template"&gt;
+
+var prices = [5, 4.25, .98, 12.1, 42.98, 9.99, 1, .02, 7.5];
+$.currency($.sortNumbersDescending(prices));
+// returns: 
+$42.98
+$12.10
+$9.99
+$7.50
+$5.00
+$4.25
+$1.00
+$.98
+$.02
 </pre>
         </div>
         
@@ -75,12 +143,7 @@
             <li><a href='../models/models-intro.html'>Models</a></li>
             <li><a href="../views/views-intro.html">Views</a></li>
             <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
-            <li><a href="../templates/templates-intro.html">Templates</a>
-              <ul>
-                <li><a href="templates-intro.html" class='selected'>Intro</a></li>
-                <li><a href="templates-use.html">Use</a></li>
-              </ul>
-            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
             <li><a href="../promises/promises-intro.html">Promises</a></li>
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
@@ -95,7 +158,12 @@
             <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
             <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
             <li><a href="../forms/forms-intro.html">Forms</a></li>
-            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../formatting/formatting-intro.html" class='selected'>Data Formatting</a>
+              <ul>
+                <li><a href="formatting-intro.html">Intro</a></li>
+                <li><a href="formatting-use.html" class='selected'>Use</a></li>
+              </ul>
+            </li>
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
             <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
           </ul>
@@ -123,7 +191,7 @@
       </div>
     </footer>
   </article>
-
+  
 <script>
   prettyPrint();
 </script>

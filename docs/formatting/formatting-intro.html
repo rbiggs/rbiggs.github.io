@@ -35,51 +35,42 @@
     <section>
       <div>
         <div>
-          <h2>Widgets</h2>
-          <h3>Range Input</h3>
-          <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-          <p>Range inputs are sliders. These are of two types, incremental and stepped. Truck styles these appropriately for each platform. You can give a range a min value and a max value. Or you can tell it to increase in steps. Below are two range inputs, one incremental and one stepped:</p>
-          <pre class="prettyprint linenums">&lt;input type="range" id="rangeControl1" value="10" min="0" max="40"&gt;
-&lt;input type="range" id="rangeControl2" step='5' value="20" min="0" max="40"&gt;</pre>
-      <img class='layout' src="../../images/widgets/range.png" alt="Multi-Select List">
+          <h2>Data Formatting</h2>
+          <h3>Intro</h3>
+          <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
+          <p>Data is king. Data is the one source of truth in your app. But data needs to be presented in a manner so that users can understand what they are seeing. Truck provides methods to help you format your data.</p>
+          <ul>
+            <li>formatNumber</li>
+            <li>sum</li>
+            <li>currency</li>
+            <li>formatTime</li>
+            <li>sortDate</li>
+            <li>sortNumbers</li>
+            <li>sortNumbersDescending</li>
+          </ul>
 
-          <p>When trying to view the Windows theme on browsers other than IE or MSEdge, the range input will render as a default and simple looking range input, but on Microsoft's browser it will look correctly. The Android and iOS range inputs will look correctly on all browsers.</p>
-          <p>Check out the file "range-control.html" in the examples folder of the source code from Github. Change the theme it uses and reload it to see how the range input looks on different platforms.</p>
+          <p>You use these in a template to format the data being rendered by the view:</p>
+
+<pre class='prettyprint linenums'>
+&lt;script type="text/x-template"&gt;
+  &lt;li&gt;
+    &lt;h3&gt;Item: ${ data.name }, Price: { $.currency(data.price) }&lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/script&gt;</pre>
+
         </div>
         
         <div id="menu">
           <ul>
             <li><a href='../models/models-intro.html'>Models</a></li>
             <li><a href="../views/views-intro.html">Views</a></li>
-            <li><a href="../mediators/mediators-intro.html">Mediators</a>
-            </li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
             <li><a href="../templates/templates-intro.html">Templates</a></li>
             <li><a href="../promises/promises-intro.html">Promises</a></li>
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
             <li><a href="../box/box-intro.html">Box</a></li>
-            <li><a href="../widgets/widgets-intro.html" class='selected'>Widgets</a>
-              <ul>
-                <li><a href="widgets-intro.html">Intro</a></li>
-                <li><a href="navigation.html">Navigation</a></li>
-                <li><a href="tabbar.html">Tab Bar</a></li>
-                <li><a href="slideout.html">Slide Out Menu</a></li>
-                <li><a href="selectlist.html">Select List</a></li>
-                <li><a href="multiselectlist.html">Multi-Select List</a></li>
-                <li><a href="editablelist.html">Editable List</a></li>
-                <li><a href="switches.html">Switches</a></li>
-                <li><a href="rangeinput.html" class='selected'>Range Input</a></li>
-                <li><a href="scrollpanel.html">Scroll Panel</a></li>
-                <li><a href="segmented.html">Segmented Button</a></li>
-                <li><a href="pagination.html">Pagination</a></li>
-                <li><a href="popup.html">Pop Up</a></li>
-                <li><a href="popover.html">Pop Over</a></li>
-                <li><a href="sheets.html">Sheets</a></li>
-                <li><a href="stepper.html">Stepper</a></li>
-                <li><a href="busy.html">Busy</a></li>
-                <li><a href="forms.html">Forms</a></li>
-              </ul>
-            </li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
             <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
             <li><a href="../dom/dom-intro.html">DOM</a></li>
             <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
@@ -89,7 +80,12 @@
             <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
             <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
             <li><a href="../forms/forms-intro.html">Forms</a></li>
-            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../formatting/formatting-intro.html" class='selected'>Data Formatting</a>
+              <ul>
+                <li><a href="formatting-intro.html" class='selected'>Intro</a></li>
+                <li><a href="formatting-use.html">Use</a></li>
+              </ul>
+            </li>
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
             <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
           </ul>
@@ -101,9 +97,9 @@
     <footer>
       <div>
           <menu id='mainFooterMenu'>
-            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-            <a href="../../quickstart.html">Quick Start</a>
-            <a href="../../features.html">Features</a>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
             <a href="../../install.html">Install</a>
           </menu>
         <aside>
@@ -117,10 +113,10 @@
       </div>
     </footer>
   </article>
-
+  
 <script>
   prettyPrint();
-</script> 
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -130,6 +126,6 @@
   ga('create', 'UA-70245106-1', 'auto');
   ga('send', 'pageview');
 
-</script> 
+</script>
 </body>
 </html>

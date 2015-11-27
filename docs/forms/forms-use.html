@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Forms &amp; Validation</h2>
+          <h3>Intro</h3>
+          <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
+          <p>To validate and convert form elements into JSON you need to define a Truck Form object. <code>$.Form</code> expects an array of objects, each of which defines a form element to validate. A Form validation object have three parts: the element to validate, the type of validation, and a callback to execute if validation fails. If validation passes on all elements pass to $.Form, it converts the collection of values into a JSON object.</p>
+
+          <p>Because <code>$.Form</code> takes individual node elements to validate, you do not need to enclose the elements in an actual form tag. To work correctly, you need to include every single element that you need. That means all checkboxes and all radio buttons, regardless whether they are in groups. <code>$.Form</code> needs all of the elements in order to construct a JSON object from their values.</p>
+
+          <p>To set up a validation object, we need to providing a selector for each element, preferably this should be an ID. This is necessary since form elements can have the same name. Next you want to provide the type of validation to run on the element. Truck has validators for the following types:</p>
+
+          <ul>
+            <li>notempty: check that an input is not empty</li>
+            <li>number: check that a value is a number</li>
+            <li>text: check that a value is pure text</li>
+            <li>alphanumeric: check that a value is alphanumeric</li>
+            <li>username: check that a value is alphanumeric and optional number of characters</li>
+            <li>email: check that a value is a valid email</li>
+            <li>phone: check US/Canada and international phone numbers</li>
+            <li>url: check that a value is a valid url</li>
+            <li>age: check that a value is a number above provide minimum</li>
+            <li>checkbox: check that a checkbox is selected</li>
+            <li>radio: check that a radio button is selected</li>
+            <li>selectbox: check that an option is selected</li>
+            <li>password: check that two passwords match and an optional minimum length</li>
+            <li>switch: check that a switch is on</li>
+            <li>selectlist: check that a select list item is selected</li>
+            <li>multiselectlist: check that a multi-select list item is selected</li>
+          </ul>
+          <h5>Naming Conventions</h5>
+          <p>In order to get a JSON object from your form elements, you need to name your elements appropriately. <code>$.Form</code> lets you use an underscore `_` as a delemiter to describe the structure of your JSON. So, if you wanted an object named `person` followed by `name` and `first` and `last`, you would create a name on elements as follows:</p>
+
+<pre class="prettyprint linenums"><code>&lt;input type='text' name='person_name_first'&gt;
+&lt;input type='text' name='person_name_last'&gt;
+&lt;input type='text' name='person_age'&gt;
+&lt;input type='text' name='person_job'&gt;
+</code></pre>
+
+<p><code>$.Form</code> will create the following object from the above names:</p>
+          
+<pre class="prettyprint linenums"><code>{
+"person": {
+  "age": 32, 
+  "job": "developer"
+  "name": {
+      "first": "John",
+      "last": "Doe"
+    }
+  }
+}
+</code></pre>
+
+          <p>After providing the type of validation, you can also provide a callback to execute if the element does not validate. You might you this to notify the user of the problem and how to address it.</p>
+
+          <p>Based on the above information we present some Form validation setup:</p>
+
+
+<pre class="prettyprint linenums"><code>$('#validateForm').on('click', function() {
+  $.myForm = $.Form([
+    {
+      element: '#firstName',
+      type: 'text',
+      callback: function() {
+        alert('The first name needs to be text!')
+      }
+    },
+    {
+      element: '#lastName',
+      type: 'text'
+    },
+    {
+      element: '#age',
+      type: 'age',
+      min: 20,
+      callback: function() {
+        alert("Please provide a proper age.")
+      }
+    },
+    {
+      element: '#fav1',
+      type: 'checkbox'
+    },
+    {
+      element: '#fav2',
+      type: 'checkbox'
+    },
+    {
+      element: '#fav3',
+      type: 'checkbox'
+    },
+    {
+      element: '#fav4',
+      type: 'checkbox'
+    },
+    {
+      element: '#fav5',
+      type: 'checkbox'
+    },
+    {
+      element: '#fav6',
+      type: 'checkbox'
+    }
+  ]);
+
+  // Check that the validation passed,
+  // then return the form's JSON:
+  if(!$.myForm.errors()) {
+    $.formData = $.myForm.get();
+    console.dir($.formData)
+  }
+});
+</code></pre>
+
+
+
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html" class='selected'>Forms</a>
+              <ul>
+                <li><a href="forms-intro.html">Intro</a></li>
+                <li><a href="forms-use.html" class='selected'>Use</a></li>
+              </ul>
+            </li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
