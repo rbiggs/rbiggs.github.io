@@ -201,7 +201,42 @@ PeopleView.stop(3);
 // The view will be able to render after five minutes:
 PeopleView.restart(300);
           </pre>
-          
+          <h4>Reusing Views</h4>
+          <p>At run time you can change what element a view is attached to, what model it is bound to, what template it is using, and what events are bound to its rendered elements. If you have a component is repeated multiple times in your app, you can easily reuse a view by making a copy and changing what element it is attached to:</p>
+
+<pre class="prettyprint linenums">var SpecialRedsView = $.View({
+      element: '#picksRed',
+      variable: 'wine',
+      template: "&lt;li data-id='${ wine.id }'&gt;\
+        &lt;div&gt;\
+          &lt;h3&gt;${ wine.name }&lt;/h3&gt;\
+          &lt;h4&gt;${ wine.winery }&lt;/h4&gt;\
+          &lt;p&gt;${ wine.year }&lt;/p&gt;\
+        &lt;/div&gt;\
+      &lt;/li&gt;",
+      events: [{
+        event: 'tap', 
+        element: 'li', 
+        callback: function() {
+          var whichWine = $(this).attr('data-id');
+          // dispatch wine id with route:
+          $.GoToScreen('selectedWine:' + whichWine);
+        }
+      }]
+    });
+    // Render with red wine data:
+    SpecialRedsView.render(bestWines[0].data);
+
+    // Reuse SpecialRedsView for white wines.
+    // Change the parent element and render
+    // with white wines.
+    //=======================================
+    var SpecialWhitesView = SpecialRedsView;
+    // Set element to white wines scroll panel:
+    SpecialWhitesView.setParent('#picksWhite');
+    // Render with white wine data:
+    SpecialWhitesView.render(bestWines[1].data);
+</pre>     
 
         </div>
         
