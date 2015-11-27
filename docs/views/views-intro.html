@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -42,6 +45,33 @@
           <p>You can wire up a view with events. If the events are targeting the element's descendants, they will be delegated on the element. Of course, you can also remove events from a view.</p>
 
           <p>By default, View renders all markup unencoded, but you can configure a view to render data encoded, or limit it to just one template delimiter set. This helps prevent injection of malicious scripts in your document. If you are unsure where you should use encoding or not, please research the security threats this may expose in your app through cross site scripting with your current server setup.</p>
+          <p>You can think of Truck's views as components. A view can contain information about the element it is bound to, a model it is bound to, the template that it uses and events bound to the view's template elements:</p>
+
+<pre class="prettyprint linenums">
+var luminariesView = $.View({
+  element: '#repeaterWithImages', 
+  model: LuminariesModel,
+  name: 'luminariesView',
+  variable: 'person',
+  template: "&lt;li class='comp'&gt;\
+    &lt;img data-src='${ person.image }' alt=''>\
+    &lt;div&gt;\
+      &lt;h3&gt;\
+        ${ person.firstName } ${ person.lastName }\
+      &lt;/h3&gt;\
+    &lt;/div&gt;\
+  &lt;/li&gt;",
+  events: [
+    {
+      element: 'li',
+      event: 'tap',
+      callback: function() {
+        console.log($(this).text());
+      }
+    }
+  ]
+});
+</pre>
         </div>
         
         <div id="menu">
@@ -99,6 +129,9 @@
     </footer>
   </article>
   
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
