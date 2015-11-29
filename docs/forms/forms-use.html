@@ -157,7 +157,7 @@ $.validateWithRegex('#australianPhoneNum', phoneRegex)
 </pre>
 
       <h4>$.registerCustomValidator</h4>
-      <p>If you want to have a custom validator that you can use with <code>$.Form</code> for getting a JSON object, you need to do two things: register the custom event and indicate it in the <code>$.Form</code> setup. To register a custom validator you use <code>$.registerCustomValidator</code>. This takes two arguments: a name for your validator and a regular express. The regular expression should be in the following format: <code>/abc/</code>. Below is an example custom validator used with <code>$.Form</code>:</p>
+      <p>If you want to have a custom validator that you can use with <code>$.Form</code> for getting a JSON object, you need to do two things: register the custom validator and indicate it in the <code>$.Form</code> setup. To register a custom validator you use <code>$.registerCustomValidator</code>. This takes two arguments: a name for your validator and a regular express. The regular expression should be in the following format: <code>/abc/</code>. Below is an example custom validator used with <code>$.Form</code>:</p>
 
 <pre class="prettyprint linenums">
 $.registerCustomValidator('textWithSpaces', /^[A-Za-z\W]+$/);
