@@ -309,7 +309,11 @@ $('li.selected').remove();
             <h4>element.replaceWith(content)</h4>
             <p>This method replaces the element it is executed on with the provided content, which may be markup for new elements or a node of a currently existing element in the document.. Before removing the element, all events are unbound from it and, if the element that will replace it is already in the DOM, from the replacement element as well.</p>
 <pre class='prettyprint linenums'>
-$('li.selected').remove();
+// Replace element with new content:
+$('li.selected').replaceWith('<li><h3>New content!</h3></li>');
+
+// Replace one element with another:
+$('li.selected').replaceWith($('li:first-of-type'));
 </pre>
             <h4>element.addClass(className)</h4>
             <p>This method lets you add a class to an element.</p>
