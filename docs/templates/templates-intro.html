@@ -42,7 +42,7 @@
 
           <p>To interpolate a data variable, use: <code>${ data }</code>. To process arbitrary JavaScript in your template, use: <code>{{ alert("hi!") }}</code>. Generally you shouldn't use JavaScript in your templates unless you need to output content conditionally.</p>
 
-          <p>You have to options for making temlates: using script tags or using inline markup. A script tag template will not show on the page. And inline template will, but by putting the class "cloak" on its parent, it will not show up until rendered.</p>
+          <p>You have to options for making temlates: using script tags or using inline markup. A script tag template will not show on the page. And inline template will, but by putting the class <code>cloak</code> on its parent, it will not show up until rendered.</p>
           <p>With script tag:</p>
 <pre class='prettyprint linenums'>
 &lt;ul class="list" id='defaultObjectTemplateScript'&gt;
@@ -51,7 +51,7 @@
   &lt;/script&gt;
 &lt;ul&gt;
 </pre>
-          <p>Without script tag, using `cloak` class:</p>
+          <p>Without script tag, using <code>cloak</code> class:</p>
 <pre class='prettyprint linenums'>
 &lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
   &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
