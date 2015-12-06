@@ -42,16 +42,14 @@
           <h4>Router</h4>
           <p><code>$.Router()</code></p>
           <p>This factory returns a router object which you assign to a variable.</p>
-<pre class="prettyprint"><code>
-var myRouter = $.Router();
+<pre class="prettyprint"><code>var myRouter = $.Router();
 </code></pre>
           
           <h4>addRoute</h4>
           <p><code>addRoute(arrayOfRoutes)</code></p>
           <p>This method adds a route to your router object. It expects an array as an argument, even if you are only adding one route. A route is an object with two properties: a route and a callback.</p>
           <p>Truck's routes are the ids of screens that you will be navigating to. You do not use the `#` but purely the id value of the screen:</p>
-<pre class="prettyprint"><code>
-var myRouter = $.Router();
+<pre class="prettyprint"><code>var myRouter = $.Router();
 myRouter.addRoute([
   route: 'detailScreen',
   callback: function() {
@@ -62,15 +60,13 @@ myRouter.addRoute([
 </code></pre>
 <p>When handling a route, you have the option of also receiving and id with the route. The id is a unique value represeting a object in a collection. A route id is indicated by a color after the route:</p>
 
-<pre class="prettyprint"><code>
-&lt;li data-goto="detail:apple"&gt;&lt;/li&gt;
+<pre class="prettyprint"><code>&lt;li data-goto="detail:apple"&gt;&lt;/li&gt;
 &lt;li data-goto="detail:orange"&gt;&lt;/li&gt;
 &lt;li data-goto="detail:banana"&gt;&lt;/li&gt;
 </code></pre>
 <p>From the above code, Truck will send routes like this: 'detail:apple', etc. The route examines routes for ids. When it find them, it separates them and passes them to the route's callback as the first argument. That means you can capture the id being passed in your routes callback:</p>
 
-<pre class="prettyprint"><code>
-var myRouter = $.Router();
+<pre class="prettyprint"><code>var myRouter = $.Router();
 myRouter.addRoute([
   route: 'detailScreen',
   callback: function(id) {
@@ -81,37 +77,31 @@ myRouter.addRoute([
     // Render the view with the returned object:
     detailView.render(item);
   }
-</code></pre>
-          
-          <h4>getFullRoute</h4>
+</code></pre><h4>getFullRoute</h4>
           <p><code>getFullRoute()</code></p>
           <p>This method returns a backslash delimited path of the current position of the user. In tab bars and slides this may simply be the current screen. If the user has drilled down in a navigation list, this will show the path the user has taken.</p>
-<pre class="prettyprint"><code>
-var route = $.Router.getFullRoute();
+<pre class="prettyprint"><code>var route = $.Router.getFullRoute();
 console.log(route) // 'main/fruits/banana'
 </code></pre>
           
           <h4>getRoutesStack</h4>
           <p><code>getRoutesStack()</code></p>
           <p>Similar to <code>getFullRoute</code>, execpt that it returns an array of the path:</p>
-<pre class="prettyprint"><code>
-var route = $.Router.getRoutesStack();
+<pre class="prettyprint"><code>var route = $.Router.getRoutesStack();
 console.log(route) // ["main", "fruits", "banana"]
 </code></pre>
           
           <h4>getCurrentLoc</h4>
           <p><code>getCurrentLoc()</code></p>
           <p>Returns the user's current location. This is the id of the current screen.</p>
-<pre class="prettyprint"><code>
-var currentScreen = $.Router.getCurrentLoc();
+<pre class="prettyprint"><code>var currentScreen = $.Router.getCurrentLoc();
 </code></pre>
           
           <h4>dispatch</h4>
           <p><code>dispatch(route)</code></p>
           <p>This method lets you dispatch to a particular route. This means that you can tell the Router to handle the route. It takes one argument, the route. All navigation wigets (tab bars, slide out menus and navigation lists) automatically dispatch their routes. Also, if you use <code>$.GoToScreen()</code> to direct the user somewhere, this will automatically dispath the screen id you provided.</p>
           <p></p>
-<pre class="prettyprint"><code>
-$.Router.dispatch('detail');
+<pre class="prettyprint"><code>$.Router.dispatch('detail');
 
 // Dispatch route with id:
 $.Router.dispatch('detail:123');
@@ -123,57 +113,55 @@ $.Router.dispatch('detail:123');
           <h4>pushRoute</h4>
           <p><code>pushRoute(route)</code></p>
           <p>This method allows you to push a route onto Truck's router object - $.TruckRoutes</p>
-<pre class="prettyprint"><code>
-$.Router.pushRoute('newRoute')
+<pre class="prettyprint"><code>$.Router.pushRoute('newRoute')
 </code></pre>
           
           <h4>popRoute</h4>
           <p><code>popRoute()</code></p>
           <p>This method lets you pop the last route from the global router object - $.TruckRoutes</p>
-<pre class="prettyprint"><code>
-var lastRoute = $.Router.pop();
+<pre class="prettyprint"><code>var lastRoute = $.Router.pop();
 </code></pre>
           
           <h4>unshiftRoute</h4>
           <p><code>unshiftRoute(route)</code></p>
           <p>This method lets you add a new route at the beginning of the global router object - $.TruckRoutes</p>
-<pre class="prettyprint"><code>
-$.Router.unshiftRoute('newRoute');
+<pre class="prettyprint"><code>$.Router.unshiftRoute('newRoute');
 </code></pre>
           
           <h4>shiftRoute</h4>
           <p><code>shiftRoute()</code></p>
           <p>This method lets you get the first route from the global router object - $.TruckRoutes</p>
-<pre class="prettyprint"><code>
-var firstRoute = $.Router.shiftRoute();
+<pre class="prettyprint"><code>var firstRoute = $.Router.shiftRoute();
 </code></pre>
           
           <h4>insert</h4>
           <p><code>insert(position, route)</code></p>
           <p>This method lets you insert a route in global router object - $.TruckRoutes, at the position you provide. This is a zero-based number.</p>
-<pre class="prettyprint"><code>
-$.Router.insert(2, 'aNewRouteAt3');
+<pre class="prettyprint"><code>$.Router.insert(2, 'aNewRouteAt3');
 </code></pre>
           
           <h4>eq</h4>
           <p><code>eq(number)</code></p>
           <p>This method lets you get a route based on its index in the global router object - $.TruckRoutes. This is a zero-based number.</p>
-<pre class="prettyprint"><code>
-var fourthRoute = $.Router.eq(3)
+<pre class="prettyprint"><code>var fourthRoute = $.Router.eq(3)
 </code></pre>
           
           <h4>indexOf</h4>
           <p><code>indexOf(route)</code></p>
           <p>By passing a route as an argument, this method lets you get its position in global router object - $.TruckRoutes. This is a zero-based number.</p>
-<pre class="prettyprint"><code>
-var routePos = $.Router.indexOf('myRoute');
+<pre class="prettyprint"><code>var routePos = $.Router.indexOf('myRoute');
 </code></pre>
           
           <h4>delete</h4>
           <p><code>delete(route)</code></p>
-          <p>This method allows you to delete the provided route from the global router object - $.TruckRoutes</p>
-<pre class="prettyprint"><code>
-$.Router.delete('myRoute');
+          <p>This method allows you to delete the provided route from the global router object - $.TruckRoutes.</p>
+<pre class="prettyprint"><code>$.Router.delete('myRoute');
+// This will delete 'myRoute' or 'myRoute:someID'
+</code></pre>
+          <p>If a route has an id, the <code>delete</code> method will by default illiminate it. If you want to delete a route only when it lacks an id, pass it a second optional value of <code>true</code>:</p>
+<pre class="prettyprint"><code>// Only delete route without id:
+$.Router.delete('myRoute', true);
+// This will delete 'myRoute' but not 'myRoute:someID'
 </code></pre>
 
           <h4>$.TruckRoutes</h4>

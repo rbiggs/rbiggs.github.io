@@ -39,13 +39,11 @@
           <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Engine.png" alt="Truck Engine">
           <p>Setting up mediators is very simple. You just need to provide a handle for the mediator to use:</p>
-          <pre class='prettyprint linenums'>
-var fooMtor = $.Mediator('baz-handle');
+          <pre class='prettyprint linenums'>var fooMtor = $.Mediator('baz-handle');
 var barMtor = $.Mediator('baz-handle');</pre>
           <p>In the above example, notice that we've created both mediators to use the same handle. This means that when anything publishes to that handle, both mediators will react. Think of a mediators handle as an event. When something dispatches that event handle, any mediator listening for it will react. Mediators do not need to share the same handle. That's up to your use case how you need mediators to react. One mediator might listen for a handle to do one thing, whereas another mediator might also be listening for the same handle to do something very different.</p>
           <p>Then you can define what you want the mediator to do using its <code>init</code> method. In the example below, although both mediators will be responding to the same handle, they react differently.</p>
-          <pre class='prettyprint linenums'>
-fooMtor.init(function(data) {
+          <pre class='prettyprint linenums'>fooMtor.init(function(data) {
   console.log('1. Foo here.')
   console.log(data);
 });
@@ -55,8 +53,7 @@ barMtor.init(function(data){
   console.log(data);
 });</pre>
           <p>With the above code in place, we could run either mediator using their <code>run</code> method:</p>
-          <pre class='prettyprint linenums'>
-fooMtor.run('This is Godzilla!');
+          <pre class='prettyprint linenums'>fooMtor.run('This is Godzilla!');
 // results:
 // 1. Foo here.
 // This is Godzilla!
@@ -71,8 +68,7 @@ fooMtor.getHandle();
 
         <h4>Controlling Your Controllers</h4>
         <p>Because mediators run when their handle is dispatched, it's possible that they can get very busy. Truck therefore provides a way to control how many times a mediator can run. You can stop a mediator. When you do so, you cannot run it and it will not react to its handle. Or you can provide a number in the stop method, which tells the mediator how many times to run before stopping. You can also tell a stopped mediator to restart. From the moment you restart a mediator, you will be able to run it and it will be able to react to dispatches to its handle. You can also provide a number value representing second for the mediator to restart. It will not be active until that provide amount of time has passed.</p>
-        <pre class='prettyprint linenums'>
-// Stop fooMtor immediately:
+        <pre class='prettyprint linenums'>// Stop fooMtor immediately:
 fooMtor.stop();
 // Tell barMtor to stop after 10 runs:
 barMtor.stop(10);
@@ -81,27 +77,22 @@ fooMtor.restart()
 // Tell barMtor to restart after 10 seconds:
 barMtor.stop(10);</pre>
       <p>You can find out how many times a mediator has run by querying it:</p>
-      <pre class='prettyprint linenums'>
-// returns how many times the mediator ran:
+      <pre class='prettyprint linenums'>// returns how many times the mediator ran:
 fooMtor.getCount();</pre>
       <p>You can find out if a mediator is stopped or not by querying it:</p>
-      <pre class='prettyprint linenums'>
-fooMtor.isStopped();
+      <pre class='prettyprint linenums'>fooMtor.isStopped();
 // returns true or false</pre>
       <p>You can control how a mediator is counting. You can tell it to reset its count to zero. You might want to do this if the number was very high and you want it to start over clean. Or you can tell a mediator to stop counting.</p>
-      <pre class='prettyprint linenums'>
-// Tell fooMtor to reset its count to zero:
+      <pre class='prettyprint linenums'>// Tell fooMtor to reset its count to zero:
 fooMtor.resetCount();
 // Tell barMtor to stop counting:
 barMtor.stopCount();</pre>
       <p>Sometimes, under some particular circumstance, you might want to run a mediator just once and then kill it. Truck lets you kill mediators. Do so is permanent. They cannot be revived to run again. They are dead. To kill a mediator, you run the <code>kill</code> method on them:</p>
-      <pre class='prettyprint linenums'>
-// Kill fooMtor:
+      <pre class='prettyprint linenums'>// Kill fooMtor:
 fooMtor.kill();
 // fooMtor can never run again</pre>
       <p>You can find out if a mediator has been killed by querying it:</p>
-      <pre class='prettyprint linenums'>
-fooMtor.hasBeenKilled();
+      <pre class='prettyprint linenums'>fooMtor.hasBeenKilled();
 // returns true or false
       </pre>
 

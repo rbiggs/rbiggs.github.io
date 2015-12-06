@@ -42,13 +42,11 @@
 
           <h4>$.receive()</h4>
           <p>Receivers take two arguments, the handle their using and a callback. If the dispatcher sent any data, this will be available to the callback as the first argument:</p>
-          <pre class='prettyprint linenums'>
-var newsUpdater = $.receive('news/update', function(data) {
+          <pre class='prettyprint linenums'>var newsUpdater = $.receive('news/update', function(data) {
   $('#news').append('&lt;li&gt;' + data + '&lt;/li&gt;');
 });</pre>
           <p>If the data being received was an array, we could loop over it:</p>
-          <pre class='prettyprint linenums'>
-var newsUpdater = $.receive('news/update', function(data) {
+          <pre class='prettyprint linenums'>var newsUpdater = $.receive('news/update', function(data) {
   data.forEach(function(item) {
     $('#news').append('&lt;li&gt;' + item + '&lt;/li&gt;');
   });
@@ -57,8 +55,7 @@ var newsUpdater = $.receive('news/update', function(data) {
           <h4>$.dispatch()</h4>
           <p>To make a dispatcher, you use the <code>$.dispatch()</code> method. This takes two arguments, the handle to dispatch to and any data. You do not have to dispatch data. Similarly, a receiver does not need to get data. Both of these could simply be about dispatching the handle. In this case the dispatcher is acting like a custom event system.</p>
           <p>Below is an example of a dispatcher for our previous reeiver example:</p>
-          <pre class='prettyprint linenums'>
-// Dispatch a single item:
+          <pre class='prettyprint linenums'>// Dispatch a single item:
 $.dispatch( 'news/update', 'We need piles of money now!' );
 // Dispatch an array of data:
 $.dispatch( 'news/update', [{'news-flash':'Not much has happened yet.'},{'update':'More of the same.'}] );</pre>
@@ -66,8 +63,7 @@ $.dispatch( 'news/update', [{'news-flash':'Not much has happened yet.'},{'update
             <h4>$.cancelReceiver()</h4>
             <p>You can cancel a recevier at any time. Please note that doing so permanently disables it. If you want to be able to stop a receiver and start it later, then you probably want to set up a mediator instead. Please see <a href="../mediators/mediators-intro.html">Mediators</a> for more information.</p>
             <p>Below is an example of canceling a receiver:</p>
-            <pre class='prettyprint linenums'>
-$.cancelReceiver( newsUpdater );</pre>
+            <pre class='prettyprint linenums'>$.cancelReceiver( newsUpdater );</pre>
 
 
         </div>

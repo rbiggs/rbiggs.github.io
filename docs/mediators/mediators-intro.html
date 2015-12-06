@@ -56,8 +56,7 @@
 
           <p>You can also define a mediator that is executed like any other function. For example:</p>
 
-<pre class='prettyprint linenums'>
-var fooMtor = $.Mediator('fooMtor');
+<pre class='prettyprint linenums'>var fooMtor = $.Mediator('fooMtor');
 fooMtor.init(function() {
   console.log('This is fooMtor running1');
 });
@@ -67,23 +66,20 @@ fooMtor.run();
 
         <p>Mediators have a number of builtin features that would require extra coding to do in an ordinary method. Besides running a mediator, you can stop it with <code>stop()</code>. This will prevent if from responding to any handles that might get published. You can also provide a number for the stop method, which tells the mediator to only run that many times and then stop.</p>
 
-<pre class='prettyprint linenums'>
-// Stop the mediator immediately:
+<pre class='prettyprint linenums'>// Stop the mediator immediately:
 fooMtor.stop();
 // Stop the mediator after 5 runs:
 fooMtor.stop(5);
 </pre>
         <p>After some time, you might want to restart a stopped mediator. You do that with <code>restart()</code>. Using restart means the mediator will immediately start responding to its handle when it is published. You can also provide a number value representing seconds. This will tell the mediator to restart <em>after</em> that many seconds have passed.</p>
 
-<pre class='prettyprint linenums'>
-// Restart the mediator immediately:
+<pre class='prettyprint linenums'>// Restart the mediator immediately:
 fooMtor.restart();
 // Restart the mediator after 5 minutes:
 fooMtor.restart(60 * 5);
 </pre>
         <p>By default, mediators keep track of how many times they have run. You can get that number with <code>getCount()</code>. This allows you to monitor the activity of mediators. You can reset a mediators count with <code>resetCount()</code>, or you can stop the count altogether with <code>stopCount()</code>. If for some reason you don't need a mediator and want to get rid of it, you can kill it literally with <code>kill()</code>. Killing is fatal for a mediator. After being killed, you cannot revive a mediator.</p>
-<pre class='prettyprint linenums'>
-// Get the current number of times
+<pre class='prettyprint linenums'>// Get the current number of times
 // the mediator has run:
 fooMtor.getCount();
 // Rest the mediator's count to 0:

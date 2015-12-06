@@ -44,16 +44,14 @@
 
           <p>You have to options for making temlates: using script tags or using inline markup. A script tag template will not show on the page. And inline template will, but by putting the class <code>cloak</code> on its parent, it will not show up until rendered.</p>
           <p>With script tag:</p>
-<pre class='prettyprint linenums'>
-&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
+<pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;script type='text/x-template'&gt;
     &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
   &lt;/script&gt;
 &lt;ul&gt;
 </pre>
           <p>Without script tag, using <code>cloak</code> class:</p>
-<pre class='prettyprint linenums'>
-&lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
+<pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
   &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
 &lt;ul&gt;
 </pre>
@@ -61,8 +59,7 @@
 
           <p>You can output sequential numbering using <code>$.view.index</code> in your template markup. This value will increase with each iteration. You can also set a what value you want the count to start.</p>
 
-<pre class='prettyprint linenums'>
-&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
+<pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;script type='text/x-template'&gt;
     &lt;li&gt;&lt;h3&gt;${ $.view.index }: ${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
   &lt;/script&gt;

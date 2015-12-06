@@ -55,8 +55,7 @@
           <p>$.encode(data) returns the value from a form element encoded.</p>
           <p>$.escapeHTML(data) escapes the html tags, parenthesis, etc.</p>
           <p>$.concat(args) takes a series of strings and returns one string. This is useful where you need to concatenate a lot of string pieces together</p>
-          <pre class='prettyprint linenums'>
-var str = $.concat('This', ' ', 'is', ' ', 'a' , ' ', 'string', '.');</pre>
+          <pre class='prettyprint linenums'>var str = $.concat('This', ' ', 'is', ' ', 'a' , ' ', 'string', '.');</pre>
           <p>$.uuid() create a uuid. This is a string. You can use it to create a unique identifier for objects in a collection, or for ids of DOM elements. Truck uses $.uuid internally for this purpose.</p>
 
 
@@ -76,8 +75,7 @@ var str = $.concat('This', ' ', 'is', ' ', 'a' , ' ', 'string', '.');</pre>
           <p>Here are some examples using them:</p>
 
 
-          <pre class='prettyprint linenums'>
-$('#list').iz('ol').css('border', 'solid 1px blue');
+          <pre class='prettyprint linenums'>$('#list').iz('ol').css('border', 'solid 1px blue');
 $('.list').iznt('.disabled').show();
 $('#list').haz('li').addClass('important');
 $('#list').haznt('li').append('&lt;li&gt;Some default text&lt;/li&gt;');

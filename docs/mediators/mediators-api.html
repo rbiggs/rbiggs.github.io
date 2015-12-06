@@ -42,15 +42,13 @@
           <h4>Mediators</h4>
           <p><code>$.Mediators(options)</code></p>
           <p>This is factory that returns a mediator object. It takes one argument: a handle for the mediator. The handle is what the mediator listens to. When something, such as a model or another some code dispatches this handle, the mediator will run. Since a dispatch can also include data, the mediator can do something with the data, such as transforming it or passing it to a view for rendering.</p>
-<pre class='prettyprint linenums'>
-var MyMtor = $.Mediator('myModel-handle');
+<pre class='prettyprint linenums'>var MyMtor = $.Mediator('myModel-handle');
 </pre>
           
           <h4>init</h4>
           <p><code>init(callback)</code></p>
           <p>This method is used to define what a mediator does when it runs. It takes a single argument, a callback. The callback get any data passed to the mediator when it is run:</p>
-<pre class='prettyprint linenums'>
-MyMtor.init(function(data) {
+<pre class='prettyprint linenums'>MyMtor.init(function(data) {
   if (data && data.length) {
     data.forEach(function(item) {
       console.log(item);
@@ -62,8 +60,7 @@ MyMtor.init(function(data) {
           <h4>run</h4>
           <p><code>run()</code></p>
           <p>This method is used to execute a mediator. It takes one argument, data to pass to the mediator's callback.</p>
-<pre class='prettyprint linenums'>
-var MyMtor = $.Mediator('my-handle');
+<pre class='prettyprint linenums'>var MyMtor = $.Mediator('my-handle');
 MyMtor.init(function(message) {
   console.log(message);
 });
@@ -74,8 +71,7 @@ MyMtor.run('This is a message');
           <p><code>stop(after)</code></p>
           <p>This method allows you to stop a method. This is more like a pause since it can be restarted later. If stop is executed on a mediator, it stops immediately. Any attemps to run it will not work. Also it will ignore any dispatches by other code to its handle.</p>
           <p>You can provide a number value, which tells the mediator to stop after the provided number of times running. So, if you wanted a mediator to stop after running 10 tiems, you would do this:</p>
-<pre class='prettyprint linenums'>
-// Stop the mediator immediately:
+<pre class='prettyprint linenums'>// Stop the mediator immediately:
 MyMtor.stop();
 
 // Stop the mediator after 10 runs:
@@ -86,8 +82,7 @@ MyMtor.stop(10);
           <p><code>restart(time)</code></p>
           <p>After a mediator has been stopped, you can make it work again by using this method. If you execute it with no arguments, it will immediately be restarted, meaning it will at once react to any dispatches to its handle or any attempts to execut run on it.</p>
           <p>You can tell a mediator to restart after a designate amount of time has passed by passing this method a number value that represents seconds:</p>
-<pre class='prettyprint linenums'>
-// Restart the Mediator 
+<pre class='prettyprint linenums'>// Restart the Mediator 
 MyMtor.restart();
 
 // Tell the mediator to start in 5 minutes:
@@ -97,43 +92,37 @@ MyMtor.restart(60 * 5);
           <h4>getCount</h4>
           <p><code>getCount()</code></p>
           <p>This method lets you find out how many times a mediator has run.</p>
-<pre class='prettyprint linenums'>
-var count = MyMtor.getCount();
+<pre class='prettyprint linenums'>var count = MyMtor.getCount();
 </pre>
           
           <h4>resetCount</h4>
           <p><code>resetCount()</code></p>
           <p>This method lets you reset a ediator's count to zero.</p>
-<pre class='prettyprint linenums'>
-MyMtor.resetCount();
+<pre class='prettyprint linenums'>MyMtor.resetCount();
 </pre>
           
           <h4>stopCount</h4>
           <p><code>stopCount()</code></p>
           <p>This method lets you tell a mediator to stop keeping track of how many times it has run.</p>
-<pre class='prettyprint linenums'>
-MyMtor.stopCount();
+<pre class='prettyprint linenums'>MyMtor.stopCount();
 </pre>
           
           <h4>kill</h4>
           <p><code>kill()</code></p>
           <p>This method lets you kill a mediator. This is a final act. Once killed, a mediator cannot be revived for later use. If you really don't need a mediator you can kill it, otherwise, just stop it.</p>
-<pre class='prettyprint linenums'>
-MyMtor.kill();
+<pre class='prettyprint linenums'>MyMtor.kill();
 </pre>
           
           <h4>getHandle</h4>
           <p><code>getHandle()</code></p>
           <p>This method lets you find out what handle a mediator is using.</p>
-<pre class='prettyprint linenums'>
-var medHandle = MyMtor.getHandle();
+<pre class='prettyprint linenums'>var medHandle = MyMtor.getHandle();
 </pre>
           
           <h4>isStopped</h4>
           <p><code>isStopped()</code></p>
           <p>This method lets you check to see if a mediator has been stopped. It returns a boolean value.</p>
-<pre class='prettyprint linenums'>
-if (MyMtor.isStopped()) {
+<pre class='prettyprint linenums'>if (MyMtor.isStopped()) {
   alert('This mediator needs to be restarted!');
 }
 </pre>
@@ -141,8 +130,7 @@ if (MyMtor.isStopped()) {
           <h4>hasBeenKilled</h4>
           <p><code>hasBeenKilled()</code></p>
           <p>This method lets you check whether a mediator has been killed or not. It returns a boolean value.</p>
-<pre class='prettyprint linenums'>
-MyMtor.hasBeenKilled();
+<pre class='prettyprint linenums'>MyMtor.hasBeenKilled();
 </pre>
 
         </div>

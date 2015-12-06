@@ -42,13 +42,11 @@
 
             <h4>$.formatNumber(number, separator, decimal)</h4>
             <p>Besides passing in the number to format, you can provide a character to use for indicating thousands. The third argument is the character to represent decimals. The default is thousands separator `,`. Some cultures use `.` for thousands and `,` for decimals. To format a number for Latin America:</p>
-<pre class='prettyprint linenums'>
-$.formatNumber(123456789.24312, '.', ',');
+<pre class='prettyprint linenums'>$.formatNumber(123456789.24312, '.', ',');
 // returns: 123.456.789,24312
 </pre>
             <p>If you want to reduce the number of decimals display, you can provide the last argument as the number of decimals to show. If the value is 0, it will be rounded of to a whole number.</p>
-<pre class='prettyprint linenums'>
-$.formatNumber(123456789.24312, 2);
+<pre class='prettyprint linenums'>$.formatNumber(123456789.24312, 2);
 // returns: 123,456,789.24
 $.formatNumber(123456789.24312, 0);
 // returns: 123,456,789
@@ -56,14 +54,12 @@ $.formatNumber(123456789.24312, 0);
 
             <h4>$.sum(array)</h4>
             <p>This takes an array of numbers and returns their sum:</p>
-<pre class='prettyprint linenums'>
-$.sum([1,2,3,4,5,6,7,8,9,10,11.2]);
+<pre class='prettyprint linenums'>$.sum([1,2,3,4,5,6,7,8,9,10,11.2]);
 // returns: 66.2
 </pre>
             <h4>$.currency(amount, symbol, separator, decimal)</h4>
             <p>This method takes and amount and formats it as currency, the default is for US dollars. The second parameters is the currency symbol, The third parameter is the thousands separator. The fourth parameter is the decimal separator or rounding number.</p>
-<pre class='prettyprint linenums'>
-$.currency(9123456789.2382, "$");
+<pre class='prettyprint linenums'>$.currency(9123456789.2382, "$");
 // returns: $9,123,456,789.24
 $.currency(9123456789.99, "€", ",", 0);
 // returns: €9,123,456,789
@@ -71,8 +67,7 @@ $.currency(9123456789.99, "€", ",", 0);
 
             <h4>$.formatTime(time)</h4>
             <p>Using JavaScript, you can get the local time to format:</p>
-<pre class='prettyprint linenums'>
-// Output a data:
+<pre class='prettyprint linenums'>// Output a data:
 var date = new Date();
 // returns: Thu Nov 26 2015 16:30:41 GMT-0800 (PST)
 date.toLocaleDateString();
@@ -105,8 +100,7 @@ var date_1980 = new Date('January 1, 1980');
 
             <h4>$.sortNumbers([1,2,3,4,5])</h4>
             <p>This method lets you sort numbers in ascending order:</p>
-<pre class='prettyprint linenums'>
-var prices = [5, 4.25, .98, 12.1, 42.98, 9.99, 1, .02, 7.5];
+<pre class='prettyprint linenums'>var prices = [5, 4.25, .98, 12.1, 42.98, 9.99, 1, .02, 7.5];
 $.currency($.sortNumbers(prices));
 // returns: 
 $42.98

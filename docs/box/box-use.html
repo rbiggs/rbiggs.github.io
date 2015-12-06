@@ -49,8 +49,7 @@
           <p>If your data needs are simply, meaning you just need a simple box for local data persistence of a few items, you can use the defaul box. You do this by just setting your data. Box will put it in its default box called 'keyvaluepairs'. You can examine your boxes by opening the browsers Web inspector and examining your resources.</p>
           <p>To put something in a box, let's look at the following example. We'll need to write an event to grab some data from some form inputs, and a mediator to handle putting those values in a box:</p>
           
-          <pre class='prettyprint linenums'>
-// Handle event to trigger model agumentation:
+          <pre class='prettyprint linenums'>// Handle event to trigger model agumentation:
 //============================================
 $('#boxit').on('click', function() {
   var key = $('#key').val();
@@ -78,8 +77,7 @@ BoxMediator.init(function(data) {
           </pre>
           <h4>$.Box.get()</h4>
           <p>You can get a key/value pair out of a box using <code>$.Box.get()</code>. Just give if the key you want to retrieve. Box will return a promise that you can use to access that data:</p>
-          <pre class='prettyprint linenums'>
-$.Box.get('name').then(function(value) {
+          <pre class='prettyprint linenums'>$.Box.get('name').then(function(value) {
   console.log('The name is: ' + value);
 });</pre>
           <p>Because this is a promise, you can use <code>catch</code> to handle errors.</p>
@@ -105,16 +103,14 @@ $.Box.get('name').then(function(value) {
           </ul>
 
           <p>Box will encode these depending on the type of storage it is using. When you extract a value, Box decodes it for you. That means that if you stored an array and you get it from the box, it is returned as an array. So you can immediately loop it:</p>
-          <pre class='prettyprint linenums'>
-$.Box.get('prices').then(function(value) {
+          <pre class='prettyprint linenums'>$.Box.get('prices').then(function(value) {
   prices.forEach(function(price)) {
     console.log('The price is: ' + price);
   });
 });</pre>
           <h4>$.Box.each()</h4>
           <p>If you want to get all the keys out of your box, you can use the <code>each()</code> method. This will run a loop on the box, returning the key/value pairs. You can do it like this:</p>
-          <pre class='prettyprint linenums'>
-$.Box.each(function(value, key, idx) {
+          <pre class='prettyprint linenums'>$.Box.each(function(value, key, idx) {
   console.log([key, value]);
 }, function(err) {
   if (!err) {
@@ -128,8 +124,7 @@ $.Box.each(function(value, key, idx) {
 
           <h4>Boxing a Model</h4>
           <p>You can tell a model to box its data. You use the <code>box</code> method. This takes a two options: a key and a box name.</p>
-          <pre class='prettyprint linenums'>
-ProjectsModel.box('projects', 'Projects-Box');</pre>
+          <pre class='prettyprint linenums'>ProjectsModel.box('projects', 'Projects-Box');</pre>
           <p>Having boxed the model, you can extract its data from the box name you provided using the key.</p>
           <p>You can find out if a model has been boxed by querying it:</p>
           <pre class='prettyprint linenums'>MyModel.isBoxed()
@@ -137,8 +132,7 @@ ProjectsModel.box('projects', 'Projects-Box');</pre>
 
           <h4>Setting a Model to Auto-Box</h4>
           <p>You can set a model to automatically box all of its changes. When you do so, there are a couple of things to keep in mind. If you have a default value for the model that gets set a load time, you need to first check the box to see if the model has been store. If it has, get it and use its values to set the data for the model, otherwise use the defaults. Below is how you set a model to auto-box:</p>
-          <pre class='prettyprint linenums'>
-PeopleModel.box({key: 'auto-boxed-people', autobox: true});</pre>
+          <pre class='prettyprint linenums'>PeopleModel.box({key: 'auto-boxed-people', autobox: true});</pre>
           <p>To see how this is done, please take a good look at the source code example called "auto-box.html".</p>
           <p>To learn more about how to use Box, please consulte the <a href="./box-api.html">API</a>.</p>
 

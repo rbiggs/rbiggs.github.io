@@ -174,8 +174,7 @@ $.Box.get('somekey')
           <h4>remove</h4>
           <p><code>remove(key, successCallback)</code></p>
           <p>Removes the value of a key from the offline store.</p>
-<pre class='prettyprint linenums'>
-// Execute callback after the key has been removed:
+<pre class='prettyprint linenums'>// Execute callback after the key has been removed:
 $.Box.remove('somekey', function(err) {
   console.log('Key is cleared!');
 });
@@ -184,8 +183,7 @@ $.Box.remove('somekey', function(err) {
           <h4>clear</h4>
           <p><code>clear(successCallback)</code></p>
           <p>Removes every key from the database, returning it to a blank slate.</p>
-<pre class='prettyprint linenums'>
-// Execute callback after the database has been deleted:
+<pre class='prettyprint linenums'>// Execute callback after the database has been deleted:
 $.Box.clear(function(err) {
    console.log('Database went bye-bye.');
 });  
@@ -196,8 +194,7 @@ $.Box.clear(function(err) {
           <h4>size</h4>
           <p><code>size(successCallback)</code></p>
           <p>Gets the number of keys in the offline store (i.e. its “size”).</p>
-<pre class='prettyprint linenums'>
-// Output the number of keys in the database:
+<pre class='prettyprint linenums'>// Output the number of keys in the database:
 $.Box.size(function(err, numberOfKeys) {
   console.log(numberOfKeys);
 });
@@ -206,8 +203,7 @@ $.Box.size(function(err, numberOfKeys) {
           <h4>key</h4>
           <p><code>key(keyIndex, successCallback)</code></p>
           <p>Get the name of a key based on its ID.</p>
-<pre class='prettyprint linenums'>
-// Output the key name:
+<pre class='prettyprint linenums'>// Output the key name:
 $.Box.key(2, function(err, keyName) {
   console.log(keyName);
 });
@@ -215,8 +211,7 @@ $.Box.key(2, function(err, keyName) {
           <h4>keys</h4>
           <p><code>keys(successCallback)</code></p>
           <p>Get the list of all keys in the datastore.</p>
-<pre class='prettyprint linenums'>
-// An array of all the key names:
+<pre class='prettyprint linenums'>// An array of all the key names:
 $.Box.keys(function(err, keys) {
   console.log(keys);
 });
@@ -231,8 +226,7 @@ $.Box.keys(function(err, keys) {
             <li>key</li>
             <li>idx - one-based number</li>
           </ol>
-<pre class='prettyprint linenums'>
-// This callback will be executed for every item in the database:
+<pre class='prettyprint linenums'>// This callback will be executed for every item in the database:
 $.Box.each(function(value, key, idx) {
   console.log([key, value]);
 }, function(err) {
@@ -290,8 +284,7 @@ $.Box.each(function(value, key, idx) {
           <p><code>createInstance(options)</code></p>
           <p>You can create multiple instances of Truck Box. <code>createInstance</code> accepts all the options that config does (see below). Each instance can have its own name to identify it.</p>
 
-<pre class='prettyprint linenums'>
-// Setup:
+<pre class='prettyprint linenums'>// Setup:
 var moviesBox = $.Box.createInstance({
   name: 'MoviesDB'
 });
@@ -327,8 +320,7 @@ moviesBox.get('movie1')
             <li>$.Box.WEBSQL</li>
             <li>$.Box.LOCALSTORAGE</li>
           </ul>
-<pre class='prettyprint linenums'>
-// Force Box to use localStorage:
+<pre class='prettyprint linenums'>// Force Box to use localStorage:
 $.Box.setDriver($.Box.LOCALSTORAGE);
 
 // Tell Box what your order preference is:
@@ -365,8 +357,7 @@ $.Box.setDriver([$.Box.WEBSQL, $.Box
             <p>A description of the database. This is only as a reminder for you, the developer. By default this value is empty.</p>
             <p>Default: ''</p>
 
-<pre class='prettyprint linenums'>
-// This will rename the database from "TruckBox"
+<pre class='prettyprint linenums'>// This will rename the database from "TruckBox"
 // to "Bongo Babies App".
 $.Box.config({
   name: 'Bongo Babies App'
