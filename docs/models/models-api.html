@@ -317,13 +317,16 @@ MyModel.setItemProp(23, 'price', '300.00', true);
           
         <h4>getItemProp</h4>
         <p><code>getItemProp(index, prop)</code></p> 
-<pre class='prettyprint linenums'>MyModel.getItemProp();
+<pre class='prettyprint linenums'>// Get the name property from
+// object at position 15:
+MyModel.getItemProp(14, 'name');
 </pre> 
           
         <h4>deleteItemProp</h4>
         <p><code>deleteItemProp(index, prop, doNotPropogate)</code></p> 
         <p>This method lets you delete a property from an object in a model's colleciton. The first argument is the index for the object. The second is the property to delete. Optionally you can provide a third boolean true argument to prevent the model from dispatching its changes to the system.</p> 
-<pre class='prettyprint linenums'>MyModel.deleteItemProp();
+<pre class='prettyprint linenums'>// Delete name off of object at position: 27:
+MyModel.deleteItemProp(26, 'name');
 </pre>
           
         <h4>getLastModTime</h4>
