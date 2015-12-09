@@ -40,7 +40,7 @@
           <img src="../../images/truck-parts/Truck-Engine.png" alt="Truck Engine">
           
           <h4>Mediators</h4>
-          <p><code>$.Mediators(options)</code></p>
+          <p><code>$.Mediator(options)</code></p>
           <p>This is factory that returns a mediator object. It takes one argument: a handle for the mediator. The handle is what the mediator listens to. When something, such as a model or another some code dispatches this handle, the mediator will run. Since a dispatch can also include data, the mediator can do something with the data, such as transforming it or passing it to a view for rendering.</p>
 <pre class='prettyprint linenums'>var MyMtor = $.Mediator('myModel-handle');
 </pre>
@@ -131,6 +131,12 @@ MyMtor.restart(60 * 5);
           <p><code>hasBeenKilled()</code></p>
           <p>This method lets you check whether a mediator has been killed or not. It returns a boolean value.</p>
 <pre class='prettyprint linenums'>MyMtor.hasBeenKilled();
+</pre>
+          
+          <h4>$.Mediator.dispatch</h4>
+          <p><code>$.Mediator.dispatch(handle, data)</code></p>
+          <p>This method lets you dispatch a handle and data to all mediators listening to that handle. They will run depending on whether they have not been stopped, etc.</p>
+<pre class='prettyprint linenums'>$.Mediator.dispatch('my-model-handle', {name: 'Mary', 22});
 </pre>
 
         </div>
