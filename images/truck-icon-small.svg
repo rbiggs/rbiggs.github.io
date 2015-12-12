@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <rect id="path-1" x="1.07162636" y="1.41458598" width="25.8083348" height="24.4640164" rx="4"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="truck-icon">
+            <g id="Rig" transform="translate(3.996728, 0.000000)">
+                <rect id="Rig-Back" stroke="#000000" stroke-width="4" fill="#000000" x="7.63833441e-14" y="0" width="27.9515875" height="30.2900009" rx="4"></rect>
+                <rect id="Rig-Side-Trim" stroke="#FEFEFE" fill="#000000" x="0.568506864" y="0.58247658" width="26.9093249" height="29.0400009" rx="4"></rect>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" xlink:href="#path-1"></use>
+                <g id="Rig-Lines" mask="url(#mask-2)" stroke-linecap="square" stroke="#FFFFFF">
+                    <g transform="translate(2.703272, 1.000000)">
+                        <path d="M1.80000019,0.04160547 L1.80000019,8.77875417" id="Line-Copy"></path>
+                        <path d="M5.00000019,0.04160547 L5.00000019,8.77875417" id="Line-Copy-3"></path>
+                        <path d="M8.5,0.04160547 L8.5,8.77875417" id="Line-Copy-5"></path>
+                        <path d="M11.5,0.04160547 L11.5,8.77875417" id="Line-Copy-7"></path>
+                        <path d="M14.5,0.04160547 L14.5,8.77875417" id="Line-Copy-9"></path>
+                        <path d="M17.5,0.04160547 L17.5,8.77875417" id="Line-Copy-11"></path>
+                        <path d="M20.5,0.04160547 L20.5,8.77875417" id="Line-Copy-13"></path>
+                    </g>
+                </g>
+            </g>
+            <g id="Cabin" transform="translate(5.000000, 8.000000)" stroke="#000000" stroke-width="4" fill="#000000">
+                <rect x="0.990183223" y="0.254878248" width="24.3600006" height="24.6304382" rx="2"></rect>
+            </g>
+            <g id="Right-Wheel" transform="translate(3.000000, 25.681843)" fill="#000000">
+                <rect stroke="#020202" x="0.982324161" y="0.66568752" width="3.83999445" height="9.65246904" rx="19"></rect>
+                <rect id="Fender-Right" stroke="#000000" stroke-width="3" x="0" y="0" width="5.80464277" height="6.90650802" rx="19"></rect>
+            </g>
+            <g id="Left-Wheel" transform="translate(27.918194, 25.681843)" fill="#000000">
+                <rect stroke="#020202" x="0.982324161" y="0.66568752" width="3.83999445" height="9.65246904" rx="19"></rect>
+                <rect id="Fender-Left" stroke="#000000" stroke-width="3" x="0" y="0" width="5.80464277" height="6.90650802" rx="19"></rect>
+            </g>
+            <g id="Hood-+-Front" transform="translate(7.000000, 18.000000)">
+                <path d="M5.65414244,0.344173884 L17.2550159,0.344173884 C18.1335595,0.344173884 19.1781107,0.922666198 19.5872781,1.63486597 L21.8125467,5.5081848 C22.2220759,6.22101435 21.4852343,6.79887688 20.1652126,6.79887688 L2.7439458,6.79887688 C1.42461907,6.79887688 0.687444271,6.22038456 1.09661167,5.5081848 L3.32188027,1.63486597 C3.73140949,0.922036413 4.77513604,0.344173884 5.65414244,0.344173884 Z" id="Hood" stroke="#FFFFFF" fill="#000000"></path>
+                <rect id="Front" stroke="#000000" fill="#000000" x="0.983638704" y="3.09579997" width="21.5279997" height="9.9853128" rx="6"></rect>
+                <g id="Grill" transform="translate(4.000000, 4.000000)">
+                    <rect id="Rectangle-5" stroke="#FFFFFF" fill="#FFFFFF" x="0.973821927" y="0.930217355" width="12.8400002" height="7.65540648" rx="8"></rect>
+                    <rect id="Rectangle-5-Copy" stroke="#000000" fill="#000000" x="1.97054967" y="1.84742605" width="11.0600004" height="5.8247658" rx="6"></rect>
+                    <g id="Grill-Rods" transform="translate(2.035714, 1.000000)" fill="#FFFFFF">
+                        <rect id="Rectangle-12" x="8.93771021" y="0.84742605" width="0.988702889" height="5.8247658"></rect>
+                        <rect id="Rectangle-12-Copy-2" x="6.94752699" y="0.84742605" width="0.988702889" height="5.8247658"></rect>
+                        <rect id="Rectangle-12-Copy-3" x="4.94752699" y="0.84742605" width="0.988702889" height="5.8247658"></rect>
+                        <rect id="Rectangle-12-Copy-4" x="2.95407151" y="0.84742605" width="0.988702889" height="5.8247658"></rect>
+                        <rect id="Rectangle-12-Copy-6" x="0.963888283" y="0.84742605" width="0.988702889" height="5.8247658"></rect>
+                    </g>
+                </g>
+                <rect id="Cap" fill="#FFFFFF" x="8.95746063" y="3.09579997" width="3.92929664" height="0.66568752" rx="40"></rect>
+            </g>
+            <rect id="Bumper" stroke="#000000" fill="#FDFDFD" x="3.99672774" y="30.1850956" width="28.3099995" height="4.15999985" rx="19"></rect>
+            <g id="Headlights" transform="translate(5.990183, 19.261383)" stroke="#000000">
+                <ellipse id="Right-Light" fill="#FFFCFC" cx="2.63441479" cy="2.45472273" rx="2.63441479" ry="2.45472273"></ellipse>
+                <ellipse id="Left-Light" fill="#FFFFFF" cx="21.2985739" cy="2.45472273" rx="2.63441479" ry="2.45472273"></ellipse>
+            </g>
+            <g id="Window" transform="translate(6.986911, 9.172087)">
+                <rect id="Windshield" stroke="#181C22" fill="#FFFFFF" x="1.77635684e-15" y="-1.77635684e-15" width="22.5041535" height="7.65540648" rx="2"></rect>
+                <g id="Windshield-Divider" transform="translate(10.805566, -0.000000)" fill="#000000">
+                    <rect id="Rectangle-11" x="0" y="0" width="0.803719768" height="7.57309028"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
