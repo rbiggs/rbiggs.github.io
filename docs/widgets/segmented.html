@@ -51,6 +51,19 @@ $.Segmented({
   callback: segmentedResponse
 });</pre>
     <p>In the above example notice that we provide the id of the container as the value of element. Then we provide labels that the buttons will display. We set a default selected state, which is a zero-based number. And finally, a callback to execute when the user taps a segment. That's all there is to set up a segmented control. Please see the file "segmented-button.html" in the folder of examples in the source code from Github.</p>
+        <p>You can capture an instance of a segmented button control so that you can find out what its current selection is. To do this, assign the control to a variable. You can then run the method <code>getSelection()</code> on it to get the current selected button. This number is zero-based. In the following example, we assign the control to <code>segCtrl</code> and then execute <code>segCtrl.getSelection() + 1</code> to output the current selected button:</p>
+          <pre class="prettyprint linenums">
+var segCtrl = $.Segmented({
+  element: '#segmentedPanel',
+  labels : ['Radioactive','Hurt','Yeah, Yeah'],
+  selected: 2,
+  callback: function() {
+    e.stopPropagation();
+    // Add one to selection to get button:
+    $('.attentionGrapper').text(segCtrl.getSelection() + 1);
+  }
+});</pre>
+
         </div>
         
         <div id="menu">
