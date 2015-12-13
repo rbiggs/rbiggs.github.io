@@ -46,13 +46,17 @@
           <p>With script tag:</p>
 <pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;script type='text/x-template'&gt;
-    &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
+    &lt;li&gt;
+      &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+    &lt;/li&gt;
   &lt;/script&gt;
 &lt;ul&gt;
 </pre>
           <p>Without script tag, using <code>cloak</code> class:</p>
 <pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
-  &lt;li&gt;&lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+  &lt;/li&gt;
 &lt;ul&gt;
 </pre>
           <p>Templates are consummed by views. That means that when the view loads, it looks for the template, extracts it from the parent element and stores it on the view object. The next time the view renders, it will find the template stored on itself and use it.</p>
@@ -61,7 +65,9 @@
 
 <pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;script type='text/x-template'&gt;
-    &lt;li&gt;&lt;h3&gt;${ $.view.index }: ${ data.firstName } ${ data.lastName }&lt;/h3&gt;&lt;/li&gt;
+    &lt;li&gt;
+      &lt;h3&gt;${ $.view.index }: ${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+    &lt;/li&gt;
   &lt;/script&gt;
 &lt;ul&gt;
 </pre>
