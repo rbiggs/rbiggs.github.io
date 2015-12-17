@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Anim</h2>
+          <h3>Use</h3>
+          <img src="../../images/truck-parts/Truck-Tank.png" alt="Truck Tank">
+          <p>You can put together fairly complex animation with <code>$.anim</code>. However, bear in mind that these are CSS-based animations. You therefore don't have as fine control as you would with a dedicated animation library. This is just the basics.</p>
+          <p>To create a animation, you must provide an element to animate.</p>
+          
+          <pre class="prettyprint linenums">$.anim('#myEl')</pre>
+          
+          <p>You can now proceed to defining what you want to animate. $.anim grabs the styles of the element before animating, so you do not need to provide initial animation values. You simply have to tell it what end values you want.</p>
+          <p>$.anim allows you to animate a wide variety of properties. The easiest way to animate a property is with <code>set()</code>:</p>
+          
+          <pre class="prettyprint linenums">$.anim('#myEl')
+.set('color', 'red')
+.set('background-color','orange')
+.set('border-width', '8px')
+.set('font-size','20px');</pre>
+
+          <p>As you can see in the above example, we create a chained sequence of the properties we want to animate. In order for Truck to know that it can fire this string of commands, you must end the animation sequence with the <code>run()</code> method. This tells Truck to execute the aniation. If you forget to end an animation sequence with run, nothing will happen. So, if your animation is not running, check that that method is at the end.</p>
+          <pre class="prettyprint linenums">$.anim('#myEl')
+.set('color', 'red')
+.set('background-color','orange')
+.set('border-width', '8px')
+.set('font-size','20px')
+// Trigger the animation:
+.run();</pre>
+
+          <p>You can delay the animation using the <code>delay()</code> method. You use milliseconds to tell Truck how much to delay the animation.</p>
+          <pre class="prettyprint linenums">$.anim('#myEl')
+// Delay the animation by 5 seconds:
+.delay(5000)
+.set('color', 'red')
+.set('background-color','orange')
+.set('border-width', '8px')
+.set('font-size','20px')
+// Trigger the animation:
+.run();</pre>
+
+          <p>You can tell Truck how long an animation should last with the <code>duration()</code> method. This uses a string, which is a number with a length identifier: '100ms', '3s', '5m' or whatever value makes sense for your animation. When you set a duration, it is limited to the sequence that it is defined on. All other sequences will use the default of 500 milliseconds. You can change the default duration to whatever you want. See <a target='_blank' href="./anim-api.html">$.anim.defaults</a> for more details.</p>
+
+          <pre class="prettyprint linenums">$.anim('#myEl')
+// Delay the animation by 5 seconds:
+.delay(5000)
+// Animation should last 2 seconds:
+.duration('2s')
+.set('color', 'red')
+.set('background-color','orange')
+.set('border-width', '8px')
+.set('font-size','20px')
+// Trigger the animation:
+.run();</pre>
+
+          <p>You can create more complex animation by chaining sequences together. You do that by using the <code>then()</code> method. This returns a new instance of the animation. The intial sequence does not need <code>then()</code>. Please note that for ever <code>then</code> block after the first that you add to your animation, you need to put a <code>pop()</code> method after it. The <code>pop()</code> terminates the <code>then</code> block and returns it so that you can chain more <code>then</code> sequences after it. If a <code>pop</code> is missing, Truck will throw an error and the animation will not run. Each sequence defined within a <code>then</code> block can have its own duration and delay. Once again, if you have one <code>then</code> you do not put a <code>pop</code>. Two <code>thens</code> get one <code>pop</code>, three <code>thens</code> get two <code>pops</code>, four <code>thens</code> get three <code>pops</code>, etc.</p>
+
+          <pre class="prettyprint linenums">$.anim('#myEl')
+// Delay the animation by 5 seconds:
+.delay(5000)
+// Animation should last 2 seconds:
+.duration('2s')
+.set('color', 'red')
+.set('background-color','orange')
+.set('border-width', '8px')
+.set('font-size','20px')
+
+// Create a second sequence:
+.then()
+  .delay(200)
+  .duration('1s')
+  .set('background-color', 'blue')
+  .set('color', 'white')
+
+// Create a thrid sequence,
+// this one needs a pop after it:
+.then()
+  .delay(200)
+  .duration('1s')
+  .set('background-color', 'blue')
+  .set('color', 'white')
+// Terminate the sequence:
+.pop()
+
+// Trigger the animation:
+.run();</pre>
+
+        <p>You can pass a callback to <code>then()</code>. The callback will be execute when that sequence ends. You can also pass a callback to run, however the callback will be executed as soon as the first sequence ends. This is because each sequence has its own <code>end</code> event. The run method only knows about the initial sequence that it fires, so its callback executes when that ends. Each <code>then</code> also has its own end event, so each <code>then</code> will execute its callback at that time. As such, if you want to do some clean up after your entire animation of multiple sequences ends, pass a callback to the last <code>then</code>.</p>
+
+
+          <pre class="prettyprint linenums">$.anim('#myEl')
+// Delay the animation by 5 seconds:
+.delay(5000)
+// Animation should last 2 seconds:
+.duration('2s')
+.set('color', 'red')
+.set('background-color','orange')
+.set('border-width', '8px')
+.set('font-size','20px')
+
+// Create a second sequence and
+// execute this callback when it finishes.
+// Only one then, so no pop needed:
+.then(function() {
+  console.log('The animation is done!');
+})
+  .delay(200)
+  .duration('1s')
+  .set('background-color', 'blue')
+  .set('color', 'white')
+
+// Trigger the animation:
+.run();</pre>
+
+        <p>You can also add easing to your animation. You use the <code>ease()</code> method to do so. Truck provides some shortcuts for basic easing:</p>
+
+        <pre class="prettyprint linenums">
+.ease('in')
+.ease('out')
+.ease('in-out')
+.ease('snap')
+.ease('linear')</pre>
+
+      <p>You can assign an easing function to ease sequence in your animation:</p>
+
+
+          <pre class="prettyprint linenums">$.anim('#myEl')
+// Delay the animation by 5 seconds:
+.delay(5000)
+// Animation should last 2 seconds:
+.duration('2s')
+// Added easing;
+.ease('in')
+.set('color', 'red')
+.set('background-color','orange')
+.set('border-width', '8px')
+.set('font-size','20px')
+
+// Create a second sequence and
+// execute this callback when it finishes:
+.then(function() {
+  console.log('The animation is done!');
+})
+  .delay(200)
+  .duration('1s')
+  // Add easing:
+  .ease('snap')
+  .set('background-color', 'blue')
+  .set('color', 'white')
+
+// Trigger the animation:
+.run();</pre>
+
+
+
+        <p>Truck provides the following functions for more complex easing results. You use them just like the simple ones illustrated above:</p>
+        <ul>
+          <li>ease-in-quad</li>
+          <li>ease-out-quad</li>
+          <li>ease-in-out-quad</li>
+          <li>ease-in-cubic</li>
+          <li>ease-out-cubic</li>
+          <li>ease-in-out-cubic</li>
+          <li>ease-in-quart</li>
+          <li>ease-out-quart</li>
+          <li>ease-in-out-quart</li>
+          <li>ease-in-quint</li>
+          <li>ease-out-quint</li>
+          <li>ease-in-sine</li>
+          <li>ease-out-sine</li>
+          <li>ease-in-out-sine</li>
+          <li>ease-in-expo</li>
+          <li>ease-out-expo</li>
+          <li>ease-in-out-expo</li>
+          <li>ease-out-in-back</li>
+          <li>ease-in-circ</li>
+          <li>ease-out-circ</li>
+          <li>ease-in-out-circ</li>
+          <li>ease-out-in-circ</li>
+          <li>ease-in-back</li>
+          <li>ease-out-back</li>
+          <li>ease-in-out-back</li>
+        </ul>
+
+        <p>If you're comfortable with the cubic-bezier formulas, you can enter a value to get the effect you want. Just incude the values in the cubic-bezier method. Make sure you enclose you formula in quotes:</p>
+
+        <pre class="prettyprint linenums">
+.ease('cubic-bezier(0.550, 0.085, 0.680, 0.530)')</pre>
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html" class='selected'>Animation</a>
+              <ul>
+                <li><a href="anim-intro.html">Intro</a></li>
+                <li><a href="anim-use.html" class='selected'>Use</a></li>
+                <li><a href="anim-api.html">API</a></li>
+              </ul></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

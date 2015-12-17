@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Anim</h2>
+          <h3>API</h3>
+          <img src="../../images/truck-parts/Truck-Tank.png" alt="Truck Tank">
+          
+
+          <h4>$.anim</h4>
+          <p><code>$.anim(element)</code></p>
+          <p>This method takes either a selector, a plain DOM node or a Truck DOMStack. In all cases, <code>$.anim</code> expects a single element. If you pass in a Truck element collection, <code$.anim</code> will only use the first.</p>
+          <p>This method is how you initialize an animation sequence. All the other animation methods below can be chained to this method.</p>
+
+<pre class="prettyprint linenums">// Pass in a string selector:
+$.anim('#myElement');
+
+// Pass in a node:
+var el1 = document.querySelect('#myEl1');
+$.anim(el1);
+
+// Pass in a Truck element:
+var el2 = $('#myEl2');
+$.anim(el2);</pre>
+
+          <p>When you initialize an animation, Truck gets the styles of the element to use as the initial state of any properties that need to be animated.</p>
+
+          <h4>set</h4>
+          <p><code>set(property, value)</code></p>
+          <p>This is the most versatile method. It allows you to set any property on an element for animation. It takes two arguments, a property and a value for the property. Both of these should be quoted strings. The property and the value should be in normal CSS format:</p>
+<pre class="prettyprint linenums">$.anim('#element')
+.set('background-color', '#ff0000')
+.set('font-size', '20pt')
+.set('color', 'green')
+run();</pre>
+
+          <h4>add</h4>
+          <p><code>add(property, value)</code></p>
+          <p>This method allows you to increase the value of the provided property. The second argument is a number. This will get converted to a pixel value. As such this can only be used to increase the value of properties that can accept pixel values.</p>
+<pre class="prettyprint linenums">// Increase the left margin:
+$.anim('#el')
+.add('margin-left', 300)
+run();</pre>
+
+          <h4>sub</h4>
+          <p><code>sub(property, value)</code></p>
+          <p>This method allows you to decrease the value of the provided property. The second argument is a number. This will get converted to a pixel value. As such this can only be used to increase the value of properties that can accept pixel values.</p>
+<pre class="prettyprint linenums">// Decrease the absolute left position:
+$.anim('#el')
+.sub('left', 300)
+run();</pre>
+
+          <h4>x</h4>
+          <p><code>x(number)</code></p>
+          <p>This method translates the element along its x coordinate. The number value will be converted to pixels.</p>
+<pre class="prettyprint linenums">// Translate the element on its x axis:
+$.anim('#el')
+.x(300)
+run();</pre>
+
+          <h4>y</h4>
+          <p><code>y(number)</code></p>
+          <p>This method translates the element along its y coordinate. The number value will be converted to pixels.</p>
+<pre class="prettyprint linenums">// Translate the element on its y axis:
+$.anim('#el')
+.y(200)
+run();</pre>
+
+          <h4>translate</h4>
+          <p><code>translate(number[, number])</code></p>
+          <p>This method translates the element along its x and y coorinates. The number value will be converted to pixels. If only one number is provided, the element will only be translated along its x axis.</p>
+<pre class="prettyprint linenums">// Translate the element on its x &amp; y axis:
+$.anim('#el')
+.translate(300, 200)
+run();
+
+// Translate it only on the x axis:
+$.anim('#el')
+.translate(300)
+run();</pre>
+
+          <h4>rotate</h4>
+          <p><code>rotate(number)</code></p>
+          <p>This method rotates an element. It takes a number that will be converted to degrees.</p>
+<pre class="prettyprint linenums">// Rotate element:
+$.anim('#el')
+.rotate(45)
+run();
+
+// Rotate element backwards:
+$.anim('#el')
+.rotate(-90)
+run();</pre>
+
+          <h4>scale</h4>
+          <p><code>scale(number[, number])</code></p>
+          <p>This method allows you to scale an element up or down. 1 is the default size, 2 is double, .5 is 50%, etc. The first is the width and the second is the height. If only want value is provided, the element is scaled proportionately.</p>
+<pre class="prettyprint linenums">// Scale the element up:
+$.anim('#el')
+.scale(3, 5)
+run();
+
+// Scale the element down:
+$.anim('#el')
+.scale(.5, .75)
+run();
+
+// Scale the element up uniformly:
+$.anim('#el')
+.scale(2)
+run();
+
+// Scale the element down uniformly:
+$.anim('#el')
+.scale(.25)
+run();</pre>
+
+          <h4>scaleX</h4>
+          <p><code>scaleX(number)</code></p>
+          <p>Scale a element by its width.</p>
+<pre class="prettyprint linenums">// Scale up the element's width:
+$.anim('#el')
+.scaleX(2)
+run();
+
+// Scale down the element's width:
+$.anim('#el')
+.scaleX(.5)
+run();</pre>
+
+          <h4>scaleY</h4>
+          <p><code>scaleY(number)</code></p>
+          <p></p>
+<pre class="prettyprint linenums">// Scale up the element's height:
+$.anim('#el')
+.scaleY(3)
+run();
+
+// Scale down the element's height:
+$.anim('#el')
+.scaleY(.25)
+run();</pre>
+
+          <h4>skew</h4>
+          <p><code>skewX(number[, number])</code></p>
+          <p>This method allows you to skew an element by its x and y axis. If only one value is provided then the element is only skewed on its x axis.</p>
+<pre class="prettyprint linenums">// Skew the element on both axis:
+$.anim('#el')
+.skew(100, 90)
+run();
+
+// Skew the element on its x axis:
+$.anim('#el')
+.skew(200)
+run();</pre>
+
+          <h4>skewX</h4>
+          <p><code>skewXs(number)</code></p>
+          <p>This method skews an element by its x axis:</p>
+<pre class="prettyprint linenums">// Skew element on its x axis:
+$.anim('#el')
+.skewX(200)
+run();
+</pre>
+
+          <h4>skewY</h4>
+          <p><code>skewY(number)</code></p>
+          <p>This method skews an element by its y axis:</p>
+<pre class="prettyprint linenums">// Skew element on its y axis:
+$.anim('#el')
+.skewY(100)
+run();</pre>
+
+          <h4>matrix</h4>
+          <p><code>matric(numbers)</code></p>
+          <p>If you're comfortable with transform matrices, you can use this method to set one on an element:</p>
+<pre class="prettyprint linenums">// Set a matrix on the element:
+$.anim('#el')
+.matrix(1, -0.00000000000000024492935982947064, 0.00000000000000024492935982947064, 1, 0, 0)
+run();</pre>
+
+          <h4>duration</h4>
+          <p><code>duration(string)</code></p>
+          <p>This method lets you set the duration of an animation sequence. B default all animations last 500 milliseconds. You can use this method to change that. If you set up multiple <code>then</code> sequences in your animation, each one can have their own duration. You can pass this method a number in milliseconds, or a string with an length identifier. These are typical time in string format as expected for CSS transtion duration:</p>
+<pre class="prettyprint linenums">$.anim('#el')
+.duration(2000)
+.add('left', 300)
+run();
+
+// With a string time:
+$.anim('#el')
+.duration('2s')
+.add('left', 300)
+run();</pre>
+
+          <h4>ease</h4>
+          <p><code>ease(easingName)</code></p>
+          <p>This method allows you to add easing to an animation sequence. </p>
+
+        <ul>
+          <li>in</li>
+          <li>out</li>
+          <li>in-out</li>
+          <li>snap</li>
+          <li>linear</li>
+          <li>ease-in-quad</li>
+          <li>ease-out-quad</li>
+          <li>ease-in-out-quad</li>
+          <li>ease-in-cubic</li>
+          <li>ease-out-cubic</li>
+          <li>ease-in-out-cubic</li>
+          <li>ease-in-quart</li>
+          <li>ease-out-quart</li>
+          <li>ease-in-out-quart</li>
+          <li>ease-in-quint</li>
+          <li>ease-out-quint</li>
+          <li>ease-in-sine</li>
+          <li>ease-out-sine</li>
+          <li>ease-in-out-sine</li>
+          <li>ease-in-expo</li>
+          <li>ease-out-expo</li>
+          <li>ease-in-out-expo</li>
+          <li>ease-out-in-back</li>
+          <li>ease-in-circ</li>
+          <li>ease-out-circ</li>
+          <li>ease-in-out-circ</li>
+          <li>ease-out-in-circ</li>
+          <li>ease-in-back</li>
+          <li>ease-out-back</li>
+          <li>ease-in-out-back</li>
+        </ul>
+<pre class="prettyprint linenums">
+$.anim('#el')
+.duration('2s')
+// Add easing:
+.ease('ease-out-expo')
+.add('left', 300)
+run();</pre>
+        <p>You can also use matrix numbers to define a custom easing function. To do that you must enclose the cubic bezier fuction in quotes:</p>
+
+<pre class="prettyprint linenums">
+$.anim('#el')
+.duration('2s')
+// Add custom easing:
+.ease('cubic-bezier(-.25,1,1,-.25)')
+.add('left', 300)
+run();</pre>
+
+          <h4>delay</h4>
+          <p><code>delay(milliseconds)</code></p>
+          <p>This method lets you define a delay before the animation runs. It takes a  value in millisecons, or you can provide a string with a length identifier as used in CSS transition duration.</p>
+<pre class="prettyprint linenums">
+$.anim('#el')
+.duration('2s')
+.delay(2000)
+.add('left', 300)
+run();
+
+// Use a string value for delay:
+$.anim('#el')
+.duration('2s')
+.delay('1s')
+.add('left', 300)
+run();</pre>
+
+          <h4>anim</h4>
+          <p><code>anim(element)</code></p>
+          <p>This method allows you to choose another element to animate as part of the sequence. This could be the same element, in which case this would allow you to completely change its state before the next sequence of transitions, or you could provide another element. this allows you to have one animation set up to animate multiple elements.</p>
+<pre class="prettyprint linenums">
+$.anim('#el')
+.duration('2s')
+.delay('1s')
+.add('left', 300)
+
+// Animate another element:
+.anim('#el2')
+.duration('1s')
+.sub('margin-left', 300)
+run();</pre>
+          <p>If you are having problems where it seems like your sequences are not executing as expected, you might try breaking it up using <code>.anim</code> targeting the same element.</p>
+
+          <h4>then</h4>
+          <p><code>then(fn)</code></p>
+          <p>This method allows you to two things, return the animation so that you can chain on another sequence, or pass in a callback that will be deferred untill the previous sequence ends. When there is more than one <code>then</code> block in an animation, each additional <code>then</code> will require a final <code>pop</code> method to terminate it. See pop below.</p>
+<pre class="prettyprint linenums">// Define a then block with another sequence:
+$.anim('#el')
+.duration('2s')
+.delay('1s')
+.add('left', 300)
+.then()
+  .set('color', 'red')
+  .set('font-size', '30px')
+run();
+
+// Pass callback to then:
+$.anim('#el')
+.duration('2s')
+.delay('1s')
+.add('left', 300)
+.then(function() {
+  console.log('Just a message here.');
+})
+  .set('color', 'red')
+  .set('font-size', '30px')
+run();</pre>
+
+          <h4>pop</h4>
+          <p><code>pop()</code></p>
+          <p>This method is used to signal the termination of a <code>then</code> sequence. If your animation has only one <code>then</code> block, the <code>run</code> method at the end will terminate it. If you have more than one <code>then</code>, for each additional <code>then</code> you will need to provide a <code>pop</code> method at the end of the animation:</p>
+<pre class="prettyprint linenums">// Define a then block with another sequence:
+$.anim('#el')
+.duration('2s')
+.delay('1s')
+.add('left', 300)
+// First then, no pop need:
+.then()
+  .set('color', 'red')
+  .set('font-size', '30px')
+// Second then, pop need:
+.then()
+  .x(-200)
+// Thrid then, pop need:
+.then()
+  .translate(300, 200);
+  .easing('snap')
+  .duration('3s')
+// End second then:
+pop()
+// End third then:
+pop()
+run();</pre>
+
+          <h4>run</h4>
+          <p><code>run(fn)</code></p>
+          <p>This method lets you run your animation. Optionally you can pass it a callback. If your animation consists of a single sequence, the callback will be execute when it terminates. However, if you have used <code>then</code> blocks or <code>.anim</code> methods to create nested sequences, the callback passed to <code>run</code> will execute when the first sequence ends. In the case where you have multiple sequences and want to execute a callback, pass it to the last <code>then</code> block.</p>
+<pre class="prettyprint linenums">$.anim('#el')
+.set('color', 'red')
+.run();
+
+// Pass run a callback:
+$.anim('#el')
+.set('color', red')
+.run(function() {
+  alert('This animation just ended!');
+});</pre>
+
+          <h4>defaults</h4>
+          <p><code>$.anim.defaults</code></p>
+          <p>This is used to set default duration for your animations. Its value is set to 500 milliseconds. This is  shared by all animations unless you use the duration method to set a duration for a sequence. You can change the default as follows:</p>
+<pre class="prettyprint linenums">$.anim.defaults = {
+  duration: 2000
+};</pre>
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html" class='selected'>Animation</a>
+              <ul>
+                <li><a href="anim-intro.html">Intro</a></li>
+                <li><a href="anim-use.html">Use</a></li>
+                <li><a href="anim-api.html" class='selected'>API</a></li>
+              </ul>
+            </li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="../../index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

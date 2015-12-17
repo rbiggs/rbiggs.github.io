@@ -32,21 +32,12 @@
     <section>
       <div>
         <div>
-          <h2>Tutorials</h2>
+          <h2>$.anim</h2>
           <h3>Intro</h3>
-          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
-          <p>We currently have two reference apps for you to download in order to see how to put TruckJS's layouts, widgets, model, views and routes together to make an app.</p>
-          <ul>
-            <li><a target='_blank' href="https://github.com/rbiggs/SFCoffee">SFCoffee</a></li>
-            <li><a target='_blank' href="https://github.com/rbiggs/Vino">Vino</a></li>
-            <li><a target='_blank' href="https://github.com/rbiggs/Fragranz">Fragranz</a></li>
-          </ul>
-          <p>You can see these apps live on your mobile devices at these urls. Please note that they are using the iOS theme:</p>
-          <ul>
-            <li><a target='_blank' href="http://wobba.io/sfcoffee">SFCoffee</a></li>
-            <li><a target='_blank' href="http://wobba.io/vino">Vino</a></li>
-            <li><a target='_blank' href="http://wobba.io/fragranz">Fragranz</a></li>
-          </ul>
+          <img src="../../images/truck-parts/Truck-Tank.png" alt="Truck Tank">
+          <p>Truck has a module for animation call $.anim. This is a tween library. It takes the properties you provide and converts them into CSS3 animations where appropriate. This is not something you would use to create a game. That said, Truck's Anim method creates smooth animations that can be chained together to create complex results. The API is easy to understand and the resulting animation code is easy to reason about. Although Truck comes with animations already implemented in the UI, if you are creating something custom, you can use Truck Animto add that extra pizzazz.</p>
+          <p>Because Truck Anim uses CSS3 transitions, browsers may sometimes fudge the tweens in unpredictable ways. This depends on the amount of memory, processor and other factors available to the browser. If you need very precise controller over every aspect of your animations, you should look at Raphael, Processing, Green Sock, D3, Velocity, etc.</p>
+        
         </div>
         
         <div id="menu">
@@ -70,13 +61,14 @@
             <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
             <li><a href="../forms/forms-intro.html">Forms</a></li>
             <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
-            <li><a href="../animation/anim-intro.html">Animation</a></li>
-            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-            <li><a href="../tutorials/tutorials-intro.html" class='selected'>Tutorials</a>
+            <li><a href="../animation/anim-intro.html" class='selected'>Animation</a>
               <ul>
-                <li><a href="tutorials-intro.html" class='selected'>Intro</a></li>
-              </ul>
-            </li>
+                <li><a href="anim-intro.html" class='selected'>Intro</a></li>
+                <li><a href="anim-use.html">Use</a></li>
+                <li><a href="anim-api.html">API</a></li>
+              </ul></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
           </ul>
         </div>
       </div>
