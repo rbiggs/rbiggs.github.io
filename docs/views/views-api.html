@@ -204,7 +204,7 @@ myView.unbind(myModel);
 </pre>
 
           <h4>addEvent</h4>
-          <p><code>addEvent(events, dontReplace)</code></p>
+          <p><code>addEvent(events, replace)</code></p>
           <p>This method allows you to add events to a view. The method expects an object or array. The object should have at least two properties:</p>
 <pre class='prettyprint linenums'>// Add an event to the view:
 myView.addEvent({
@@ -213,6 +213,17 @@ myView.addEvent({
     console.log($(this).text());
   }
 });</pre>
+<p>You can replace all events with the provided event by passing a true value after the events. By default events are add to whatever is already there:</p>
+
+<pre class='prettyprint linenums'>// Add an event to the view,
+// replacing any events already registered:
+myView.addEvent({
+  event: 'tap',
+  callback: function() {
+    console.log($(this).text());
+  }
+}, /* Replace events */ true);</pre>
+
 <p>You can also add a third property for a delegated element event. This element should be a descendent of the parent element:</p>
 <pre class='prettyprint linenums'>// Add a delegate event to the view:
 myView.addEvent({

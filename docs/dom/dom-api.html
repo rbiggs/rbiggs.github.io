@@ -427,6 +427,12 @@ $('#list').find('li').unshift(listItem);
             <p>This method lets you remove an element from a collection.</p>
 <pre class='prettyprint linenums'>$('li').shift();
 </pre>
+            <h4>element.forEach(callback)</h4>
+            <p>This method lets you execute a callback on each item in the collection. Its arguments follow the normal JavaScript convention of context followed by index.</p>
+<pre class='prettyprint linenums'>$('li').each(function(item) {
+    $('item').append(' Sold!');
+});
+</pre>
             <h4>element.each(callback)</h4>
             <p>This method lets you execute a callback on each item in the collection. Its arguments follow the jQuery convention of index and context.</p>
 <pre class='prettyprint linenums'>$('li').each(function(item) {
