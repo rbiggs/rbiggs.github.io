@@ -75,7 +75,7 @@ $.Modules.add( "foo", function() {
 // The dependencies are added in an array,
 // then passed as arguments to the implementation:
 //=================================================
-$.Modules.add("baz", ["foo", "bar"], function(bar, baz) {
+$.Modules.add("baz", ["foo", "bar"], function(foo, bar) {
   
   var name = "Charlie";
 
