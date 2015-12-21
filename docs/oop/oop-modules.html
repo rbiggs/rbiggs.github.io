@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>OOP</h2>
+          <h3>Modules and Depedency Injection</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <p>It's a good practice to avoid polluting the global space with variable. Even if your code is all within the scope of an immediately invoked function expression, its still a good practice to limit how many things you have hanging out in the local scope.</p>
+
+          <p>Truck provides <code>$.Modules</code> to let you define modules. These are encapsulated in the private scope of <code>$.Module</code>. You can create modules that have other modules as dependencies. These will be injected into the module. To create a module, you "add" it to the <code>$.Modules</code> object. Because of the private scope of the module, you need to return an object literal to expose the module members you want to be used outside the module. To create a module, we provide to arguments: a name for the module, and a function that implements its properties and methods:</p>
+
+
+          <pre class="prettyprint linenums">// Create a module named "foo":
+$.Modules.add( "foo", function() {
+  function hello(who) {
+    return "Let me introduce: " + who;
+  }
+
+  // Make "hello" method public:
+  return {
+    hello: hello
+  };
+});</pre>
+          <p>Notice that we expose the private hello method be returning it in an object literal.</p>
+
+          <p>Next we create another module named "bar":</p>
+
+<pre class="prettyprint linenums">$.Modules.add( "bar", function() {
+  function announce(who) {
+    console.log('Announcement: ' + who + "!");
+  }
+  
+  // Make "announce" method public:
+  return {
+    announce: announce
+  };
+});</pre>
+
+        <p>So far we have two similar modules, foo returns a string and bar outputs to the browser's console. In the next module, we're goint to inject these two so that it can use them. We'll name the new module "baz". To indicate dependencies, when put the module name in quote inside an array as the second argument, followed by the module implementation. The besides providing the names in an array to indicate the dependency, we inject them into the implementation as arguments of the wrapper function. If you forget to provide a quote depedency in the array, or enter the dependecy as an argument, it will not get injected. This means that any attempt to use that modules inside this module will throw and exception. If you're getting an error about a module not being a function, etc., check that you've got it indicate at both locations in the module setup.</p>
+
+          <pre class="prettyprint linenums">// Add module with two dependencies - bar &amp; baz.
+// The dependencies are added in an array,
+// then passed as arguments to the implementation:
+//=================================================
+$.Modules.add("baz", ["foo", "bar"], function(bar, baz) {
+  
+  var name = "Charlie";
+
+  function upperCase(str) {
+    return str.toUpperCase();
+  }
+
+  function message() {
+    // Use the "foo" module:
+    var msg = upperCase(foo.hello(name));
+    console.log(msg);
+    // Use the "bar" module:
+    bar.announce(name);
+  }
+
+  var inform = function(msg) {
+    console.log('For your information: ' + msg);
+  }
+
+  // Make these methods public:
+  return {
+    message: message,
+    inform: inform
+  };
+});</pre>
+          <p>With all three modules defined, we can now use them. You do this my running them direciton on the <code>$.Modules</code> object:</p>
+
+            <pre class="prettyprint linenums">
+$.Modules.run("baz").message();
+$.Modules.run("bar").announce('Bozo the Clown');
+$.Modules.run("baz").inform('Wobba is here!');</pre>
+            
+            <p>When we run these modules, the following happens. First <code>baz.message</code> gets executed, which invokes the module <code>foo</code> and <code>bar</code> to output lines 1 and 2. Then <code>bar.announce</code> gets executed, which outputs line 3. THen <code>baz.inform</code> gets executed, which outputs line 4.</p>
+            <pre class="prettyprint linenums">1. LET ME INTRODUCE: CHARLIE
+2. Announcement: Charlie!
+3. Announcement: Bozo the Clown!
+4. For your information: Wobba is here!</pre>
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../oop/oop-intro.html" class='selected'>OOP</a>
+              <ul>
+                <li><a href="oop-intro.html">Intro</a></li>
+                <li><a href="oop-extend.html">Extend</a></li>
+                <li><a href="oop-mixin.html">Mixin</a></li>
+                <li><a href="oop-clone.html">Clone</a></li>
+                <li><a href="oop-modules.html" class='selected'>Modules</a></li>
+              </ul>
+            </li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html">Animation</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

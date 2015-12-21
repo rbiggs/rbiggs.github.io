@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>OOP</h2>
+          <h3>Clone</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <p>Classes are very common pattern in many programming laguages for creating multiple instances of objects. Until ES6 JavaScript has not had classes, depending instead of various types of composition. This works remarkably well do to the fact that JavaScript is a prototypal language. This means that when you make copies of an object, the copies get their members from the original by following the prototype chain. The new ES6 classes in JavaScript are just sugar over this feature. The main benefit is legibility. JavaScript classes make it easier to reason about what code is doing.</p>
+          <p>Before classes, there have always been various strategies to accomplish the same thing with less code using various types of object factories. Actually these strategies result in very clean and readable code as well. Truck provides a method to create copies of objects. It's called <code>$.clone()</code>. This will create a unique copy of whatever object you pass an an argument.</p>
+
+          <h3>Cloning Object Literals</h3>
+
+          <p>Object literals are a popular and common way of defining objects. They are also easy to clone. Below is an object literal:</p>
+
+              <pre class="prettyprint linenums">// Define an Object literal:
+//==========================
+var nameObj = {
+  name: 'Whatever',
+
+  setName: function(name) {
+    this.name = name;
+  },
+
+  getName: function() {
+    return this.name
+  }
+};</pre>
+
+<p>Now we want to make some copies of nameObj:</p>
+
+          <pre class="prettyprint linenums">// Create clone of nameObj:
+var person = $.clone(nameObj);</pre>
+
+          <p>Now that we have a copy of nameObj, we can extend it. We don't need to do tack anything on to the object's prototype. We just attach it directly to the object with dot notation:</p>
+
+<pre class="prettyprint linenums">// Add new method to person clone:
+person.speak = function() {
+// Access private var this.name:
+  console.log('My name is: ' + this.name);
+};</pre>
+
+          <p>We can now invoke our new function.</p>
+
+<pre class="prettyprint linenums">person.speak(); // returns default - 'My name is: Whatever'</pre>
+          
+          <p>Now we'll change the name value:</p>
+
+<pre class="prettyprint linenums">person.setName('Wobba');
+person.speak(); // returns 'My name is: Wobba'</pre>
+          <p>Now we are going to create a clone of person. Since we just set the name to 'Wobba', the clone of person will have that as its defalt name value:</p>
+
+<pre class="prettyprint linenums">// Create a clone of person.
+// Will include all its properties:
+var person2 = $.clone(person);
+person2.speak(); // returns 'My name is: Wobba'
+
+// Set the name to John Doe:
+person2.setName('John Doe');
+person2.speak(); // returns 'My name is: John Doe'</pre>
+
+          <p>Now we're going to override the speak method on person2. Just define it directly on the object:</p>
+
+<pre class="prettyprint linenums">// Override the speak method:
+person2.speak = function(msg) { console.log('New version of speak: ' + msg)};
+person2.speak('A new message.'); // New version of speak: A new message.</pre>
+
+          <p>Next we'll create a clone of person2:</p>
+
+<pre class="prettyprint linenums">// Create a clone of person2:
+var person3 = $.clone(person2);
+person3.speak('Sam was here!'); // New version of speak: Sam was here!</pre>
+
+          <p>As you can see from these examples, cloning a base object to create copies, or clone extended copies allows for powerful object extension through composition. Each time we make a copy, it inherits the properties of the original through the prototype chain.</p>
+
+          <h3>Cloning a Revealing Module</h3>
+          <p>The revealing module, or object factory, is another popular way to creating objects in JavaScript. The nice thing about it is that it provides a simple pattern for defining private properties, and then only exposing what you want as the public interface.</p>
+
+          <p>Lets start with a simple module. Notice that we give it an extend method. This will allow us to add new members to the object, event after its result has been returned:</p>
+
+<pre class="prettyprint linenums">// Define a revealing module:
+//===========================
+var foo = (function() {
+  var ask = function(msg) {
+    console.log(msg + ": Tell me something good...");
+  }
+
+  // Define method to extend this module:
+  function extend(method, args) {
+    this[method] = args;
+  }
+
+  // Make these public:
+  return {
+    ask: ask,
+    extend: extend
+  }
+})();</pre>
+
+          <pre class="prettyprint linenums">// Make clones of foo:
+var bar = $.clone(foo);
+var baz = $.clone(foo);</pre>
+
+          <p>We now have three objects, foo, bar and baz. We can invoke ask on all three:</p>
+
+          <pre class="prettyprint linenums">foo.ask('bar.ask');
+bar.ask('bar.ask');
+baz.ask('baz.ask');</pre>
+          
+          <p>Time to do some extending. We'll extend baz:</p>
+
+          <pre class="prettyprint linenums">// Define method on baz.
+// This only exists on baz: 
+baz.extend('clownAlert', function() {
+  console.log('baz.clownAlert: Bozo the Clown was here!');
+});
+
+// Invoke the new method:
+baz.clownAlert(); // baz.clownAlert: Bozo the Clown was here!</pre>
+            
+          <p>Using baz's extend method, we can even override its private ask method:</p>
+
+          <pre class="prettyprint linenums">// Override private talk method:
+baz.extend('ask', function(msg) {
+  console.log(msg + ': I\'m doing someting else now.')
+});
+baz.ask('baz.ask') // I'm doing someting else now.</pre>
+          
+          <p>Using <code>$.clone</code> we can create copies of copies of objects and using simple extension method to add new properties or override existing ones. The clone process retains the prototype chain from the furthest clone back to the original. This is very efficient since it reduces the amount of memmory needed for each clone.</p>
+
+          <h3>A Practical Comparison</h3>
+
+          <p>Some much for the simple examples. Now we want to look at someting more realistic so you can see the difference in coding styles. We'll start with the typical prototypcal inheritance pattern, followed by the new ES6 class equivalent, followed by the same thing using <code>$.clone</code>. Below is the old school prototypal inheritance pattern:</p>
+
+
+          <pre class="prettyprint linenums">// Parent class:
+function Widget(width,height) {
+  this.width = width || 50;
+  this.height = height || 50;
+  this.$elem = null;
+}
+
+Widget.prototype.render = function($where){
+  if (this.$elem) {
+    this.$elem.css({
+      width: this.width + "px",
+      height: this.height + "px"
+    }).appendTo($where);
+  }
+};
+
+// Child class:
+function Button(width,height,label) {
+  // "super" constructor call
+  Widget.call( this, width, height );
+  this.label = label || "Default";
+  this.$elem = $("&lt;button id='my-button'&gt;&lt;/button&gt;").text(this.label);
+}
+
+// Make `Button` "inherit" from `Widget`:
+Button.prototype = Object.create( Widget.prototype );
+
+// Override base "inherited" `render(..)`:
+Button.prototype.render = function($where) {
+  $($where).append(this.$elem);
+  $('#my-button').on('click', function() {
+    console.log("Button '" + $(this).text() + "' clicked!");
+  });
+};
+</pre>
+
+          <p>This have been the typical way of doing pseudo-classical programming in JavaScript for years. Now lets look at the same code using the new ES6 class syntax. Notice how much cleaner it is, and therefore easier to reason about what the code is doing:</p>
+
+          <pre class="prettyprint linenums">class Widget {
+  constructor(width,height) {
+    this.width = width || 50;
+    this.height = height || 50;
+    this.$elem = null;
+  }
+  render($where){
+    if (this.$elem) {
+      this.$elem.css( {
+        width: this.width + "px",
+        height: this.height + "px"
+      }).appendTo( $where );
+    }
+  }
+}
+
+class Button extends Widget {
+  constructor(width,height,label) {
+    super(width, height);
+    this.label = label || "Default";
+    this.$elem = $("&lt;button id='my-button'&gt;&lt;/button&gt;").text(this.label);
+  }
+  render($where) {
+    $($where).append(this.$elem);
+    $('#my-button').on('click', function() {
+      console.log("Button '" + $(this).text() + "' clicked!");
+    });
+  }
+}</pre>
+
+        <p>Under the covers, the class definition is actually creating the same prototype linking that the first example does. The class version hides the wordiness and makes the code more concise. The biggest drawback to using JavaScript classes is that its brand new. It will literally be years before you can use this reliably in the wild without worrying about browsers not supporting it. Currently only the most recent browser versions support it. If you need to target most version of Android, this is not going to work.</p>
+
+        <p>Now lets look at accomplishing the same thing using object composition with Truck's <code>$clone:</code></p>
+
+          <pre class="prettyprint linenums">// Define first object:
+// Define Widget object:
+var Widget = {
+  init: function(width,height){
+    this.width = width || 50;
+    this.height = height || 50;
+    this.$elem = null;
+  },
+  insert: function($where){
+    if (this.$elem) {
+      this.$elem.css( {
+        width: this.width + "px",
+        height: this.height + "px"
+      }).appendTo( $where );
+    }
+  }
+};
+
+// Create a clone of Widget:
+var Button = $.clone( Widget );
+
+// Extend Button object:
+$.extend(Button, {
+  setup: function(width,height,label) {
+    this.init( width, height );
+    this.label = label || "Default";
+
+    this.$elem = $("&lt;button id='my-button'&gt;&lt;/button&gt;").text(this.label);
+  },
+  render: function($where) {
+    $($where).append(this.$elem);
+    $('#my-button').on('click', function() {
+      console.log("Button '" + $(this).text() + "' clicked!");
+    });
+  },
+});
+
+// Create a button instance, set it up 
+// and render it to the screen:
+var btn = $.clone(Button);
+btn.setup('100', '50', 'Click Me');
+btn.build('section')</pre>
+
+          <p>Although the above is not quite as concise as the class version, it works everywhere now, on desktop and mobile. As you can see, creating objects, cloning them and extending them with extend or mixin enable you to create efficient and versitile objects.</p>
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../oop/oop-intro.html" class='selected'>OOP</a>
+              <ul>
+                <li><a href="oop-intro.html">Intro</a></li>
+                <li><a href="oop-extend.html">Extend</a></li>
+                <li><a href="oop-mixin.html">Mixin</a></li>
+                <li><a href="oop-clone.html" class='selected'>Clone</a></li>
+                <li><a href="oop-modules.html">Modules</a></li>
+              </ul>
+            </li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html">Animation</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

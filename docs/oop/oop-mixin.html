@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -32,50 +35,75 @@
     <section>
       <div>
         <div>
-          <h2>Gestures</h2>
-          <h3>Intro</h3>
-          <img src="../../images/truck-parts/Truck-Wheels.png" alt="Truck Wheels">
-          <p>Truck provides gestures to make user interactions more natural. These work identically with mouse or touch. Truck provides the following gestures:</p>
-          <ul>
-            <li>tap</li>
-            <li>doubletap</li>
-            <li>longtap</li>
-            <li>swipeleft</li>
-            <li>swiperight</li>
-            <li>swipeup</li>
-            <li>swipedown</li>
-          </ul>
-          <p>On Microsoft platforms, they use long taps for showing the context menu, so mostly this does not respond as expected. Otherwise these work the same across platforms and devices.</p>
-          <p>We strong recommend use Truck's tap for user interactions. Using a click has a rather long delay, and using a touchstart and cause scrollable lists to behave unexpected do to triggering actions while trying to scroll. A tap is the sweet spot for most user interactions.</p>
+          <h2>OOP</h2>
+          <h3>Mixin</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <p>Extend provides a nice way of adding new properties from one object to another, but if you don't want existing properties to be replaced, you can use Truck's <code>$.mixin()</code> method. This takes to arguments: the object to mix in, and the object to mix into. If properties on the source object already exist on the target object, they will be ignored. Only new properties will be added to the target.</p>
 
+          <p>Let's take a look at the example from <code>$.Extend</code>, but do a mixin instead.</p>
+
+
+          <p>Below is sam object:</p>
+
+
+          <pre class="prettyprint linenums">var sam = {
+  name: 'Sam',
+  job: 'developer',
+  hobby: 'twiddling thumbs',
+  address: '1234 Lane, SomeWhereVille'
+}</pre>
+      
+          <p>And this is the object we want to mix into sam:</p>
+
+          <pre class="prettyprint linenums">var newProps = {
+  job: 'cook',
+  address: '000 DeadEnd, NoPlace',
+  age: 1000
+};</pre>  
+
+          <pre class="prettyprint linenums">// Mixin Sam:
+$.mixin(newProps, Sam);
+
+// Sam is now:
+// (He's still a develoer)
+{
+  name: 'Sam',
+  job: 'developer',
+  age: 32
+}</pre>
+          <p>As you can see, because we did a mixin, Sam's job did not change, but he now has an age. Like <code>$.extend</code>, you can define a mixin source inline:</p>
+
+
+          <pre class="prettyprint">// Mixin Sam:
+$.mixin({name: 'Sam', job: 'developer', age: 32}, Sam);</pre>
         </div>
         
         <div id="menu">
           <ul>
             <li><a href='../models/models-intro.html'>Models</a></li>
             <li><a href="../views/views-intro.html">Views</a></li>
-            <li><a href="../mediators/mediators-intro.html">Mediators</a>
-            </li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
             <li><a href="../templates/templates-intro.html">Templates</a></li>
             <li><a href="../promises/promises-intro.html">Promises</a></li>
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
             <li><a href="../box/box-intro.html">Box</a></li>
             <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
-            <li><a href="../oop/oop-intro.html">OOP</a></li>
-            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
-            <li><a href="../gestures/gestures-intro.html" class='selected'>Gestures</a>
+            <li><a href="../oop/oop-intro.html" class='selected'>OOP</a>
               <ul>
-                <li><a href="gestures-intro.html" class='selected'>Intro</a></li>
-                <li><a href="gestures-use.html">Use</a></li>
-                <li><a href="gestures-api.html">API</a></li>
+                <li><a href="oop-intro.html">Intro</a></li>
+                <li><a href="oop-extend.html">Extend</a></li>
+                <li><a href="oop-mixin.html" class='selected'>Mixin</a></li>
+                <li><a href="oop-clone.html">Clone</a></li>
+                <li><a href="oop-modules.html">Modules</a></li>
               </ul>
             </li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
             <li><a href="../dom/dom-intro.html">DOM</a></li>
             <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
             <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
             <li><a href="../themes/themes-intro.html">Themes</a></li>
-            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
             <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
             <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
             <li><a href="../forms/forms-intro.html">Forms</a></li>
@@ -92,9 +120,9 @@
     <footer>
       <div>
           <menu id='mainFooterMenu'>
-            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-            <a href="quickstart.html">Quick Start</a>
-            <a href="features.html">Features</a>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
             <a href="../../install.html">Install</a>
           </menu>
         <aside>
@@ -109,6 +137,9 @@
     </footer>
   </article>
   
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
