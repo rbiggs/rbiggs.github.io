@@ -159,25 +159,25 @@ var myViewIsRendered = myView.isRendered();
 var myViewIsEmpty = myView.isEmpty();
 </pre>
 
-          <h4>getParent</h4>
-          <p><code>getParent()</code></p>
+          <h4>getElement</h4>
+          <p><code>getElement()</code></p>
           <p>This method allows you to find out what parent element the view is attached to.</p>
 <pre class='prettyprint linenums'>// Get the element a view is attached to:
-var parentElement = myView.getParent();
+var parentElement = myView.getElement();
 </pre>
 
-          <h4>setParent</h4>
-          <p><code>setParent(element)</code></p>
+          <h4>setElement</h4>
+          <p><code>setElement(element)</code></p>
           <p>This method allows you to change the element a view is anchored to. If you change the parent, the new element will have its content deleted. If you intend to change the parent element that a view uses, make sure that the view has the template you want and some data so that you can render it immediately.</p>
           <p>When you change the parent element that a view is using, Truck rebinds any events you have in your view. If you want different events you need to change those using the <code>addEvent</code> method.</p>
 <pre class='prettyprint linenums'>// Set the parent element for the view:
-myView.setParent('#newParent');
+myView.setElement('#newParent');
 myView.render(someData);
 </pre>
 
           <p>To change the events after setting a new parent element, first unbind its events, then add the new ones:</p>
 <pre class='prettyprint linenums'>// Set the parent element for the view:
-myView.setParent('#newParent');
+myView.setElement('#newParent');
 myView.off();
 myView.addEvent({
   element: 'li',
@@ -396,6 +396,7 @@ myView.getRenderCount();
             </li>
             <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
             <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../components/components-intro.html">Components</a></li>
             <li><a href="../promises/promises-intro.html">Promises</a></li>
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>

@@ -35,24 +35,109 @@
     <section>
       <div>
         <div>
-          <h2>jQuery</h2>
-          <h3>Intro</h3>
+          <h2>Components</h2>
+          <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-          <p>You can use jQuery with Truck. Just load it first. Truck will then use jQuery instead of its default DOM selector engine. You can also build Truck in a number of ways to which make it easier to use with jQuery. Personally, we don't think you should bother using jQuery with Truck. There simply isn't a good reason to do so. Including jQuery in every Web project is like a drug addiction. Truck can build powerful apps without jQuery. It provides great layouts and advanced widgets that do not need jQuery. It gives you modern, ECMAScript 6 Promises and the Fetch API as an alternative to jQuery's Ajax. Yes, there are a ton of jQuery plugins out there. But none of them are fit to use on mobile devices, and none of them create a satisfactory user experience on mobile devices. jQuery plugins are great for desktop though.</p>
-          <p>OK, so if you really, really, really insist on using jQuery, here are your build options:</p>
+          
+          <h4>Setup</h4>
+          <p>Components are just reusable views. As such, their setup is almost identical to views. The only difference is that for a component, you never, ever provide an element. All components are elementless at creation. The element for a component gets assigned after you create an instance.</p>
+          <pre class="prettyprint linenums">// Define a component:
+$.Component({
+  name: 'MyWidget',
+  variable: 'widget',
+  events: [
+    {
+      event: 'tap',
+      element: 'li',
+      callback: function() {
+        console.log($(this).text());
+      }
+    }
+  ]
+});</pre>
 
-        <ol>
-          <li>The complete framework</li>
-          <li>Just the MVC components</li>
-          <li>Everyting except the selector engine</li>
-        </ol>
-        <p>To build the whole thing, just run <code>gulp</code>:</p>
-<pre class="prettyprint linenums">gulp</pre>
+          <p>The above gives a component named "MyWidget" that we can use to create exact copies of the original component. The component will be registered on the dollar sign ($):</p>
 
-        <p>If you want to build just Truck's selector engine to use it as a light and modern replacement for jQuery, run:</p>
-<pre class="prettyprint linenums">gulp --mvc</pre>
-        <p>And to build the framework but without Truck's DOM engine because you want to use jQuery, run:</p>
-<pre class="prettyprint linenums">gulp --engine</pre>
+<pre class="prettyprint linenums">// Create an instance of $.MyWidget:
+var Widget1 = $.Widget();</pre>
+
+          <p>After creating an instance of our component, we need to tell it what element it is associated with:</p>
+
+<pre class="prettyprint linenums">// Create an instance of $.MyWidget:
+var Widget1 = $.Widget();
+
+// Tell the component what element to use:
+Widget1.setElement('#myWidget1);</pre>
+
+          <p>Now that the component has an element, we can render it will data:</p>
+
+<pre class="prettyprint linenums">// Create an instance of $.MyWidget:
+var Widget1 = $.Widget();
+
+// Tell the component what element to use:
+Widget1.setElement('#myWidget1');
+
+// Render the component with data:
+Widget1.render(widgetData);</pre>
+
+        <p>Below is a complete example of defining and use a component:</p>
+
+<pre class="prettyprint linenums">// Array data:
+//=============
+var lums = [
+  {firstName: "Stephen", lastName: "Hawking", image: 'images/Hawking.jpg'},
+  {firstName: "Albert", lastName: "Einstein", image: 'images/Einstein.jpg'},
+  {firstName: "Leonardo", lastName: "Da Vinci", image: 'images/DaVinci.jpg'},
+  {firstName: "Galileo", lastName: "Galilei", image: 'images/Galileo.jpg'},
+  {firstName: "Nicholas", lastName: "Copernicus", image: 'images/Copernicus.jpg'}  
+];
+
+var bums = [
+  {firstName: 'Joe', lastName: 'Bodoni', image: 'images/apple.png'},
+  {firstName: 'Wobba', lastName: 'Bango', image: 'images/orange.png'},
+  {firstName: 'Jeff', lastName: 'Ruther', image: 'images/banana.png'},
+  {firstName: 'Pete', lastName: 'Smith', image: 'images/avocado.png'}
+];
+
+// Define component "people":
+$.Component({
+  name: 'People',
+  variable: 'person',
+  // Get if a start number:
+  startIndexFrom: 7,
+  template: "&lt;li class='comp'&gt;\
+    &lt;img data-src='${ person.image }' alt=''&gt;\
+    &lt;div&gt;\
+      &lt;h3&gt;\
+        ${ $.view.index }: ${ person.firstName } ${ person.lastName }\
+      &lt;/h3&gt;\
+    &lt;/div&gt;\
+  &lt;/li&gt;",
+  events: [
+    {
+      event: 'tap',
+      element: 'li',
+      callback: function() {
+        console.log($(this).text())
+      }
+    }
+  ]
+});
+
+// Define a component instance:
+var LumsView = $.People();
+LumsView.setElement('#arrayTemplate1');
+LumsView.render(lums);
+
+// Define another component instance:
+var BumsView = $.People();
+BumsView.setElement('#arrayTemplate2');
+BumsView.render(bums);
+
+// Markup for components:
+&lt;ul class="list" id="arrayTemplate1"&gt;&lt;/ul&gt;
+&lt;ul class="list" id="arrayTemplate2"&gt;&lt;/ul&gt;</pre>
+
         </div>
         
         <div id="menu">
@@ -60,9 +145,13 @@
             <li><a href='../models/models-intro.html'>Models</a></li>
             <li><a href="../views/views-intro.html">Views</a></li></li>
             <li><a href="../mediators/mediators-intro.html">Mediators</a>
-            </li>
             <li><a href="../templates/templates-intro.html">Templates</a></li>
-            <li><a href="../components/components-intro.html">Components</a></li>
+            <li><a href='../components/components-intro.html' class='selected'>Components</a>
+              <ul>
+                <li><a href="../components/components-intro.html">Intro</a></li>
+                <li><a href="components-use.html" class='selected'>Use</a></li>
+              </ul></li>
+            </li>
             <li><a href="../promises/promises-intro.html">Promises</a></li>
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
@@ -81,24 +170,19 @@
             <li><a href="../forms/forms-intro.html">Forms</a></li>
             <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
             <li><a href="../animation/anim-intro.html">Animation</a></li>
-            <li><a href="../jquery/jquery-intro.html" class='selected'>jQuery</a>
-              <ul>
-                <li><a href="jquery-intro.html" class='selected'>Intro</a></li>
-              </ul>
-            </li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
             <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
           </ul>
         </div>
       </div>
     </section>
 
-
     <footer>
       <div>
           <menu id='mainFooterMenu'>
-            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
-            <a href="quickstart.html">Quick Start</a>
-            <a href="features.html">Features</a>
+            <a id='truckLogoLink' href="i../../ndex.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="../../quickstart.html">Quick Start</a>
+            <a href="../../features.html">Features</a>
             <a href="../../install.html">Install</a>
           </menu>
         <aside>
@@ -112,7 +196,6 @@
       </div>
     </footer>
   </article>
-  
   
 <script>
   prettyPrint();

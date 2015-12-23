@@ -38,6 +38,7 @@
 						<p>Data is the ultimate truth in an app. Models provide a convenient way to encapsulate data and make it available to the system for use. Unlike raw data, models can propagate their changes so that views can update automatically.</p>
 						<a href="docs/models/models-intro.html" class="mainLink">Learn More</a>
 					</div>
+
 					<div>
 						<h2>Views</h2>
 						<p>Magical unicorns, seriously. Views make your document come alive. You can bind them to one model, then to another, render them a few times, rendered them after a designated time, change their template, or change their element.</p>
@@ -51,6 +52,7 @@
 						<p>These enable you to manage the flow between the view and model. Truck creates mediators for you when you bind a view to a model. But by writing your own, you can update a model as the user interacts with the view.</p>
 						<a href="docs/mediators/mediators-intro.html" class="mainLink">Learn More</a>
 					</div>
+
 					<div>
 						<h2>Templates</h2>
 						<p>Truck has two kinds of templates, markup in the DOM, or markup in a script tag. You can use custom variables that make sense for the data you're using. You can define helpers and templates can include JavaScript.</p>
@@ -60,119 +62,134 @@
 				
 				<div class='row'>
 					<div>
+						<h2>Components</h2>
+						<p>Components allow you to reuse a view in diffeent places in your app. A component supports all the features that regular views do, including events, starting index number, etc.</p>
+						<a href="docs/components/components-intro.html" class="mainLink">Learn More</a>
+					</div>
+
+					<div>
 						<h2>Promises</h2>
 						<p>Truck supports ES6 Promises. If the browser supports these, no problem. Otherwise Truck uses a polyfill. Promises provide an elegant way to avoid nested tower of doom callback structures. Truck's Fetch API uses promises by default.</p>
 						<a href="docs/promises/promises-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+				
+				<div class='row'>
 					<div>
 						<h2>Fetch</h2>
 						<p>Fetch is Ajax with a simplified interface. It has builtin support for Promises. You can create headers for more advance uses. Promise chains make processing data and handling errors easy. It includes JSONP as well.</p>
 						<a href="docs/fetch/fetch-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
-				
-				<div class='row'>
+
 					<div>
 						<h2>Router</h2>
 						<p>Routing enables you to write code detached from the DOM. Truck automatically dispatches these for you and gives you with the correct data points in the route callback. Routes are used internally and do not affect the url.</p>
 						<a href="docs/router/router-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+
+				<div class="row">
 					<div>
 						<h2>Box</h2>
 						<p>Truck's Box provides local data persistence. It first tries to use IndexedDB. If there is a problem with the browser's implementation, it falls back to WebSQL or to localStorage. The data cap varies by browser.</p>
 						<a href="docs/box/box-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
 
-				<div class="row">
-					
 					<div>
 						<h2>Dispatcher</h2>
 						<p>Sometimes mediators are overkill. But you need a decouped way to handle the programatic flow between to disparate components. Truck's Dispatcher lets you do this in a simple and elegant way.</p>
 						<a href="docs/dispatcher/dispatcher-intro.html" class="mainLink">Learn More</a>
 					</div>
-					
+				</div>
+				
+				<div class='row'>
 					<div>
 						<h2>OOP</h2>
 						<p>Writing consistent and reusable code in JavaScript can be tough due to the dynamic nature and its use of protypal inheritance. Truck offers tools to create mixins, object clones and modules to organize code for easier maintenance and human readability.</p>
 						<a href="docs/oop/oop-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
-				
-				<div class='row'>
+
 					<div>
 						<h2>Widgets</h2>
 						<p>Navigation lists, select lists, editale lists, tab bars, slide out menus, switches, buttons, carousels, popups, popovers, sheets, segmented buttons, steppers, busy indicators. Lots of widgets to implement the user interactions you need.</p>
 						<a href="docs/widgets/widgets-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+				
+				<div class='row'>
 					<div>
 						<h2>Gestures</h2>
 						<p>Truck provides extensive support for interactions with multiple types of devices: mouse, finger, stylus. Whether it's a tap, a mouse down, a click or a swipe, Truck gives you a consistent interface for capturing these.</p>
 						<a href="docs/gestures/gestures-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
-				
-				<div class='row'>
+
 					<div>
 						<h2>DOM</h2>
 						<p>Views with data binding mean you don't need to fiddle with the DOM. If you do need to, Truck provides a powerful selector engine and DOM methods that replicate everything you know and love in jQuery. It works the same way.</p>
 						<a href="docs/dom/dom-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+				
+				<div class='row'>
 					<div>
 						<h2>Utilities</h2>
 						<p>Truck provides a number of utilities to help you write better code. These include a group of unique methods to help you write oneliners with selector filters. These are similar to <code>is</code> and <code>not</code>, but return the matching elements instead of a boolean.</p>
 						<a href="docs/utilities/utilities-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
-				
-				<div class='row'>
+
 					<div>
 						<h2>Layouts</h2>
 						<p>From the simple to the complex, Truck has a comprehesive layout system to build any type of layout you need. By default Truck layouts are responsive, so you don't need to worry about device sizes. You do need to make sure your content fits properly on narrower devices.</p>
 						<a href="docs/layouts/layouts-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+				
+				<div class='row'>
 					<div>
 						<h2>Themes</h2>
 						<p>Truck uses themes to create the look and feel of Android, iOS and Windows Phone. You create your app with one markup and one JavaScript. To support a platform is just a matter of providing the appropriate theme. Themes make your apps look great with little effort.</p>
 						<a href="docs/themes/themes-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
-				
-				<div class='row'>
+
 					<div>
 						<h2>Stacks</h2>
 						<p>Everything in Truck started with the concept of stacks. This is an abstraction of arrays. You can use stacks to store any kind of data collection. Stacks provide a convenient and secure way of storing data for use by your app.</p>
 						<a href="docs/stacks/stacks-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+				<div class='row'>
 					<div>
 						<h2>Forms &amp; Validation</h2>
 						<p>If you have forms, you can use Truck's form validators to check you data as the user is filling out the form. You can also validate the form at submit. If the form passes, it will be converted into a JSON object.</p>
 						<a href="docs/forms/forms-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
-				<div class='row'>
+
 					<div>
 						<h2>Data Formatting</h2>
 						<p>Raw data, that's what you usually get when you query a database. It doesn't look pretty. Truck provides a number of help data formatters so that your data looks the way your users expect. They have options to help you meet localization needs.</p>
 						<a href="docs/formatting/formatting-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+				<div class='row'>
 					<div>
 						<h2>Animation</h2>
 						<p>Truck has a simple an elegant animation module. This uses JavaScript to create tweening of DOM element properties using CSS3 transitions. The API allows you to quickly and intuitively create striking animations for your app.</p>
 						<a href="docs/animation/anim-intro.html" class="mainLink">Learn More</a>
 					</div>
-				</div>
-				<div class='row'>
+
 					<div>
 						<h2>Hybrids</h2>
 						<p>So, you made an web app with Truck. You want to deploy it to Android or iOS. Truck provides you with NPM tools to turn your app into a hybrid that you can put on each platform's app store.</p>
 						<a href="docs/hybrids/hybrids-intro.html" class="mainLink">Learn More</a>
 					</div>
+				</div>
+				<div class="row">
 					<div>
 						<h2>jQuery</h2>
 						<p>Truck does not need jQuery. It provides everything you need to do the things jQuery does. And it does it in less code. But if jQuery is your crack, you can use it with Truck. Just load it first. Truck will only use the parts that jQuery needs.</p>
 						<a href="docs/jquery/jquery-intro.html" class="mainLink">Learn More</a>
 					</div>
+					<div></div>
 				</div>
 
 			</div>
