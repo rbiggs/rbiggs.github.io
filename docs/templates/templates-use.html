@@ -38,8 +38,9 @@
           <h2>Templates</h2>
           <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-          <p>Truck's views use templates to render data. Template are of three types: script, markup and string. We really prefer our templates directly where they will be rendered since it shows intent clearly. You could also define a temlate as a string. This is very tedious if the temlate is complex. Using a script tag or DOM elements is much easier. Besides, when you define a view, it grabs the elements template and caches it for reuse.</p>
-          <p>Templates have two important type of markers or delimiters: interpolators and executors. An interpolator tells Truck to render a data variable. And executor tells Truck to run a piece of JavaScript. A template can also hold an number sequencer or a template helper.</p>
+          <p>Truck's views use templates to render data. Template are of three types: script, markup and string. We really prefer our templates directly where they will be rendered since it shows intent clearly. You could also define a temlate as a string. This is very tedious if the temlate is complex. Using a script tag or DOM elements is much easier. Besides, when you define a view, it grabs the element's template and caches it for reuse.</p>
+          <p>It's important to note that you can also define templates directly in your views. This has the advantage that the view holds in one place all the information affecting what the view does: template, data/model, and events.</p>
+          <p>Templates have two important types of markers or delimiters: interpolators and executors. An interpolator tells Truck to render a data variable. And executor tells Truck to run a piece of JavaScript. A template can also hold an number sequencer or a template helper.</p>
           <p>Script templates are convenient because they hide their content from the browser. Truck expects script templates to have the type <code>type="text/x-template"</code>. Let's put together a template based on an object we want to render.</p>
           <pre class='prettyprint linenums'>var myObject = {
   name: {
@@ -61,7 +62,7 @@
 &lt;/script&gt;</pre>
         <p>In the above example, <code>${ }</code> is used to demark a data variable for interpolation by the template renderer. Similary, we can use <code>{{ }}</code> to define blocks of JavaScript to be executed in a temlate. You might want to do that to conditionally output something.</p>
         <pre class='prettyprint linenums'>&lt;script type="text/x-template"&gt;
-  {{ if (somebody.friends && somebody.friends.length) { }}
+  {{ if (somebody.friends &amp;&amp; somebody.friends.length) { }}
     {{  somebody.friends.forEach(function(friend) {  }}
     &lt;li&gt; ${ friend.name}: ${ friend.job }&lt;/li&gt;
     {{  });  }}
@@ -193,7 +194,7 @@ var PeopleView = $.View({
         &lt;h3&gt;${ somebody.name }&lt;/h3&gt;
       &lt;/div&gt;
     &lt;/li&gt;
-    {{ if (somebody.friends && somebody.friends.length) { }}
+    {{ if (somebody.friends &amp;&amp; somebody.friends.length) { }}
     &lt;li&gt;
       &lt;div class='no-flex' style='max-width: 100px;'&gt;
         &lt;h3&gt;Friends:&lt;/h3&gt;
@@ -209,6 +210,29 @@ var PeopleView = $.View({
     {{ } }}
   &lt;/script&gt;
 &lt;/ul&gt;</pre>  
+
+          <h3>Templates in Views</h3>
+          <p>Although in all the above examples we have been using templates in markup, we can also define templates directly in our views. This has the advantage of having all the information regarding the rendering and behavior of a view in one place. To define a template in a view, you assign it to the view's <code>template</code> property. When doing so, you will need to put a backslash after each new line. Failing to do so will cause a fatal EOF error.</p>
+
+
+          <pre class="prettyprint linenums">
+// Define view with string template:
+var SimpleView = $.View({
+  element: '#employees',
+  variable: 'employee',
+  template: '&lt;li&gt;\
+    &lt;div&gt;\
+      &lt;h3&gt;${ employee.firstName } ${ employee.lastName }&lt;/h3&gt;\
+      &lt;h4&gt;${ employee.job }&lt;/h4&gt;\
+      &lt;p&gt;${ employee.performance }&lt;p&gt;\
+    &lt;/div&gt;\
+  &lt;/li&gt;'
+});
+// Render view:
+SimpleView.render(fruits);
+          </pre>
+          <p>Regardless of which approach you take to implementing templates, when TruckJS parses the template, it converts the template into JavaScript. In the end, the template will be a JavaScript function that evaluates the template values, evaluates any inline JavaScript and returns the markup as DOM nodes.</p>
+
         </div>
         
         <div id="menu">
