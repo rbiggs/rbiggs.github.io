@@ -49,7 +49,7 @@
           <p><code>init(callback)</code></p>
           <p>This method is used to define what a mediator does when it runs. It takes a single argument, a callback. The callback get any data passed to the mediator when it is run:</p>
 <pre class='prettyprint linenums'>MyMtor.init(function(data) {
-  if (data && data.length) {
+  if (data &amp;&amp; data.length) {
     data.forEach(function(item) {
       console.log(item);
     });
@@ -77,22 +77,21 @@ MyMtor.stop();
 // Stop the mediator after 10 runs:
 MyMtor.stop(10);
 </pre>
-          
-          <h4>restart</h4>
-          <p><code>restart(time)</code></p>
-          <p>After a mediator has been stopped, you can make it work again by using this method. If you execute it with no arguments, it will immediately be restarted, meaning it will at once react to any dispatches to its handle or any attempts to execut run on it.</p>
-          <p>You can tell a mediator to restart after a designate amount of time has passed by passing this method a number value that represents seconds:</p>
-<pre class='prettyprint linenums'>// Restart the Mediator 
-MyMtor.restart();
 
-// Tell the mediator to start in 5 minutes:
-MyMtor.restart(60 * 5);
-</pre>
+          <p>You can also stop a mediator from responding to dispatches using the <code>$.stopDispatch</code> method. To learn more about the dispatch system, please read this <a href="../dispatcher/dispatcher-intro.html" target="_blank">section</a>.</p>
           
-          <h4>getCount</h4>
-          <p><code>getCount()</code></p>
-          <p>This method lets you find out how many times a mediator has run.</p>
-<pre class='prettyprint linenums'>var count = MyMtor.getCount();
+          <h4>start</h4>
+          <p><code>restart()</code></p>
+          <p>After a mediator has been stopped, you can make it work again by using this method. It will immediately be respond to attempts to run it or to disptaches to its handle.</p>
+<pre class='prettyprint linenums'>// Restart the Mediator 
+MyMtor.restart();</pre>
+
+          <p>You can also restart a mediator so that it responds to dispatches using the <code>$.startDispatch</code> method. To learn more about the dispatch system, please read this <a href="../dispatcher/dispatcher-intro.html" target="_blank">section</a>.</p>
+          
+          <h4>count</h4>
+          <p><code>count</code></p>
+          <p>This property shows how many times a mediator has run.</p>
+<pre class='prettyprint linenums'>var count = MyMtor.count;
 </pre>
           
           <h4>resetCount</h4>
@@ -107,36 +106,18 @@ MyMtor.restart(60 * 5);
 <pre class='prettyprint linenums'>MyMtor.stopCount();
 </pre>
           
-          <h4>kill</h4>
-          <p><code>kill()</code></p>
-          <p>This method lets you kill a mediator. This is a final act. Once killed, a mediator cannot be revived for later use. If you really don't need a mediator you can kill it, otherwise, just stop it.</p>
-<pre class='prettyprint linenums'>MyMtor.kill();
+          <h4>handle</h4>
+          <p><code>handle</code></p>
+          <p>This is the handle a mediator is using.</p>
+<pre class='prettyprint linenums'>var handle = MyMtor.handle;
 </pre>
           
-          <h4>getHandle</h4>
-          <p><code>getHandle()</code></p>
-          <p>This method lets you find out what handle a mediator is using.</p>
-<pre class='prettyprint linenums'>var medHandle = MyMtor.getHandle();
-</pre>
-          
-          <h4>isStopped</h4>
-          <p><code>isStopped()</code></p>
-          <p>This method lets you check to see if a mediator has been stopped. It returns a boolean value.</p>
-<pre class='prettyprint linenums'>if (MyMtor.isStopped()) {
-  alert('This mediator needs to be restarted!');
+          <h4>exec</h4>
+          <p><code>exec</code></p>
+          <p>This property lets you check to see if a mediator has been stopped. It is a boolean value.</p>
+<pre class='prettyprint linenums'>if (!MyMtor.exec) {
+  alert('This mediator is stopped. You need to start it to reuse it!');
 }
-</pre>
-          
-          <h4>hasBeenKilled</h4>
-          <p><code>hasBeenKilled()</code></p>
-          <p>This method lets you check whether a mediator has been killed or not. It returns a boolean value.</p>
-<pre class='prettyprint linenums'>MyMtor.hasBeenKilled();
-</pre>
-          
-          <h4>$.Mediator.dispatch</h4>
-          <p><code>$.Mediator.dispatch(handle, data)</code></p>
-          <p>This method lets you dispatch a handle and data to all mediators listening to that handle. They will run depending on whether they have not been stopped, etc.</p>
-<pre class='prettyprint linenums'>$.Mediator.dispatch('my-model-handle', {name: 'Mary', 22});
 </pre>
 
         </div>
@@ -158,7 +139,7 @@ MyMtor.restart(60 * 5);
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
             <li><a href="../box/box-intro.html">Box</a></li>
-            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
             <li><a href="../oop/oop-intro.html">OOP</a></li>
             <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
             <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
@@ -166,14 +147,14 @@ MyMtor.restart(60 * 5);
             <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
             <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
             <li><a href="../themes/themes-intro.html">Themes</a></li>
-            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
             <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
             <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
             <li><a href="../forms/forms-intro.html">Forms</a></li>
             <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
             <li><a href="../animation/anim-intro.html">Animation</a></li>
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+            <li><a href="../tutorials/tutorials-views.html">Tutorials</a></li>
           </ul>
         </div>
       </div>

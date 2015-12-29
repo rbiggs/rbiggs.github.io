@@ -32,16 +32,18 @@
     <section>
       <div>
         <div>
-          <h2>Dispatcher</h2>
+          <h2>Dispatch</h2>
           <h3>Intro</h3>
           <img src="../../images/truck-parts/Truck-Wheels.png" alt="Truck Wheels">
-          <p>Truck's Dispatcher enables decoupling of components. The dispatch system has two parts: a dispatcher and a receiver. You define a reciever with a handle, which is its address, and a callback to execute when a dispatch is received. The dispatcher can optionally send some data with a dispatch. When this happens, the receiver can respond by doing something with the data it received. Or you could have a receiver perform some other task.</p>
+          <p>Truck's dispatch system enables decoupling of components. This has two parts: a dispatcher and a receiver. You define a reciever with a handle, which is its address, and a callback to execute when a dispatch is received. The dispatcher can optionally send some data with a dispatch. When this happens, the receiver can respond by doing something with the data it received. Think of dispatches as events. The receivers can respond however you need them to when a dispatch is sent.</p>
 
-          <p>Truck's controllers are based on the behavior of the dispatcher. Dispatches enable Truck to perform data binding, etc. Dispatchers are delivery agents that their handles to deliver data. That's all they do. Receivers are the workers who do something when the dispatcher makes a delivery. Receivers are very patient. They won't do anything until a dispatcher delivers.</p>
+          <p>Truck's mediators are based on the behavior of the dispatcher. Dispatches enable Truck to perform data binding, etc. Dispatchers are delivery agents that use their handles to deliver data. That's all they do. Receivers are the workers who do something when the dispatcher makes a delivery. Receivers are very patient. They won't do anything until a dispatcher delivers.</p>
 
-          <p>If you need to, you can cancel a receiver. Cancelation is permanent. Once canceled, a receiver will not react to a dispatcher. It's like nobody is home when a delivery agent arrives. Cancelation does not eliminate the receiver. It eliminates the handle and callback the receiver uses, making it unable to do anything when a dispatch is made. Remember, cancelation permanently disables a receiver. Dispatchers can continue to work, but canceled receivers will not react to the dispatches.</p>
+          <p>If you need to, you can stop a dispatch from happening. Once stopped, you will not be able to use that handle from being dispatched.. It's like taking the keys away from the delivery agent, so can't drive his truck to make a delivery. Stopping a dispatch handle does not eliminate it. You can start it again at any time.</p>
 
-          <p>A receiver can handle deliveries from multiple dispatchers. Receivers can react differently depending on what the dispatcher delivers. One receiver might only accept string data. Another might only want arrays. Or a receiver could do different things depending on the kind of the data delivered - eat the pizza, throw out the junk mail.</p>
+          <p>A receiver can handle deliveries from multiple dispatchers. Receiver are simply waiting for a dispatch. They don't care who is making the dispatch. You can have multiple dispatchers using the same handle in different parts of your app, depending on what you need to accomplish.<p>
+
+          <p>Receivers can react differently depending on what the dispatcher delivers. One receiver might only accept string data. Another might only want arrays. Or a receiver could do different things depending on the kind of the data delivered - eat the pizza, throw out the junk mail.</p>
         </div>
         
         <div id="menu">
@@ -56,7 +58,7 @@
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
             <li><a href="../box/box-intro.html">Box</a></li>
-            <li><a href="../dispatcher/dispatcher-intro.html" class='selected'>Dispatcher</a>
+            <li><a href="../dispatcher/dispatcher-intro.html" class='selected'>Dispatch</a>
               <ul>
                 <li><a href="dispatcher-intro.html" class='selected'>Intro</a></li>
                 <li><a href="dispatcher-use.html">Use</a></li>
@@ -76,7 +78,7 @@
             <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
             <li><a href="../animation/anim-intro.html">Animation</a></li>
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+            <li><a href="../tutorials/tutorials-views.html">Tutorials</a></li>
           </ul>
         </div>
       </div>

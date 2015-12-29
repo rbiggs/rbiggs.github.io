@@ -35,32 +35,46 @@
     <section>
       <div>
         <div>
-          <h2>Dispatcher</h2>
+          <h2>Dispatch</h2>
           <h3>API</h3>
           <img src="../../images/truck-parts/Truck-Wheels.png" alt="Truck Wheels">
 
           <h4>receive</h4>
-          <p><code>$.receive(handle, callback)</code></p>
+          <pre class="prettyprint linenums">$.receive(handle, callback)</pre>
           <p>This method sets up a receiver. This takes two arguments, a handle to listen to and a callback to execute when the handle is dispatched. The callback gets passed two arguments when executed: the handle and any data sent by the dispatcher. You can setup a receive by assigning it to a variable. Doing so allows you to cancel the receiver if you choose to. Without the variable reference, there is no way identify a receiver for cancelation.</p>
-<pre class="prettyprint"><code>
-var myReceiver = $.receive('my-handle', function(handle, data) {
+<pre class="prettyprint linenums"><code>$.receive('my-handle', function(data) {
   console.log('The data received is: ' + data);
 });
 </code></pre>
 
+          <p>If you assign a receiver to a variable, you create a mediator. Mediators behavior differently than dispatch receivers. To learn more about mediators, please read the <a href="../mediators/mediators-into.html" target="_blank">section</a> about them.</p> 
+
+<pre class="prettyprint linenums"><code>// Create a mediator:
+var MyMediator = $.receive('my-mediator-handle', function(data) {
+  console.log('The data received is: ' + data);
+});
+</code></pre>
+
+
           <h4>dispatch</h4>
           <p><code>$.dispatch(handle, data)</code></p>
           <p>This method lets you dispatch a handle and possible data to a receiver.</p>
-<pre class="prettyprint"><code>
-// Dispatch to the receiver defined above:
+<pre class="prettyprint linenums"><code>// Dispatch to the receiver defined above:
 $.dispatch('my-handle, 'This is a message.');
 </code></pre>
 
-          <h4>cancelReceiver</h4>
-          <p><code>cancelReceiver(receiverName)</code></p>
-          <p>This method allows you to cancel a receiver. When you cancel a receiver, it will be permanently disabled.</p>
-<pre class="prettyprint"><code>
-$.cancelReceiver('myReceiver');
+          <h4>stopDispatch</h4>
+          <p><code>stopDispatch(handle)</code></p>
+          <p>This method allows you to stop the dispatch of a handle. After being stopped, it can be started again. When you stop the dispatch of a handle, this affects all receivers and all mediators using that handle. If you want to stop the dispatch from being received by a mediator, but not dispatch receivers, pass in the mediator itself as the argument.</p>
+<pre class="prettyprint linenums"><code>$.stopDispatch('my-handle');</code></pre>
+
+          <h4>startDispatch</h4>
+          <p><code>sartDispatch(handle)</code></p>
+          <p>This method allows you to enable the dispatch of a stopped handle. In the case that you have used <code>stopDispatch</code> on with a mediator, you can pass this the mediator to start it again. This will allow the mediator to respond to dispatches.</p>
+<pre class="prettyprint linenums"><code>$.sartDispatch('my-handle');
+</code></pre>
+
+
 </code></pre>
         </div>
         
@@ -76,7 +90,7 @@ $.cancelReceiver('myReceiver');
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
             <li><a href="../box/box-intro.html">Box</a></li>
-            <li><a href="../dispatcher/dispatcher-intro.html" class='selected'>Dispatcher</a>
+            <li><a href="../dispatcher/dispatcher-intro.html" class='selected'>Dispatch</a>
               <ul>
                 <li><a href="dispatcher-intro.html">Intro</a></li>
                 <li><a href="dispatcher-use.html">Use</a></li>
@@ -96,7 +110,7 @@ $.cancelReceiver('myReceiver');
             <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
             <li><a href="../animation/anim-intro.html">Animation</a></li>
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+            <li><a href="../tutorials/tutorials-views.html">Tutorials</a></li>
           </ul>
         </div>
       </div>

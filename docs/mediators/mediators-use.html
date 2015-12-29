@@ -38,63 +38,115 @@
           <h2>Mediators</h2>
           <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Engine.png" alt="Truck Engine">
-          <p>Setting up mediators is very simple. You just need to provide a handle for the mediator to use:</p>
-          <pre class='prettyprint linenums'>var fooMtor = $.Mediator('baz-handle');
-var barMtor = $.Mediator('baz-handle');</pre>
-          <p>In the above example, notice that we've created both mediators to use the same handle. This means that when anything publishes to that handle, both mediators will react. Think of a mediators handle as an event. When something dispatches that event handle, any mediator listening for it will react. Mediators do not need to share the same handle. That's up to your use case how you need mediators to react. One mediator might listen for a handle to do one thing, whereas another mediator might also be listening for the same handle to do something very different.</p>
-          <p>Then you can define what you want the mediator to do using its <code>init</code> method. In the example below, although both mediators will be responding to the same handle, they react differently.</p>
-          <pre class='prettyprint linenums'>fooMtor.init(function(data) {
+          <p>Setting up mediators is very simple. You just need to provide a handle for the mediator to use and a callback to execute:</p>
+          <pre class='prettyprint linenums'>var FooMtor = $.Mediator('baz-handle',function(data) {
   console.log('1. Foo here.')
   console.log(data);
 });
-
-barMtor.init(function(data){
+var BarMtor = $.Mediator('baz-handle',function(data){
   console.log('2. Bar here.');
   console.log(data);
 });</pre>
-          <p>With the above code in place, we could run either mediator using their <code>run</code> method:</p>
-          <pre class='prettyprint linenums'>fooMtor.run('This is Godzilla!');
+          <p>In the above example, notice that we've created both mediators to use the same handle. This means that when anything publishes to that handle, both mediators will react. Think of a mediator's handle as a custom event. When something dispatches that event handle, any mediator listening for it will react. Mediators do not need to share the same handle. That's up to your use case how you need mediators to react. One mediator might listen for a handle to do one thing, whereas another mediator might also be listening for the same handle to do something very different.</p>
+
+          <p>Once you have a mediator defined, you can run using its <code>run</code> method:</p>
+          <pre class='prettyprint linenums'>FooMtor.run('This is Godzilla!');
 // results:
 // 1. Foo here.
-// This is Godzilla!
-
-// 2. Bar here.
 // This is Godzilla!</pre>
-        <p>As you can see from the output, because both mediators are listening to the same handle, running one mediator will invoke the other mediator. Of course, if you don't want this happening, you wouldn't give both mediators the same handle. You can find out what handle a mediator is using by querying it:</p>
-        <pre>
-// Get fooMtor's handle:
-fooMtor.getHandle();
-// returns: "baz-handle"</pre>
 
-        <h4>Controlling Your Controllers</h4>
-        <p>Because mediators run when their handle is dispatched, it's possible that they can get very busy. Truck therefore provides a way to control how many times a mediator can run. You can stop a mediator. When you do so, you cannot run it and it will not react to its handle. Or you can provide a number in the stop method, which tells the mediator how many times to run before stopping. You can also tell a stopped mediator to restart. From the moment you restart a mediator, you will be able to run it and it will be able to react to dispatches to its handle. You can also provide a number value representing second for the mediator to restart. It will not be active until that provide amount of time has passed.</p>
-        <pre class='prettyprint linenums'>// Stop fooMtor immediately:
-fooMtor.stop();
-// Tell barMtor to stop after 10 runs:
-barMtor.stop(10);
-// Restart fooMtor immediately:
-fooMtor.restart()
-// Tell barMtor to restart after 10 seconds:
-barMtor.stop(10);</pre>
-      <p>You can find out how many times a mediator has run by querying it:</p>
-      <pre class='prettyprint linenums'>// returns how many times the mediator ran:
-fooMtor.getCount();</pre>
-      <p>You can find out if a mediator is stopped or not by querying it:</p>
-      <pre class='prettyprint linenums'>fooMtor.isStopped();
-// returns true or false</pre>
-      <p>You can control how a mediator is counting. You can tell it to reset its count to zero. You might want to do this if the number was very high and you want it to start over clean. Or you can tell a mediator to stop counting.</p>
-      <pre class='prettyprint linenums'>// Tell fooMtor to reset its count to zero:
-fooMtor.resetCount();
-// Tell barMtor to stop counting:
-barMtor.stopCount();</pre>
-      <p>Sometimes, under some particular circumstance, you might want to run a mediator just once and then kill it. Truck lets you kill mediators. Do so is permanent. They cannot be revived to run again. They are dead. To kill a mediator, you run the <code>kill</code> method on them:</p>
-      <pre class='prettyprint linenums'>// Kill fooMtor:
-fooMtor.kill();
-// fooMtor can never run again</pre>
-      <p>You can find out if a mediator has been killed by querying it:</p>
-      <pre class='prettyprint linenums'>fooMtor.hasBeenKilled();
-// returns true or false
-      </pre>
+        <p>Even though both mediators are listening to the same handle, running one mediator will not invoke the other mediator. If you want all mediators using the same handle to respond, you need to use Truck's dispatcher. Just dispatch the hande with any data you want the mediators to receive:</p>
+
+        <pre class='prettyprint linenums'>// Dispatch to both mediators:
+$.dispatch('baz-handle', 'Sent from the dispatcher.');
+
+// Result:
+// 1. Foo here.
+// Sent from the dispatcher.
+// 2. Bar here.
+// Sent from the dispatcher.
+</pre>
+        <p>As you can see, using mediators in combination with dispatches gives you more flexibility in how you notify your system about changes that need to be propagated to different areas.</p>
+
+        <p>You can find out what handle a mediator is using by examining its <code>handle</code> property:</p>
+        <pre class='prettyprint linenums'>
+// Get FooMtor's handle:
+var handle = FooMtor.hanlde;
+// handle is "baz-handle"</pre>
+
+        <h4>Controlling Your Mediators</h4>
+        <p>Because mediators run when their handle is dispatched, it's possible that they can get very busy. Truck therefore provides a way to control how many times a mediator can run. You can stop a mediator. When you do so, you cannot run it and it will not react when its handle is dispatched. Or you can provide a number in the stop method, which tells the mediator how many times to run before stopping. After a mediator has been stopped, you can also tell it to start again. From that moment on you will be able to run it and it will react to dispatches to its handle.</p>
+
+        <pre class='prettyprint linenums'>// Stop FooMtor immediately:
+FooMtor.stop();
+// Tell BarMtor to stop after 10 runs:
+BarMtor.stop(10);
+
+// FooMtor will not run now:
+FooMtor.run('Is this working now?');
+// BarMtor will run 10 times before stopping:
+BarMtor.run('Hey, at least this one works.');</pre>
+      
+      <p>After stopping a mediator, you can restart it using the <code>start()</code> method:</p>
+
+        <pre class='prettyprint linenums'>// Stop FooMtor immediately:
+FooMtor.stop();
+// Nothing happens:
+FooMtor.run("Why isn't this working?");
+// Start it again:
+FooMtor.start();
+FooMtor.run("Yay! We're working again.");</pre>
+
+      <p>You can find out how many times a mediator has run by examining its <code>count</code> property:</p>
+
+      <pre class='prettyprint linenums'>// Find out how many times the mediator ran:
+var count = FooMtor.count;</pre>
+
+      <p>You can find out if a mediator is stopped or not by examining its <code>exec</code> property:</p>
+
+      <pre class='prettyprint linenums'>var running = FooMtor.exec;
+// `running` is either true or false</pre>
+
+      <p>You can control a mediator's count by setting it to zero. You might want to do this if the number was very high and you want it to start over clean. Or you can tell a mediator to stop counting.</p>
+
+      <pre class='prettyprint linenums'>// Tell FooMtor to reset its count to zero:
+FooMtor.resetCount();
+// Tell BarMtor to stop counting:
+BarMtor.stopCount();</pre>
+
+        <h3>Mediators and Dispatches</h3>
+
+        <p>Mediators are a specialize part of Truck's dispatch system. As such, mediators will respond to dispatches when the handle matches. In fact, when you create a mediator you simultaneously create an anonymous dispatch receiver with the same handle. Normally you call a mediator using its <code>run</code> method. But you can also make all mediators using the same handle fire at once by dispatch that handle.</p>
+
+      <pre class='prettyprint linenums'>// Run a mediator:
+FooMtor.run('Directly running FooMtor.');
+// Send a dispatch to FooMtor's handle:
+$.dispatch("baz-handle", "Dispatching to Foo's handle.");</pre>
+        
+        <p>Using a dispatch allows you to run multiple mediators at once. You would want to do this where you had one mediator to render a view and another to update a data store. Using a dispatch, you can use the handle to send the data to both. Without this type of loose coupling that dispatches enable, you would have to right some spaghetti code to do the same thing.</p>
+
+        <p>Since Mediators also have corresponding dispatch receivers, if you want to stop a Mediator completely so that it does not respond to dispatches, you have to use the <code>$.stopDispatch</code> method. You pass it the mediator you want to stop:</p>
+
+      <pre class='prettyprint linenums'>// Stop a mediator from 
+// responding to dispatches:
+$.stopDispatch(FooMtor);</pre>
+      <p>When you stop a mediator from responding to dispatches, this only affects that mediator. Other mediators using the same handle will continue to respond to dispatch of their handle.</p>
+
+      <p>When you stop a mediator from responding to a dispatch handle, this only affects that mediator. Other mediators will still respond to dispatches to that handle, as will any dispatch receivers.</p>
+
+      <p>If you stopped a mediator from responding to dispatches, you can restart if again using the <code>$.startDispatch</code> method:</p>
+
+      <pre class='prettyprint linenums'>// Set a mediator to respond 
+// to dispatches:
+$.startDispatch(FooMtor);</pre>
+
+
+
+      <p>To learn more about the dispatch system, please read this <a href="../dispatcher/dispatcher-intro.html" target="_blank">section</a>.</p>
+
+        
+
+
 
 
 
@@ -117,7 +169,7 @@ fooMtor.kill();
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
             <li><a href="../router/router-intro.html">Router</a></li>
             <li><a href="../box/box-intro.html">Box</a></li>
-            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
             <li><a href="../oop/oop-intro.html">OOP</a></li>
             <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
             <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
@@ -125,14 +177,14 @@ fooMtor.kill();
             <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
             <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
             <li><a href="../themes/themes-intro.html">Themes</a></li>
-            <li><a href="../dispatcher/dispatcher-intro.html">Dispatcher</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
             <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
             <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
             <li><a href="../forms/forms-intro.html">Forms</a></li>
             <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
             <li><a href="../animation/anim-intro.html">Animation</a></li>
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-            <li><a href="../tutorials/tutorials-intro.html">Tutorials</a></li>
+            <li><a href="../tutorials/tutorials-views.html">Tutorials</a></li>
           </ul>
         </div>
       </div>

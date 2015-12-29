@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Tutorials</h2>
+          <h3>Views</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <h4>Understanding Truck</h4>
+          <p></p>
+          <h4>A Room with a View</h4>
+          <p>When building applications, separation of concerns is absolutely necessary. Truck is built on the paradigm of mediators, views and models. Mediators know about views, models, local data stores and remove servers. Views don't know anything except how to render the data they are given and how to execute their registered events for user interaction. Models don't know anything about anything, but when you modify them they will let your app know. Any mediators paying attention to the models will be able to deal with the model's changes by rendering a view, putting the changes in a local data store, or sending it off to a server.</p>
+
+          <p>Views are the part of Truck that you will use most often. Maybe it's the only part you might use in your app. Views are flexible. They can be bound to a model, or consume raw JavaScript data. They can be set to persist themselves in a local data store through Truck's Box. Views can grab templates from the DOM, or they can hold templates defined on them. You can switch out what template a view is using at any time. You can do that with their models as well. Views can hold events that controller user interaction. You might use views with Truck mediators or with Truck's router, or you might just write your own code to handle everything.</p>
+
+          <p>Views remove the necessity of jQuery-style DOM manipulations. When you have DOM nodes that need to have their text or attributes changed dynamically, look at how to create a view to handle it. Once you define a view, you can render it with data and let the view take care of updating the DOM. No more mess of <code>apppend(), html(), text()</code>, etc.</p>
+
+          <h3>First Steps</h3>
+          <p>Main main reason you are going to use a view is to render a template. Granted, it is possible to make a view that does not use any template. You would do this where you are using a view purely for wiring up events in the DOM.</p>
+          <h4>Templates</h4>
+          <p>There's a lot of negativity these days about templates. Some developers are of the opinion that templates are evil. This is usually because they want to define the entire app in JavaScript. The fact is, having templates makes it easy to reason about the dynamic parts of an app. Having templates defined in place lets you scan your apps document structure to see how it all fits together - like a storyboard. Or defining your template directly on your view or component makes it easy for you to reason about its behavior.</p>
+
+          <h4>Create a View</h4>
+          <p>When you create a view, you want to associate it with an element. This element will serve as the container of DOM elements rendered by the view's template, or hosting registered events. To create a view, just assign it to a variable, which will hold the view's instance. There are many properties we can set when we create a view, but at bare minimum we can just provide it with an element to anchor to. When you indicating the element for the view, you can use standard CSS selector markup, or a DOM node or a TruckJS DOM object. Usually you'll just use the selector approach:</p>
+
+          <pre class='prettyprint linenums'>var AppTitleView = $({
+  element: '#appTitle'
+});</pre>
+          <p>The above code creates a view instance named "MyView". We can use this instance to render templates, bind to models, etc.</p>
+
+          <h4>Delimiters</h4>
+          <p>Templates are defined using standard HTML markup and delimiters. Truck has two kinds of delimiters: interpolators and executors. Interpolator delimiters allow you to ouput a data value. Executor delimiters lets you write JavaScript that will be run when the template is rendered. You can use any JavaScript you could possibly need in a template using executor delimitors.</p>
+          <p>Truck's interpolator delimiters follow the HTML5 template string convention:</p>
+          <pre class='prettyprint linenums'>&lt;h1 id="appTitle" &gt;${ data }&lt;/h1&gt;</pre>
+
+          <p>As you noticed, we used the term <code>data</code> to indicate that we wanted a value ouput. The space around <code>data</code> is optional. By default, Truck uses <code>data</code> as the term for any data being rendering by a template. You can change this in the view setup to use a term that makes more sense for what the template is rendering.</p>
+
+          <p>With a template defined, an a view instance defined, when the document loads, Truck looks at the view instance, sees the element selector, looks for it in the DOM, extracts its template and stores it on the view instance. This allows us to render the template repeatedly at any time with the same template. In this case we can render this template with a simple string:</p>
+
+          <pre class='prettyprint linenums'>AppTitleView.render('My Great App');</pre>
+          <p>This would produce:</p>
+          <pre class='prettyprint linenums'>&lt;h1 id="appTitle" &gt;My Great App&lt;/h1&gt;</pre>
+
+          <p>Using this technique we can render a view with a string or a number. However, we usually have more complex data to use with views. Continue reading to learn how to handle that.</p>
+
+          <h3>Object Properties</h3>
+          <p>The previous example was quite simple. In most cases you are not going to be rendering a view with such simple data. Instead you're going to be dealing with objects. You can expose and object's properties to the view using dot notation. Let's create a person object:</p>
+          <pre class='prettyprint linenums'>var person = {
+  firstName: 'John',
+  lastName: 'Doe',
+  age: 32,
+  job: 'developer'
+};</pre>
+          <p>We can use the following template structure to render this object in our view:</p>
+          <pre class='prettyprint linenums'>&lt;li id='person'&gt;
+  &lt;div&gt;
+    &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+    &lt;h4&gt;${ data.age }&lt;/h4&gt;
+    &lt;/p&gt;${ data.job }&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/li&gt;</pre>
+          
+          <p>To consume this template, we'll create the following view:</p>
+          <pre class='prettyprint linenums'>var PersonView = $({
+  element: '#person'
+});
+// Render the view with the person object:
+PersonView.render(person);</pre>
+          <p>The above will give us this:</p>
+          
+          <pre class='prettyprint linenums'>&lt;li id='person'&gt;
+  &lt;div&gt;
+    &lt;h3&gt;John Doe&lt;/h3&gt;
+    &lt;h4&gt;32&lt;/h4&gt;
+    &lt;/p&gt;developer&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/li&gt;</pre>
+          
+          <h4>Custom Variable Names</h4>
+          <p>As I mentioned earlier, you can provide custom variable names so that the templates make sense for the data they are consuming. Instead of <code>data</code>, use the term you want in the template. Then when you define the view, provide the name you want to use on the view's variable property:</p>
+
+          <pre class='prettyprint linenums'>&lt;!-- Use the variable "person" --&gt;
+&lt;li id='person'&gt;
+  &lt;div&gt;
+    &lt;h3&gt;${ person.firstName } ${ person.lastName }&lt;/h3&gt;
+    &lt;h4&gt;${ person.age }&lt;/h4&gt;
+    &lt;/p&gt;${ person.job }&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/li&gt;
+
+// Define "person" as custom variable:
+var PersonView = $({
+  element: '#person',
+  variable: 'person'
+});
+
+// Render with the person object:
+PersonView.render(person);</pre>
+          
+          <p>We could do that with our title view as well:</p>
+
+          <pre class='prettyprint linenums'>&lt;!-- Use the variable "title" --&gt;
+&lt;h1 id="appTitle" &gt;${ title }&lt;/h1&gt;
+
+// Define "title" as custom variable:
+var AppTitleView = $({
+  element: '#appTitle',
+  variable: 'title'
+});
+
+// Render the title:
+AppTitleView.render('My Great App');</pre>
+
+          <h3>Arrays of Objects</h3>
+          <p>So far we saw how to render simple strings and number, as well as objects with properties. However, many times we need to render an array of objects to create a list. Although other frameworks have special mechanisms to handle this, Truck does not. That's because Truck doesn't care whether you data is an object or an array. As long as the properties on the simple object and the array of objects are the same, Truck will render them as a single item or a list. This means that you can turn a view rendering a single object into a list by renderin the same view with an array of similar objects. Or rendering a list view with a single object. The only requirement for this to work is that the object properties and the template variables match.</p>
+          <p>So, in the case of our person object, if we change or object to an array like this:</p>
+
+          <pre class='prettyprint linenums'>var persons = [
+  {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 32,
+    job: 'developer'
+  },
+  {
+    firstName: 'Sam',
+    lastName: 'Smith',
+    age: 28,
+    job: 'mechanic'
+  },
+  // etc.
+];</pre>
+          <p>If we render AppTitleView with this, it will create a list of persons:</p>
+<pre class='prettyprint linenums'>// Render with "persons" array:
+PersonView.render(persons);</pre>
+
+        <h3>Executor Delimitors</h3>
+
+        <p>So far we've looked at how to use data interpolation in view templates. We can also write executable JavaScript in our templates. This allows you to render data conditionally, or whatever pre-rendering task you might need to perform.</p>
+
+        <p>The executor delimitors are a pair of opening and closing curly braces, like Mustache templates:</p>
+
+          <pre class='prettyprint linenums'>// JavaScript in template:
+&lt;div id='executable'&gt;
+  {{ alert("I just ran!"); }}
+  &lt;p&gt;${ data }}&lt;/p&gt;
+&lt;/div&gt;
+
+var ExecutableView = $.View({
+  element: '#executable'
+});
+ExecutableView.render('Executable template')</pre>
+
+        <p>When the above view is loaded in the browser, you'll get an alert with "I just ran!" This is a trivial example. Let's see how we might do something more practical. The number one reason you might need is for conditional rendering. You only want to render based on a value test. Here's how you can do that:</p>
+
+          <pre class='prettyprint linenums'>// JavaScript in template:
+&lt;li id='personsList'&gt;
+  {{ if (data.name !== 'Joe') { }}
+    ${ data.name }}
+  {{ } }}
+&lt;/li&gt;</pre>
+
+        <p>To use a condition block, notice how it spans several lines. I had to enclose the opening if state with double curly braces, and terminate it with double curly braces. Yeah, I know, it isn't pretty. But it works. Using this technique you could also implement a loop or any other type of JavaScript block. Open up views2.html in the examples folder of the source code in a text editor to see how we did JavaScrpit loops in a template.</p>
+
+        <p>The fact is, you should try to do any kind of filtering or looping before you hand off data to a view for rendering. Executable delimiters are there for when there is no other options for pre-processing your data for a view.</p>
+
+        <h4>Data Binding</h4>
+        <p>To learn how to bind a model to a view, read the tutorial about <a href="./tutorials-models.html" target="_blank">models</a>. You need to know how models work before using them with views.</p>
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../components/components-intro.html">Components</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../oop/oop-intro.html">OOP</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html">Animation</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html" class='selected'>Tutorials</a>
+              <ul>
+                <li><a href="tutorials-views.html" class='selected'>Views</a></li>
+                <li><a href="../tutorials/tutorials-models.html">Models</a></li>
+                <li><a href="tutorials-mediators.html">Mediators</a></li>
+                <li><a href="tutorials-demos.html">Demos</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

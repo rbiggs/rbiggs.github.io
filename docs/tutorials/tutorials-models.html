@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Tutorials</h2>
+          <h3>Models</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <h4>More Than Just Data</h4>
+          <p>Its become almost a fashion for web developers to diss models as unnecessary. Object.observe is supposed to give us the ability to monitor data objects and implement data binding without the need to models. While that's true, it does tell you the whole picture. Yeah, Object.observe does offer a solution to observable data objects. But it is not a total solution. The HTML5 template tag and ES6 template strings do not invalidate Mustache, Angular or React.</p>
+
+          <p>Truck's models provide several things. First and foremost is encapsulation and abstraction. This allows us to isolate your data from accidental modification. It also enable's us to add capabilities for your data without having to register events, getters and setters or other intrusive operations. At the end of the day, the data you put in a Truck model is clean and untouched. You can extract it from the model at any time.</p>
+
+          <h4>The Purpose of Life</h4>
+          <p>Oops! I meant the purpose of models. The main reason Truck has models is so the app can know when a data changes. This is useful where you want to be able to automatically update the view when a model changes, or persist its state in a local data store or on a remove server. Without a model, we would need some kind of checking, such as making a copy of the data and running a poll to compare the copy with the original. Instead, Truck models use custom events to let Truck know when they've been modified. We call these <code>handles</code>. When you create a model, you give it data and a handle:</p>
+
+          <pre class='prettyprint linenums'>// Data for model:
+var person = {
+  firstName: 'John',
+  lastName: 'Doe',
+  age: 32,
+  job: 'developer'
+};
+
+// Define model:
+var PersonModel = $.Model(person, 'person-model');</pre>
+          
+          <p>Models expose a lot of useful methods to handle your data. You can find out about them in the section about <a target='_blank' href="../models/models-api.html">Model API</a>. Since the model we create above holds an object, we can use any of the model's object methods on it to change the data. But first lets create a view that we can bind to this object:</p>
+
+          <pre class='prettyprint linenums'>&lt;li id='person'&gt;
+  &lt;div&gt;
+    &lt;h3&gt;${ person.firstName } ${ person.lastName }&lt;/h3&gt;
+    &lt;h4&gt;${ person.age }&lt;/h4&gt;
+    &lt;/p&gt;${ person.job }&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/li&gt;
+
+// Define a view:
+var PersonView = $.View({
+  element: '#person',
+  // Bind view to model:
+  model: PersonModel
+});
+PersonView.render();</pre>
+
+        <p>Because we've bound the view to the person model, when we render the view, it does so with the data from the model. Now, any changes we make to the model will be reflected in the view automatically. This is because tell Truck that we want to bind a view to a model, it creates a dispatch receiver that listens to the model for changes. When the model changes, the dispatch receiver updates the view.</p>
+        
+        <p>When a model holds an object, we have object related methods that we can use. For example, we can query a property on the model with <code>getProp</code>. So, with the above model, we can get the firstName doing:</p>
+
+          <pre class='prettyprint linenums'>var firstName = PersonView.getProp('firstName');</pre>
+
+          <p>Getting a property does not change a model, and so there will be no change in its bound view. But if we change a property, it will:</p>
+
+          <pre class='prettyprint linenums'>PersonView.setProp('firstName', 'Tom');</pre>
+
+          <p>By changing the property on our model, we cause the model to notify the dispatch receiver, which in turn re-renders the view with the first name "Tom". Besides updating a property value on the model, we could add a new property using the same method. This would also trigger a re-render of the view. Note that if the property is not in the template, it won't get output. That said, it is possible to update a view's template to accomodate changing data needs.</p>
+
+          <p>You can also delete a model's property. Say, we want to delete the age property. We can do the following:</p>
+
+          <pre class='prettyprint linenums'>PersonView.delete('age');</pre>
+          <p>This would also trigger a re-render of a bound view.</p>
+
+          <h3>Collections</h3>
+          <p>Not all models hold object. In fact, most models will hold collections. These are array of related objects, such as items for sale, etc. When you create a model for a collection, you have a whole range of methods to access the collection. When you bind a collection model to a view, the view renders its template for each object in the colleciton.</p>
+
+          <p>Earlier we made a person object. Now we're going to make an array of person objects and turn it into  model:</p>
+
+
+          <pre class='prettyprint linenums'>var people = [
+  {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 32,
+    job: 'developer'
+  },
+  {
+    firstName: 'Sam',
+    lastName: 'Smith',
+    age: 28,
+    job: 'mechanic'
+  },
+  // etc.
+];
+
+// Make a collection model:
+var PeopleModel = $.Model(people, 'people-handle');
+
+// Bind this model to our person view:
+var PersonView = $.View({
+  element: '#person',
+  // Bind view to collection model:
+  model: PeopleModel
+});
+PersonView.render();</pre>
+          <p>This will result in a list of two persons being rendered by the view. Now if we modify the model, the list will update automatically. Collection models support the same types of methods as arrays: push, pop, unshift, shift, sort, reverse, etc. Any of the methods that modify the model will alert the view's dispatch receiver that it has changed. And the receiver will then update the view. If we push or pop an item to the model, the list will update without us having to write any DOM manipulation code.</p>
+
+          <pre class='prettyprint linenums'>// Push another person object:
+PeopleModel.push({
+  firstName: 'Sally',
+  lastName: 'Daniels',
+  age: 27,
+  job: 'entrepreneur'
+});
+// The view bound to PeopleModel
+// will automatically update.
+</pre>
+
+        <p>To learn more about collection model methods, please consult the <a target='_blank' href="../models/models-api.html">documentation</a>.</p>
+
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../components/components-intro.html">Components</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../oop/oop-intro.html">OOP</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html">Animation</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html" class='selected'>Tutorials</a>
+              <ul>
+                <li><a href="tutorials-views.html">Views</a></li>
+                <li><a href="tutorials-models.html" class='selected'>Models</a></li>
+                <li><a href="tutorials-mediators.html">Mediators</a></li>
+                <li><a href="tutorials-demos.html">Demos</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

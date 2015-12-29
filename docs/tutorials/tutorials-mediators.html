@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Tutorials</h2>
+          <h3>Mediators</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <h4>One Ring to Rule Them All</h4>
+          <p>Mediators are the one part of your app that can know about and interact with every other part of your app. Mediators let you write decoupled code.Mediators work best when they deal with one task. Mediators should handle unidirectional flow. There are three directions for flow in a Truck applications: from a view, from a model or from a remote server. Mediators capture the flow coming from these three sources and channel it into four possible directions: a model, a view, a local data store or a remote server.</p>
+
+          <h4>Go with the Flow</h4>
+
+          <p>When building a Truck app, there are only a certain number of flows that you need to manage. They are:</p>
+          <ul>
+            <li>from view
+              <ul>
+                <li>to model</li>
+                <li>to local data store</li>
+                <li>to server</li>
+              </ul>
+            </li>
+            <li>from model
+              <ul>
+                <li>to view</li>
+                <li>to local data store</li>
+                <li>to server</li>
+              </ul>
+            </li>
+            <li>from server
+              <ul>
+                <li>to model</li>
+                <li>to view</li>
+                <li>to local data store</li>
+              </ul>
+            </li>
+          </ul>
+          
+          <p>Mediators work by listening for a handle. These are custom events that you can fire using Truck's dispatch system. When you dispatch a handle, you can also send some accompanying data. You can have multiple mediators listening to the same handle. Each mediator could be doing something totally different with the handle. That's up to you to decide how to divide up the work flow. You can dispatch different types of data with the same handle. Then different mediators can check the data type, if it matchs what they're looking for, they can handle it. Offloading the handling of different data types to specific mediators helps keep data processing granular and easier to troubleshoot. Say we have a handle "my-update" and we have three mediators. Each mediators can only handle one of three types of data: strings, arrays or object. The mediators check the data they receive with the dispatch to see if its the type they need.</p>
+
+          <p>To create a mediator, you use the <code>$.Mediator</code> method. This takes two arguments, a handle, which is the mediator listens to, and a callback. If data is passed to the mediator, it will be available as the argument of the callback:</p>
+
+          <pre class='prettyprint linenums'>// Create mediator:
+var MyMtor = $.Mediator('my-handle', function(data) {
+  // Check the type of data:
+  if ($.type(data) === 'string') {
+    console.log('We got the following string: ' + data);
+  }
+});
+
+// Create another mediator to handle objects:
+var PeopleMtor = $.Mediator('my-handle, function(data) {
+  // Check if data is object:
+  if ($.type(data) === 'object') {
+    // render a view with the data:
+    PeopleView.render(data);
+  }
+});</pre>
+
+        <p>We can dispatch a handle using Truck's <code>$.dispatch</code> method. This takes two arguments, the handle to dispatch, and any optional data you want to send:</p>
+
+          <pre class='prettyprint linenums'>// Dispatch a string to my-handle:
+$.dispatch('my-handle', 'This is the message.');
+
+// Dispatch an object to my-handle:
+$.dispatch('my-handle', {firstName: 'Ben', lastName: 'Carson', age: 35};
+
+// With the above dispatches, MyMtor responds to the first and PeopleMtor to the second.</pre>
+
+          <p>When you send a dispatch, any mediators listen to that handle will receive it. However, because we are doing type checking in our mediators, if we dispatch a string, only MyMtor will process it. You can use data checks to limit whether a mediator handles a dispatch based on the type of data sent.</p>
+
+          <h4>Directly Running a Mediator</h4>
+          <p>Besides dispatching a handle to a mediator, you can directly execute them. You do this with their <code>run</code> method. When you run a mediator, you don't need to pass a handle. Instead, you pass it whatever data you want to send:</p>
+
+          <pre class='prettyprint linenums'>// Run MyMtor:
+MyMtor.run('Directly running the mediator.');
+
+// Run PeopleMtor:
+PeopleMtor.run({
+  firstName: 'Phil',
+  lastName: 'Mackee',
+  age: 38,
+  job: 'electrician'
+});
+</pre>
+        <p>One of the things mediators provide is the ability to control when they can run. You can stop a mediator, or tell it to stop after running x number of times, and later restart it.</p>
+
+
+
+          <pre class='prettyprint linenums'></pre>
+        
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../components/components-intro.html">Components</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../oop/oop-intro.html">OOP</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html">Animation</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html" class='selected'>Tutorials</a>
+              <ul>
+                <li><a href="tutorials-views.html">Views</a></li>
+                <li><a href="tutorials-models.html">Models</a></li>
+                <li><a href="tutorials-mediators.html" class='selected'>Mediators</a>
+                <li><a href="tutorials-demos.html">Demos</a></li></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
