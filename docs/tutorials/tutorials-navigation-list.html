@@ -35,53 +35,57 @@
     <section>
       <div>
         <div>
-          <h2>Templates</h2>
-          <h3>Intro</h3>
-          <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
-          <p>Templates enable views to output data to your app. Templates are markup with delimiters to indicate data end points to interpolate while rendering.</p>
+          <h2>Tutorials</h2>
+          <h3>Navigation List</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <h4>Setup</h4>
+          <p>The most common way to organize an app to enable the users to get to different areas is to use a navigation list. By tapping a list item, the user is directed to another screen. Each list item could lead to a complete different screen. Or they could all lead to the same screen, where the app loads different content based on which item the user tapped.</p>
 
-          <p>To interpolate a data variable, use: <code>${ data }</code>. To process arbitrary JavaScript in your template, use: <code>{{ alert("hi!") }}</code>. Generally you shouldn't use JavaScript in your templates unless you need to output content conditionally.</p>
+          <p>Truck provides navigation lists to make creating these types of navigation as simple as possible. You use a typical Truck list, but on the list items you put a <code>data-goto</code> attribute with the screen you want that list item to navigate to:</p>
 
-          <p>You have three options for making templates: using template tags, script tags or using inline markup. Script and template tags will not show on the page. An inline template will, but by putting the class <code>cloak</code> on its parent, it will not show up until rendered.</p>
-          <p>With script tag:</p>
-<pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
-  &lt;script type='text/x-template'&gt;
-    &lt;li&gt;
-      &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
-    &lt;/li&gt;
-  &lt;/script&gt;
-&lt;ul&gt;
-</pre>
-          <p>With template tag:</p>
-<pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
-  &lt;template&gt;
-    &lt;li&gt;
-      &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
-    &lt;/li&gt;
-  &lt;/template&gt;
-&lt;ul&gt;
-</pre>
-
-
-          <p>Without script tag, using <code>cloak</code> class:</p>
-<pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
-  &lt;li&gt;
-    &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+<pre class='prettyprint linenums'>&lt;ul class="list"&gt;
+  &lt;li data-goto="recipes"&gt;
+    &lt;h3&gt;Recipes&lt;/h3&gt;
   &lt;/li&gt;
-&lt;ul&gt;
-</pre>
-          <p>Templates are consummed by views. That means that when the view loads, it looks for the template, extracts it from the parent element and stores it on the view object. The next time the view renders, it will find the template stored on itself and use it.</p>
+  &lt;li data-goto="shopping-list"&gt;
+    &lt;h3&gt;Shopping List&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li data-goto="wish-list"&gt;
+    &lt;h3&gt;Wish List&lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
 
-          <p>You can output sequential numbering using <code>$.view.index</code> in your template markup. This value will increase with each iteration. You can also set a what value you want the count to start.</p>
+<p>The above list presupposes that there are screens in the app with the IDs: "recipes", "shopping-list" and "wisth-list". As long as these exist, tapping on the list item will automatically take the user to the designated screen.</p>
 
-<pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
-  &lt;template&gt;
-    &lt;li&gt;
-      &lt;h3&gt;${ $.view.index }: ${ data.firstName } ${ data.lastName }&lt;/h3&gt;
-    &lt;/li&gt;
-  &lt;/template&gt;
-&lt;ul&gt;
-</pre>
+<p>There really isn't anything more to navigation lists than providing a <code>data-goto</code> value for a screen ID.</p>
+
+          <h4>Routing</h4>
+          <p>Although the above list is a perfect candidate for navigation lists, sometimes you may have a list where each item leads to a detail page that shows the same layout with the details for the items tapped. You can use routing to handle this situation. You have the navigation list items all point to the same screen, but append each destination with a unique id:</p>
+
+<pre class='prettyprint linenums'>&lt;ul class="list"&gt;
+  &lt;li data-goto="detail:apples"&gt;
+    &lt;h3&gt;Apples&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li data-goto="detail:oranges"&gt;
+    &lt;h3&gt;Oranges&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li data-goto="detail:bananas"&gt;
+    &lt;h3&gt;Bananas&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;/li&gt;
+  &lt;li data-goto="detail:pears"&gt;
+    &lt;h3&gt;Pears&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;/li&gt;
+  &lt;li data-goto="detail:cherries"&gt;
+    &lt;h3&gt;Cherries&lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+
+          <p>Then you can handle these using a route. Please read this tutorial about <a href="./tutorials-routing.html">routes</a> for more information.</p>
+          
+          
+
         </div>
         
         <div id="menu">
@@ -89,12 +93,7 @@
             <li><a href='../models/models-intro.html'>Models</a></li>
             <li><a href="../views/views-intro.html">Views</a></li></li>
             <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
-            <li><a href="../templates/templates-intro.html">Templates</a>
-              <ul>
-                <li><a href="templates-intro.html" class='selected'>Intro</a></li>
-                <li><a href="templates-use.html">Use</a></li>
-              </ul>
-            </li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
             <li><a href="../components/components-intro.html">Components</a></li>
             <li><a href="../promises/promises-intro.html">Promises</a></li>
             <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
@@ -115,7 +114,16 @@
             <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
             <li><a href="../animation/anim-intro.html">Animation</a></li>
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
-            <li><a href="../tutorials/tutorials-views.html">Tutorials</a></li>
+            <li><a href="../tutorials/tutorials-intro.html" class='selected'>Tutorials</a>
+              <ul>
+                <li><a href="tutorials-views.html">Views</a></li>
+                <li><a href="../tutorials/tutorials-models.html">Models</a></li>
+                <li><a href="tutorials-mediators.html">Mediators</a></li>
+                <li><a href="tutorials-routing.html">Routing</a></li>
+                <li><a href="tutorials-navigation-list.html" class='selected'>Navigation List</a></li>
+                <li><a href="tutorials-demos.html">Demos</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
@@ -141,7 +149,7 @@
       </div>
     </footer>
   </article>
-
+  
 <script>
   prettyPrint();
 </script>

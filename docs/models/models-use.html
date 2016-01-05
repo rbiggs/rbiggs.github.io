@@ -89,7 +89,10 @@ fruits.getItemProp(2, 'name'); // returns "Orange"
 // Returns
 </pre>
 <p>In the above example, we accessed the data a little differently. Because this is a collection, we need to tell Truck what index of the collect we want to get the property from. The index, like arrays, is zero-based.</p>
+        
+        <h3>When Not To Use</h3>
 
+        <p>Not all data needs to be in a model. If you have simple data, a string, an array of a couple of items, or a very simple object, it doesn't make sense to put them in a model. Similarly, if your data is of a temporary nature, don't bother putting it in a model. If your data is complex and your app depends on it for functionality, put it in a model. However, if you have some data that needs to be manipulated in very rapid operations, leave it as raw data. You'll have better performance. When you're done manipulating the data, you can store it in a model. Models are ideal when you want to bind a view to one, or persist its data in a local data store automatically.</p>
 
         </div>
         

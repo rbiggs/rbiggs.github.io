@@ -106,7 +106,7 @@ person3.speak('Sam was here!'); // New version of speak: Sam was here!</pre>
           <p>As you can see from these examples, cloning a base object to create copies, or clone extended copies allows for powerful object extension through composition. Each time we make a copy, it inherits the properties of the original through the prototype chain.</p>
 
           <h3>Cloning a Revealing Module</h3>
-          <p>The revealing module, or object factory, is another popular way to creating objects in JavaScript. The nice thing about it is that it provides a simple pattern for defining private properties, and then only exposing what you want as the public interface.</p>
+          <p>The revealing module, or object factory, is another popular way to creating objects in JavaScript. It is popular beause it provides a simple pattern for defining private properties and only exposing what you want as the public interface.</p>
 
           <p>Lets start with a simple module. Notice that we give it an extend method. This will allow us to add new members to the object, event after its result has been returned:</p>
 
@@ -139,7 +139,7 @@ var baz = $.clone(foo);</pre>
 bar.ask('bar.ask');
 baz.ask('baz.ask');</pre>
           
-          <p>Time to do some extending. We'll extend baz:</p>
+          <p>Time to do some extending. We'll start with baz:</p>
 
           <pre class="prettyprint linenums">// Define method on baz.
 // This only exists on baz: 
@@ -158,11 +158,11 @@ baz.extend('ask', function(msg) {
 });
 baz.ask('baz.ask') // I'm doing someting else now.</pre>
           
-          <p>Using <code>$.clone</code> we can create copies of copies of objects and using simple extension method to add new properties or override existing ones. The clone process retains the prototype chain from the furthest clone back to the original. This is very efficient since it reduces the amount of memmory needed for each clone.</p>
+          <p>Using <code>$.clone</code> we can create copies of copies of objects and using simple extension method to add new properties or override existing ones. The clone process retains the prototype chain from the furthest clone back to the original. This is very efficient since it reduces the amount of memory needed for each clone.</p>
 
           <h3>A Practical Comparison</h3>
 
-          <p>Some much for the simple examples. Now we want to look at someting more realistic so you can see the difference in coding styles. We'll start with the typical prototypcal inheritance pattern, followed by the new ES6 class equivalent, followed by the same thing using <code>$.clone</code>. Below is the old school prototypal inheritance pattern:</p>
+          <p>So much for the simple examples. Now we want to look at someting more realistic so you can see the difference in coding styles. We'll start with the typical prototypcal inheritance pattern, followed by the new ES6 class equivalent, followed by the same thing using <code>$.clone</code>. Below is the old school prototypal inheritance pattern:</p>
 
 
           <pre class="prettyprint linenums">// Parent class:
@@ -280,7 +280,7 @@ var btn = $.clone(Button);
 btn.setup('100', '50', 'Click Me');
 btn.build('section')</pre>
 
-          <p>Although the above is not quite as concise as the class version, it works everywhere now, on desktop and mobile. As you can see, creating objects, cloning them and extending them with extend or mixin enable you to create efficient and versitile objects.</p>
+          <p>Although the above is not quite as concise as the class version, it works everywhere now, on desktop and mobile. As you can see, creating objects, cloning them and extending them with extend or mixin enables you to create efficient and versitile objects.</p>
 
         </div>
         

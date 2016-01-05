@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Tutorials</h2>
+          <h3>Routing</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <h4>Look Ma, No URL!</h4>
+          <p>Truck's router does not use a url. Huh? Yeah, we thought a lot about routing in the context of an app. Mobile apps that require constant network connection to work suffer from the one problem everyone everywhere struggles with - poor network connections or no connection. At the same time we wanted the benefits of routing to enable handling the different types of navigation in a Truck app. In the end we came up with routing that does not use a url. Instead of attaching a #! fragment to the url or changing the window.location.hash value, you use Truck's route dispatcher. This tells Truck what route you want to load. You can also pass along a unique id or any other value that the route callback can use. Since Truck's router does not use a url, the back button works as expected.</p>
+
+          <h4>Setting Up a Route</h4>
+          
+          <p>To set up a route, you use the <code>$.Router</code> method. This returns the route object for your app. You'll use this to add routes.</p>
+
+          <pre class='prettyprint linenums'>var routes = $.Router();</pre>
+
+          <p>After creating your route object, you can add routes. Of course, creating a route means you want something to happen with that route is dispatched, so each route gets a callback:</p>
+
+          <pre class='prettyprint linenums'>var routes = $.Router();
+
+routes.addRoute({
+  route: 'detail',
+  callback: function() {
+    alert("You've just landed on the detail screen!");
+  }
+});</pre>
+          <p>So, now we have a Truck route defined, but how do you activate one? There's no url, so links aren't going to do it. But Truck apps don't use links for navigation anyway. They use element attributes to define how navigation works. For example, to make a navigation list go to a detail page, you use the attribute <code>data-goto</code> and give it the value <code>detail</code>. When the use tap's the list item with that value, Truck will direct the user to that screen and it will automatically dispatch the vaue as a route. Since we have a route defined for <code>detail</code>, when the user taps the list item with <code>data-goto='detail'</code>, Truck will take the user there and execute our route callback.</p>
+
+          <p>Good so far, but sometimes you want to have multiple list items leading to the same detail screen and loading different content depeding on which item the user tapped. No problem. You can include a unique id with a route. You do this by adding it to the route with a color ":"</p>
+
+          <pre class='prettyprint linenums'>&lt;ul class="list"&gt;
+  &lt;li data-goto="detail:apples"&gt;
+    &lt;h3&gt;Apples&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li data-goto="detail:oranges"&gt;
+    &lt;h3&gt;Oranges&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li data-goto="detail:bananas"&gt;
+    &lt;h3&gt;Bananas&lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+          </pre>
+
+          <p>In the above markup, notice that all list items are pointing to the same destination screen, "detail". However each one also has a unique id as a fruit. Ids can be whatever you need or suits your purpose. You could use a simple descriptor as we've done above, or a guid. When Truck sees a navigation value with an ID, it extracts the id and dispatches it with the route value. You can capture that id value as the argument of your routes callback:</p>
+
+          <pre class='prettyprint linenums'>var routes = $.Router();
+          
+routes.addRoute({
+  route: 'detail',
+  callback: function(id) {
+    alert("You want to see the fruit: " + id);
+  }
+});</pre>
+
+        <p>By capturing a route's id, we can do more complex things, such as filtering out a data object from a collection so that we can render its content in a view:</p>
+
+          <pre class='prettyprint linenums'>var routes = $.Router();
+          
+routes.addRoute({
+  route: 'detail',
+  callback: function(id) {
+    // Filter the chosen fruit from the collection:
+    var chosenFruit = fruitsCollection.filter(function(fruit) {
+      return fruit.id = id;
+    });
+
+    // Rener the detail view with the fruit:
+    ChosenFruitView.render(chosenFruit);
+  }
+});</pre>
+
+        <p>This works great for navigating around an app, but routes also provide another useful feature, communicating with a remote server. If you wish to use a RESTful interface for persisting local actions to a server, you can get the current full path of a route. Use the method <code>$.Router.getFullRoute</code>. This will give you the route, including route ids, separated by slashes:</p>
+
+          <pre class='prettyprint linenums'>var currentRoute = $.Router.getFullRoute();
+// Possible value: 'main/fruits:banana'</pre>
+          <p>After getting the full path, you can post it to a server in an Ajax/Fetch request.</p>
+
+
+
+
+
+          
+
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../components/components-intro.html">Components</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../oop/oop-intro.html">OOP</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html">Animation</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-intro.html" class='selected'>Tutorials</a>
+              <ul>
+                <li><a href="tutorials-views.html">Views</a></li>
+                <li><a href="tutorials-models.html">Models</a></li>
+                <li><a href="tutorials-mediators.html">Mediators</a></li>
+                <li><a href="tutorials-routing.html" class='selected'>Routing</a></li>
+                <li><a href="tutorials-navigation-list.html">Navigation List</a></li>
+                <li><a href="tutorials-demos.html">Demos</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

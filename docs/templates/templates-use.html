@@ -54,28 +54,28 @@
 // To render this object, 
 // we can use the following template:
 
-&lt;script type="text/x-template"&gt;
+&lt;template&gt;
   &lt;li&gt;
     &lt;h3&gt;Name: ${ data.name.first } { data.name.last }&lt;/h3&gt;
     &lt;h4&gt;Job: ${ data.job }&lt;/h4&gt;
   &lt;/li&gt;
-&lt;/script&gt;</pre>
+&lt;/template&gt;</pre>
         <p>In the above example, <code>${ }</code> is used to demark a data variable for interpolation by the template renderer. Similary, we can use <code>{{ }}</code> to define blocks of JavaScript to be executed in a temlate. You might want to do that to conditionally output something.</p>
-        <pre class='prettyprint linenums'>&lt;script type="text/x-template"&gt;
+        <pre class='prettyprint linenums'>&lt;template&gt;
   {{ if (somebody.friends &amp;&amp; somebody.friends.length) { }}
     {{  somebody.friends.forEach(function(friend) {  }}
     &lt;li&gt; ${ friend.name}: ${ friend.job }&lt;/li&gt;
     {{  });  }}
   {{ } }}
-&lt;/script&gt;</pre>
+&lt;/template&gt;</pre>
         </p>
         <h4>Sequential Numbering</h4>
         <p>Truck provides a way to enable you to output sequential numbering with each repetition of a template. To do so you put <code>$.view.index</code> at the place where you want the number output. By default number starts at 1. But you can tell the view at what number you want it to start. For example, if you wanted it to start at a negative number, just provide that as the argument. The numbering will begin with the negative number provided and increase by 1. Below are some examples:</p>
-        <pre class='prettyprint linenums'>&lt;script type="text/x-template"&gt;
+        <pre class='prettyprint linenums'>&lt;template&gt;
   &lt;li&gt;
     &lt;h3&gt;${ $.view.index }: Name: ${ data.name.first } { data.name.last }&lt;/h3&gt;
   &lt;/li&gt;
-&lt;/script&gt;</pre>
+&lt;/template&gt;</pre>
         <p>The above example will begin from 1. However, we can tell the view to start at any number. We can do that at setup:</p>
         <pre class='prettyprint linenums'>// Tell the view to start from 10:
 var PeopleView = $.View({
@@ -104,12 +104,12 @@ var PeopleView = $.View({
             <li>sortNumbersDescending</li>
           </ul>
           <p>You use them as a function with the data you want formatted as the argument:</p>
-          <pre class='prettyprint linenums'>&lt;script type="text/x-template"&gt;
+          <pre class='prettyprint linenums'>&lt;template&gt;
   &lt;li&gt;
     &lt;h3&gt;Ammount: ${ $.formatNumber(data.number) }&lt;/h3&gt;
     &lt;h4&gt;Price: $.currency(data.price, '$', ',', 0)&lt;/h4&gt;
   &lt;/li&gt;
-&lt;/script&gt;</pre>
+&lt;/template&gt;</pre>
             
             <h4>Temlate Helpers</h4>
             <p>You can define your own template helpers to operate on data before it is output by the template. To do that you use the <code>$.defineHelper</code> method:</p>
@@ -187,7 +187,7 @@ var PeopleView = $.View({
   }
 ];</pre>
           <pre class='prettyprint linenums'>&lt;ul class='list' id="complexTemplate"&gt;
-  &lt;script id='tempie' type='text/x-template'&gt;
+  &lt;template id='tempie'&gt;
     &lt;li&gt;
       &lt;img data-src='${ somebody.image }'&gt;
       &lt;div&gt;
@@ -208,7 +208,7 @@ var PeopleView = $.View({
       &lt;/div&gt;
     &lt;/li&gt;
     {{ } }}
-  &lt;/script&gt;
+  &lt;/template&gt;
 &lt;/ul&gt;</pre>  
 
           <h3>Templates in Views</h3>
