@@ -157,10 +157,10 @@ $.validateWithRegex('#australianPhoneNum', phoneRegex)
 </pre>
 
       <h4>$.registerCustomValidator</h4>
-      <p>If you want to have a custom validator that you can use with <code>$.Form</code> for getting a JSON object, you need to do two things: register the custom validator and indicate it in the <code>$.Form</code> setup. To register a custom validator you use <code>$.registerCustomValidator</code>. This takes two arguments: a name for your validator and a regular express. The regular expression should be in the following format: <code>/abc/</code>. Below is an example custom validator used with <code>$.Form</code>:</p>
+      <p>If you want to use a custom validator with <code>$.Form</code> so that you can get a JSON object, you need to do two things: register the custom validator and indicate it in the <code>$.Form</code> setup. To register a custom validator you use <code>$.registerCustomValidator</code>. This takes two arguments: a name for your validator and a regular express. The name should start with 'custom-'. This is required for registering it. The regular expression should be in the following format: <code>/abc/</code>. Below is an example custom validator used with <code>$.Form</code>:</p>
 
 <pre class="prettyprint linenums">
-$.registerCustomValidator('textWithSpaces', /^[A-Za-z\W]+$/);
+$.registerCustomValidator('custom-textWithSpaces', /^[A-Za-z\W]+$/);
 
 // Setup Form validation:
 $('#validateForm').on('click', function() {
@@ -180,7 +180,7 @@ $('#validateForm').on('click', function() {
   }
 });
 </pre>
-        <p>When you define a custom validator and want to use it with <code>$.Form</code>, remember that you must prefix the name of your custom validator with "custom-" when you assign it as the type of the $.Form validator. Please examine the above example carefully. We defined a custom validator as 'textWithSpaces' and then assigned it as a type with 'custom-textWithSpaces'.</p>
+        <p>When you define a custom validator remember that you must prefix the name with "custom-". In the above example, notice how we registered out validator as "custom-textWithSpaces".</p>
 
 
 
