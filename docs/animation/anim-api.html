@@ -23,6 +23,15 @@
           <a class='selected' href="#">Docs</a>
           <a href="../../install.html">Install</a>
         </menu>
+        <svg id='hamburgerButton' width="30px" height="28px" viewBox="0 0 30 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Artboard-1" stroke="#fff" stroke-width="4" stroke-linecap="square">
+              <path d="M2,2 L28,2" id="Line"></path>
+              <path d="M2,26 L28,26" id="Line-Copy"></path>
+              <path d="M2,14 L28,14" id="Line-Copy-2"></path>
+            </g>
+          </g>
+        </svg>
       </div>
     </nav>
     <header>
@@ -388,6 +397,14 @@ $.anim('#el')
         
         <div id="menu">
           <ul>
+            <svg id='closeMark' width="30px" height="28px" viewBox="0 0 30 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Artboard-1" stroke="#070707" stroke-width="4" stroke-linecap="square">
+                  <path d="M3,25 L27,3" id="Line-Copy"></path>
+                  <path d="M3,3 L27,25" id="Line-Copy-2"></path>
+                </g>
+              </g>
+            </svg>
             <li><a href='../models/models-intro.html'>Models</a></li>
             <li><a href="../views/views-intro.html">Views</a></li></li>
             <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
@@ -458,6 +475,17 @@ $.anim('#el')
   ga('create', 'UA-70245106-1', 'auto');
   ga('send', 'pageview');
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var button = document.getElementById('hamburgerButton');
+    var closeBtn = document.getElementById('closeMark');
+    var menu = document.getElementById('menu');
+    button.addEventListener('click', function() {
+      menu.className = 'opened'
+    });
+    closeBtn.addEventListener('click', function() {
+      menu.className = '';
+    })
+  })
 </script>
 </body>
 </html>

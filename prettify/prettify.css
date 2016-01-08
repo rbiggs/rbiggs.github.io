@@ -37,7 +37,10 @@ pre.prettyprint { padding: 10px; border: 1px solid #bbb;
     box-sizing: border-box;  
     background-color: #fff;
 	 white-space: pre-wrap;
-	 font-size: 11pt; }
+	 font-size: 11pt; 
+   white-space: pre-wrap;
+   word-wrap: break-word;
+  }
 
 /* Specify class=linenums on a pre to get line numbering */
 ol.linenums { margin-top: 0; margin-bottom: 0; margin-left: 16px; } /* IE indents via margin-left */

@@ -212,3 +212,158 @@ footer > div > menu a#truckLogoLink {
 	height: 20px;
 	width: 52px;
 }
+
+/* Media Queries */
+@media only screen and (max-width: 1024px) {
+
+	nav > div {
+		width: 90%;
+	}
+	menu > a {
+		font-size: 20px;
+		margin-left: 30px;
+	}
+	header div {
+		width: 90% !important;
+	}
+	footer > div {
+		width: 90% !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	nav > div > h1,
+	nav > div > h1 a {
+		background-size: auto 30px !important;
+		height: 30px !important;
+		width: 80px;
+	}
+	menu {
+		flex: none;
+		height: 40px !important;
+		padding: 0;
+	}
+	menu > a {
+		font-size: 12px;
+		margin-left: 10px;
+		height: auto;
+		border-bottom-width: 2px;
+	}
+	header #truck-image {
+		height: 150px;
+	}
+	header h2 {
+		font-size: 18px !important;
+		margin-right: 14px;
+	}
+	section {
+		height: auto !important;
+	}
+	section > div {
+		padding: 1px 10px;
+	}
+	#build {
+		padding: 1px 10px;
+	}
+	#build > div {
+		max-width: none;
+		width: 300px;
+		margin: 0;
+	}
+	#build > div h2 {
+		font-size: 18px !important;
+	}
+	#build img {
+		height: 100px;
+	}
+	#build > div > aside {
+		margin-left: 120px;
+	}
+	#code {
+		padding: 1px 10px;
+		border: solid 1px transparent;
+	}
+	#code img {
+		margin-bottom: 20px;
+	}
+	#code h2,
+	#opensource h2 {
+		font-size: 18px !important;
+	}
+	#opensource img {
+		display: none;
+	}
+	#opensource aside {
+		margin: 0 !important;
+	}
+}
+
+@media only screen and (max-width: 340px) {
+	nav > div {
+		position: relative;
+	}
+	nav > div > h1 {
+		position: absolute;
+		top: 20px;
+		left: 0px;
+		background-size: auto 25px !important;
+		width: 80px !important;
+	}
+	menu {
+		margin-top: 20px;
+		padding-left: 0 !important;
+		float: left;
+		height: 60px;
+	}
+	section {
+		min-height: 200px !important;
+	}
+	header {
+		height: 150px !important;
+	}
+	header > div {
+		padding: 20px 1px 1px 1px !important;
+		height: 150px !important;
+	}
+	header #truck-image {
+		height: 100px;
+	}
+	header h2 {
+		font-size: 14px !important;
+	}
+	#build > div h2 {
+		font-size: 14px !important;
+	}
+	#build img {
+		height: 70px;
+	}
+	#build > div > aside {
+		margin-left: 85px !important;
+	}
+	#build > div > aside h3,
+	#code > div > aside h3,
+	#opensource > div > aside h3 {
+		font-size: 12px !important;
+	}
+	#code {
+		padding: 40px 10px !important;
+	}
+	#code > div > img {
+		-webkit-transform: scale(.75);
+		transform: scale(.75);
+		display: inline-block;
+		float: none !important;
+		margin: 0 !important;
+		position: relative;
+		left: -30px;
+	}
+	#opensource {
+		padding: 30px 10px 30px !important;
+	}
+	#truckLogoLink {
+		display: none;
+	}
+	footer {
+
+	}
+}
