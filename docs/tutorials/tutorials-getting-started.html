@@ -8,6 +8,9 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
 </head>
 <body>
   <article>
@@ -42,22 +45,62 @@
       <div>
         <div>
           <h2>Tutorials</h2>
-          <h3>Demos</h3>
+          <h3>Getting Started</h3>
           <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
-          <p>We currently have two reference apps for you to download in order to see how to put TruckJS's layouts, widgets, model, views and routes together to make an app.</p>
+          <h4>Creating a Project</h4>
+          <p>You could create a project by copying all the files you need from the Github sources files, but then why would you want to do that? There are better ways.</p>
+          <h5>NPM Module</h5>
+          <p>Truck has an NPM module for quickly creating Truck projects. Just install the module globally on your machine and you're ready to start cranking out Truck apps. When you use this module to create a project, it gives you both development and minified versions, a basic app structure and a TypeScript declaration file which you can use with your Text Editor or IDE for tooling (Intellisense, code completion, etc.).</p>
+
+          <p>Before you can do anything, of course, you've got to install the NPM module:</p>
+          <pre class="prettyprint linenums"><code>npm install truckjs -g
+</code></pre>
+          
+          <p>On a Mac or Linux you will need to run this with <code>sudo</code>, which will ask you for your password. Once this is installed, you're ready to start making projects. There are a number of options you can provide to control how the Truckjs module setting the project up.</p>
+          
+          <h5>Options:</h5>
           <ul>
-            <li><a target='_blank' href="https://github.com/rbiggs/SFCoffee">SFCoffee</a></li>
-            <li><a target='_blank' href="https://github.com/rbiggs/Vino">Vino</a></li>
-            <li><a target='_blank' href="https://github.com/rbiggs/Fragranz">Fragranz</a></li>
-            <li><a target='_blank' href="https://github.com/rbiggs/TodoMVC">TodoMVC</a></li>
+            <li>--name or -n A name for your project</li>
+            <li>--path or -p A path to where you want your project put</li>
+            <li>--os or -o The operating system you want to target</li>
+            <li>--type or -t The type of app shell you want</li>
           </ul>
-          <p>TodoMVC is our take on the popular <a target='_blank' href="http://todomvc.com">TodoMVC</a> project. But unfortunately it is designed as a desktop app. Since TruckJS is all about the mobile experience, we create a mobile version of TodoMVC where the UI reflects what a mobile app should be.</p>
-          <p>You can see these apps live on your mobile devices at these urls. Please note that they are using the iOS theme:</p>
-          <ul>
-            <li><a target='_blank' href="http://wobba.io/sfcoffee">SFCoffee</a></li>
-            <li><a target='_blank' href="http://wobba.io/vino">Vino</a></li>
-            <li><a target='_blank' href="http://wobba.io/fragranz">Fragranz</a></li>
-          </ul>
+
+          <p>Let's break these down. Notice that each option has two versions of the flag - a long form with double hyphens and a short for with one hyphen and one letter. You can choose which you prefer.</p>
+
+          <p>To successfully create a project, Truckjs needs at least two values: a name for the project and an OS to target. The name can be whatever you want. Please note if there is already a folder in that location with the same name as the project you are creating, it will be replaced with your new project. If you want to replace an existing project, not a problem, but you do need to be aware of this. The other value you must provide is an OS: android, ios or win. These must be lower case. This will provide the correct theme for the target operating system.</p>
+
+
+          <pre class='prettyprint linenums'>// Create an iOS app:
+truckjs -n myApp -o ios
+// Create and Android app:
+truckjs -n myApp -o android
+// Create a Windows Phone app:
+truckjs -n myApp -o win</pre>
+
+        <p>Running any of the above commands will create a base app shell for the designated operating system. Because a path was not provided, it will be created on the user's desktop. If you want to create the project at a specific location, you'll need to provide the path flag:</p>
+
+<pre class='prettyprint linenums'>// Create an iOS app:
+// Path is for Mac OS X:
+truckjs -n myApp -o ios -p ~/Documents/Dev
+// Create and Android app:
+truckjs -n myApp -o android ~/Documents/Dev
+// Create a Windows Phone app:
+// Path is for Windows file system:
+truckjs -n myApp -o win ~\Documents\Dev</pre>
+
+        <p>You can also tell Truckjs to create a particular type of app shell. The default is a single screen with a static list. Using the type flag you can create a navigation list with routing, simple tab bar or a slide out menu app. These will have working code included, giving you a clear idea how to customize them and make them work for your needs. The type flag can handle four values: default, navigation, tabbar and slideout. If no type flag is provided, then the default type will be created:</p>
+
+
+<pre class='prettyprint linenums'>// Create a default app:
+truckjs -n myApp -o ios -t default
+// Create a navigation list:
+truckjs -n myApp -o android -t navigation
+// Create a tab bar interface:
+truckjs -n myApp -o win -t tabbar
+// Create a slide out menu app:
+truckjs -n myApp -o ios -t slideout</pre>
+
         </div>
         
         <div id="menu">
@@ -96,13 +139,13 @@
             <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
             <li><a href="../tutorials/tutorials-intro.html" class='selected'>Tutorials</a>
               <ul>
-                <li><a href="tutorials-getting-started.html">Getting Started</a></li>
+                <li><a href="tutorials-getting-started.html" class='selected'>Getting Started</a></li>
                 <li><a href="tutorials-views.html">Views</a></li>
-                <li><a href="tutorials-models.html">Models</a></li>
+                <li><a href="../tutorials/tutorials-models.html">Models</a></li>
                 <li><a href="tutorials-mediators.html">Mediators</a></li>
                 <li><a href="tutorials-routing.html">Routing</a></li>
                 <li><a href="tutorials-navigation-list.html">Navigation List</a></li>
-                <li><a href="tutorials-demos.html" class='selected'>Demos</a></li>
+                <li><a href="tutorials-demos.html">Demos</a></li>
               </ul>
             </li>
           </ul>
@@ -131,6 +174,9 @@
     </footer>
   </article>
   
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
