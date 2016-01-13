@@ -76,7 +76,7 @@ AppRoutes.addRoute([
     route: 'detail',
     callback: function(id) {
       // Get current view model:
-      var model = AppViews.VIPView.getModel().getData();
+      var model = AppViews.VIPView.getModel();
       // Filter model with id passed in route:
       var whichPerson = model.filter(function(person) {
         return person.guid === id;
