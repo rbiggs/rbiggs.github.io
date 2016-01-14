@@ -8,6 +8,24 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+  <style>
+    .images {
+      display: -webkit-flex;
+      -webkit-align-items: center;
+      -webkit-jusitify-content: center;
+      display: flex;
+      align-items: center;
+      jusitify-content: space-around;
+    }
+    .images > img {
+      width: 200px;
+      display: inline-block;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
   <article>
@@ -44,7 +62,129 @@
           <h2>Themes</h2>
           <h3>Use</h3>
           <img src="../../images/truck-parts/Truck-Body.png" alt="Truck Body">
-          <p>Coming soon...</p>
+          <p>TruckJS provides three themes: Android, iOS and Windows Phone. These use the default colors for each. In most cases this may be fine for what you are building. However, if you need color for branding purposes, you can add a few styles to a style tag in your app's header.</p>
+
+          <p>When colorizing your app, there is one thing to keep in mind, readability. If you colorize the navigation bar and toolbar with a dark color, you will need to color the text and widget indicators in them so that they stand out from the background color. So, in the case of a light color in the navigation and tool bars, you'd be fine. But it you gave them a dark red, you'd need to make their content lighter so that you can see them.</p>
+
+          <h3>iOS</h3>
+          <p>In the following example, we'll give the navigation and toolbars a light blue color and make the titles and buttons in them a dark charcoal:</p>
+
+<pre class='prettyprint linenums'>/* Color nav bar and toolbar */
+nav, screen > footer, screen > toolbar {
+  background-color: #9fc5e8;
+}
+/* Color title and buttons in nav and toolbars */
+nav h1, nav button, toolbar button, footer button, nav .back, #truck-back-arrow  {
+  color: #333 !important;
+  stroke: #333 !important;
+}</pre>
+
+<p class='images'>
+  <img src="../../images/themes/iOS-light-blue-1.png" alt="">
+  <img src="../../images/themes/iOS-light-blue-2.png" alt="">
+</p>
+
+<p>Now if we want to use a darker background color on the nav and toolbars, we would need to lighten up the button in them as well:</p>
+
+<pre class='prettyprint linenums'>/* Color nav bar and toolbar */
+nav, screen > footer, screen > toolbar {
+  background-color: red;
+}
+/* Color title and buttons in nav and toolbars */
+nav h1, nav button, toolbar button, footer button, nav .back, #truck-back-arrow  {
+  color: #fafafa !important;
+  stroke: #fafafa !important;
+}</pre>
+
+<p class='images'>
+  <img src="../../images/themes/iOS-red-1.png" alt="">
+  <img src="../../images/themes/iOS-red-2.png" alt="">
+</p>
+
+          <h3>Android</h3>
+
+          <p>Colorizing the Android theme works the same as iOS:</p>
+<pre class='prettyprint linenums'>/* Color nav bar and toolbar */
+nav, screen > footer, screen > toolbar {
+  background-color: #9fc5e8;
+}
+/* Color title and buttons in nav and toolbars */
+nav h1, nav button, toolbar button, footer button, nav .back, #truck-back-arrow  {
+  color: #333 !important;
+  stroke: #333 !important;
+}</pre>
+
+<p class='images'>
+  <img src="../../images/themes/Android-light-blue-1.png" alt="">
+  <img src="../../images/themes/Android-light-blue-2.png" alt="">
+</p>
+
+<p>And here we have the same dark red background for Android:</p>
+
+<pre class='prettyprint linenums'>/* Color nav bar and toolbar */
+nav, screen > footer, screen > toolbar {
+  background-color: red;
+}
+/* Color title and buttons in nav and toolbars */
+nav h1, nav button, toolbar button, footer button, nav .back, #truck-back-arrow  {
+  color: #fafafa !important;
+  stroke: #fafafa !important;
+}</pre>
+
+<p class='images'>
+  <img src="../../images/themes/Android-red-1.png" alt="">
+  <img src="../../images/themes/Android-red-2.png" alt="">
+</p>
+
+
+          <h4>Windows Phone</h4>
+          <p>The Windows theme is slightly different, though not by much. Here's the light blue background equivalent:</p>
+
+<pre class='prettyprint linenums'>/* Color nav bars and buttons */
+nav, screen > footer, screen > toolbar {
+  background-color: #9fc5e8;
+}
+nav h1, nav button, toolbar button, footer button, nav .back, #truck-back-arrow  {
+  color: #333 !important;
+  stroke: #333 !important;
+}
+nav button, footer button, toolbar button {
+  background-color: transparent !important;
+  border-color: transparent;
+}
+nav button:hover, footer button:hover, toolbar button:hover {
+  background-color: transparent !important;
+  border-color: #333 !important;
+}</pre>
+
+
+<p class='images'>
+  <img src="../../images/themes/Windows-light-blue-1.png" alt="">
+  <img src="../../images/themes/Windows-light-blue-2.png" alt="">
+</p>
+      <p>Here's the Window equivalent for the dark red background on nav and toolbars:</p>
+
+<pre class='prettyprint linenums'>/* Color nav bars and buttons */
+nav, screen > footer, screen > toolbar {
+  background-color: red;
+}
+nav h1, nav button, toolbar button, footer button, nav .back, #truck-back-arrow  {
+  color: #fafafa !important;
+  stroke: #fafafa !important;
+}
+nav button, footer button, toolbar button {
+  background-color: transparent !important;
+  border-color: transparent;
+}
+nav button:hover, footer button:hover, toolbar button:hover {
+  background-color: transparent !important;
+  border-color: #fafafa !important;
+}</pre>
+
+<p class='images'>
+  <img src="../../images/themes/Windows-red-1.png" alt="">
+  <img src="../../images/themes/Windows-red-2.png" alt="">
+</p>
         </div>
         
         <div id="menu">
@@ -112,6 +252,9 @@
     </footer>
   </article>
   
+<script>
+  prettyPrint();
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
