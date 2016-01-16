@@ -296,6 +296,9 @@ footer > div > menu a#truckLogoLink {
 	#opensource aside {
 		margin: 0 !important;
 	}
+	#view-lifecycle {
+		width: 300px;
+	}
 }
 
 @media only screen and (max-width: 340px) {
