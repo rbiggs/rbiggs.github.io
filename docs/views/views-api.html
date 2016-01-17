@@ -59,11 +59,10 @@
           <p>Views can be initialized with the following options:</p>
           <ul>
             <li><strong>element</strong>: The element that the view will use as a temlate parent. The template will be rendered inside of this element.</li>
-            <li><strong>template</strong>: a template to use. This can must be a string. You could use $(selector).text() to get a template.</li>
-            <li><strong>model</strong>: a model. This will bind the view to the designated model.</li>
+            <li><strong>template</strong>: A template to use. This can must be a string. You could use $(selector).text() to get a template.</li>
+            <li><strong>model</strong>: A model. This will bind the view to the designated model.</li>
             <li><strong>controller</strong>: This tells the view which controller to use.</li>
-            <li><strong>name</strong>: Used to identify a view. This should be the same as the variable you use to initialize the view. This will be exposed by <code>getViewName()</code>.</li>
-            <li><strong>variable</strong>:A name to use inside your templates to refer to the data being consumed. By default Truck uses <code>data</code>. Providing a variable allows you to use a term that makes sense for the data you template is consuming.</li>
+            <li><strong>variable</strong>: A name to use inside your templates to refer to the data being consumed. By default Truck uses <code>data</code>. Providing a variable allows you to use a term that makes sense for the data you template is consuming.</li>
             <li><strong>events</strong>: This is an array of events to bind to a view. You can target the parent element by leaving out the `element` property or using `self` as the value for `element`. Otherwise, you can create a delegated event on the template's descendants by providing a selector for the intended target:
 <pre class='prettyprint linenums'>var myView = $.View({
   element: '#arrayTemplate1', 
@@ -343,21 +342,6 @@ myView.stopRenderViewEvery();
 var renderTime = myView.getLastRenderTime();
 </pre>
 
-          <h4>getViewName</h4>
-          <p><code>getViewName()</code></p>
-          <p>Find out the name you used when you set up a view. If you did not provide a name, this will return undefined. Below is an example of initializing a view with a name:</p>
-<pre class='prettyprint linenums'>var myView = $.View({
-    element: '#element',
-    name: 'myView',
-    model: myModels
-});
-</pre>
-
-<p>You should make sure that if you do set this, that the name you provide is the same as the variable you assign the view to. This value gets pushed to <code>$.RegisteredViews</code>, which serves as a central reference to all registered views in your app. This can be helpful to keep track of all your views. Other than that, it has no other functionality. You can examine the contents of $.RegesteredViews. It's just an array of view names.</p>
-
-<pre class='prettyprint linenums'>// Get the name of the view:
-var viewName = myView.getViewName();
-</pre>
           
           <h4>defineHelper</h4>
           <p><code>defineHelper(callback)</code></p>
