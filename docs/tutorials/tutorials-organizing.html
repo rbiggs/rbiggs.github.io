@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck - Documentation</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles-docs.css">
+  <link rel="stylesheet" href="../../prettify/obsidian.css">
+  <script type='text/javascript' src='../../prettify/prettify.js'></script>
+  <script type='text/javascript' src='../../prettify/lang-css.js'></script>
+</head>
+<body>
+  <article>
+    <nav>
+      <div>
+        <h1><a href="../../index.html">Truck</a></h1>
+        <menu>
+          <a href="../../quickstart.html">Quick Start</a>
+          <a href="../../features.html">Features</a>
+          <a class='selected' href="#">Docs</a>
+          <a href="../../install.html">Install</a>
+        </menu>
+        <svg id='hamburgerButton' width="30px" height="28px" viewBox="0 0 30 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Artboard-1" stroke="#fff" stroke-width="4" stroke-linecap="square">
+              <path d="M2,2 L28,2" id="Line"></path>
+              <path d="M2,26 L28,26" id="Line-Copy"></path>
+              <path d="M2,14 L28,14" id="Line-Copy-2"></path>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </nav>
+    <header>
+      <div>
+        <h2>Docs</h2>
+        <h3>Everything You Need to Know</h3>
+      </div>
+    </header>
+    
+    <section>
+      <div>
+        <div>
+          <h2>Tutorials</h2>
+          <h3>Organizing Your Code</h3>
+          <img src="../../images/truck-parts/Truck-Complete.png" alt="Complete Truck">
+          <h4>It's About Parts</h4>
+
+          <p>The piece of TruckJS that you will always use, regardless of the type of app you're making, is views. The second part that you'll probably need to use is the router. After that, other features depend on your use case. To better understand how we can organize Truck's app code, we need to take a look at how views work and what they can do for you to organize your code.</p>
+
+          <h5>Views</h5>
+          <p>Although we write code to make an app, when we run it, we see a UI. Truck's views let you break that UI down into managable chunks. You can create views to do this in three ways. You can have a view render data to the screen. This might be just a snippet of text, or an object or a collection of object. You can also add event listeners to your views. You can also define the template the view uses when you setup the view. This results in a complete component where you do not need to look elsewhere to understand its functionality. Or you could create a view whose only purpose is to wire up events in the UI.</p>
+
+          <p>When your app has a lot of views, it gets hard to dig through the code to find the view you want. But you can combine all of your views into one object. Below we show a before and after:</p>
+
+          <pre class='prettyprint linenums'>//===========================
+// Scope views to App object:
+//===========================
+var App = {
+
+  // Define views:
+  SpecialRedsView: $.View({
+    element: '#picksRed',
+    variable: 'wine'
+  }),
+
+  SpecialWhitesView: $.View({
+    element: '#picksWhite',
+    variable: 'wine'
+  }),
+
+  SelectedWineView: $.View({
+    element: '#wineDetail',
+    variable: 'wine'
+  }),
+
+  FilteredWinesView: $.View({
+    element: '#filteredWines',
+    variable: 'wine'
+  }),
+
+  WineryView: $.View({
+    element: '#viewWinery',
+    noTemplate: true,
+    events: [{
+      event: 'tap',
+      callback: function() {
+        var location = $(this).attr('data-location');
+        window.location.href= 'http://maps.apple.com/?q=' + location;
+      }
+    }]
+  })
+};
+
+// Render the views:
+//==================
+App.SpecialRedsView.render(bestWines[0].data);
+App.SpecialWhitesView.render(bestWines[1].data);</pre>
+          
+          <p>In the above example, the last view, WineryView, is only for wiring up an event. That's why it has the property <code>noTemplate</code>. The other views are all callable off the <code>App</code> object. This gives you namespacing and one place to look for all of your views.</p>
+
+          <p>Another common problem with UIs are event registration. If you have a lot of interactive elements, such as buttons, etc., you can wind up with events dispersed throughout your code. It can be hard to find the event your looking for. In the following example, a screen had a lot of elements with registered events. We created a view for the screen and attached all those loose event there. When you add events to a view, Truck uses event delegation based on the view's element. In this case its the screen.</p>
+
+          <pre class='prettyprint linenums'>// Create a view to register events:
+//==================================
+var AppEvents = $.View({
+  element: 'screen',
+  noTemplate: true,
+  events: [
+    // Add todo item:
+    //===============
+    {
+      event: 'tap',
+      element: '.add',
+      callback: function() {
+        var todo = $('#add-todo').val();
+        $('#add-todo')[0].value = '';
+        if (todo) {
+          TodosData.unshift({state: 'active', value: todo});
+          renderActiveTodos(TodosData);
+          TodoView.render(TodosData);
+          toggleButtonState('#show-all');
+        }
+        $.Box.set('truck-todos', TodosData, function(err, value) {});
+      }
+    },
+    // Set state of todo:
+    //===================
+    {
+      event: 'tap',
+      element: '.set-state',
+      callback: function() {
+        var parent = $(this).closest('li');
+        var index = parent.index();
+        parent.toggleClass('active');
+        var state = parent.hasClass('active') ? 'active' : 'completed';
+        TodosData[index].state = state;
+        renderActiveTodos(TodosData);
+        $.Box.set('truck-todos', TodosData, function(err, value) {});
+      }
+    },
+    // Delete a todo:
+    //===============
+    {
+      event: 'tap',
+      element: '.delete-item',
+      callback: function() {
+        var index = $(this).closest('li').index();
+        // Remove item from list:
+        TodosData.splice(index, 1);
+        TodoView.render(TodosData);
+        renderActiveTodos(TodosData);
+        $.Box.set('truck-todos', TodosData, function(err, value) {});
+      }
+    },
+    // Handle visibility of todo items by state:
+    //==========================================
+    {
+      event: 'tap',
+      element: 'button',
+      callback: function() {
+        var id = this.id;
+        var todoItems = $('#todo-items li');
+        switch(id) {
+          // Show all todos:
+          case 'show-all':
+            todoItems.css(listItemFlex);
+            toggleButtonState(this);
+            break;
+          // Show only active todos:
+          case 'show-active':
+            todoItems.hazClass('active').css(listItemFlex);
+            todoItems.hazntClass('active').hide();
+            toggleButtonState(this);
+          break;
+          // Show only completed todos:
+          case 'show-completed':
+            todoItems.hazClass('active').hide();
+            todoItems.hazntClass('active').css(listItemFlex);
+            toggleButtonState(this);
+          break;
+        }
+      }
+    }
+  ]
+});</pre>
+
+        <h4>Routes</h4>
+
+        <p>The other main item you will use in your app is routes. Luckily, routes are organized by default. You set up routes by creating a router object and defining routes on it. This means there's just one place to look for routes:</p>
+
+        <pre class='prettyprint linenums'>// Define Routes:
+//===============
+var FragranzRoutes = $.Router();
+FragranzRoutes.addRoute([
+  {
+    route: 'fragranceList',
+    callback: function(genre) {
+      chosenGenre = [];
+      fragrances.forEach(function(fragrance) {
+        if (fragrance.genre === genre) {
+          chosenGenre.push(fragrance)
+        }
+      });
+      AvailableFragrancesView.render(chosenGenre);
+      FragrancesGenreTitleView.render([genre]);
+      $('#backToGenre span').text(genre);
+    }
+  },
+  {
+    route: 'detail',
+    callback: function(sku) {
+      var chosenFragrance = chosenGenre.filter(function(fragrance) {
+        return fragrance.sku === sku;
+      });
+      FragranceDetailView.render(chosenFragrance);
+      DetalTitleView.render([chosenFragrance[0].product_title])
+      $('#addToCart').data('fragrance', chosenFragrance[0]);
+    }
+  }
+]);</pre>
+
+          <h5>Mediators</h5>
+
+          <p>If you want to decouple your code, you'll use mediators. However, you'd probably never have more than a couple. You can namespace them with views or routes or however you like.</p>
+
+          <h5>Create Namespaces Based on Functionality</h5>
+
+          <p>If you have a complex app with different things going on, create separate namespaces for each division. For example, Registration, ShoppingCart, etc. Add all the relavant code to the namespace. That way all the code related to a block of functionality is in one place. Below is a Shopping Cart namespace:</p>
+
+
+          <pre class='prettyprint linenums'>var Cart = {
+
+  CartModel: $.Model([], 'cart-model');
+
+  CartView: $.View({
+    element: '#purchaseItems',
+    model: CartModel,
+    variable: 'item'
+  }),
+
+  TotalItemsView: $.View({
+    element: '#totalItems',
+    variable: 'total'
+  }),
+
+  TotalCostView: $.View({
+    element: '#totalCost',
+    variable: 'total'
+  }),
+
+  TotalPurchasedItemsViews: $.View({
+    element: '#purchaseDetails',
+    variable: 'item',
+    model: CartModel
+  }),
+
+  TotalPurchaseCostView: $.View({
+    element: '#confirmTotalCost',
+    variable: 'cost'
+  }),
+
+  CartEvents: $.View({
+    element: '#cart',
+    noTemplate: true,
+    events: [
+      {
+        event: 'tap',
+        element: '#cancelOrder',
+        callback: function() {
+          Cart.CartModel.purge();
+          Cart.TotalItemsView.empty();
+          Cart.TotalCostView.empty();
+          Cart.CartView.empty();
+          $.GoBackToScreen('main');
+        })
+        }
+      },
+      {
+        event: 'tap',
+        element: '#placeOrder',
+        callback: function() {
+          $.GoToScreen('confirmation');
+          Cart.TotalPurchasedItemsViews.render();
+          function confirmationNumber() {
+            var d = Date.now();
+            var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+            var randomLetter = charset[Math.floor(Math.random() * charset.length)];
+            return randomLetter + 'xx-xxxx-xxx'.replace(/[xy]/g, function(c) {
+              var r = (d + Math.random() * 16) % 16 | 0;
+              d = Math.floor(d / 16);
+              return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+          }
+          $('#confirmationNum').text(confirmationNumber());
+        }
+      },
+      {
+        event: 'tap',
+        element: '#backToCart',
+        callback: function() {
+          Cart.CartModel.purge();
+          Cart.TotalItemsView.empty();
+          Cart.TotalCostView.empty();
+          Cart.CartView.empty();
+        }
+      }
+    ]
+  });
+};</pre>
+
+        <h4>Build Scripts</h4>
+
+        <p>You could also break your code down into separate files. Using a logical file structure allows you to have small, managable chunks of code. It's easy to find cart code in a cart directory. If you take this approach, you will need to do one of two things. Create a build script to combine them together, or use a module loader/package manager, which will do that for you. There are so many module bundlers to choose from: SystemJS, JSPM, Webpack, etc. We feel that a build script gives you more control over how your final file is. In contrast, bundlers add module loading code in the final output. If you choose to write a build script, there are a number of ways to do so. You could use make, npm, gulp or grunt. We currently use gulp to assemble all the pieces of TruckJS together and are happy with how it's working.</p>
+
+
+        </div>
+        
+        <div id="menu">
+          <ul>
+            <svg id='closeMark' width="30px" height="28px" viewBox="0 0 30 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Artboard-1" stroke="#070707" stroke-width="4" stroke-linecap="square">
+                  <path d="M3,25 L27,3" id="Line-Copy"></path>
+                  <path d="M3,3 L27,25" id="Line-Copy-2"></path>
+                </g>
+              </g>
+            </svg>
+            <li><a href='../models/models-intro.html'>Models</a></li>
+            <li><a href="../views/views-intro.html">Views</a></li></li>
+            <li><a href="../mediators/mediators-intro.html">Mediators</a></li>
+            <li><a href="../templates/templates-intro.html">Templates</a></li>
+            <li><a href="../components/components-intro.html">Components</a></li>
+            <li><a href="../promises/promises-intro.html">Promises</a></li>
+            <li><a href="../fetch/fetch-intro.html">Fetch</a></li>
+            <li><a href="../router/router-intro.html">Router</a></li>
+            <li><a href="../box/box-intro.html">Box</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../oop/oop-intro.html">OOP</a></li>
+            <li><a href="../widgets/widgets-intro.html">Widgets</a></li>
+            <li><a href="../gestures/gestures-intro.html">Gestures</a></li>
+            <li><a href="../dom/dom-intro.html">DOM</a></li>
+            <li><a href="../utilities/utilities-intro.html">Utilities</a></li>
+            <li><a href="../layouts/layouts-intro.html">Layouts</a></li>
+            <li><a href="../themes/themes-intro.html">Themes</a></li>
+            <li><a href="../dispatcher/dispatcher-intro.html">Dispatch</a></li>
+            <li><a href="../hybrids/hybrids-intro.html">Hybrids</a></li>
+            <li><a href="../stacks/stacks-intro.html">Stacks</a></li>
+            <li><a href="../forms/forms-intro.html">Forms</a></li>
+            <li><a href="../formatting/formatting-intro.html">Data Formatting</a></li>
+            <li><a href="../animation/anim-intro.html">Animation</a></li>
+            <li><a href="../jquery/jquery-intro.html">jQuery</a></li>
+            <li><a href="../tutorials/tutorials-getting-started.html" class='selected'>Tutorials</a>
+              <ul>
+                <li><a href="tutorials-getting-started.html">Getting Started</a></li>
+                <li><a href="tutorials-organizing.html" class='selected'>Organizing Your Code</a></li>
+                <li><a href="tutorials-views.html">Views</a></li>
+                <li><a href="../tutorials/tutorials-models.html">Models</a></li>
+                <li><a href="tutorials-mediators.html">Mediators</a></li>
+                <li><a href="tutorials-routing.html">Routing</a></li>
+                <li><a href="tutorials-navigation-list.html">Navigation List</a></li>
+                <li><a href="tutorials-demos.html">Demos</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <div>
+          <menu id='mainFooterMenu'>
+            <a id='truckLogoLink' href="index.html"><img src="../../images/footer-logo.png" alt="Truck"></a>
+            <a href="quickstart.html">Quick Start</a>
+            <a href="features.html">Features</a>
+            <a href="../../install.html">Install</a>
+          </menu>
+        <aside>
+          <menu id='social-links'>
+            <a id='tumblr' target='_blank'  href="http://wobbabits.tumblr.com">Tumblr</a>
+            <a id='github' target='_blank'  href="https://github.com/rbiggs/TruckJS">Github</a>
+            <a id='twitter' target='_blank'  href="https://twitter.com/@trukrs">Twitter</a>
+            <!--<a id='npm' href="#">NPM</a>-->
+          </menu>
+        </aside>
+      </div>
+    </footer>
+  </article>
+  
+<script>
+  prettyPrint();
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70245106-1', 'auto');
+  ga('send', 'pageview');
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var button = document.getElementById('hamburgerButton');
+    var closeBtn = document.getElementById('closeMark');
+    var menu = document.getElementById('menu');
+    button.addEventListener('click', function() {
+      menu.className = 'opened'
+    });
+    closeBtn.addEventListener('click', function() {
+      menu.className = '';
+    })
+  })
+</script>
+</body>
+</html>
