@@ -57,6 +57,7 @@
             <li>$.escapeHTML()</li>
             <li>$.concat()</li>
             <li>$.uuid()</li>
+            <li>$.unique()</li>
           </ul>
           <p>$.isEmptyObject(object) tests where an object is <code>{}</code> or where it has properties. This is a boolean value.</p>
           <p>$.isInteger(number) tests whether the number is an integer or not. This is a boolean value.</p>
@@ -66,6 +67,8 @@
           <p>$.concat(args) takes a series of strings and returns one string. This is useful where you need to concatenate a lot of string pieces together</p>
           <pre class='prettyprint linenums'>var str = $.concat('This', ' ', 'is', ' ', 'a' , ' ', 'string', '.');</pre>
           <p>$.uuid() create a uuid. This is a string. You can use it to create a unique identifier for objects in a collection, or for ids of DOM elements. Truck uses $.uuid internally for this purpose.</p>
+
+          <p>$.unique() takes an array as its argument. It returns a new array free of duplicates.</p>
 
 
           <h4>The Haz Helpers</h4>
