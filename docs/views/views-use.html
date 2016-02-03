@@ -62,7 +62,7 @@ var SimpleView = $.View({
           <p>The above view presupposes the existence of an element called <code>#special</code>. This might have a template inside it like this:</p>
           <pre class="prettyprint linenums">
 &lt;ul&gt;
-  &lt;li&gt;${ data.name }&lt;/li&gt;
+  &lt;li&gt;{= data.name }&lt;/li&gt;
 &lt;/ul&gt;
           </pre>
           <p>When we point a view to an element with a template, Truck extracts the template and parses it. Then we can render the template with our data:</p>
@@ -79,7 +79,7 @@ SimpleView.render(fruits);
 var SimpleView = $.View({
   element: '#special',
   variable: 'fruit',
-  template: '&lt;li&gt;${ fruit.name }&lt;/li&gt;'
+  template: '&lt;li&gt;{= fruit.name }&lt;/li&gt;'
 });
 // Render view:
 SimpleView.render(fruits);
@@ -136,10 +136,12 @@ MyView.addEvent({
 
           <h5>Changing Templates</h5>
           <p>As we mentioned previously, you can change the template that a view is using. If you wanted to render several kinds of data on the same view depending on what the user chooses, you can change the view's model and template with each choice.</p>
-          <p>To change a view's template, you assign it using the method <code>setTemplate</code>. After change the template, you will need to render the teplate again, as illustrated below:</p>
-          <pre class="prettyprint linenums">
+          <p>To change a view's template, you assign it using the property <code>template</code>. After changing the template, you will need to render the template again, as illustrated below:</p>
+          <pre class="prettyprint linenums">// Get a template:
 var template2 = $('#template2').html();
-PeopleView.setTemplate(template2);
+// Assign new template to view:
+PeopleView.template = template2;
+// Rerender the view:
 PeopleView.render();
           </pre>
           <p>If you want to change a view's model and template, change the template first, then the model. That way, the new model will render the view with the new template. Please see <a href="http://truckjs.io/docs/templates/templates-intro.html">templates</a> for more details.</p>
@@ -155,7 +157,7 @@ PeopleView.startIndexFrom(10);
 &lt;ul class="list cloak" id="arrayTemplate1"&gt;
   &lt;li class='comp'&gt;
     &lt;h3&gt;
-      ${ $.view.index }: ${ data.firstName } ${ data.lastName }
+      {= $.view.index }: {= data.firstName } {= data.lastName }
     &lt;/h3&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -187,7 +189,7 @@ $.defineHelper({
           <p>You can then use it like so:</p>
           <pre class="prettyprint linenums">
 &lt;ul class="list cloak" id="basicRepeater"&gt;
-  &lt;li&gt;${ $.helpers.bigName(data) }&lt;/li&gt;
+  &lt;li&gt;{= $.helpers.bigName(data) }&lt;/li&gt;
 &lt;/ul&gt;
           </pre>
 
@@ -202,13 +204,12 @@ $.defineHelper({
 PeopleView.stop();
 // Nothing will happen because the view is stopped.
 PeopleView.render();
+// Restart the view:
 PeopleView.restart();
 // Now the view will render:
 PeopleView.render();
 // The view will only render three times:
 PeopleView.stop(3);
-// The view will be able to render after five minutes:
-PeopleView.restart(300);
           </pre>
           <h4>Reusing Views</h4>
           <p>At run time you can change what element a view is attached to, what model it is bound to, what template it is using, and what events are bound to its rendered elements. If you have a component that is repeated multiple times in your app, you can easily reuse one view by making a copy and changing what element it is attached to. In the following example we are rendering two scroll panels, one for red wines and one for whites. They are in two different panels and with different data, otherwise their templates and events are identical:</p>
@@ -216,11 +217,11 @@ PeopleView.restart(300);
 <pre class="prettyprint linenums">var SpecialRedsView = $.View({
       element: '#picksRed',
       variable: 'wine',
-      template: "&lt;li data-id='${ wine.id }'&gt;\
+      template: "&lt;li data-id='{= wine.id }'&gt;\
         &lt;div&gt;\
-          &lt;h3&gt;${ wine.name }&lt;/h3&gt;\
-          &lt;h4&gt;${ wine.winery }&lt;/h4&gt;\
-          &lt;p&gt;${ wine.year }&lt;/p&gt;\
+          &lt;h3&gt;{= wine.name }&lt;/h3&gt;\
+          &lt;h4&gt;{= wine.winery }&lt;/h4&gt;\
+          &lt;p&gt;{= wine.year }&lt;/p&gt;\
         &lt;/div&gt;\
       &lt;/li&gt;",
       events: [{

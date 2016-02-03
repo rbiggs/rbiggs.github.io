@@ -356,7 +356,7 @@ $.defineHelper({
 <p>With a helper defined, you can then use it in a template like this:</p>
 <pre class='prettyprint linenums'>&lt;ul class="list cloak" id="basicRepeater"&gt;
   &lt;!-- Use the helper to output the last name in uppercase --&gt;
-  &lt;li&gt;${ data.firstName }, ${ $.helpers.bigName(data) }&lt;/li&gt;
+  &lt;li&gt;{= data.firstName }, {= $.helpers.bigName(data) }&lt;/li&gt;
 &lt;/ul&gt;
 </pre>
 

@@ -49,14 +49,14 @@
           <img src="../../images/truck-parts/Truck-Chassis.png" alt="Truck Chassis">
           <p>Templates enable views to output data to your app. Templates are markup with delimiters to indicate data end points to interpolate while rendering.</p>
 
-          <p>To interpolate a data variable, use: <code>${ data }</code>. To process arbitrary JavaScript in your template, use: <code>{{ alert("hi!") }}</code>. Generally you shouldn't use JavaScript in your templates unless you need to output content conditionally.</p>
+          <p>To interpolate a data variable, use: <code>{= data }</code>. To process arbitrary JavaScript in your template, use: <code>{{ alert("hi!") }}</code>. Generally you shouldn't use JavaScript in your templates unless you need to output content conditionally.</p>
 
           <p>You have three options for making templates: using template tags, script tags or using inline markup. Script and template tags will not show on the page. An inline template will, but by putting the class <code>cloak</code> on its parent, it will not show up until rendered.</p>
           <p>With script tag:</p>
 <pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;script type='text/x-template'&gt;
     &lt;li&gt;
-      &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+      &lt;h3&gt;{= data.firstName } {= data.lastName }&lt;/h3&gt;
     &lt;/li&gt;
   &lt;/script&gt;
 &lt;ul&gt;
@@ -65,7 +65,7 @@
 <pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;template&gt;
     &lt;li&gt;
-      &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+      &lt;h3&gt;{= data.firstName } {= data.lastName }&lt;/h3&gt;
     &lt;/li&gt;
   &lt;/template&gt;
 &lt;ul&gt;
@@ -75,7 +75,7 @@
           <p>Without script tag, using <code>cloak</code> class:</p>
 <pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript' class='cloak'&gt;
   &lt;li&gt;
-    &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+    &lt;h3&gt;{= data.firstName } {= data.lastName }&lt;/h3&gt;
   &lt;/li&gt;
 &lt;ul&gt;
 </pre>
@@ -86,7 +86,7 @@
 <pre class='prettyprint linenums'>&lt;ul class="list" id='defaultObjectTemplateScript'&gt;
   &lt;template&gt;
     &lt;li&gt;
-      &lt;h3&gt;${ $.view.index }: ${ data.firstName } ${ data.lastName }&lt;/h3&gt;
+      &lt;h3&gt;{= $.view.index }: {= data.firstName } {= data.lastName }&lt;/h3&gt;
     &lt;/li&gt;
   &lt;/template&gt;
 &lt;ul&gt;

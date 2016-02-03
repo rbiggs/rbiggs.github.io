@@ -64,7 +64,7 @@
           <h4>Create a View</h4>
           <p>When you create a view, you want to associate it with an element. This element will serve as the container of DOM elements rendered by the view's template, or hosting registered events. To create a view, just assign it to a variable, which will hold the view's instance. There are many properties we can set when we create a view, but at bare minimum we can just provide it with an element to anchor to. When you indicating the element for the view, you can use standard CSS selector markup, or a DOM node or a TruckJS DOM object. Usually you'll just use the selector approach:</p>
 
-          <pre class='prettyprint linenums'>var AppTitleView = $({
+          <pre class='prettyprint linenums'>var AppTitleView = $.View({
   element: '#appTitle'
 });</pre>
           <p>The above code creates a view instance named "MyView". We can use this instance to render templates, bind to models, etc.</p>
@@ -72,7 +72,7 @@
           <h4>Delimiters</h4>
           <p>Templates are defined using standard HTML markup and delimiters. Truck has two kinds of delimiters: interpolators and executors. Interpolator delimiters allow you to ouput a data value. Executor delimiters lets you write JavaScript that will be run when the template is rendered. You can use any JavaScript you could possibly need in a template using executor delimitors.</p>
           <p>Truck's interpolator delimiters follow the HTML5 template string convention:</p>
-          <pre class='prettyprint linenums'>&lt;h1 id="appTitle" &gt;${ data }&lt;/h1&gt;</pre>
+          <pre class='prettyprint linenums'>&lt;h1 id="appTitle" &gt;{= data }&lt;/h1&gt;</pre>
 
           <p>As you noticed, we used the term <code>data</code> to indicate that we wanted a value ouput. The space around <code>data</code> is optional. By default, Truck uses <code>data</code> as the term for any data being rendering by a template. You can change this in the view setup to use a term that makes more sense for what the template is rendering.</p>
 
@@ -95,14 +95,14 @@
           <p>We can use the following template structure to render this object in our view:</p>
           <pre class='prettyprint linenums'>&lt;li id='person'&gt;
   &lt;div&gt;
-    &lt;h3&gt;${ data.firstName } ${ data.lastName }&lt;/h3&gt;
-    &lt;h4&gt;${ data.age }&lt;/h4&gt;
-    &lt;/p&gt;${ data.job }&lt;/p&gt;
+    &lt;h3&gt;{= data.firstName } {= data.lastName }&lt;/h3&gt;
+    &lt;h4&gt;{= data.age }&lt;/h4&gt;
+    &lt;/p&gt;{= data.job }&lt;/p&gt;
   &lt;/div&gt;
 &lt;/li&gt;</pre>
           
           <p>To consume this template, we'll create the following view:</p>
-          <pre class='prettyprint linenums'>var PersonView = $({
+          <pre class='prettyprint linenums'>var PersonView = $.View({
   element: '#person'
 });
 // Render the view with the person object:
@@ -123,14 +123,14 @@ PersonView.render(person);</pre>
           <pre class='prettyprint linenums'>&lt;!-- Use the variable "person" --&gt;
 &lt;li id='person'&gt;
   &lt;div&gt;
-    &lt;h3&gt;${ person.firstName } ${ person.lastName }&lt;/h3&gt;
-    &lt;h4&gt;${ person.age }&lt;/h4&gt;
-    &lt;/p&gt;${ person.job }&lt;/p&gt;
+    &lt;h3&gt;{= person.firstName } {= person.lastName }&lt;/h3&gt;
+    &lt;h4&gt;{= person.age }&lt;/h4&gt;
+    &lt;/p&gt;{= person.job }&lt;/p&gt;
   &lt;/div&gt;
 &lt;/li&gt;
 
 // Define "person" as custom variable:
-var PersonView = $({
+var PersonView = $.View({
   element: '#person',
   variable: 'person'
 });
@@ -141,10 +141,10 @@ PersonView.render(person);</pre>
           <p>We could do that with our title view as well:</p>
 
           <pre class='prettyprint linenums'>&lt;!-- Use the variable "title" --&gt;
-&lt;h1 id="appTitle" &gt;${ title }&lt;/h1&gt;
+&lt;h1 id="appTitle" &gt;{= title }&lt;/h1&gt;
 
 // Define "title" as custom variable:
-var AppTitleView = $({
+var AppTitleView = $.View({
   element: '#appTitle',
   variable: 'title'
 });
@@ -184,7 +184,7 @@ PersonView.render(persons);</pre>
           <pre class='prettyprint linenums'>// JavaScript in template:
 &lt;div id='executable'&gt;
   {{ alert("I just ran!"); }}
-  &lt;p&gt;${ data }}&lt;/p&gt;
+  &lt;p&gt;{= data }&lt;/p&gt;
 &lt;/div&gt;
 
 var ExecutableView = $.View({
@@ -197,7 +197,7 @@ ExecutableView.render('Executable template')</pre>
           <pre class='prettyprint linenums'>// JavaScript in template:
 &lt;li id='personsList'&gt;
   {{ if (data.name !== 'Joe') { }}
-    ${ data.name }}
+    {= data.name }
   {{ } }}
 &lt;/li&gt;</pre>
 
@@ -207,6 +207,33 @@ ExecutableView.render('Executable template')</pre>
 
         <h4>Data Binding</h4>
         <p>To learn how to bind a model to a view, read the tutorial about <a href="./tutorials-models.html" target="_blank">models</a>. You need to know how models work before using them with views.</p>
+
+        <h4>ES6 and Template Literals</h4>
+        <p>If you are writing in ES6 or transpiling from ES6 to ES5, you can take advantage of ES6 template literals to make you view templates more managable. Although defining templates directly in the View definition is great for organization, having to escape new lines with backslashes is a pain. If you're using ES6 as a target or just using it to transpile to ES5 with Babel, Traceur or TypeScript, then template literals are you best friend. No need for backslashes. Just you back ticks to enclose the template definition:</p>
+
+          <pre class='prettyprint linenums'>// Use ES6 template literal:
+var PersonView = $.View({
+  element: '#person',
+  variable: 'person',
+  events: [
+    {
+      element: 'h3',
+      event: 'tap',
+      callback: function() {
+        console.log($(this).text());
+      }
+    }
+  ],
+  template: `&lt;li id='person'&gt;
+  &lt;div&gt;
+    &lt;h3&gt;{= person.firstName } {= person.lastName }&lt;/h3&gt;
+    &lt;h4&gt;{= person.age }&lt;/h4&gt;
+    &lt;/p&gt;{= person.job }&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/li&gt;
+});`</pre>
+
+      <p>As you can see in the above example, including everything into the view definition makes it easy to reason about what the view is doing. It also gives you one place to look for everything related to the view, templates, events, etc.</p>
 
         </div>
         

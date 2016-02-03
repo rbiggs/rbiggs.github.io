@@ -65,15 +65,15 @@
 
 &lt;template&gt;
   &lt;li&gt;
-    &lt;h3&gt;Name: ${ data.name.first } { data.name.last }&lt;/h3&gt;
-    &lt;h4&gt;Job: ${ data.job }&lt;/h4&gt;
+    &lt;h3&gt;Name: {= data.name.first } {= data.name.last }&lt;/h3&gt;
+    &lt;h4&gt;Job: {= data.job }&lt;/h4&gt;
   &lt;/li&gt;
 &lt;/template&gt;</pre>
-        <p>In the above example, <code>${ }</code> is used to demark a data variable for interpolation by the template renderer. Similary, we can use <code>{{ }}</code> to define blocks of JavaScript to be executed in a temlate. You might want to do that to conditionally output something.</p>
+        <p>In the above example, <code>{= }</code> is used to demark a data variable for interpolation by the template renderer. Similary, we can use <code>{{ }}</code> to define blocks of JavaScript to be executed in a temlate. You might want to do that to conditionally output something.</p>
         <pre class='prettyprint linenums'>&lt;template&gt;
   {{ if (somebody.friends &amp;&amp; somebody.friends.length) { }}
     {{  somebody.friends.forEach(function(friend) {  }}
-    &lt;li&gt; ${ friend.name}: ${ friend.job }&lt;/li&gt;
+    &lt;li&gt; {= friend.name }: {= friend.job }&lt;/li&gt;
     {{  });  }}
   {{ } }}
 &lt;/template&gt;</pre>
@@ -82,18 +82,18 @@
         <p>Truck provides a way to enable you to output sequential numbering with each repetition of a template. To do so you put <code>$.view.index</code> at the place where you want the number output. By default number starts at 1. But you can tell the view at what number you want it to start. For example, if you wanted it to start at a negative number, just provide that as the argument. The numbering will begin with the negative number provided and increase by 1. Below are some examples:</p>
         <pre class='prettyprint linenums'>&lt;template&gt;
   &lt;li&gt;
-    &lt;h3&gt;${ $.view.index }: Name: ${ data.name.first } { data.name.last }&lt;/h3&gt;
+    &lt;h3&gt;{= $.view.index }: Name: {= data.name.first } {= data.name.last }&lt;/h3&gt;
   &lt;/li&gt;
 &lt;/template&gt;</pre>
         <p>The above example will begin from 1. However, we can tell the view to start at any number. We can do that at setup:</p>
         <pre class='prettyprint linenums'>// Tell the view to start from 10:
-var PeopleView = $.View({
+var PeopleView = new View({
   element: '#peopleList',
   model: PeopleModel,
   startIndexFrom: 10
 });
 // Or tell the view to start from a negative number:
-var PeopleView = $.View({
+var PeopleView = new View({
   element: '#peopleList',
   model: PeopleModel,
   startIndexFrom: -20
@@ -115,7 +115,7 @@ var PeopleView = $.View({
           <p>You use them as a function with the data you want formatted as the argument:</p>
           <pre class='prettyprint linenums'>&lt;template&gt;
   &lt;li&gt;
-    &lt;h3&gt;Ammount: ${ $.formatNumber(data.number) }&lt;/h3&gt;
+    &lt;h3&gt;Ammount: {= $.formatNumber(data.number) }&lt;/h3&gt;
     &lt;h4&gt;Price: $.currency(data.price, '$', ',', 0)&lt;/h4&gt;
   &lt;/li&gt;
 &lt;/template&gt;</pre>
@@ -132,7 +132,7 @@ var PeopleView = $.View({
           <p>You can then use it like so:</p>
           <pre class="prettyprint linenums">
 &lt;ul class="list cloak" id="basicRepeater"&gt;
-  &lt;li&gt;${ $.helpers.bigName(data) }&lt;/li&gt;
+  &lt;li&gt;{= $.helpers.bigName(data) }&lt;/li&gt;
 &lt;/ul&gt;
           </pre>
 
@@ -198,9 +198,9 @@ var PeopleView = $.View({
           <pre class='prettyprint linenums'>&lt;ul class='list' id="complexTemplate"&gt;
   &lt;template id='tempie'&gt;
     &lt;li&gt;
-      &lt;img data-src='${ somebody.image }'&gt;
+      &lt;img data-src='{= somebody.image }'&gt;
       &lt;div&gt;
-        &lt;h3&gt;${ somebody.name }&lt;/h3&gt;
+        &lt;h3&gt;{= somebody.name }&lt;/h3&gt;
       &lt;/div&gt;
     &lt;/li&gt;
     {{ if (somebody.friends &amp;&amp; somebody.friends.length) { }}
@@ -211,7 +211,7 @@ var PeopleView = $.View({
       &lt;div&gt;
         &lt;ol&gt;
           {{  somebody.friends.forEach(function(friend) {  }}
-          &lt;li&gt; ${ friend.name}: ${ friend.job }&lt;/li&gt;
+          &lt;li&gt; {= friend.name }: {= friend.job }&lt;/li&gt;
           {{  });  }}
         &lt;/ol&gt;
       &lt;/div&gt;
@@ -226,20 +226,42 @@ var PeopleView = $.View({
 
           <pre class="prettyprint linenums">
 // Define view with string template:
-var SimpleView = $.View({
+var SimpleView = new View({
   element: '#employees',
   variable: 'employee',
   template: '&lt;li&gt;\
     &lt;div&gt;\
-      &lt;h3&gt;${ employee.firstName } ${ employee.lastName }&lt;/h3&gt;\
-      &lt;h4&gt;${ employee.job }&lt;/h4&gt;\
-      &lt;p&gt;${ employee.performance }&lt;p&gt;\
+      &lt;h3&gt;{= employee.firstName } {= employee.lastName }&lt;/h3&gt;\
+      &lt;h4&gt;{= employee.job }&lt;/h4&gt;\
+      &lt;p&gt;{= employee.performance }&lt;p&gt;\
     &lt;/div&gt;\
   &lt;/li&gt;'
 });
 // Render view:
 SimpleView.render(fruits);
           </pre>
+
+        <h3>ES6 Template Literals</h3>
+        <p>If you are targetting ES6 or using ES6 and transpiling to ES5 with Bable, Traceur or TypeScript, you can use ES6 template literals to define your templates. This eliminates the need for escaping line endings, etc. You just enclose you template in back ticks:</p>
+
+          <pre class="prettyprint linenums">
+// Define view with template literal:
+var SimpleView = new View({
+  element: '#employees',
+  variable: 'employee',
+  template: `&lt;li&gt;
+    &lt;div&gt;
+      &lt;h3&gt;{= employee.firstName } {= employee.lastName }&lt;/h3&gt;
+      &lt;h4&gt;{= employee.job }&lt;/h4&gt;
+      &lt;p&gt;{= employee.performance }&lt;p&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;`
+});
+// Render view:
+SimpleView.render(fruits);
+          </pre>
+
+
           <p>Regardless of which approach you take to implementing templates, when TruckJS parses the template, it converts the template into JavaScript. In the end, the template will be a JavaScript function that evaluates the template values, evaluates any inline JavaScript and returns the markup as DOM nodes.</p>
 
         </div>

@@ -56,7 +56,7 @@
           <p>You can wire up a view with events. If the events are targeting the element's descendants, they will be delegated on the element. Of course, you can also remove events from a view.</p>
 
           <p>By default, View renders all markup unencoded, but you can configure a view to render data encoded, or limit it to just one template delimiter set. This helps prevent injection of malicious scripts in your document. If you are unsure where you should use encoding or not, please research the security threats this may expose in your app through cross site scripting with your current server setup.</p>
-          <p>You can think of Truck's views as components. A view can contain information about the element it is bound to, a model it is bound to, the template that it uses and events bound to the view's template elements:</p>
+          <p>You can think of Truck's views as components. A view can contain information about the element it is bound to, a model it is bound to, the template that it uses and events bound to the view's template elements. You create an instace of a view with the <code>$.View()</code> method:</p>
 
 <pre class="prettyprint linenums">
 var luminariesView = $.View({
@@ -65,10 +65,10 @@ var luminariesView = $.View({
   name: 'luminariesView',
   variable: 'person',
   template: "&lt;li class='comp'&gt;\
-    &lt;img data-src='${ person.image }' alt=''>\
+    &lt;img data-src='{= person.image }' alt=''>\
     &lt;div&gt;\
       &lt;h3&gt;\
-        ${ person.firstName } ${ person.lastName }\
+        {= person.firstName } {= person.lastName }\
       &lt;/h3&gt;\
     &lt;/div&gt;\
   &lt;/li&gt;",
@@ -83,6 +83,36 @@ var luminariesView = $.View({
   ]
 });
 </pre>
+        <h4>ES6 Template Literals</h4>
+        <p>If you are taking advantange of the new ES6 spec to build your app and transpiling to ES5 with Babel, Traceur or TypeScript, you can use ES6 template literals to define you View templates. Notice how much cleaner the template in the following version is compared to the version above:</p>
+
+<pre class="prettyprint linenums">
+var luminariesView = $.View({
+  element: '#repeaterWithImages', 
+  model: LuminariesModel,
+  name: 'luminariesView',
+  variable: 'person',
+  template: 
+  `&lt;li class='comp'&gt;
+    &lt;img data-src='{= person.image }' alt=''>
+    &lt;div&gt;
+      &lt;h3&gt;
+        {= person.firstName } {= person.lastName }
+      &lt;/h3&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;`,
+  events: [
+    {
+      element: 'li',
+      event: 'tap',
+      callback: function() {
+        console.log($(this).text());
+      }
+    }
+  ]
+});
+</pre>
+
         <h4>Views are Flexible, You Should be Too</h4>
         <p>When defining views, use the coding style that works for you. If you prefer your templates in the markup, you can. You can put your templates in script tags in the place where they'll be rendered, or put them wherever you want. Or use plain HTML markup in place for your templates. Just put the class <code>cloak</code> on the parent element. If you prefer to write your DOM events separate, you can. If you prefer a more component-style approach as illustrated above, define your templates and events right in the view definition.</p>
         </div>
