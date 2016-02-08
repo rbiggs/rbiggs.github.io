@@ -93,9 +93,98 @@ truckjs -n Fruits -o ios -t tabbar
 // Fruits on the desktop:
 truckjs -n Fruits -o windows -t slideout
 </code></pre>
+<h2>Browserify, Babelify &amp; LiveReload</h2>
+
+<p>You can also create a Browserify project with Livereload and Babelify. This allows you to write your app's code using ES6 that gets transpiled to ES5. We use this so you can take advantage of ES6 template literals when defining your app's views. You can also use comprehensions, classes and arrow functions in your code if you want to. To build your project with these features, just use the <code>--browserify</code> or <code>-b</code> flags with your command:</p>
+
+<pre class="prettyprint linenums"><code>truckjs -n Fruits -o windows -t slideout --browserify
+
+// or
+truckjs -n Fruits -o windows -t slideout -b
+</code></pre>
+
+<p>This will create the following directory structure:</p>
+
+<pre class="prettyprint linenums"><code>- data
+- dev
+- dist
+gulpfile.js
+- images
+index.html
+package.json
+</code></pre>
+
+<p>After creating your app, <code>cd</code> to the folder and run:</p>
+
+<pre class="prettyprint linenums"><code>npm install
+</code></pre>
+
+<h4>App.js, The Core of Your App</h4>
+
+<p>The <code>dev</code> folder holds a file called <code>app.js</code>. This is the development version of your app's JavaScript. Because this project also has Babelify. When you run a build or serve command, this file gets transpiled to ES5.</p>
+
+<p>When the install is done, you have two options. You can run a build script or a server script. When you run the build script, it take the app.js file and converts it to valid ES5 an outputs it to the <code>dist</code> folder. Your <code>index.html</code> references it from the <code>dist</code> folder. When you run the server script, it first runs the build script and then starts up a server instance and opens your default browser. You can change which browser it opens by editing the browserSynch browser property in the <code>gulpfile</code>. Currently it is commented out:</p>
+
+<pre class="prettyprint linenums"><code>// ,browser: ['chrome']
+</code></pre>
+
+<p>Uncomment it and put whatever browser you want to use (Chrome, IE, Edge, Safari, Firefox). </p>
+
+<p>To build your project, run the following command in your project folder:</p>
+
+<pre class="prettyprint linenums"><code>gulp build
+</code></pre>
+
+<p>To run a server instance with your project, run:</p>
+
+<pre class="prettyprint linenums"><code>gulp server
+// or just:
+gulp
+</code></pre>
+
+<p>This will first build the project, then start up a server instance and load your project in your defaut browser. This also starts up a watch task for your <code>index.html</code>, <code>app.js</code> and data files. As soon as you edit any of these, your app will automatically reload in the browser without you needing to reload it yourself. Please be aware that if you do something that throws an exception in either the browser or the server instance, you will need to run the server command again. Sometimes when an error is throw, the server stays alive but can't respond. In that case, hold the command key and hit the C key. This will abort the server, allowing you to restart it.</p>
+
+<h4>Using Template Literals</h4>
+
+<p>Because this setup is using Babelify, you can use ES6 code styles in your <code>app.js</code> file. By default all templates in the <code>app.js</code> use ES6 template literals. These simplify how to write view templates. Just enclose the template between an opening and closing back tick, no need to escape new lines or quotes:</p>
+
+<pre class="prettyprint linenums"><code>var MusicView = $.View({
+  element: '#musicList',
+  variable: "song",
+  // Use template literal:
+  template: 
+  `&lt;li&gt;
+    &lt;img src='{= song.image }'&gt;
+    &lt;div&gt;
+      &lt;h3&gt;{= song.title }&lt;/h3&gt;
+      &lt;h4&gt;{= song.album }&lt;/h4&gt;
+      &lt;p&gt;{= song.description }&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;`
+});
+
+</code></pre>
+
+<h4>Project Structure</h4>
+
+<ul>
+<li>data</li>
+<li>dev</li>
+</ul>
+
+<p>The folder <code>data</code> holds the data that the project uses. For navigation, slideout and tabbar, the <code>app.js</code> file uses the fetch API to get the json data in the data folder. Once this data is retrieved, <code>app.js</code> renders the views.</p>
+
+<p>While developing your app, you'll work on the <code>app.js</code> file in the <code>dev</code> folder. When you build or run the server, the task transpiles <code>app.js</code> into standard ES5 and places in the <code>dist</code> folder. The <code>index.html</code> file references <code>app.js</code> in <code>dist</code>. </p>
+
+<h4>Watch</h4>
+
+<p>If you want to enable editing of other files to trigger a reload, you'll need to watch them as well. You might do this, for example, with a separate CSS file, or with an images folder. To add a new watch, open the gulpfile.js and add a watch command towards the end of the file like this:</p>
+
+<pre><code>gulp.watch('images/*.*', ['default']);
+</code></pre>
+
 
 <h3>Troubleshooting</h3>
-
 <p>If for some reason your path isn't working, check that you are using the correct path delimiters for your platform (Mac or Windows). Check to see if a name in the path has a space. If it has any spaces, enclose the path in quotes, single or double.</p>
 
 <p>If you are trying to create an app for Android or Windows and you keep getting iOS, check the os flag. It needs two hyphens: <code>truckjs --os android</code>, or <code>truckjs --os windos</code>. Similarly, if you are using the single letter flags, it should be: <code>truckjs -o android</code>, or <code>truckjs -o windows</code>.</p>
@@ -106,6 +195,9 @@ truckjs -n Fruits -o windows -t slideout
 </code></pre>
 
 <p>Check your hyphens. You're missing a double hyphen for an argument that needs them somewhere. Only single letter flags can use one hyphen. Two hyphens are required in all other cases.</p>
+
+<h3>Troubleshootng Babelify, etc.</h3>
+<p>If you are having trouble install the Babelify module, this is probably due to <code>node-gyp</code>. Please read the <a target='_blank' href="https://github.com/nodejs/node-gyp">installation requirements in there docuemntation</a> for this module dependency.</p>
 
 <h2>Github</h2>
 <p>You can get the source and code ready to build with from <a href="https://github.com/rbiggs/TruckJS">Github</a>. When you download the source code from Github, everything you need to get going is in the folder "dist". You do not need to run a build script. Also the source code includes a folder called "examples". In it you will find working examples of layouts and widgets that Truck provides.</p>
