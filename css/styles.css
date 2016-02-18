@@ -19,6 +19,8 @@ nav > div {
 	width: 100%;
 	max-width: 960px;
 	margin: 0 auto;
+	display: -webkit-flex;
+	-webkit-align-items: center;
 	display: flex;
 	align-items: center;
 }
