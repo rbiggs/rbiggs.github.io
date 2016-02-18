@@ -52,8 +52,18 @@
           <p>Components are just reusable views. As such, their setup is almost identical to views. The only difference is that for a component, you never, ever provide an element. All components are elementless at creation. The element for a component gets assigned after you create an instance.</p>
           <pre class="prettyprint linenums">// Define a component:
 $.Component({
-  name: 'MyWidget',
-  variable: 'widget',
+  name: 'PeopleComponent',
+  variable: 'person',
+  // Get if a start number:
+  startIndexFrom: 7,
+  template: "&lt;li class='comp'&gt;\
+    &lt;img data-src='{= person.image }' alt='{= $.view.index }: {= person.firstName } {= person.lastName }'&gt;\
+    &lt;div&gt;\
+      &lt;h3&gt;\
+        {= $.view.index }: {= person.firstName } {= person.lastName }\
+      &lt;/h3&gt;\
+    &lt;/div&gt;\
+  &lt;/li&gt;",
   events: [
     {
       event: 'tap',
