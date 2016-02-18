@@ -54,13 +54,11 @@
 $.Component({
   name: 'PeopleComponent',
   variable: 'person',
-  // Get if a start number:
-  startIndexFrom: 7,
   template: "&lt;li class='comp'&gt;\
     &lt;img data-src='{= person.image }' alt='{= $.view.index }: {= person.firstName } {= person.lastName }'&gt;\
     &lt;div&gt;\
       &lt;h3&gt;\
-        {= $.view.index }: {= person.firstName } {= person.lastName }\
+        {= person.firstName } {= person.lastName }\
       &lt;/h3&gt;\
     &lt;/div&gt;\
   &lt;/li&gt;",
