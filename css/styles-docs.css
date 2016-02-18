@@ -9,6 +9,8 @@ pre {
 	white-space: pre-wrap;
 }
 section > div {
+	display: -webkit-flex;
+	-webkit-align-items: stretch;
 	display: flex;
 	align-items: stretch;
 }

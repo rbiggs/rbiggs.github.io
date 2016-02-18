@@ -12,8 +12,6 @@ nav {
 	border-bottom: solid 1px #8DBEF0;
 }
 nav > div {
-	display: -webkit-flex;
-	-webkit-align-items: center;
 	height: 100%;
 	padding: 1px;
 	-webkit-box-sizing: border-box;
@@ -21,6 +19,8 @@ nav > div {
 	width: 100%;
 	max-width: 960px;
 	margin: 0 auto;
+	display: -webkit-flex;
+	-webkit-align-items: center;
 	display: flex;
 	align-items: center;
 }
