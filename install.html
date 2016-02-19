@@ -180,7 +180,7 @@ gulp
 
 <p>If you want to enable editing of other files to trigger a reload, you'll need to watch them as well. You might do this, for example, with a separate CSS file, or with an images folder. To add a new watch, open the gulpfile.js and add a watch command towards the end of the file like this:</p>
 
-<pre><code>gulp.watch('images/*.*', ['default']);
+<pre class="prettyprint linenums"><code>gulp.watch('images/*.*', ['default']);
 </code></pre>
 
 
@@ -204,24 +204,139 @@ gulp
 <p>If you need to, you can build a specialized version of TruckJS. To do so, you first need to run npm install on the folder with the source code:</p>
 <pre class="prettyprint linenums">
 npm install</pre>
-<p>After than you can build Truck in one of four ways:</p>
+<p>If you're on a Mac, you'll need to prefix that with <code>sudo</code> and enter you password.</p>
+
+<h3>Build Options</h3>
+
+<p>If you just run <code>gulp</code> this will build the default.</p>
+
+<p>There are four build options:</p>
+
 <ol>
-	<li>The complete framework</li>
-	<li>Just the selector engine</li>
-	<li>Just the MVC components</li>
-	<li>Everyting except the selector engine</li>
+<li>The complete package</li>
+<li>Just the selector engine</li>
+<li>Just the MVC components</li>
+<li>Everyting except the selector engine</li>
+<li>Minimum build</li>
+<li>Custom build - you pick what you want</li>
 </ol>
 
-<p>To build the whole thing, just run <code>gulp</code>:</p>
-<pre class="prettyprint linenums">gulp</pre>
+<p>These cover four uses cases:</p>
 
-<p>If you want to build just Truck's selector engine to use it as a light and modern replacement for jQuery, run:</p>
-<pre class="prettyprint linenums">gulp --wheels</pre> 
-<p>To build just the MVC components, because you don't care about the layouts and widgets and maybe you want to use it with jQuery for desktop browsers, run:</p>
-<pre class="prettyprint linenums">gulp --mvc</pre>
-<p>And to build the framework but with Truck's DOM engine because you want to use jQuery, run:</p>
-<pre class="prettyprint linenums">gulp --engine</pre>
-<p>Please note that when you build a version without Truck's DOM engine, you need to load jQuery in the browser first. Also, you can use jQuery with the complete build as well, just load it first and Truck will use jQuery instead of its own DOM library.</p>
+<ol>
+<li>
+<p>You want the complete package.</p>
+
+<p>run: <code>gulp</code></p>
+</li>
+<li>
+<p>You just want a small and future-facing DOM library as an alternative to jQuery.</p>
+
+<p>run <code>gulp --wheels</code></p>
+</li>
+<li>
+<p>You don't care about the widgets, etc. You just want the MVC parts. You'll be using this with jQuery. You might want to make a desktop web app instead of mobile.</p>
+
+<p>run: <code>gulp --mvc</code></p>
+</li>
+<li>
+<p>You'd rather use jQuery because, well, we're not really sure why. But you can. This needs jQuery to make the other parts work.</p>
+
+<p>run <code>gulp --engine</code></p>
+</li>
+</ol>
+
+<p>In fact, you can load jQuery before loading the default build of jQuery and Truck will use jQuery instead of its own DOM library.</p>
+
+<h2>
+Minimum and Custom Builds</h2>
+
+<p>You can create a minimum build of TruckJS. This gives you the DOM library, the MVC framework and the basics for a navigation app. The resulting minified file is just over 70kb, compared to 180kb for the complete build of JavaScript files. To create a minimum build, just run the following gulp task:</p>
+
+<pre class="prettyprint linenums"><code>gulp --minimum
+</code></pre>
+
+<p>The files incluced in the minimum build are:</p>
+
+<p><strong>Truck Wheels Components</strong> </p>
+
+<ul>
+<li>domstack.js </li>
+<li>selectors.js </li>
+<li>utils.js </li>
+<li>types.js </li>
+<li>strings.js </li>
+<li>domstack.js </li>
+<li>dom.js </li>
+<li>data.js </li>
+<li>serialize.js </li>
+<li>events.js </li>
+</ul>
+
+<p><strong>Truck Engine Components</strong> </p>
+
+<ul>
+<li>environment.js </li>
+<li>event-aliases.js </li>
+<li>gestures.js </li>
+<li>plugins.js </li>
+<li>stack.js </li>
+<li>mediator.js </li>
+<li>model.js </li>
+<li>view.js </li>
+<li>component.js </li>
+<li>screens.js </li>
+<li>router.js </li>
+</ul>
+
+<p><strong>Truck Body Components</strong></p>
+
+<ul>
+<li>navbar.js </li>
+<li>setup.js </li>
+<li>buttons.js </li>
+<li>navigation.js </li>
+<li>center.js</li>
+</ul>
+
+<h3>
+Customizing</h3>
+
+<p>To add new features, you use the minimum flag with the extras flag and put the features you want after the extras flag in quotes with a space separating the terms:</p>
+
+<pre class="prettyprint linenums"><code>gulp --minimum --extras 'select switch range popup'
+// or
+gulp --minimum --extras 'fetch box edititable slideout form'
+</code></pre>
+
+<p><strong>Please Note</strong>
+When you add either <code>fetch</code> or <code>box</code> to your build, <code>promises</code> will autmomatically be included as a dependency. No need to add them unless you want promises without <code>fetch</code> or <code>box</code>. Similarly, if you include <code>activityIndicator</code>, <code>popup</code> or <code>popover</code>, the <code>block</code> module will be included automatically. Also if you add <code>form</code> then <code>validators</code> will be included.</p>
+
+<p>Below is the complete list of modules you can add to your custom build:</p>
+
+<ul>
+<li>promises</li>
+<li>fetch</li>
+<li>validators</li>
+<li>box</li>
+<li>anim</li>
+<li>oop</li>
+<li>tabbar</li>
+<li>slideout</li>
+<li>editable</li>
+<li>form</li>
+<li>select</li>
+<li>multiselect</li>
+<li>switch</li>
+<li>popup</li>
+<li>popover</li>
+<li>segmented</li>
+<li>range</li>
+<li>sheets</li>
+<li>paging</li>
+<li>stepper</li>
+<li>busy or activityIndicator</li>
+</ul>
 
 			</div>
 
