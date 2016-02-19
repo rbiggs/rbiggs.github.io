@@ -123,10 +123,10 @@ $.Component({
   // Get if a start number:
   startIndexFrom: 7,
   template: "&lt;li class='comp'&gt;\
-    &lt;img data-src='${ person.image }' alt=''&gt;\
+    &lt;img data-src='{= person.image }' alt=''&gt;\
     &lt;div&gt;\
       &lt;h3&gt;\
-        ${ $.view.index }: ${ person.firstName } ${ person.lastName }\
+        {= $.view.index }: {= person.firstName } {= person.lastName }\
       &lt;/h3&gt;\
     &lt;/div&gt;\
   &lt;/li&gt;",
@@ -155,6 +155,8 @@ BumsView.render(bums);
 &lt;ul class="list" id="arrayTemplate1"&gt;&lt;/ul&gt;
 &lt;ul class="list" id="arrayTemplate2"&gt;&lt;/ul&gt;</pre>
 
+<iframe height='558' scrolling='no' src='http://codepen.io/rbiggs/embed/PZvWBd/?height=558&theme-id=6688&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/rbiggs/pen/PZvWBd/'>PZvWBd</a> by Robert Biggs (<a href='http://codepen.io/rbiggs'>@rbiggs</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
         </div>
         
         <div id="menu">

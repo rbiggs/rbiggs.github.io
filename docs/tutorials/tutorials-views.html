@@ -93,13 +93,15 @@
   job: 'developer'
 };</pre>
           <p>We can use the following template structure to render this object in our view:</p>
-          <pre class='prettyprint linenums'>&lt;li id='person'&gt;
-  &lt;div&gt;
-    &lt;h3&gt;{= data.firstName } {= data.lastName }&lt;/h3&gt;
-    &lt;h4&gt;{= data.age }&lt;/h4&gt;
-    &lt;/p&gt;{= data.job }&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/li&gt;</pre>
+          <pre class='prettyprint linenums'>&lt;ul id='person'&gt;
+  &lt;li&gt;
+    &lt;div&gt;
+      &lt;h3&gt;{= data.firstName } {= data.lastName }&lt;/h3&gt;
+      &lt;h4&gt;{= data.age }&lt;/h4&gt;
+      &lt;/p&gt;{= data.job }&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
           
           <p>To consume this template, we'll create the following view:</p>
           <pre class='prettyprint linenums'>var PersonView = $.View({
@@ -109,25 +111,32 @@
 PersonView.render(person);</pre>
           <p>The above will give us this:</p>
           
-          <pre class='prettyprint linenums'>&lt;li id='person'&gt;
-  &lt;div&gt;
-    &lt;h3&gt;John Doe&lt;/h3&gt;
-    &lt;h4&gt;32&lt;/h4&gt;
-    &lt;/p&gt;developer&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/li&gt;</pre>
+          <pre class='prettyprint linenums'>&lt;ul id='person'&gt;
+  &lt;li&gt;
+    &lt;div&gt;
+      &lt;h3&gt;John Doe&lt;/h3&gt;
+      &lt;h4&gt;32&lt;/h4&gt;
+      &lt;/p&gt;developer&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+
+<iframe height='266' scrolling='no' src='http://codepen.io/rbiggs/embed/PZvWQB/?height=266&theme-id=6688&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/rbiggs/pen/PZvWQB/'>PZvWQB</a> by Robert Biggs (<a href='http://codepen.io/rbiggs'>@rbiggs</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
           
           <h4>Custom Variable Names</h4>
           <p>As I mentioned earlier, you can provide custom variable names so that the templates make sense for the data they are consuming. Instead of <code>data</code>, use the term you want in the template. Then when you define the view, provide the name you want to use on the view's variable property:</p>
 
           <pre class='prettyprint linenums'>&lt;!-- Use the variable "person" --&gt;
-&lt;li id='person'&gt;
-  &lt;div&gt;
-    &lt;h3&gt;{= person.firstName } {= person.lastName }&lt;/h3&gt;
-    &lt;h4&gt;{= person.age }&lt;/h4&gt;
-    &lt;/p&gt;{= person.job }&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/li&gt;
+&lt;ul id='person'&gt;
+  &lt;li&gt;
+    &lt;div&gt;
+      &lt;h3&gt;{= person.firstName } {= person.lastName }&lt;/h3&gt;
+      &lt;h4&gt;{= person.age }&lt;/h4&gt;
+      &lt;/p&gt;{= person.job }&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 // Define "person" as custom variable:
 var PersonView = $.View({
@@ -137,6 +146,9 @@ var PersonView = $.View({
 
 // Render with the person object:
 PersonView.render(person);</pre>
+
+<iframe height='266' scrolling='no' src='http://codepen.io/rbiggs/embed/xZNgjR/?height=266&theme-id=6688&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/rbiggs/pen/xZNgjR/'>xZNgjR</a> by Robert Biggs (<a href='http://codepen.io/rbiggs'>@rbiggs</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
           
           <p>We could do that with our title view as well:</p>
 
