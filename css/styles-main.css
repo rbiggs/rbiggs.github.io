@@ -101,4 +101,31 @@ section div {
 #opensource .mainLink {
 	margin: 20px 0 0 0;
 }
+#announcement {
+	border-top: solid 1px #8DBEF0;
+	background-color: #3682cd;
+	padding: 60px 40px;
+	height: auto !important;
+}
+#announcement * {
+	color: #fff;
+}
+#announcement h2 {
+	font-family: 'Open Sans', Consolas, San-serif;
+	font-weight: 100;
+	font-size: 24px;
+	margin: 0 0 5px 0;
+	display: block;
+}
 
+
+@media only screen and (max-width: 414px) {
+	#announcement h2 {
+		font-size: 16px !important;
+	}
+}
+@media only screen and (max-width: 340px) {
+	#announcement h2 {
+		font-size: 12px !important;
+	}
+}
